@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The sender - how the nodes gets rid of a message &mdash; OM2 v1.1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.1.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="OM2 v1.1.0 documentation" href="../index.html" />
+    <link rel="up" title="The node -the basic buildingblock" href="index.html" />
+    <link rel="next" title="Devnull" href="senders/devnull.html" />
+    <link rel="prev" title="The resolver - turns an address into a protocol and an endpoint" href="resolver.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="senders/devnull.html" title="Devnull"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="resolver.html" title="The resolver - turns an address into a protocol and an endpoint"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">OM2 v1.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">The node -the basic buildingblock</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="the-sender-how-the-nodes-gets-rid-of-a-message">
+<span id="node-sender"></span><h1>The sender - how the nodes gets rid of a message<a class="headerlink" href="#the-sender-how-the-nodes-gets-rid-of-a-message" title="Permalink to this headline">¶</a></h1>
+<p>Since different sender protocols have different costs. For instance it costs a lot less
+to write to a file then use HTTPS to send to a receiver.
+You may order the senders so that the less costly are tried first.
+As soon as the messages has been successfully transmitted to one receiver (protocol/endpoint).
+Then no more possible receivers are tried.</p>
+<div class="section" id="senders">
+<h2>Senders<a class="headerlink" href="#senders" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="senders/devnull.html">Devnull</a></li>
+<li class="toctree-l1"><a class="reference external" href="senders/djbmaildir.html">Djbmaildir</a></li>
+<li class="toctree-l1"><a class="reference external" href="senders/file.html">File</a></li>
+<li class="toctree-l1"><a class="reference external" href="senders/ldap.html">LDAP</a></li>
+<li class="toctree-l1"><a class="reference external" href="senders/rest.html">Rest</a></li>
+<li class="toctree-l1"><a class="reference external" href="senders/smtp.html">SMTP</a></li>
+<li class="toctree-l1"><a class="reference external" href="senders/soap.html">Soap</a></li>
+<li class="toctree-l1"><a class="reference external" href="senders/unix.html">Unix Domain Socket</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="">The sender - how the nodes gets rid of a message</a><ul>
+<li><a class="reference external" href="#senders">Senders</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="resolver.html"
+                                  title="previous chapter">The resolver - turns an address into a protocol and an endpoint</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="senders/devnull.html"
+                                  title="next chapter">Devnull</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/node/sender.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="senders/devnull.html" title="Devnull"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="resolver.html" title="The resolver - turns an address into a protocol and an endpoint"
+             >previous</a> |</li>
+        <li><a href="../index.html">OM2 v1.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >The node -the basic buildingblock</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009, Roland Hedberg.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.2.
+    </div>
+  </body>
+</html>

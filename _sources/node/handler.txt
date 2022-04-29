@@ -1,0 +1,105 @@
+.. _node-handler:
+
+============================================================
+The handlers - to provide the dispatcher with more functions
+============================================================
+
+From the dispatchers point of view it will receive messages from a listener then it
+will either succeed of fail in transmitting the message to the receivers.
+
+That gives us three places where we can put handlers which will provide the dispatcher 
+with extra functionality.
+
+  * between the listener and the dispatcher and sender and 
+  * between the dispatcher and the sender depending on whether it was successful or
+  * a failure.
+  
+So we have pre-,post- and error-handlers.
+
+If you want to use more than one pre-handler for instance you will have to define in which
+order they will apply. And the order will always be maintained.
+
+A pre-handler might stop a message from reaching the dispatcher.
+
+A post- or error-handler might create a new message which will then be passed over to the
+dispatcher as if it has been received by the listener. The dispatcher will not see any
+difference. Such a message will **not** pass through the pre-handler if present.
+
+Implemented handlers
+====================
+
+block
+-----
+
+The function of this handler is to block messages from a sender
+until the previous one is successfully passed on to the receivers.
+The message that failed will be retried again and again with a
+suitable intervall between the tries.
+
+Typical configuration::
+
+  block = nc.RetryHandler()
+  block["name"] = "blocker"
+  block["module"] = "pyom.handler.block"
+  block["timeout"] = 2
+
+  disp = nc.Sforwarder()
+  disp["nextHandler"] = block
+
+Setting the handler to a 'nextHandler' means that it will be entered as pre-,post- and error-handler.
+Which in this case is necessary since it must be able to set the block on error and to remove it when
+the message has been transmitted. The retransmit timer is set to 2 seconds.
+
+errsender
+---------
+
+Will construct and send an error message to a set of receivers.
+
+Typical configuration::
+
+  err = nc.SendHandler()
+  err["name"] = "error"
+  err["module"] = "pyom.handler.errsender"
+  err["errorAddress"] = "error@example.com"
+
+  disp = nc.Sforwarder()
+  disp["errorHandler"] = err
+
+
+replyTo
+-------
+
+Will construct and send a reply-to message to a receivers specified in the "reply-To" property of
+the message.
+
+Typical configuration::
+
+  reply = nc.SendHandler()
+  reply["name"] = "replyTo"
+  reply["module"] = "pyom.handler.replyTo"
+
+  disp = nc.Sforwarder()
+  disp["postHandler"] = reply
+
+synch
+-----
+
+Will put itself in the reply-To field and will not ACK to the publisher until it has received a
+inReplyTo message with a message-id it waited for from the receiver.
+
+Typical configuration::
+
+  restin = nc.RestListener()
+  restin["port"] = "8084"
+  restin["responseAfter"] = "sent"
+
+  synch = nc.SendHandler()
+  synch["name"] = "replyTo"
+  synch["module"] = "pyom.handler.synch"
+  synch["sourceAddress"] = "synch@example.com"
+
+  disp = nc.Sforwarder()
+  disp["nextHandler"] = synch
+  conf["dispatcher"] = disp
+
+I've included the listener specification because 'responseAfter' have to be 'sent' for this to work.

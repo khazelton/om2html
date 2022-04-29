@@ -1,0 +1,365 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Backend - a server backend &mdash; OM2 v1.1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.1.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="OM2 v1.1.0 documentation" href="../index.html" />
+    <link rel="up" title="Higher level APIs" href="index.html" />
+    <link rel="next" title="The om2 REST API" href="rest.html" />
+    <link rel="prev" title="Higher level APIs" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="rest.html" title="The om2 REST API"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Higher level APIs"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">OM2 v1.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Higher level APIs</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-backend">
+<span id="api-backend"></span><h1>Backend - a server backend<a class="headerlink" href="#module-backend" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">mod:</th><td class="field-body">&#8216;backend&#8217; &#8211; server backend</td>
+</tr>
+</tbody>
+</table>
+<hr class="docutils" />
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Roland Hedberg</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.1</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="module-backend2">
+<h2>Module<a class="headerlink" href="#module-backend2" title="Permalink to this headline">¶</a></h2>
+<p>This module is expected to be used by applications that acts as
+JSON-RPS, REST, SOAP, .. servers.</p>
+<p>All operations are atomic, that is: either they succeed in their entirety
+or they fail.</p>
+<dl class="class">
+<dt id="backend2.Backend">
+<em class="property">
+class </em><tt class="descclassname">backend2.</tt><tt class="descname">Backend</tt><big>(</big><em>om2</em>, <em>authzsrv=None</em>, <em>log=None</em>, <em>debug=0</em>, <em>verbose=0</em><big>)</big><a class="headerlink" href="#backend2.Backend" title="Permalink to this definition">¶</a></dt>
+<dd><p>A interface to a OM2 cloud which is expected to be used as part of
+a AJAX/REST/SOA service</p>
+<dl class="method">
+<dt id="backend2.Backend.add">
+<tt class="descname">add</tt><big>(</big><em>obj</em>, <em>req=None</em><big>)</big><a class="headerlink" href="#backend2.Backend.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a object to the OM2 system. If no uriref are given one will
+be constructed on-the-fly.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>obj</em> &#8211; object instance as {object_type: [uriref, ava]} where 
+ava is a dictionary.</li>
+<li><em>req</em> &#8211; The entity that wants this operation to be completed</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">True or False</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="backend2.Backend.add_graph">
+<tt class="descname">add_graph</tt><big>(</big><em>graph</em>, <em>req=None</em><big>)</big><a class="headerlink" href="#backend2.Backend.add_graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a object to the OM2 system</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>obj</em> &#8211; object instance as an RDF/XML serialized rdf graph</li>
+<li><em>req</em> &#8211; The entity that wants this operation to be completed</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">True or False</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="backend2.Backend.delete">
+<tt class="descname">delete</tt><big>(</big><em>uriref</em>, <em>req=None</em><big>)</big><a class="headerlink" href="#backend2.Backend.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete an object from the OM2 system</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>uriref</em> &#8211; The identifier of the object</li>
+<li><em>req</em> &#8211; The requestor, an identifier of the entity that wants
+to run this operation.</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">True if the object was removed, or False is it for some
+reason couldn&#8217;t be removed. Removing a non-existent object 
+should result in a True result.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="backend2.Backend.modify_insert">
+<tt class="descname">modify_insert</tt><big>(</big><em>obj</em>, <em>req=None</em>, <em>create=False</em><big>)</big><a class="headerlink" href="#backend2.Backend.modify_insert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attempts to modify an existing object in the repository, or if
+the object does not exit, try to create it.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>obj</em> &#8211; object instance as {object_type: [uriref, ava]}</li>
+<li><em>req</em> &#8211; The entity that wants this operation to be completed</li>
+<li><em>create</em> &#8211; If the object that should be modified does not 
+exit, attempt to create it instead.</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">True or False</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="backend2.Backend.modify_remove">
+<tt class="descname">modify_remove</tt><big>(</big><em>obj</em>, <em>req=None</em><big>)</big><a class="headerlink" href="#backend2.Backend.modify_remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attempts to remove some information from an existing object in the
+repository.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>obj</em> &#8211; object instance as {object_type: [uriref, ava]}</li>
+<li><em>req</em> &#8211; The entity that wants this operation to be completed</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">True or False</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="backend2.Backend.modify_replace">
+<tt class="descname">modify_replace</tt><big>(</big><em>obj</em>, <em>req=None</em><big>)</big><a class="headerlink" href="#backend2.Backend.modify_replace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attempts to replace one set of information with another on an
+existing object in the repository.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>obj</em> &#8211; object instance as {object_type: [uriref, ava]} where
+ava is {key: [(before,after),...]}</li>
+<li><em>req</em> &#8211; The entity that wants this operation to be completed</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">True or False</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="backend2.Backend.read">
+<tt class="descname">read</tt><big>(</big><em>uriref</em>, <em>properties=</em><span class="optional">[</span><span class="optional">]</span>, <em>expand=False</em>, <em>req=None</em>, <em>native=False</em><big>)</big><a class="headerlink" href="#backend2.Backend.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read information about an object from the OM2 system</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>uriref</em> &#8211; The identifier of the object</li>
+<li><em>properties</em> &#8211; A list of properties which should be returned if
+present in the object</li>
+<li><em>req</em> &#8211; The requestor, an identifier of the entity that wants
+to run this operation.</li>
+<li><em>expand</em> &#8211; Read objects that this object are referring to.</li>
+<li><em>native</em> &#8211; Return the objects in their native RdfMarshal format
+and not as a combination of dictionaries,lists and singel 
+values as produced by the Base.struct() command.</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The object or None if the object doesn&#8217;t exist or if the
+requestor are not allowed to read the object.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="backend2.Backend.search">
+<tt class="descname">search</tt><big>(</big><em>objtype</em>, <em>prefilt={}</em>, <em>properties=</em><span class="optional">[</span><span class="optional">]</span>, <em>req=None</em><big>)</big><a class="headerlink" href="#backend2.Backend.search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search for objects in the OM2 system</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>objtype</em> &#8211; The type of the object</li>
+<li><em>prefilt</em> &#8211; The original search filter as a dictionary</li>
+<li><em>properties</em> &#8211; A list of properties which should be returned if
+present in the found objects.</li>
+<li><em>req</em> &#8211; The requestor, an identifier of the entity that wants
+to run this operation.</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The objects or None if no objects was found or if the 
+requestor was not allowed to see the objects found.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="backend2.Backend.whoami">
+<tt class="descname">whoami</tt><big>(</big><big>)</big><a class="headerlink" href="#backend2.Backend.whoami" title="Permalink to this definition">¶</a></dt>
+<dd>Return information about the client</dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="backend2.NotInOntology">
+<em class="property">
+exception </em><tt class="descclassname">backend2.</tt><tt class="descname">NotInOntology</tt><a class="headerlink" href="#backend2.NotInOntology" title="Permalink to this definition">¶</a></dt>
+<dd>Is raised when some class or property is not in a specified ontology</dd></dl>
+
+<dl class="function">
+<dt id="backend2.regexp">
+<tt class="descclassname">backend2.</tt><tt class="descname">regexp</tt><big>(</big><em>restr</em><big>)</big><a class="headerlink" href="#backend2.regexp" title="Permalink to this definition">¶</a></dt>
+<dd>Creates regular expressions from a simpler form of wildcarding</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="">Backend - a server backend</a><ul>
+<li><a class="reference external" href="#module-backend2">Module</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="index.html"
+                                  title="previous chapter">Higher level APIs</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="rest.html"
+                                  title="next chapter">The om2 REST API</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/api/backend.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="rest.html" title="The om2 REST API"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Higher level APIs"
+             >previous</a> |</li>
+        <li><a href="../index.html">OM2 v1.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Higher level APIs</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009, Roland Hedberg.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Node configuration &mdash; OM2 v1.1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.1.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="OM2 v1.1.0 documentation" href="../index.html" />
+    <link rel="up" title="The node -the basic buildingblock" href="index.html" />
+    <link rel="next" title="The listener - the ears of a node" href="listener.html" />
+    <link rel="prev" title="A node through a microscope :-)" href="overview.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="listener.html" title="The listener - the ears of a node"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="overview.html" title="A node through a microscope :-)"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">OM2 v1.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">The node -the basic buildingblock</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-nodeconfig">
+<span id="node-config"></span><h1>Node configuration<a class="headerlink" href="#module-nodeconfig" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Roland Hedberg</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.1</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="a-configuration-file">
+<h2>A configuration file<a class="headerlink" href="#a-configuration-file" title="Permalink to this headline">¶</a></h2>
+<p>Is a python script that typically starts with:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+
+<span class="kn">import</span> <span class="nn">pyom.ontology.nodeconfig</span> <span class="kn">as</span> <span class="nn">nc</span>
+
+<span class="c"># Generell Node information</span>
+<span class="n">conf</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">Configuration</span><span class="p">()</span>
+<span class="n">conf</span><span class="o">.</span><span class="n">about</span> <span class="o">=</span> <span class="s">&quot;http://www.umu.se/node#N1&quot;</span>
+<span class="n">conf</span><span class="p">[</span><span class="s">&quot;ontology&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;pyom.ontology.om2_1&quot;</span><span class="p">,</span><span class="s">&quot;pyom.ontology.prim_4&quot;</span><span class="p">,</span>
+  <span class="s">&quot;pyom.ontology.miro&quot;</span><span class="p">]</span>
+<span class="n">conf</span><span class="p">[</span><span class="s">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;node1@example.org&quot;</span>
+</pre></div>
+</div>
+<p><strong>Note</strong>: Using <em>about</em> and setting a name of the configuration as such is
+only necessary if you contemplate saving the configuration in a RDF store.
+Otherwise you may as well leave it out.</p>
+<p>You <strong>must</strong> specify which ontologies the node must understand. If a message
+arrives that is built using an ontology that the node doesn&#8217;t know about
+it will be rejected.</p>
+<p>Setting a <em>name</em> is a good thing since this information is used in logging.</p>
+<p>After this you have to got through the other parts</p>
+<ul class="simple">
+<li><a class="reference external" href="listener.html#node-listener"><em>Listener</em></a></li>
+<li><a class="reference external" href="router.html#node-router"><em>Router</em></a></li>
+<li><a class="reference external" href="resolver.html#node-resolver"><em>Resolver</em></a></li>
+<li><a class="reference external" href="sender.html#node-sender"><em>Sender</em></a></li>
+<li><a class="reference external" href="transformer.html#node-transformer"><em>Transformer</em></a></li>
+<li><a class="reference external" href="handler.html#node-handler"><em>handler</em></a></li>
+</ul>
+<p>Configuration directives are described by the
+<em class="xref">nodeconfig ontology</em></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="">Node configuration</a><ul>
+<li><a class="reference external" href="#a-configuration-file">A configuration file</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="overview.html"
+                                  title="previous chapter">A node through a microscope :-)</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="listener.html"
+                                  title="next chapter">The listener - the ears of a node</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/node/config.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="listener.html" title="The listener - the ears of a node"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="overview.html" title="A node through a microscope :-)"
+             >previous</a> |</li>
+        <li><a href="../index.html">OM2 v1.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >The node -the basic buildingblock</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009, Roland Hedberg.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.2.
+    </div>
+  </body>
+</html>

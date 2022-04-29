@@ -1,0 +1,265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The listener - the ears of a node &mdash; OM2 v1.1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.1.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="OM2 v1.1.0 documentation" href="../index.html" />
+    <link rel="up" title="The node -the basic buildingblock" href="index.html" />
+    <link rel="next" title="The centre of the node" href="dispatcher.html" />
+    <link rel="prev" title="Node configuration" href="config.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="dispatcher.html" title="The centre of the node"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="config.html" title="Node configuration"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">OM2 v1.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">The node -the basic buildingblock</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="the-listener-the-ears-of-a-node">
+<span id="node-listener"></span><h1>The listener - the ears of a node<a class="headerlink" href="#the-listener-the-ears-of-a-node" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>The configuration is in the form of a dictionary, ( or in fact a <tt class="xref docutils literal"><span class="pre">Base()</span></tt>). Exactly what properties you can define can be
+found <a class="reference external" href="nodeconfig.html#nodeconfig-class-listener"><em>here</em></a></p>
+<p>These are examples of &#8216;normal&#8217; listeners</p>
+<ul class="simple">
+<li><a class="reference internal" href="#listener-rest"><em>RestListener</em></a></li>
+<li><a class="reference internal" href="#listener-soap"><em>SoapListener</em></a></li>
+<li><a class="reference internal" href="#listener-line"><em>LineListener</em></a></li>
+<li><a class="reference internal" href="#listener-djb"><em>DjbMaildirListener</em></a></li>
+<li><a class="reference internal" href="#listener-unix"><em>UnixSocketListener</em></a></li>
+</ul>
+<p>and then a couple of special ones which are more like small servers bound to the node.</p>
+<ul class="simple">
+<li><a class="reference internal" href="#listener-nodeinfo"><em>NodeInfo</em></a></li>
+<li><a class="reference internal" href="#listener-state"><em>StateServer</em></a></li>
+</ul>
+</div>
+<div class="section" id="listeners">
+<h2>Listeners<a class="headerlink" href="#listeners" title="Permalink to this headline">¶</a></h2>
+<p>Properties common to all listeners</p>
+<ul>
+<li><dl class="first docutils">
+<dt><a class="reference external" href="nodeconfig.html#nodeconfig-property-accessrule"><em>accessRule</em></a> - who are allowed to talk to this listener, simple</dt>
+<dd><p class="first last">domainname/ipnumber access control. Some protocols supports log in other not in which case this
+might be the best one can do.</p>
+</dd>
+</dl>
+</li>
+<li><p class="first"><a class="reference external" href="nodeconfig.html#nodeconfig-property-debug"><em>debug</em></a> - The level of debugging, right now it&#8217;s mostly on/off</p>
+</li>
+<li><p class="first"><a class="reference external" href="nodeconfig.html#nodeconfig-property-name"><em>name</em></a> - The name of the listener, used in the log file</p>
+</li>
+<li><p class="first"><a class="reference external" href="nodeconfig.html#nodeconfig-property-responseafter"><em>responseAfter</em></a> - When the listener should ACK.</p>
+</li>
+<li><p class="first"><a class="reference external" href="nodeconfig.html#nodeconfig-property-protocolname"><em>protocolName</em></a> - Typical for the listener</p>
+</li>
+</ul>
+<div class="section" id="restlistener">
+<span id="listener-rest"></span><h3>RestListener<a class="headerlink" href="#restlistener" title="Permalink to this headline">¶</a></h3>
+<p>Will listen on a port for HTTP PUT messages.
+Each message is expected to contain <em>one</em> OM2 message.</p>
+<p>Extra properties for this listener:</p>
+<ul class="simple">
+<li><a class="reference external" href="nodeconfig.html#nodeconfig-property-path"><em>path</em></a></li>
+<li><a class="reference external" href="nodeconfig.html#nodeconfig-property-port"><em>port</em></a></li>
+<li><a class="reference external" href="nodeconfig.html#nodeconfig-property-ssl"><em>ssl</em></a></li>
+</ul>
+</div>
+<div class="section" id="soaplistener">
+<span id="listener-soap"></span><h3>SoapListener<a class="headerlink" href="#soaplistener" title="Permalink to this headline">¶</a></h3>
+<p>Expects communication using the SOAP protocol over HTTP.
+Only supports one command: &#8216;put&#8217;.
+Each message is expected to contain <em>one</em> OM2 message.</p>
+<p>Extra properties for this listener:</p>
+<ul class="simple">
+<li><a class="reference external" href="nodeconfig.html#nodeconfig-property-dir"><em>dir</em></a></li>
+<li><a class="reference external" href="nodeconfig.html#nodeconfig-property-port"><em>port</em></a></li>
+</ul>
+</div>
+<div class="section" id="linelistener">
+<span id="listener-line"></span><h3>LineListener<a class="headerlink" href="#linelistener" title="Permalink to this headline">¶</a></h3>
+<p>Listens on a telnet port for incoming connections.
+Expects to receive one or more lines followed by one empty line.
+When it has receive the empty line, all preceding lines together are
+assumed to represent <em>one</em> OM2 message.</p>
+<p>Extra property for this listener:</p>
+<ul class="simple">
+<li><a class="reference external" href="nodeconfig.html#nodeconfig-property-port"><em>port</em></a></li>
+</ul>
+</div>
+<div class="section" id="djbmaildirlistener">
+<span id="listener-djb"></span><h3>DjbMaildirListener<a class="headerlink" href="#djbmaildirlistener" title="Permalink to this headline">¶</a></h3>
+<p>Works on a directory that follows the <a class="reference external" href="http://en.wikipedia.org/wiki/Maildir">http://en.wikipedia.org/wiki/Maildir</a>
+specification. Each file that are place in the <em>new</em> directory are expected
+to represent an incomming OM2 message. The listener will clean up after itself, that
+is it will move a successfully forwarded message to the <em>old</em> directory.
+If the message for some reason could not be forwarded it will be placed in the <em>err</em>
+directory and the listener will block. The block will be removed when the <em>err</em>
+directory becomes empty.</p>
+<p>Extra properties for this listener:</p>
+<ul class="simple">
+<li><a class="reference external" href="nodeconfig.html#nodeconfig-property-root"><em>root</em></a></li>
+<li><a class="reference external" href="nodeconfig.html#nodeconfig-property-create"><em>create</em></a></li>
+</ul>
+</div>
+<div class="section" id="unixsocketlistener">
+<span id="listener-unix"></span><h3>UnixSocketListener<a class="headerlink" href="#unixsocketlistener" title="Permalink to this headline">¶</a></h3>
+<p>Will listen on a Unix domain socket, which is represented as a file.
+Typical configuration:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">djbin</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">DjbMaildirListener</span><span class="p">()</span>
+<span class="n">djbin</span><span class="p">[</span><span class="s">&quot;root&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;./incoming&quot;</span>
+<span class="n">conf</span><span class="p">[</span><span class="s">&quot;listener&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">djbin</span>
+</pre></div>
+</div>
+<p>Extra properties for this listener:</p>
+<ul class="simple">
+<li><a class="reference external" href="nodeconfig.html#nodeconfig-property-root"><em>root</em></a></li>
+</ul>
+</div>
+<div class="section" id="nodeinfo">
+<h3>NodeInfo<a class="headerlink" href="#nodeinfo" title="Permalink to this headline">¶</a></h3>
+<p id="listener-nodeinfo">If you are using dynamic resolving of addresses you need to place information
+about your nodes on a web server <strong>or</strong> you can let the node supply the information.
+This &#8216;listener&#8217; will act as a web server and on a GET request will provide
+node information.</p>
+<p>Extra properties for this listener:</p>
+<ul class="simple">
+<li><a class="reference external" href="nodeconfig.html#nodeconfig-property-path"><em>path</em></a></li>
+<li><a class="reference external" href="nodeconfig.html#nodeconfig-property-port"><em>port</em></a></li>
+<li><a class="reference external" href="nodeconfig.html#nodeconfig-property-cachetime"><em>cacheTime</em></a></li>
+</ul>
+</div>
+<div class="section" id="stateserver-experimental">
+<h3>StateServer (<strong>EXPERIMENTAL</strong>)<a class="headerlink" href="#stateserver-experimental" title="Permalink to this headline">¶</a></h3>
+<p id="listener-state">A interface which you can use to get state information about the node.
+If you do HTTP GET on the webpage it will return a JSON
+(<a class="reference external" href="http://www.json.org/">http://www.json.org/</a>) encoded dictionary, containing items with the keys:</p>
+<ul class="simple">
+<li>Name</li>
+<li>Counters</li>
+<li>Receivers</li>
+<li>Transformers</li>
+<li>Version</li>
+</ul>
+<p>Extra properties for this listener:</p>
+<ul class="simple">
+<li><a class="reference external" href="nodeconfig.html#nodeconfig-property-port"><em>port</em></a></li>
+<li><a class="reference external" href="nodeconfig.html#nodeconfig-property-ssl"><em>ssl</em></a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="">The listener - the ears of a node</a><ul>
+<li><a class="reference external" href="#introduction">Introduction</a></li>
+<li><a class="reference external" href="#listeners">Listeners</a><ul>
+<li><a class="reference external" href="#restlistener">RestListener</a></li>
+<li><a class="reference external" href="#soaplistener">SoapListener</a></li>
+<li><a class="reference external" href="#linelistener">LineListener</a></li>
+<li><a class="reference external" href="#djbmaildirlistener">DjbMaildirListener</a></li>
+<li><a class="reference external" href="#unixsocketlistener">UnixSocketListener</a></li>
+<li><a class="reference external" href="#nodeinfo">NodeInfo</a></li>
+<li><a class="reference external" href="#stateserver-experimental">StateServer (<strong>EXPERIMENTAL</strong>)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="config.html"
+                                  title="previous chapter">Node configuration</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="dispatcher.html"
+                                  title="next chapter">The centre of the node</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/node/listener.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="dispatcher.html" title="The centre of the node"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="config.html" title="Node configuration"
+             >previous</a> |</li>
+        <li><a href="../index.html">OM2 v1.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >The node -the basic buildingblock</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009, Roland Hedberg.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.2.
+    </div>
+  </body>
+</html>

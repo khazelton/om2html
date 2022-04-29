@@ -1,0 +1,79 @@
+.. _ontology-index:
+
+==========
+Ontologies
+==========
+
+A message sent through a OM2 system must follow a set of ontologies.
+The relationship between them as depicted in the diagram below.
+
+.. image:: ontology_relationsship.png
+
+Most of what is done in pyom assumes the usage of the Om2 ontology, and
+in some cases the Miro ontology. The Prim ontology on the other hand is
+barely assumed.
+
+Specific ontologies
+===================
+
+We need a couple of ontologies to describe different parts of messages or messages used by the system.
+There are a number of different classes of ontologies:
+
+* A ontology describing the message format. There will only be one in this case, namely
+
+  * :ref:`OM2 <ontology-om2>`
+
+* A set of ontologies describing operations common to a set of applications. In a Identity Management
+  system you may want to add, delete and modify object. Therefor any system that has to implement the
+  operation semantics, has to understand this ontology. One set of such systems are the repository.
+  Application class specific repositories would be one plausible solution. We envisage that there will
+  be more types in the future. For now we only have one:
+
+  * :ref:`MIRO <ontology-miro>`
+
+* One ontology describing objects that are common for many applications. Objects like persons,
+  organizational units, groups and so on. We have the :ref:`PRIM ontology <ontology-prim>`.
+
+* Application specific ontologies. These typically are not housed at www.openmetadir.org but rather
+  at the home of the organization responsible for the application.
+
+* An ontology describing the information that you can receive from the service discovery system.
+  :ref:`The Node ontology <ontology-node>`.
+
+Version handling
+================
+
+Ontologies are not expected to be fixed once and for all, they are instead expected to evolve over 
+time. Because of this version handling is extremely important. You can always find information about 
+the version in the ontology itself. We will use the property versionInfo and will use the common
+major.minor.patch type of version numbering. But, it will not be uncommon that you have no idea which 
+exact ontology a source is using. The only information that you have in these cases are the URIs 
+that are used to name classes and properties. Because of this we have decided to place the major 
+version number in the URI. The format use will be - like in prim-1. If no version number are present 
+in the URI then that must be treated as if the version number was 0 (zero).
+
+One effect of only placing the major version number in the URI is that minor changes must not change 
+the ontology such that a receiver of a RDF following the ontology N.M will not be able to parse it 
+and understand the result if its software is build based on N.K (K != M).
+
+Getting the latest
+==================
+
+Using SVN you can always find the latest versions of the ontologies we use at:
+
+svn co https://repository.umdac.umu.se/svn/om2/ontology/trunk
+
+
+Central Ontologies
+==================
+
+
+.. toctree::
+   :maxdepth: 1
+
+   om2
+   miro
+   prim
+   node
+
+   

@@ -1,0 +1,105 @@
+.. _node-router:
+
+=====================================================
+The router - finds the receiver address for a message
+=====================================================
+
+The work of a router is to use information in the message, together with other information it has,
+to pick the receiver addresses for the message. Of course the work of an router might as the 
+outcome have that there is no receiver for a specific message under certain circumstances,
+but that is probably not the common case.
+
+The router is before the resolver in the pipe and there is, presently anyway, no feed-back
+between them. Therefor if the router picks an address the resolver can not find a protocol 
+and endpoint for there is no way to ask the router to pick another address.
+
+If there is more than one router in the node all of them gets the chance to pick an address.
+
+.. _router-simple:
+
+Simple router
+=============
+
+This router only looks at what is specified in the message. If there is a receiver specified
+that will be used, if there is no receiver in the message then the default receiver if defined
+is used. One extension to this behaviour is that using the 'fanout' property one receiver address
+might be translated into a number of other addresses.
+
+Simplest usage::
+
+  router = nc.SimpleRouter()
+
+Will only use the receiver address in the message, if there is none (which might not be the case).
+If there is no receiver address, with no default there will be no receiver for
+that message.
+
+With a default::
+
+  router = nc.SimpleRouter()
+  router["defaultReceiver"] = "sink@example.com"
+  
+The only difference from the one above is that there is a default receiver which will then be used
+for all the cases when there is no receiver defined in the message.
+
+With fanout::
+
+  router = nc.SimpleRouter()
+  m = nc.Map()
+  m["pattern"] = "test@example.com"
+  m["recipient"] = ["sink@example.org","sunk@example.com"]
+  router["fanout"] = m1
+
+In this case if the message has a receiver defined to be "test@example.com", the router will set 
+the addresses of the message to be "sink@example.org" and "sunk@example.com".
+
+.. _router-pattern:
+
+Pattern router
+==============
+
+Will compare a pattern given in the configuration with the messages. If a message is considered 
+to be more specific than the pattern then that is a signal that the message should be sent to 
+the address connected to the pattern.
+
+Configuration example::
+
+  addop = miro.MIRO()
+  addop["otherwiseInsert"] = None
+  msg = om2.Message()
+  msg["body"] = add
+
+  map = nc.Map()
+  map["pattern"] = msg.graph()
+  map["recipient"] = "sink@example.org"
+
+  pr = nc.PatternRouter()
+  pr["ontology"] = ["pyom.ontology.prim_4","pyom.ontology.miro","pyom.ontology.om2_1"]
+  pr["receiveMap"] = map
+
+The interpretation of this is that any message that is a ADD message should be forwarded to
+"sink@example.org".
+
+If you only want messages about adds of persons then this would give you that::
+
+  person = prim.Person()
+  addop = miro.MIRO()
+  addop["otherwiseInsert"] = person
+  msg = om2.Message()
+  msg["body"] = add
+
+  map = nc.Map()
+  map["pattern"] = msg.graph()
+  map["recipient"] = "sink@example.org"
+
+  pr = nc.PatternRouter()
+  pr["ontology"] = ["pyom.ontology.prim_4","pyom.ontology.miro","pyom.ontology.om2_1"]
+  pr["receiveMap"] = map
+
+
+.. router-spocp:
+
+Spocp router
+============
+
+Uses an external pattern matching facility to manage the rules about which messages should 
+be sent to which receivers.

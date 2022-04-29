@@ -1,0 +1,31 @@
+.. _api-index:
+
+*****************
+Higher level APIs
+*****************
+
+:Release: |version|
+:Date: |today|
+
+.. module:: api
+
+============
+Motivation ?
+============
+
+The rise and fall of a metadirectory is how easy it is to get information into and out of the system.
+I expect organizations to build graphical used interfaces to alleviate management of information that 
+are not easily collected/exported from some system. To facilitate the building of these user interfaces
+I am making available a JSON-RPC and a REST interface to a OM2 cloud.
+This is the documentation of these APIs.
+
+========
+The APIs
+========
+
+.. toctree::
+   :maxdepth: 1
+    
+   backend
+   rest
+   jsonrpc

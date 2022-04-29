@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The router - finds the receiver address for a message &mdash; OM2 v1.1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.1.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="OM2 v1.1.0 documentation" href="../index.html" />
+    <link rel="up" title="The node -the basic buildingblock" href="index.html" />
+    <link rel="next" title="The resolver - turns an address into a protocol and an endpoint" href="resolver.html" />
+    <link rel="prev" title="The centre of the node" href="dispatcher.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="resolver.html" title="The resolver - turns an address into a protocol and an endpoint"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="dispatcher.html" title="The centre of the node"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">OM2 v1.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">The node -the basic buildingblock</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="the-router-finds-the-receiver-address-for-a-message">
+<span id="node-router"></span><h1>The router - finds the receiver address for a message<a class="headerlink" href="#the-router-finds-the-receiver-address-for-a-message" title="Permalink to this headline">¶</a></h1>
+<p>The work of a router is to use information in the message, together with other information it has,
+to pick the receiver addresses for the message. Of course the work of an router might as the
+outcome have that there is no receiver for a specific message under certain circumstances,
+but that is probably not the common case.</p>
+<p>The router is before the resolver in the pipe and there is, presently anyway, no feed-back
+between them. Therefor if the router picks an address the resolver can not find a protocol
+and endpoint for there is no way to ask the router to pick another address.</p>
+<p>If there is more than one router in the node all of them gets the chance to pick an address.</p>
+<div class="section" id="simple-router">
+<span id="router-simple"></span><h2>Simple router<a class="headerlink" href="#simple-router" title="Permalink to this headline">¶</a></h2>
+<p>This router only looks at what is specified in the message. If there is a receiver specified
+that will be used, if there is no receiver in the message then the default receiver if defined
+is used. One extension to this behaviour is that using the &#8216;fanout&#8217; property one receiver address
+might be translated into a number of other addresses.</p>
+<p>Simplest usage:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">router</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">SimpleRouter</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Will only use the receiver address in the message, if there is none (which might not be the case).
+If there is no receiver address, with no default there will be no receiver for
+that message.</p>
+<p>With a default:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">router</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">SimpleRouter</span><span class="p">()</span>
+<span class="n">router</span><span class="p">[</span><span class="s">&quot;defaultReceiver&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;sink@example.com&quot;</span>
+</pre></div>
+</div>
+<p>The only difference from the one above is that there is a default receiver which will then be used
+for all the cases when there is no receiver defined in the message.</p>
+<p>With fanout:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">router</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">SimpleRouter</span><span class="p">()</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">Map</span><span class="p">()</span>
+<span class="n">m</span><span class="p">[</span><span class="s">&quot;pattern&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;test@example.com&quot;</span>
+<span class="n">m</span><span class="p">[</span><span class="s">&quot;recipient&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;sink@example.org&quot;</span><span class="p">,</span><span class="s">&quot;sunk@example.com&quot;</span><span class="p">]</span>
+<span class="n">router</span><span class="p">[</span><span class="s">&quot;fanout&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">m1</span>
+</pre></div>
+</div>
+<p>In this case if the message has a receiver defined to be &#8220;<a class="reference external" href="mailto:test&#37;&#52;&#48;example&#46;com">test<span>&#64;</span>example<span>&#46;</span>com</a>&#8220;, the router will set
+the addresses of the message to be &#8220;<a class="reference external" href="mailto:sink&#37;&#52;&#48;example&#46;org">sink<span>&#64;</span>example<span>&#46;</span>org</a>&#8221; and &#8220;<a class="reference external" href="mailto:sunk&#37;&#52;&#48;example&#46;com">sunk<span>&#64;</span>example<span>&#46;</span>com</a>&#8220;.</p>
+</div>
+<div class="section" id="pattern-router">
+<span id="router-pattern"></span><h2>Pattern router<a class="headerlink" href="#pattern-router" title="Permalink to this headline">¶</a></h2>
+<p>Will compare a pattern given in the configuration with the messages. If a message is considered
+to be more specific than the pattern then that is a signal that the message should be sent to
+the address connected to the pattern.</p>
+<p>Configuration example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">addop</span> <span class="o">=</span> <span class="n">miro</span><span class="o">.</span><span class="n">MIRO</span><span class="p">()</span>
+<span class="n">addop</span><span class="p">[</span><span class="s">&quot;otherwiseInsert&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">msg</span> <span class="o">=</span> <span class="n">om2</span><span class="o">.</span><span class="n">Message</span><span class="p">()</span>
+<span class="n">msg</span><span class="p">[</span><span class="s">&quot;body&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">add</span>
+
+<span class="nb">map</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">Map</span><span class="p">()</span>
+<span class="nb">map</span><span class="p">[</span><span class="s">&quot;pattern&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">graph</span><span class="p">()</span>
+<span class="nb">map</span><span class="p">[</span><span class="s">&quot;recipient&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;sink@example.org&quot;</span>
+
+<span class="n">pr</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">PatternRouter</span><span class="p">()</span>
+<span class="n">pr</span><span class="p">[</span><span class="s">&quot;ontology&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;pyom.ontology.prim_4&quot;</span><span class="p">,</span><span class="s">&quot;pyom.ontology.miro&quot;</span><span class="p">,</span><span class="s">&quot;pyom.ontology.om2_1&quot;</span><span class="p">]</span>
+<span class="n">pr</span><span class="p">[</span><span class="s">&quot;receiveMap&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">map</span>
+</pre></div>
+</div>
+<p>The interpretation of this is that any message that is a ADD message should be forwarded to
+&#8220;<a class="reference external" href="mailto:sink&#37;&#52;&#48;example&#46;org">sink<span>&#64;</span>example<span>&#46;</span>org</a>&#8220;.</p>
+<p>If you only want messages about adds of persons then this would give you that:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">person</span> <span class="o">=</span> <span class="n">prim</span><span class="o">.</span><span class="n">Person</span><span class="p">()</span>
+<span class="n">addop</span> <span class="o">=</span> <span class="n">miro</span><span class="o">.</span><span class="n">MIRO</span><span class="p">()</span>
+<span class="n">addop</span><span class="p">[</span><span class="s">&quot;otherwiseInsert&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">person</span>
+<span class="n">msg</span> <span class="o">=</span> <span class="n">om2</span><span class="o">.</span><span class="n">Message</span><span class="p">()</span>
+<span class="n">msg</span><span class="p">[</span><span class="s">&quot;body&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">add</span>
+
+<span class="nb">map</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">Map</span><span class="p">()</span>
+<span class="nb">map</span><span class="p">[</span><span class="s">&quot;pattern&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">graph</span><span class="p">()</span>
+<span class="nb">map</span><span class="p">[</span><span class="s">&quot;recipient&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;sink@example.org&quot;</span>
+
+<span class="n">pr</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">PatternRouter</span><span class="p">()</span>
+<span class="n">pr</span><span class="p">[</span><span class="s">&quot;ontology&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;pyom.ontology.prim_4&quot;</span><span class="p">,</span><span class="s">&quot;pyom.ontology.miro&quot;</span><span class="p">,</span><span class="s">&quot;pyom.ontology.om2_1&quot;</span><span class="p">]</span>
+<span class="n">pr</span><span class="p">[</span><span class="s">&quot;receiveMap&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">map</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="spocp-router">
+<h2>Spocp router<a class="headerlink" href="#spocp-router" title="Permalink to this headline">¶</a></h2>
+<p>Uses an external pattern matching facility to manage the rules about which messages should
+be sent to which receivers.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="">The router - finds the receiver address for a message</a><ul>
+<li><a class="reference external" href="#simple-router">Simple router</a></li>
+<li><a class="reference external" href="#pattern-router">Pattern router</a></li>
+<li><a class="reference external" href="#spocp-router">Spocp router</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="dispatcher.html"
+                                  title="previous chapter">The centre of the node</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="resolver.html"
+                                  title="next chapter">The resolver - turns an address into a protocol and an endpoint</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/node/router.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="resolver.html" title="The resolver - turns an address into a protocol and an endpoint"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="dispatcher.html" title="The centre of the node"
+             >previous</a> |</li>
+        <li><a href="../index.html">OM2 v1.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >The node -the basic buildingblock</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009, Roland Hedberg.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.2.
+    </div>
+  </body>
+</html>

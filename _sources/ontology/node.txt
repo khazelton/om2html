@@ -1,0 +1,111 @@
+.. _ontology-node:
+
+=================
+The node ontology
+=================
+
+:Author: Roland Hedberg
+:Version: 0.1.0
+
+.. module:: node
+.. moduleauthor:: Roland Hedberg
+
+* :ref:`Interface <node-class-Interface>`
+* :ref:`Service <node-class-Service>`
+
+*******
+Classes
+*******
+
+
+Service
+^^^^^^^
+
+.. _node-class-Service:
+
+**Properties**
+
+* :ref:`interface <node-property-interface>`
+* :ref:`cacheTime <node-property-cacheTime>`
+* :ref:`name <node-property-name>`
+
+Interface
+^^^^^^^^^
+
+.. _node-class-Interface:
+
+**Properties**
+
+* :ref:`url <node-property-url>` *restriction* cardinality 1
+* :ref:`mustEncrypt <node-property-mustEncrypt>` *restriction* maxCardinality 1
+* :ref:`protocol <node-property-protocol>` *restriction* cardinality 1
+* :ref:`mustSign <node-property-mustSign>` *restriction* maxCardinality 1
+
+**********
+Properties
+**********
+
+
+interface
+^^^^^^^^^
+
+.. _node-property-interface:
+
+*range*
+  :ref:`Interface <node-class-Interface>`
+
+cacheTime
+^^^^^^^^^
+
+.. _node-property-cacheTime:
+
+*range*
+  integer
+
+**Functional**
+
+url
+^^^
+
+.. _node-property-url:
+
+*range*
+  string
+
+**Functional**
+
+name
+^^^^
+
+.. _node-property-name:
+
+*range*
+  string
+
+**Functional**
+
+protocol
+^^^^^^^^
+
+.. _node-property-protocol:
+
+*range*
+  string
+
+**Functional**
+
+mustSign
+^^^^^^^^
+
+.. _node-property-mustSign:
+
+*range*
+  integer
+
+mustEncrypt
+^^^^^^^^^^^
+
+.. _node-property-mustEncrypt:
+
+*range*
+  integer

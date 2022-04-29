@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The centre of the node &mdash; OM2 v1.1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.1.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="OM2 v1.1.0 documentation" href="../index.html" />
+    <link rel="up" title="The node -the basic buildingblock" href="index.html" />
+    <link rel="next" title="The router - finds the receiver address for a message" href="router.html" />
+    <link rel="prev" title="The listener - the ears of a node" href="listener.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="router.html" title="The router - finds the receiver address for a message"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="listener.html" title="The listener - the ears of a node"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">OM2 v1.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">The node -the basic buildingblock</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="the-centre-of-the-node">
+<span id="node-dispatcher"></span><h1>The centre of the node<a class="headerlink" href="#the-centre-of-the-node" title="Permalink to this headline">¶</a></h1>
+<p>The dispatcher is the central point of the node, it&#8217;s where everything is connected.
+It:</p>
+<blockquote>
+<ul class="simple">
+<li>Receives a message from a listener,</li>
+<li>uses the routers and</li>
+<li>the resolvers that it has connected to it to get protocol/endpoint specifications and</li>
+<li>finally will pick senders to use for sending the message.</li>
+</ul>
+</blockquote>
+<p>It will also, if so configured, make sure that a message isn&#8217;t lost during processing by
+saving it on disc while working with it.</p>
+<p>One might imaging having several different types of dispatchers with special functionality&#8217;s.
+And in fact that was how it started. But with the advent of the handlers the need for special
+dispatcher has lessened.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="listener.html"
+                                  title="previous chapter">The listener - the ears of a node</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="router.html"
+                                  title="next chapter">The router - finds the receiver address for a message</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/node/dispatcher.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="router.html" title="The router - finds the receiver address for a message"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="listener.html" title="The listener - the ears of a node"
+             >previous</a> |</li>
+        <li><a href="../index.html">OM2 v1.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >The node -the basic buildingblock</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009, Roland Hedberg.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,77 @@
+.. _node-overview:
+
+===============================
+A node through a microscope :-)
+===============================
+
+The components in a node described in an *simple* activity diagram:
+ 
+.. image:: pyomnode_ad.png
+
+The absolutely simplest node contains one listener, one simple router, a 
+static resolver, one sender and no handlers.
+
+In that case a message:
+
+#. comes in trough the listener,
+#. after it is parsed into a python object it is passed on to the dispatcher, who
+#. sends it to a router which returns zero or more address.
+#. For each address it is sent to the resolver who returns zero or more
+    protocol/endpoint combination.
+#. a sender is picked based on the protocol and that sender receives the
+    message together with the endpoint specification
+#. the sender sends the message
+#. depending on whether the sending was successfull or not a positive or negative 
+    reply is returned to the listener
+#. who returns a response to the original sender according to the protocol it uses.
+
+This then can be arbitrarily complicated; 
+
+- increase the number of listener and senders
+- use pre-/initerr-/post-/errorhandlers
+- more sophisticated routers and dynamic resolvers
+- and so on
+
+***************
+Starting a node
+***************
+
+A node is started with the command::
+
+  nodectl.py start <nodeconfiguration_file>
+  
+The node configuration file is a python script that using the :ref:`nodeconfig 
+ontology <node-nodeconfig>` specifies what parts the node is expected to contain.
+
+The command syntax for nodectl.py is:
+
+Usage: nodectl [options] operation 1*node
+
+Valid options:
+  -l logfile     : The directory where the logfile should be placed
+  -p pidfile     : The directory where the pidfile should be placed
+  
+operations are
+  "start"
+  "stop"
+  "restart" and
+  "configtest"
+
+node
+  a node configuration file
+
+
+****************
+Debugging a node
+****************
+
+There is no central place where you can turn on/turn off debug logging, rather you
+do it per piece. If you want to know what a specific listener does, turn on the 
+debugging for that listener.
+The same for every other piece.
+
+Debug level is an integer, but presently it's mostly on/off. This might change in 
+the future.
+
+
+  

@@ -1,0 +1,544 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The JSON-RPC API &mdash; OM2 v1.1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.1.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="OM2 v1.1.0 documentation" href="../index.html" />
+    <link rel="up" title="Higher level APIs" href="index.html" />
+    <link rel="next" title="Ontologies" href="../ontology/index.html" />
+    <link rel="prev" title="The om2 REST API" href="rest.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="../ontology/index.html" title="Ontologies"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="rest.html" title="The om2 REST API"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">OM2 v1.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Higher level APIs</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="the-json-rpc-api">
+<span id="api-jsonrpc"></span><h1>The JSON-RPC API<a class="headerlink" href="#the-json-rpc-api" title="Permalink to this headline">¶</a></h1>
+<p>Is implemented as a CGI script and publishes a set of methods.</p>
+<p>A normal <a class="reference external" href="http://json-rpc.org/">JSON-RPC</a> contains three properties:</p>
+<ul class="simple">
+<li>method</li>
+<li>params</li>
+<li>id</li>
+</ul>
+<p>And these are packaged as</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&quot;method&quot;</span><span class="p">:</span> <span class="s">&quot;methodName&quot;</span><span class="p">,</span>
+  <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="s">&quot;arbitrary-something&quot;</span><span class="p">,</span>
+  <span class="s">&quot;params&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">,</span> <span class="o">...</span><span class="p">]}</span>
+</pre></div>
+</div>
+<p>What is described below are the methods and which parameters they take in the
+om2 JSON-RPC API.
+Parameters that are in <strong>bold</strong> are mandatory, parameters in <em>italic</em> are optional.</p>
+<div class="section" id="read">
+<h2>read<a class="headerlink" href="#read" title="Permalink to this headline">¶</a></h2>
+<p>Reads information about an object from the repository</p>
+<hr class="docutils" />
+<dl class="docutils">
+<dt>method</dt>
+<dd>read</dd>
+<dt>params:</dt>
+<dd><ul class="first last simple">
+<li><strong>id</strong> The uriref of the object</li>
+<li><em>properties</em> A list of properties that the server are expected to return</li>
+<li><em>expand</em> Governs how values of object properties are handled. If expand are not
+set then only uriref&#8221;s of value objects are returned. If expand are set then value
+objects are expected to contain information about the objects, this only works one
+level deep.</li>
+<li><em>req</em> The requestor of the operation</li>
+</ul>
+</dd>
+<dt>return</dt>
+<dd>dictionary with information about the object. The format of the dictionary are
+{ objecttype : (uriref, ava)}, where ava is a dictionary with property names and values.</dd>
+</dl>
+<hr class="docutils" />
+<p>With a operation like:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&quot;method&quot;</span><span class="p">:</span> <span class="s">&quot;read&quot;</span><span class="p">,</span>
+  <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="s">&quot;whatever&quot;</span><span class="p">,</span>
+  <span class="s">&quot;params&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s">&quot;id&quot;</span><span class="p">:</span><span class="s">&quot;urn:mace:example.com:id#_1&quot;</span><span class="p">}]}</span>
+</pre></div>
+</div>
+<p>one might receive a reply resembling this (linebreaks added for readability):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&quot;result&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s">&quot;http://www.openmetadir.org/om2/prim-4.owl#UserPerson&quot;</span><span class="p">:</span>
+    <span class="p">[</span><span class="s">&quot;urn:mace:example.com:id#_1&quot;</span><span class="p">,</span> <span class="p">{</span>
+      <span class="s">&quot;givenName&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;Derek&quot;</span><span class="p">],</span> <span class="s">&quot;surName&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;Jeter&quot;</span><span class="p">]</span>
+      <span class="p">}</span>
+    <span class="p">]},</span>
+  <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="s">&quot;whatever&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="delete">
+<h2>delete<a class="headerlink" href="#delete" title="Permalink to this headline">¶</a></h2>
+<p>Delets an object from the repository</p>
+<hr class="docutils" />
+<dl class="docutils">
+<dt>method</dt>
+<dd>delete</dd>
+<dt>params:</dt>
+<dd><ul class="first last simple">
+<li><strong>id</strong> The uriref of the object</li>
+<li><em>req</em> The requestor of the operation</li>
+</ul>
+</dd>
+<dt>return</dt>
+<dd>True or False depending on the outcome of the operation.</dd>
+</dl>
+<hr class="docutils" />
+<p>With a operation like:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&quot;method&quot;</span><span class="p">:</span> <span class="s">&quot;delete&quot;</span><span class="p">,</span>
+  <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="s">&quot;whatever&quot;</span><span class="p">,</span>
+  <span class="s">&quot;params&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s">&quot;id&quot;</span><span class="p">:</span><span class="s">&quot;urn:mace:example.com:id#_1&quot;</span><span class="p">}]}</span>
+</pre></div>
+</div>
+<p>one might receive a reply resembling this (linebreaks added for readability):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&quot;result&quot;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+  <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="s">&quot;whatever&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="search">
+<h2>search<a class="headerlink" href="#search" title="Permalink to this headline">¶</a></h2>
+<p>Searches for all objects in the repository that matches a specified filter</p>
+<hr class="docutils" />
+<dl class="docutils">
+<dt>method</dt>
+<dd>search</dd>
+<dt>params:</dt>
+<dd><ul class="first last simple">
+<li><em>typ</em> The type of object</li>
+<li><em>properties</em> The properties to return. To define which properties to return one can use
+a XPath like format &lt;name&gt; [&#8216;.&#8217; &lt;name&gt;] . This is interesting when the objects that is found
+has properties with objects as value and what you really are efter is the value of a property
+of an object that i a value of a property of the object found. Like if you want the mail address
+of a person. To do this you would have to use the property specification &#8220;email.address&#8221;.</li>
+<li><em>filter</em> The filter, a dictionary of property names and values.
+substring specifications may be used as values. Leading (&#8220;str*&#8221;), trailing (&#8220;*ing&#8221;) and
+any (&#8220;*rin*&#8221;) substrings are valid.</li>
+<li><em>req</em> The requestor of the operation</li>
+</ul>
+</dd>
+<dt>return</dt>
+<dd>True or False depending on the outcome of the operation.</dd>
+</dl>
+<hr class="docutils" />
+<p>The following call will return all objects in the repository that are of the
+type <em>Person</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&quot;method&quot;</span><span class="p">:</span> <span class="s">&quot;search&quot;</span><span class="p">,</span>
+  <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="s">&quot;whatever&quot;</span><span class="p">,</span>
+  <span class="s">&quot;params&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s">&quot;type&quot;</span><span class="p">:</span><span class="s">&quot;Person&quot;</span><span class="p">}]}</span>
+</pre></div>
+</div>
+<p>This might possibly return a very long list of uriref&#8221;s:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&quot;result&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;urn:mace:example.com:id#_39&quot;</span><span class="p">,</span>
+      <span class="s">&quot;urn:mace:example.com:id#_41&quot;</span><span class="p">,</span>
+      <span class="o">...</span>
+      <span class="p">],</span>
+  <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="s">&quot;whatever&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If one wants a special set of persons and not just everybody, you have to add a filter
+like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&quot;method&quot;</span><span class="p">:</span> <span class="s">&quot;search&quot;</span><span class="p">,</span>
+  <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="s">&quot;whatever&quot;</span><span class="p">,</span>
+  <span class="s">&quot;params&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s">&quot;type&quot;</span><span class="p">:</span><span class="s">&quot;Person&quot;</span><span class="p">,</span>
+              <span class="s">&quot;filter&quot;</span><span class="p">:{</span><span class="s">&quot;givenName&quot;</span><span class="p">:</span><span class="s">&quot;Roland&quot;</span><span class="p">},</span>
+              <span class="s">&quot;properties&quot;</span><span class="p">:[</span><span class="s">&quot;surName&quot;</span><span class="p">]}]}</span>
+</pre></div>
+</div>
+<p>Which will search for all objects of type Person and where the property &#8220;givenName&#8221; of the
+object has <em>exact</em> the value &#8220;Roland&#8221; and for those found return not just the uriref
+but also the values of the property &#8220;surName&#8221;. The result might look like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&quot;result&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">[</span><span class="s">&quot;urn:mace:example.com:id#_279&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s">&quot;surName&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;Olsson&quot;</span><span class="p">]}],</span>
+    <span class="p">[</span><span class="s">&quot;urn:mace:example.com:id#_145&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s">&quot;surName&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;Johansson&quot;</span><span class="p">]}],</span>
+    <span class="p">[</span><span class="s">&quot;urn:mace:example.com:id#_239&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s">&quot;surName&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;Wass&quot;</span><span class="p">]}],</span>
+    <span class="p">[</span><span class="s">&quot;urn:mace:example.com:id#_327&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s">&quot;surName&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;Spolander&quot;</span><span class="p">]}],</span>
+    <span class="o">...</span><span class="p">,</span>
+  <span class="p">],</span>
+  <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="s">&quot;whatever&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the search filter it is permissible to use simple substring definitions like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&quot;method&quot;</span><span class="p">:</span> <span class="s">&quot;search&quot;</span><span class="p">,</span>
+  <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="s">&quot;whatever&quot;</span><span class="p">,</span>
+  <span class="s">&quot;params&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s">&quot;type&quot;</span><span class="p">:</span><span class="s">&quot;Person&quot;</span><span class="p">,</span>
+              <span class="s">&quot;filter&quot;</span><span class="p">:{</span><span class="s">&quot;givenName&quot;</span><span class="p">:</span><span class="s">&quot;*land&quot;</span><span class="p">},</span>
+              <span class="s">&quot;properties&quot;</span><span class="p">:[</span><span class="s">&quot;surName&quot;</span><span class="p">,</span><span class="s">&quot;givenName&quot;</span><span class="p">]}]}</span>
+</pre></div>
+</div>
+<p>Which then might give a result similar to this:</p>
+<div class="highlight-python"><pre>{"result": [
+    ["urn:mace:example.com:id#_279", {"givenName": ["Roland"], "surName":  ["Olsson"]}],
+    ...
+    ["urn:mace:example.com:id#_268", {"givenName": ["Erland"], "surName": ["Danielsson"]}],
+    ["urn:mace:example.com:id#_418", {"givenName": ["Bo-Roland"], "surName": ["Karlsson"]}]]
+  "id": "whatever"
+}</pre>
+</div>
+<p>And finally like for <em>read</em> you can in <em>properties</em> refer to properties in objects that are values to
+properties in the object that matches the query:</p>
+<div class="highlight-python"><pre>{"method": "search",
+  "id": "whatever",
+  "params": [{"type":"Person",
+              "filter":{"givenName":"Roland", "surName": "Johansson"},
+              "properties":["email.address"]}</pre>
+</div>
+<p>and the result  will be accordingly:</p>
+<div class="highlight-python"><pre>{"result": [
+  ['urn:mace:example.com:id#_2194848237278695939', {
+    'email': [
+      {'http://www.openmetadir.org/om2/prim-4.owl#Email':
+        ['urn:mace:example.com:uuid#_943a2da8-93d7-11dd-8ad4-0016cba1aac1', {
+          'address': ['roland.johansson@adm.umu.se']}]}]}],
+  ['urn:mace:example.com:id#_1450418969126394361', {
+    'email': [
+      {'http://www.openmetadir.org/om2/prim-4.owl#Email':
+        ['urn:mace:example.com:uuid#_5a744bbd-93d7-11dd-94f5-0016cba1aac1', {
+          'address': ['roland.s.johansson@physiol.umu.se']}]},
+      {'http://www.openmetadir.org/om2/prim-4.owl#Email':
+        ['urn:mace:example.com:uuid#_5a74770f-93d7-11dd-9f25-0016cba1aac1', {
+          'address': ['roland.johansson@physiol.umu.se']}]}]}]]
+  "id": "whatever"
+}</pre>
+</div>
+</div>
+<div class="section" id="add">
+<h2>add<a class="headerlink" href="#add" title="Permalink to this headline">¶</a></h2>
+<p>Adds an objects to the repository.</p>
+<hr class="docutils" />
+<dl class="docutils">
+<dt>method</dt>
+<dd>add</dd>
+<dt>params:</dt>
+<dd><ul class="first last simple">
+<li><strong>object</strong> The object that is to be added</li>
+<li><em>req</em> The requestor of the operation</li>
+</ul>
+</dd>
+<dt>return</dt>
+<dd>True or False depending on the outcome of the operation.</dd>
+</dl>
+<hr class="docutils" />
+<p>Example:</p>
+<div class="highlight-python"><pre>{ "method": "add,
+  "id": "whatever",
+  {'http://www.openmetadir.org/om2/prim-4.owl#Person':
+    ('urn:mace:example.com:id#_666666', {'givenName': ['Emil'], 'surName': ['Eifrem']})}
+  }</pre>
+</div>
+<p>Reply</p>
+<blockquote>
+{&#8220;result&#8221;: True, &#8220;id&#8221;: &#8220;whatever&#8221;}</blockquote>
+<p>Note that the object you want to add has to adher to all the restrictions that
+are set on objects of that type. If it isn&#8217;t the repository should reject it.</p>
+</div>
+<div class="section" id="modify-insert">
+<h2>modify_insert<a class="headerlink" href="#modify-insert" title="Permalink to this headline">¶</a></h2>
+<p>Modifies an objects in the repository by adding some information to it.</p>
+<hr class="docutils" />
+<dl class="docutils">
+<dt>method</dt>
+<dd>modify_insert</dd>
+<dt>params:</dt>
+<dd><ul class="first last simple">
+<li><strong>object</strong> The object that is to be added. The object is expessed as dictionary
+where the key is the type of the object and the value is a 2-tuple (whether it is
+actually a 2-tuple or a list of two items are immaterial since JSON does not distinguish
+inbetween them) containing the
+uriref and a property-value assertion. The property-value assertion is in itself a
+dictionary with the property names as keys and a list of values as value.</li>
+<li><em>req</em> The requestor of the operation</li>
+</ul>
+</dd>
+<dt>return</dt>
+<dd>True or False depending on the outcome of the operation.</dd>
+</dl>
+<hr class="docutils" />
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&quot;method&quot;</span><span class="p">:</span> <span class="s">&quot;modify_insert&quot;</span><span class="p">,</span>
+  <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="s">&quot;whatever&quot;</span><span class="p">,</span>
+  <span class="s">&quot;params&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s">&quot;object&quot;</span><span class="p">:{</span>
+      <span class="s">&quot;http://www.openmetadir.org/om2/prim-4.owl#Person&quot;</span><span class="p">:</span>
+        <span class="p">(</span><span class="s">&quot;urn:mace:example.com:id#_279&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s">&quot;title&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;test person&quot;</span><span class="p">]})</span>
+    <span class="p">}}]}</span>
+</pre></div>
+</div>
+<p>returns:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&quot;result&quot;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="s">&quot;whatever&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="modify-remove">
+<h2>modify_remove<a class="headerlink" href="#modify-remove" title="Permalink to this headline">¶</a></h2>
+<p>Modifies an objects in the repository by removing some information from it.</p>
+<hr class="docutils" />
+<dl class="docutils">
+<dt>method</dt>
+<dd>modify_remove</dd>
+<dt>params:</dt>
+<dd><ul class="first last simple">
+<li><strong>object</strong> The object part that is to be removed</li>
+<li><em>req</em> The requestor of the operation</li>
+</ul>
+</dd>
+<dt>return</dt>
+<dd>True or False depending on the outcome of the operation.</dd>
+</dl>
+<hr class="docutils" />
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&quot;method&quot;</span><span class="p">:</span> <span class="s">&quot;modify_remove&quot;</span><span class="p">,</span>
+  <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="s">&quot;whatever&quot;</span><span class="p">,</span>
+  <span class="s">&quot;params&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s">&quot;object&quot;</span><span class="p">:{</span>
+      <span class="s">&quot;http://www.openmetadir.org/om2/prim-4.owl#Person&quot;</span><span class="p">:</span>
+        <span class="p">(</span><span class="s">&quot;urn:mace:example.com:id#_279&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s">&quot;title&quot;</span><span class="p">:</span> <span class="bp">None</span><span class="p">})</span>
+    <span class="p">}}]}</span>
+</pre></div>
+</div>
+<p>returns:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&quot;result&quot;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="s">&quot;whatever&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="modify-replace">
+<h2>modify_replace<a class="headerlink" href="#modify-replace" title="Permalink to this headline">¶</a></h2>
+<p>Modifies an objects in the repository by replacing some information in it with something else.</p>
+<hr class="docutils" />
+<dl class="docutils">
+<dt>method</dt>
+<dd>modify_replace</dd>
+<dt>params:</dt>
+<dd><ul class="first last simple">
+<li><strong>object</strong> An object describing what should be replaced by what as
+{object_type: [uriref, ava]} where ava is {key: [(before,after),...]}</li>
+<li><em>req</em> The requestor of the operation</li>
+</ul>
+</dd>
+<dt>return</dt>
+<dd>True or False depending on the outcome of the operation.</dd>
+</dl>
+<hr class="docutils" />
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&quot;method&quot;</span><span class="p">:</span> <span class="s">&quot;modify_remove&quot;</span><span class="p">,</span>
+  <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="s">&quot;whatever&quot;</span><span class="p">,</span>
+  <span class="s">&quot;params&quot;</span><span class="p">:</span> <span class="p">[{</span>
+      <span class="s">&quot;object&quot;</span><span class="p">:{</span><span class="s">&quot;http://www.openmetadir.org/om2/prim-4.owl#Person&quot;</span><span class="p">:</span>
+        <span class="p">[</span><span class="s">&quot;urn:mace:example.com:id#_279&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s">&quot;title&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s">&quot;test person&quot;</span><span class="p">,</span> <span class="s">&quot;person test&quot;</span><span class="p">]]}]</span>
+      <span class="p">}}]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>returns:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&quot;result&quot;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="s">&quot;whatever&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="tree">
+<h2>tree<a class="headerlink" href="#tree" title="Permalink to this headline">¶</a></h2>
+<p>Returns a list of children to an object and possibly also their children and so on.</p>
+<hr class="docutils" />
+<dl class="docutils">
+<dt>method</dt>
+<dd>tree</dd>
+<dt>params:</dt>
+<dd><ul class="first last simple">
+<li><strong>id</strong> The objects whoes children are sought</li>
+<li><strong>type</strong> The object type of the children I&#8221;m interested in.</li>
+<li><em>properties</em> what apart from the uriref should be returned about the child</li>
+<li><em>depth</em> 0 will give you the immediate children (this is the default), 1 gives you
+the children and granchildren, ...</li>
+<li><em>req</em> The requestor of the operation</li>
+</ul>
+</dd>
+<dt>return</dt>
+<dd>List of children</dd>
+</dl>
+<hr class="docutils" />
+<p>Query, immediate children:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&quot;method&quot;</span><span class="p">:</span> <span class="s">&quot;tree&quot;</span><span class="p">,</span>
+  <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="s">&quot;whatever&quot;</span><span class="p">,</span>
+  <span class="s">&quot;params&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s">&quot;id&quot;</span><span class="p">:</span><span class="s">&quot;urn:mace:example.com:id#_15&quot;</span><span class="p">,</span> <span class="s">&quot;type&quot;</span><span class="p">:</span><span class="s">&quot;Stem&quot;</span><span class="p">,</span> <span class="s">&quot;properties&quot;</span><span class="p">:[</span><span class="s">&quot;name&quot;</span><span class="p">]}]}</span>
+</pre></div>
+</div>
+<p>Reply:</p>
+<div class="highlight-python"><pre>{"result":[
+    ("urn:mace:example.com:id#_268", "Produktionsavdelningen",
+    ("urn:mace:example.com:id#_162", "Konsultavdelningen"),
+    ("urn:mace:example.com:id#_362", "RDS"),
+    ("urn:mace:example.com:id#_754", "Internservice")
+  ],
+  "id": "whatever"
+}</pre>
+</div>
+<p>Query, chidren and grandchildren:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&quot;method&quot;</span><span class="p">:</span> <span class="s">&quot;tree&quot;</span><span class="p">,</span>
+  <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="s">&quot;whatever&quot;</span><span class="p">,</span>
+  <span class="s">&quot;params&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s">&quot;id&quot;</span><span class="p">:</span><span class="s">&quot;urn:mace:example.com:id#_15&quot;</span><span class="p">,</span>
+            <span class="s">&quot;type&quot;</span><span class="p">:</span><span class="s">&quot;Stem&quot;</span><span class="p">,</span>
+            <span class="s">&quot;properties&quot;</span><span class="p">:[</span><span class="s">&quot;name&quot;</span><span class="p">],</span>
+            <span class="s">&quot;depth&quot;</span><span class="p">:</span><span class="mf">1</span><span class="p">}]}</span>
+</pre></div>
+</div>
+<p>Reply:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&quot;result&quot;</span><span class="p">:[</span>
+    <span class="p">(</span><span class="s">&quot;urn:mace:example.com:id#_268&quot;</span><span class="p">,</span> <span class="s">&quot;Produktionsavdelningen&quot;</span><span class="p">,</span>
+       <span class="p">[(</span><span class="s">&quot;urn:mace:example.com:id#_197&quot;</span><span class="p">,</span> <span class="s">u&quot;N</span><span class="se">\xe4</span><span class="s">tdrift&quot;</span><span class="p">),</span>
+       <span class="p">(</span><span class="s">&quot;urn:mace:example.com:id#_257&quot;</span><span class="p">,</span> <span class="s">&quot;IRT&quot;</span><span class="p">),</span>
+       <span class="p">(</span><span class="s">&quot;urn:mace:example.com:id#_408&quot;</span><span class="p">,</span> <span class="s">&quot;Datordrift&quot;</span><span class="p">)]),</span>
+    <span class="p">(</span><span class="s">&quot;urn:mace:example.com:id#_162&quot;</span><span class="p">,</span> <span class="s">&quot;Konsultavdelningen&quot;</span><span class="p">,</span>
+      <span class="p">[(</span><span class="s">&quot;urn:mace:example.com:id#_184&quot;</span><span class="p">,</span> <span class="s">u&quot;Systemf</span><span class="se">\xf6</span><span class="s">rvaltning&quot;</span><span class="p">),</span>
+      <span class="p">(</span><span class="s">&quot;urn:mace:example.com:id#_560&quot;</span><span class="p">,</span> <span class="s">&quot;Support&quot;</span><span class="p">),</span>
+      <span class="p">(</span><span class="s">&quot;urn:mace:example.com:id#_507&quot;</span><span class="p">,</span> <span class="s">&quot;Utvecklingsenheten&quot;</span><span class="p">)]),</span>
+    <span class="p">(</span><span class="s">&quot;urn:mace:example.com:id#_362&quot;</span><span class="p">,</span> <span class="s">&quot;RDS&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s">&quot;urn:mace:example.com:id#_754&quot;</span><span class="p">,</span> <span class="s">&quot;Internservice&quot;</span><span class="p">)],</span>
+  <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="s">&quot;whatever&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="whoami">
+<h2>whoami<a class="headerlink" href="#whoami" title="Permalink to this headline">¶</a></h2>
+<p>In a single-sign-on environment this tells the client who is actually using it.
+The client is not expected to handle the login itself.</p>
+<hr class="docutils" />
+<dl class="docutils">
+<dt>method</dt>
+<dd>whoami</dd>
+<dt>params:</dt>
+<dd>no parameters</dd>
+<dt>return</dt>
+<dd>string</dd>
+</dl>
+<hr class="docutils" />
+<p>Typically:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&quot;method&quot;</span><span class="p">:</span> <span class="s">&quot;whoami&quot;</span><span class="p">,</span>
+  <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="s">&quot;whatever&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>returns something like:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span> <span class="s">&quot;result&quot;</span><span class="p">:</span> <span class="s">&quot;urn:mace:example.com:id#_279&quot;</span><span class="p">,</span>
+  <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="s">&quot;whatever&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="">The JSON-RPC API</a><ul>
+<li><a class="reference external" href="#read">read</a></li>
+<li><a class="reference external" href="#delete">delete</a></li>
+<li><a class="reference external" href="#search">search</a></li>
+<li><a class="reference external" href="#add">add</a></li>
+<li><a class="reference external" href="#modify-insert">modify_insert</a></li>
+<li><a class="reference external" href="#modify-remove">modify_remove</a></li>
+<li><a class="reference external" href="#modify-replace">modify_replace</a></li>
+<li><a class="reference external" href="#tree">tree</a></li>
+<li><a class="reference external" href="#whoami">whoami</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="rest.html"
+                                  title="previous chapter">The om2 REST API</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="../ontology/index.html"
+                                  title="next chapter">Ontologies</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/api/jsonrpc.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../ontology/index.html" title="Ontologies"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="rest.html" title="The om2 REST API"
+             >previous</a> |</li>
+        <li><a href="../index.html">OM2 v1.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Higher level APIs</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009, Roland Hedberg.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.2.
+    </div>
+  </body>
+</html>

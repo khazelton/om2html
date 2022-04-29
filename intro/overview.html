@@ -1,0 +1,239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Pyom at a glance &mdash; OM2 v1.1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.1.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="OM2 v1.1.0 documentation" href="../index.html" />
+    <link rel="up" title="Getting started" href="index.html" />
+    <link rel="next" title="Quick install guide" href="install.html" />
+    <link rel="prev" title="Getting started" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="install.html" title="Quick install guide"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Getting started"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">OM2 v1.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Getting started</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="pyom-at-a-glance">
+<span id="intro-overview"></span><h1>Pyom at a glance<a class="headerlink" href="#pyom-at-a-glance" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="background-the-openmetadir-model-an-event-based-messaging-system">
+<h2>Background: The Openmetadir model; an event based messaging system<a class="headerlink" href="#background-the-openmetadir-model-an-event-based-messaging-system" title="Permalink to this headline">¶</a></h2>
+<p>A publisher-subscribe system using</p>
+<ul class="simple">
+<li>indirect-delivery model,</li>
+<li>content filtering,</li>
+<li>distributed delivery and a</li>
+<li>binder.</li>
+</ul>
+<img alt="../_images/deliverymodel.png" src="../_images/deliverymodel.png" />
+</div>
+<div class="section" id="the-raison-d-tre-for-pyom">
+<h2>The raison d&#8217;être for Pyom<a class="headerlink" href="#the-raison-d-tre-for-pyom" title="Permalink to this headline">¶</a></h2>
+<p>Pyom was develop as a tool primary to do identity management, implementing the
+functions defined in to the Openmetadir model. The goal was to produce something
+that would help us keep several different information sources in synch.
+At the same time we did not want to limit what people wanted to keep synchronised.</p>
+<p>Now, if you want to synchronise two information sources one being the
+source and the other the receiver, and you have an intermediate, you have to:</p>
+<ul class="simple">
+<li>pick a protocol by which the intermediate can talk to the source/receiver</li>
+<li>pick a information representation to be used by the intermediate.</li>
+<li>decide how to transform the local representations to and fro the intermediate.</li>
+</ul>
+<p>If you increase the number of information sources and receivers and if
+they are built on different technologies and therefor tend to use different
+internal representations of data, then you definitely want to have
+a very rich information representation in the centre. You do not want a
+central information representation for any source-sink pair since this would
+lead to a NxM conversion problem.
+Instead you want one or a very limited number of central
+representations more or less independent of which sources and sinks that are
+coupled to the metadirectory system. Given that you dealing with a specific set
+of objects.
+Another thing that will become obvious when you increase the
+number of sources is that the total system description will become very unstable.
+Hence, you must to be able to handle version control.</p>
+<p>You also want to allow for usage of any type of transport protocol.</p>
+<p>These points lead us to define the two corner stones that the OpenMetadir project,
+and therefor Pyom, is build on.</p>
+<ul class="simple">
+<li>Any transport protocol that can transport relatively small sets of text
+should be usable.</li>
+<li>The syntax and partly semantics of the transported and centrally stored
+information will be described using the web ontology language (<a class="reference internal" href="#owl">[owl]</a>) and
+serialised into RDF/XML (<a class="reference internal" href="#rdfxml">[rdfxml]</a>) before going on-the-wire.</li>
+</ul>
+<p>The goal of this document is to give you enough technical specifics to
+understand how Pyom works in this context.</p>
+</div>
+<div class="section" id="creating-a-pyom-system">
+<h2>Creating a Pyom system<a class="headerlink" href="#creating-a-pyom-system" title="Permalink to this headline">¶</a></h2>
+<p>So what is a Pyom system ?
+Going back to what I said above, in order to synchronise a source and a sink, you have to:</p>
+<ul class="simple">
+<li>Choose/construct a central information representation which in our case amounts
+to choosing or constructing one or more ontologies.</li>
+<li>Choose a transport protocol between the source and the center.</li>
+<li>Define the conversion between the internal data representation of the source and
+the central representation</li>
+<li>Choose a transport protocol between the center and the sink.</li>
+<li>Define the conversion between the central representation and the internal data
+representation of the sink.</li>
+</ul>
+<p>So this is the basic pattern. On top of this you might want to save all the
+messages for future reference or you might want to keep the state of objects (if
+that is what the source transmits information about) somewhere in the center.</p>
+<p>So a simple system might look like this:</p>
+<img alt="../_images/simple_system.png" src="../_images/simple_system.png" />
+<p>Notice here that the base system is dealing with unidirectional flows fo data
+and that we expect the system to be event based. That is events in the source
+system will trigger export of information describing the event.</p>
+<p>A publisher (P) that sends information about events using a transport protocol, to
+a node (CLp) that converts between the data format of the publisher and the central
+system. That node will then forward the event messages to a repository (Repo)
+which might keep a log over all the messages and/or keep a representation of
+the state of the object on which the events happen.
+The repository, in the SWAMI case a neorepo (<a class="reference internal" href="#neorepo">[neorepo]</a>, <a class="reference internal" href="#neousage">[neoUsage]</a>) will send
+messages to the conversion node (CLs) for the subscriber when the state of an
+object has changed. And eventually the converter for the sink will transmit the
+information to the subscriber (S). Now, in some cases the converters might be
+implemented in the publisher/sink but that will be quite rare, for some time to
+come, unless you have full source control of the publisher/sink.</p>
+<p>So, if by know are interested in testing pyom you have to install it.
+More on that here <a class="reference external" href="install.html#intro-install"><em>install pyom</em></a> .</p>
+</div>
+<div class="section" id="links">
+<h2>Links<a class="headerlink" href="#links" title="Permalink to this headline">¶</a></h2>
+<table class="docutils citation" frame="void" id="neorepo" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[neorepo]</a></td><td><a class="reference external" href="http://neo4j.org/">http://neo4j.org/</a></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="neousage" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[neoUsage]</a></td><td><a class="reference external" href="http://wiki.neo4j.org/content/Using_NeoRepo">http://wiki.neo4j.org/content/Using_NeoRepo</a></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="owl" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[owl]</a></td><td><a class="reference external" href="http://www.w3.org/TR/owl-features/">http://www.w3.org/TR/owl-features/</a></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="rdfxml" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[rdfxml]</a></td><td><a class="reference external" href="http://www.w3.org/TR/rdf-syntax-grammar/">http://www.w3.org/TR/rdf-syntax-grammar/</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="">Pyom at a glance</a><ul>
+<li><a class="reference external" href="#background-the-openmetadir-model-an-event-based-messaging-system">Background: The Openmetadir model; an event based messaging system</a></li>
+<li><a class="reference external" href="#the-raison-d-tre-for-pyom">The raison d&#8217;être for Pyom</a></li>
+<li><a class="reference external" href="#creating-a-pyom-system">Creating a Pyom system</a></li>
+<li><a class="reference external" href="#links">Links</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="index.html"
+                                  title="previous chapter">Getting started</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="install.html"
+                                  title="next chapter">Quick install guide</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/intro/overview.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="install.html" title="Quick install guide"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Getting started"
+             >previous</a> |</li>
+        <li><a href="../index.html">OM2 v1.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Getting started</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009, Roland Hedberg.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.2.
+    </div>
+  </body>
+</html>

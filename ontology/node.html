@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The node ontology &mdash; OM2 v1.1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.1.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="OM2 v1.1.0 documentation" href="../index.html" />
+    <link rel="up" title="Ontologies" href="index.html" />
+    <link rel="next" title="API documentation!" href="../api/index.html" />
+    <link rel="prev" title="The prim ontology" href="prim.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="../api/index.html" title="API documentation!"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="prim.html" title="The prim ontology"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">OM2 v1.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Ontologies</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-node">
+<span id="ontology-node"></span><h1>The node ontology<a class="headerlink" href="#module-node" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Roland Hedberg</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">0.1.0</td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><a class="reference internal" href="#node-class-interface"><em>Interface</em></a></li>
+<li><a class="reference internal" href="#node-class-service"><em>Service</em></a></li>
+</ul>
+<div class="section" id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="service">
+<h3>Service<a class="headerlink" href="#service" title="Permalink to this headline">¶</a></h3>
+<p id="node-class-service"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#node-property-interface"><em>interface</em></a></li>
+<li><a class="reference internal" href="#node-property-cachetime"><em>cacheTime</em></a></li>
+<li><a class="reference internal" href="#node-property-name"><em>name</em></a></li>
+</ul>
+</div>
+<div class="section" id="interface">
+<h3>Interface<a class="headerlink" href="#interface" title="Permalink to this headline">¶</a></h3>
+<p id="node-class-interface"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#node-property-url"><em>url</em></a> <em>restriction</em> cardinality 1</li>
+<li><a class="reference internal" href="#node-property-mustencrypt"><em>mustEncrypt</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#node-property-protocol"><em>protocol</em></a> <em>restriction</em> cardinality 1</li>
+<li><a class="reference internal" href="#node-property-mustsign"><em>mustSign</em></a> <em>restriction</em> maxCardinality 1</li>
+</ul>
+</div>
+</div>
+<div class="section" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>interface<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="node-property-interface">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#node-class-interface"><em>Interface</em></a></dd>
+</dl>
+</div>
+<div class="section" id="cachetime">
+<h3>cacheTime<a class="headerlink" href="#cachetime" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="node-property-cachetime">
+<dt><em>range</em></dt>
+<dd>integer</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="url">
+<h3>url<a class="headerlink" href="#url" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="node-property-url">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="name">
+<h3>name<a class="headerlink" href="#name" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="node-property-name">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="protocol">
+<h3>protocol<a class="headerlink" href="#protocol" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="node-property-protocol">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="mustsign">
+<h3>mustSign<a class="headerlink" href="#mustsign" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="node-property-mustsign">
+<dt><em>range</em></dt>
+<dd>integer</dd>
+</dl>
+</div>
+<div class="section" id="mustencrypt">
+<h3>mustEncrypt<a class="headerlink" href="#mustencrypt" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="node-property-mustencrypt">
+<dt><em>range</em></dt>
+<dd>integer</dd>
+</dl>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="">The node ontology</a><ul>
+<li><a class="reference external" href="#classes">Classes</a><ul>
+<li><a class="reference external" href="#service">Service</a></li>
+<li><a class="reference external" href="#interface">Interface</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#properties">Properties</a><ul>
+<li><a class="reference external" href="#id1">interface</a></li>
+<li><a class="reference external" href="#cachetime">cacheTime</a></li>
+<li><a class="reference external" href="#url">url</a></li>
+<li><a class="reference external" href="#name">name</a></li>
+<li><a class="reference external" href="#protocol">protocol</a></li>
+<li><a class="reference external" href="#mustsign">mustSign</a></li>
+<li><a class="reference external" href="#mustencrypt">mustEncrypt</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="prim.html"
+                                  title="previous chapter">The prim ontology</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="../api/index.html"
+                                  title="next chapter">API documentation!</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/ontology/node.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../api/index.html" title="API documentation!"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="prim.html" title="The prim ontology"
+             >previous</a> |</li>
+        <li><a href="../index.html">OM2 v1.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Ontologies</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009, Roland Hedberg.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.2.
+    </div>
+  </body>
+</html>

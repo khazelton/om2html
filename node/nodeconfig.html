@@ -1,0 +1,2081 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The nodeconfig ontology &mdash; OM2 v1.1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.1.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="OM2 v1.1.0 documentation" href="../index.html" />
+    <link rel="up" title="The node -the basic buildingblock" href="index.html" />
+    <link rel="next" title="API reference" href="../ref/index.html" />
+    <link rel="prev" title="The handlers - to provide the dispatcher with more functions" href="handler.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="../ref/index.html" title="API reference"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="handler.html" title="The handlers - to provide the dispatcher with more functions"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">OM2 v1.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">The node -the basic buildingblock</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-nodeconfig">
+<span id="ontology-nodeconfig"></span><h1>The nodeconfig ontology<a class="headerlink" href="#module-nodeconfig" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Roland Hedberg</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">0.22.0</td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-classes"><em>Classes</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-properties"><em>Properties</em></a></li>
+</ul>
+<div class="section" id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple" id="nodeconfig-classes">
+<li><a class="reference internal" href="#nodeconfig-class-accessrule"><em>AccessRule</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-actor"><em>Actor</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-address"><em>Address</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-configuration"><em>Configuration</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-dnsresolver"><em>DNSResolver</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-devnullsender"><em>DevNullSender</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-dispatcher"><em>Dispatcher</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-djbmaildirlistener"><em>DjbMaildirListener</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-djbmaildirsender"><em>DjbMaildirSender</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-filesender"><em>FileSender</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-forwarder"><em>Forwarder</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-handler"><em>Handler</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-idmapper"><em>IdMapper</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-ladokconv"><em>Ladokconv</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-ldapsender"><em>LdapSender</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-ldapservice"><em>LdapService</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-ldapconv"><em>Ldapconv</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-limitation"><em>Limitation</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-linelistener"><em>LineListener</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-listener"><em>Listener</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-loghandler"><em>LogHandler</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-logservice"><em>LogService</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-map"><em>Map</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-nodeinfo"><em>NodeInfo</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-oidservice"><em>OidService</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-om2api"><em>Om2api</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-patternrouter"><em>PatternRouter</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-ping"><em>Ping</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-reply"><em>Reply</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-repository"><em>Repository</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-resolver"><em>Resolver</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-resolvermap"><em>ResolverMap</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-restlistener"><em>RestListener</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-restsender"><em>RestSender</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-retry"><em>Retry</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-retryhandler"><em>RetryHandler</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-retryrouter"><em>RetryRouter</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-router"><em>Router</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-smtpsender"><em>SMTPSender</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-ssl"><em>SSL</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-sendhandler"><em>SendHandler</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-sender"><em>Sender</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-servicehandler"><em>ServiceHandler</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-servicelocation"><em>ServiceLocation</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-sforwarder"><em>Sforwarder</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-simplerouter"><em>SimpleRouter</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-soaplistener"><em>SoapListener</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-soapsender"><em>SoapSender</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-sparqlservice"><em>SparqlService</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-spocprouter"><em>SpocpRouter</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-spocpsender"><em>SpocpSender</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-spocpservice"><em>SpocpService</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-stateserver"><em>StateServer</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-statefull"><em>Statefull</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-static"><em>Static</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-sync"><em>Sync</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-transformer"><em>Transformer</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-unixsocketlistener"><em>UnixSocketListener</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-unixsocketsender"><em>UnixSocketSender</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-class-xmppmsgsender"><em>XMPPMsgSender</em></a></li>
+</ul>
+<div class="section" id="accessrule">
+<h3>AccessRule<a class="headerlink" href="#accessrule" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-accessrule"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-accessdefault"><em>accessDefault</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-deny"><em>deny</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-allow"><em>allow</em></a></li>
+</ul>
+</div>
+<div class="section" id="actor">
+<h3>Actor<a class="headerlink" href="#actor" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-actor"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-servicelocation"><em>serviceLocation</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-name"><em>name</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-mustsucceed"><em>mustSucceed</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-module"><em>module</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-next"><em>next</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-sourceaddress"><em>sourceAddress</em></a></li>
+</ul>
+</div>
+<div class="section" id="address">
+<h3>Address<a class="headerlink" href="#address" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-address">a OM2 recipient of RDF graphs</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-protocolname"><em>protocolName</em></a> <em>restriction</em> cardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-endpoint"><em>endpoint</em></a> <em>restriction</em> cardinality 1</li>
+</ul>
+</div>
+<div class="section" id="configuration">
+<h3>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-configuration"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-readinterface"><em>readInterface</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-name"><em>name</em></a> <em>restriction</em> cardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-nodeinfo"><em>nodeinfo</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-statusserver"><em>statusServer</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-listener"><em>listener</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-relplogger"><em>relpLogger</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-resolver"><em>resolver</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-ontpath"><em>ontpath</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-router"><em>router</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-ontology"><em>ontology</em></a> <em>restriction</em> minCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-dispatcher"><em>dispatcher</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-sender"><em>sender</em></a></li>
+</ul>
+</div>
+<div class="section" id="dnsresolver">
+<h3>DNSResolver<a class="headerlink" href="#dnsresolver" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-dnsresolver">A service that takes a receiver of the form <a class="reference external" href="mailto:local&#37;&#52;&#48;domain">local<span>&#64;</span>domain</a> and
+translates it into a set of protocols and endpoints.</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-priority"><em>priority</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-servicetype"><em>serviceType</em></a> <em>restriction</em> hasValue dns</li>
+<li><a class="reference internal" href="#nodeconfig-property-ontology"><em>ontology</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-servicelocation"><em>serviceLocation</em></a></li>
+</ul>
+</div>
+<div class="section" id="devnullsender">
+<h3>DevNullSender<a class="headerlink" href="#devnullsender" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-devnullsender"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-maxcopies"><em>maxCopies</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-protocolname"><em>protocolName</em></a> <em>restriction</em> hasValue devnull</li>
+<li><a class="reference internal" href="#nodeconfig-property-priority"><em>priority</em></a></li>
+</ul>
+</div>
+<div class="section" id="dispatcher">
+<h3>Dispatcher<a class="headerlink" href="#dispatcher" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-dispatcher"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-servicetype"><em>serviceType</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-doreplyto"><em>doReplyTo</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-name"><em>name</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-trottle"><em>trottle</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-authoritativeabout"><em>authoritativeAbout</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-model"><em>model</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-sourceaddress"><em>sourceAddress</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-persistentstore"><em>persistentStore</em></a> <em>restriction</em> maxCardinality 1</li>
+</ul>
+</div>
+<div class="section" id="djbmaildirlistener">
+<h3>DjbMaildirListener<a class="headerlink" href="#djbmaildirlistener" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-djbmaildirlistener"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-name"><em>name</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-accessrule"><em>accessRule</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-create"><em>create</em></a> <em>restriction</em> cardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-responseafter"><em>responseAfter</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-protocolname"><em>protocolName</em></a> <em>restriction</em> hasValue djbmaildir</li>
+<li><a class="reference internal" href="#nodeconfig-property-root"><em>root</em></a> <em>restriction</em> cardinality 1</li>
+</ul>
+</div>
+<div class="section" id="djbmaildirsender">
+<h3>DjbMaildirSender<a class="headerlink" href="#djbmaildirsender" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-djbmaildirsender"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-maxcopies"><em>maxCopies</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-create"><em>create</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-priority"><em>priority</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-protocolname"><em>protocolName</em></a> <em>restriction</em> hasValue djbmaildir</li>
+<li><a class="reference internal" href="#nodeconfig-property-root"><em>root</em></a></li>
+</ul>
+</div>
+<div class="section" id="filesender">
+<h3>FileSender<a class="headerlink" href="#filesender" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-filesender"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-maxcopies"><em>maxCopies</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-path"><em>path</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-protocolname"><em>protocolName</em></a> <em>restriction</em> hasValue file</li>
+<li><a class="reference internal" href="#nodeconfig-property-priority"><em>priority</em></a></li>
+</ul>
+</div>
+<div class="section" id="forwarder">
+<h3>Forwarder<a class="headerlink" href="#forwarder" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-forwarder"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-servicetype"><em>serviceType</em></a> <em>restriction</em> hasValue forwarder</li>
+<li><a class="reference internal" href="#nodeconfig-property-doreplyto"><em>doReplyTo</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-name"><em>name</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-trottle"><em>trottle</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-errorhandler"><em>errorHandler</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-authoritativeabout"><em>authoritativeAbout</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-model"><em>model</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-sourceaddress"><em>sourceAddress</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-setoutgoingreceiver"><em>setOutgoingReceiver</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-persistentstore"><em>persistentStore</em></a> <em>restriction</em> maxCardinality 1</li>
+</ul>
+</div>
+<div class="section" id="handler">
+<h3>Handler<a class="headerlink" href="#handler" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-handler"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-name"><em>name</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-errorhandler"><em>errorHandler</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-module"><em>module</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-nexthandler"><em>nextHandler</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-initerrorhandler"><em>initErrorHandler</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-path"><em>path</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-posthandler"><em>postHandler</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-prehandler"><em>preHandler</em></a></li>
+</ul>
+</div>
+<div class="section" id="idmapper">
+<h3>IdMapper<a class="headerlink" href="#idmapper" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-idmapper">An actor that transforms one identifier of an object into another.</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-servicelocation"><em>serviceLocation</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-name"><em>name</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-mustsucceed"><em>mustSucceed</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-idmap"><em>idMap</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-module"><em>module</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-next"><em>next</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-objectprefixmap"><em>objectPrefixMap</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-sourceaddress"><em>sourceAddress</em></a></li>
+</ul>
+</div>
+<div class="section" id="ladokconv">
+<h3>Ladokconv<a class="headerlink" href="#ladokconv" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-ladokconv"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-servicetype"><em>serviceType</em></a> <em>restriction</em> hasValue ladokmtconv</li>
+<li><a class="reference internal" href="#nodeconfig-property-doreplyto"><em>doReplyTo</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-name"><em>name</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-trottle"><em>trottle</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-authoritativeabout"><em>authoritativeAbout</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-model"><em>model</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-sourceaddress"><em>sourceAddress</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-persistentstore"><em>persistentStore</em></a> <em>restriction</em> maxCardinality 1</li>
+</ul>
+</div>
+<div class="section" id="ldapsender">
+<h3>LdapSender<a class="headerlink" href="#ldapsender" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-ldapsender"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-dn"><em>dn</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-servicelocation"><em>serviceLocation</em></a> <em>restriction</em> cardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-maxcopies"><em>maxCopies</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-priority"><em>priority</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-protocolname"><em>protocolName</em></a> <em>restriction</em> hasValue ldapprov</li>
+</ul>
+</div>
+<div class="section" id="ldapservice">
+<h3>LdapService<a class="headerlink" href="#ldapservice" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-ldapservice"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-dn"><em>dn</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-passwd"><em>passwd</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-ip"><em>ip</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-hostname"><em>hostname</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-ssl"><em>ssl</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-user"><em>user</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-url"><em>url</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-protocolname"><em>protocolName</em></a> <em>restriction</em> hasValue ldap</li>
+<li><a class="reference internal" href="#nodeconfig-property-port"><em>port</em></a> <em>restriction</em> maxCardinality 1</li>
+</ul>
+</div>
+<div class="section" id="ldapconv">
+<h3>Ldapconv<a class="headerlink" href="#ldapconv" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-ldapconv"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-servicetype"><em>serviceType</em></a> <em>restriction</em> hasValue ldapmtconv</li>
+<li><a class="reference internal" href="#nodeconfig-property-doreplyto"><em>doReplyTo</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-name"><em>name</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-trottle"><em>trottle</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-authoritativeabout"><em>authoritativeAbout</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-model"><em>model</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-sourceaddress"><em>sourceAddress</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-persistentstore"><em>persistentStore</em></a> <em>restriction</em> maxCardinality 1</li>
+</ul>
+</div>
+<div class="section" id="limitation">
+<h3>Limitation<a class="headerlink" href="#limitation" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-limitation"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-maskbits"><em>maskbits</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-net"><em>net</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-host"><em>host</em></a></li>
+</ul>
+</div>
+<div class="section" id="linelistener">
+<h3>LineListener<a class="headerlink" href="#linelistener" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-linelistener"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-name"><em>name</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-accessrule"><em>accessRule</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-responseafter"><em>responseAfter</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-protocolname"><em>protocolName</em></a> <em>restriction</em> hasValue line</li>
+<li><a class="reference internal" href="#nodeconfig-property-port"><em>port</em></a></li>
+</ul>
+</div>
+<div class="section" id="listener">
+<h3>Listener<a class="headerlink" href="#listener" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-listener"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-responseafter"><em>responseAfter</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-name"><em>name</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-accessrule"><em>accessRule</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-protocolname"><em>protocolName</em></a></li>
+</ul>
+</div>
+<div class="section" id="loghandler">
+<h3>LogHandler<a class="headerlink" href="#loghandler" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-loghandler"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-name"><em>name</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-hostname"><em>hostname</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-errorhandler"><em>errorHandler</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-port"><em>port</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-module"><em>module</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-nexthandler"><em>nextHandler</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-initerrorhandler"><em>initErrorHandler</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-path"><em>path</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-posthandler"><em>postHandler</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-store"><em>store</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-prehandler"><em>preHandler</em></a></li>
+</ul>
+</div>
+<div class="section" id="logservice">
+<h3>LogService<a class="headerlink" href="#logservice" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-logservice"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-name"><em>name</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-passwd"><em>passwd</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-ip"><em>ip</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-hostname"><em>hostname</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-ssl"><em>ssl</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-user"><em>user</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-url"><em>url</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-protocolname"><em>protocolName</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-port"><em>port</em></a> <em>restriction</em> maxCardinality 1</li>
+</ul>
+</div>
+<div class="section" id="map">
+<h3>Map<a class="headerlink" href="#map" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-map"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-pattern"><em>pattern</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-recipient"><em>recipient</em></a> <em>restriction</em> minCardinality 1</li>
+</ul>
+</div>
+<div class="section" id="nodeinfo">
+<h3>NodeInfo<a class="headerlink" href="#nodeinfo" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-nodeinfo"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-cachetime"><em>cacheTime</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-name"><em>name</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-accessrule"><em>accessRule</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-responseafter"><em>responseAfter</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-path"><em>path</em></a> <em>restriction</em> cardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-protocolname"><em>protocolName</em></a> <em>restriction</em> hasValue nodeinfo</li>
+<li><a class="reference internal" href="#nodeconfig-property-port"><em>port</em></a> <em>restriction</em> cardinality 1</li>
+</ul>
+</div>
+<div class="section" id="oidservice">
+<h3>OidService<a class="headerlink" href="#oidservice" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-oidservice"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-receiveraddress"><em>receiverAddress</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-passwd"><em>passwd</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-ip"><em>ip</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-hostname"><em>hostname</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-ssl"><em>ssl</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-user"><em>user</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-ontpath"><em>ontpath</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-url"><em>url</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-protocolname"><em>protocolName</em></a> <em>restriction</em> hasValue oidsrv</li>
+<li><a class="reference internal" href="#nodeconfig-property-ontology"><em>ontology</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-sourceaddress"><em>sourceAddress</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-port"><em>port</em></a> <em>restriction</em> maxCardinality 1</li>
+</ul>
+</div>
+<div class="section" id="om2api">
+<h3>Om2api<a class="headerlink" href="#om2api" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-om2api"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-passwd"><em>passwd</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-ip"><em>ip</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-hostname"><em>hostname</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-ssl"><em>ssl</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-user"><em>user</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-ontpath"><em>ontpath</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-url"><em>url</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-protocolname"><em>protocolName</em></a> <em>restriction</em> hasValue om2api</li>
+<li><a class="reference internal" href="#nodeconfig-property-ontology"><em>ontology</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-port"><em>port</em></a> <em>restriction</em> maxCardinality 1</li>
+</ul>
+</div>
+<div class="section" id="patternrouter">
+<h3>PatternRouter<a class="headerlink" href="#patternrouter" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-patternrouter"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-receivemap"><em>receiveMap</em></a> <em>restriction</em> minCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-servicetype"><em>serviceType</em></a> <em>restriction</em> hasValue pattern</li>
+<li><a class="reference internal" href="#nodeconfig-property-ontology"><em>ontology</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-errortomap"><em>errorToMap</em></a></li>
+</ul>
+</div>
+<div class="section" id="ping">
+<h3>Ping<a class="headerlink" href="#ping" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-ping"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-servicetype"><em>serviceType</em></a> <em>restriction</em> hasValue ping</li>
+<li><a class="reference internal" href="#nodeconfig-property-doreplyto"><em>doReplyTo</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-name"><em>name</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-trottle"><em>trottle</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-authoritativeabout"><em>authoritativeAbout</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-model"><em>model</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-sourceaddress"><em>sourceAddress</em></a> <em>restriction</em> cardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-persistentstore"><em>persistentStore</em></a> <em>restriction</em> maxCardinality 1</li>
+</ul>
+</div>
+<div class="section" id="reply">
+<h3>Reply<a class="headerlink" href="#reply" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-reply"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-servicetype"><em>serviceType</em></a> <em>restriction</em> hasValue reply</li>
+</ul>
+</div>
+<div class="section" id="repository">
+<h3>Repository<a class="headerlink" href="#repository" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-repository"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-maxcopies"><em>maxCopies</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-priority"><em>priority</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-protocolname"><em>protocolName</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-path"><em>path</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-ontology"><em>ontology</em></a> <em>restriction</em> minCardinality 1</li>
+</ul>
+</div>
+<div class="section" id="resolver">
+<h3>Resolver<a class="headerlink" href="#resolver" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-resolver">A service that takes a receiver of the form <a class="reference external" href="mailto:local&#37;&#52;&#48;domain">local<span>&#64;</span>domain</a> and
+translates it into a set of protocols and endpoints.</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-priority"><em>priority</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-servicetype"><em>serviceType</em></a></li>
+</ul>
+</div>
+<div class="section" id="resolvermap">
+<h3>ResolverMap<a class="headerlink" href="#resolvermap" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-resolvermap"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-pattern"><em>pattern</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-receiver"><em>receiver</em></a></li>
+</ul>
+</div>
+<div class="section" id="restlistener">
+<h3>RestListener<a class="headerlink" href="#restlistener" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-restlistener">A listener that expects PUT requests. What is put is a RDF graph.</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-name"><em>name</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-accessrule"><em>accessRule</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-responseafter"><em>responseAfter</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-ssl"><em>ssl</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-path"><em>path</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-protocolname"><em>protocolName</em></a> <em>restriction</em> hasValue rest</li>
+<li><a class="reference internal" href="#nodeconfig-property-port"><em>port</em></a></li>
+</ul>
+</div>
+<div class="section" id="restsender">
+<h3>RestSender<a class="headerlink" href="#restsender" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-restsender"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-maxcopies"><em>maxCopies</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-protocolname"><em>protocolName</em></a> <em>restriction</em> hasValue rest</li>
+<li><a class="reference internal" href="#nodeconfig-property-ssl"><em>ssl</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-priority"><em>priority</em></a></li>
+</ul>
+</div>
+<div class="section" id="retry">
+<h3>Retry<a class="headerlink" href="#retry" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-retry"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-servicetype"><em>serviceType</em></a> <em>restriction</em> hasValue retry</li>
+<li><a class="reference internal" href="#nodeconfig-property-doreplyto"><em>doReplyTo</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-name"><em>name</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-trottle"><em>trottle</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-timeout"><em>timeout</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-authoritativeabout"><em>authoritativeAbout</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-model"><em>model</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-sourceaddress"><em>sourceAddress</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-maxtries"><em>maxTries</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-persistentstore"><em>persistentStore</em></a> <em>restriction</em> maxCardinality 1</li>
+</ul>
+</div>
+<div class="section" id="retryhandler">
+<h3>RetryHandler<a class="headerlink" href="#retryhandler" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-retryhandler"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-name"><em>name</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-timeout"><em>timeout</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-errorhandler"><em>errorHandler</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-maxtries"><em>maxTries</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-module"><em>module</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-nexthandler"><em>nextHandler</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-initerrorhandler"><em>initErrorHandler</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-path"><em>path</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-posthandler"><em>postHandler</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-store"><em>store</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-prehandler"><em>preHandler</em></a></li>
+</ul>
+</div>
+<div class="section" id="retryrouter">
+<h3>RetryRouter<a class="headerlink" href="#retryrouter" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-retryrouter">Special router for the retry node</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-servicetype"><em>serviceType</em></a> <em>restriction</em> hasValue retry</li>
+</ul>
+</div>
+<div class="section" id="router">
+<h3>Router<a class="headerlink" href="#router" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-router"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-servicetype"><em>serviceType</em></a></li>
+</ul>
+</div>
+<div class="section" id="smtpsender">
+<h3>SMTPSender<a class="headerlink" href="#smtpsender" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-smtpsender"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-replyto"><em>replyTo</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-from"><em>from</em></a> <em>restriction</em> cardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-maxcopies"><em>maxCopies</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-bcc"><em>bcc</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-priority"><em>priority</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-cc"><em>cc</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-senderdomainname"><em>senderDomainName</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-smtphost"><em>smtpHost</em></a> <em>restriction</em> cardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-protocolname"><em>protocolName</em></a> <em>restriction</em> hasValue smtp</li>
+<li><a class="reference internal" href="#nodeconfig-property-sentby"><em>sentBy</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-subject"><em>subject</em></a> <em>restriction</em> cardinality 1</li>
+</ul>
+</div>
+<div class="section" id="ssl">
+<h3>SSL<a class="headerlink" href="#ssl" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-ssl"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-cacert"><em>cacert</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-requiresubject"><em>requireSubject</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-verifyhostname"><em>verifyHostname</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-privatekey"><em>privateKey</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-certificate"><em>certificate</em></a></li>
+</ul>
+</div>
+<div class="section" id="sendhandler">
+<h3>SendHandler<a class="headerlink" href="#sendhandler" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-sendhandler"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-sender"><em>sender</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-name"><em>name</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-receiveraddress"><em>receiverAddress</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-erroraddress"><em>errorAddress</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-errorhandler"><em>errorHandler</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-errreceiver"><em>errReceiver</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-module"><em>module</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-nexthandler"><em>nextHandler</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-initerrorhandler"><em>initErrorHandler</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-path"><em>path</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-sourceaddress"><em>sourceAddress</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-posthandler"><em>postHandler</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-prehandler"><em>preHandler</em></a></li>
+</ul>
+</div>
+<div class="section" id="sender">
+<h3>Sender<a class="headerlink" href="#sender" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-sender"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-maxcopies"><em>maxCopies</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-protocolname"><em>protocolName</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-priority"><em>priority</em></a></li>
+</ul>
+</div>
+<div class="section" id="servicehandler">
+<h3>ServiceHandler<a class="headerlink" href="#servicehandler" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-servicehandler"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-servicelocation"><em>serviceLocation</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-name"><em>name</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-errorhandler"><em>errorHandler</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-module"><em>module</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-nexthandler"><em>nextHandler</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-initerrorhandler"><em>initErrorHandler</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-path"><em>path</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-posthandler"><em>postHandler</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-prehandler"><em>preHandler</em></a></li>
+</ul>
+</div>
+<div class="section" id="servicelocation">
+<h3>ServiceLocation<a class="headerlink" href="#servicelocation" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-servicelocation"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-passwd"><em>passwd</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-ip"><em>ip</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-hostname"><em>hostname</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-ssl"><em>ssl</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-user"><em>user</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-url"><em>url</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-protocolname"><em>protocolName</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-port"><em>port</em></a> <em>restriction</em> maxCardinality 1</li>
+</ul>
+</div>
+<div class="section" id="sforwarder">
+<h3>Sforwarder<a class="headerlink" href="#sforwarder" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-sforwarder"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-servicetype"><em>serviceType</em></a> <em>restriction</em> hasValue sforwarder</li>
+<li><a class="reference internal" href="#nodeconfig-property-doreplyto"><em>doReplyTo</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-name"><em>name</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-nexthandler"><em>nextHandler</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-setoutgoingreceiver"><em>setOutgoingReceiver</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-trottle"><em>trottle</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-errorhandler"><em>errorHandler</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-initerrorhandler"><em>initErrorHandler</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-actor"><em>actor</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-authoritativeabout"><em>authoritativeAbout</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-model"><em>model</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-prehandler"><em>preHandler</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-sourceaddress"><em>sourceAddress</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-posthandler"><em>postHandler</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-persistentstore"><em>persistentStore</em></a> <em>restriction</em> maxCardinality 1</li>
+</ul>
+</div>
+<div class="section" id="simplerouter">
+<h3>SimpleRouter<a class="headerlink" href="#simplerouter" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-simplerouter"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-servicetype"><em>serviceType</em></a> <em>restriction</em> hasValue simple</li>
+<li><a class="reference internal" href="#nodeconfig-property-fanout"><em>fanout</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-defaulterrorto"><em>defaultErrorTo</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-defaultreceiver"><em>defaultReceiver</em></a></li>
+</ul>
+</div>
+<div class="section" id="soaplistener">
+<h3>SoapListener<a class="headerlink" href="#soaplistener" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-soaplistener"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-name"><em>name</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-accessrule"><em>accessRule</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-responseafter"><em>responseAfter</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-protocolname"><em>protocolName</em></a> <em>restriction</em> hasValue soap</li>
+<li><a class="reference internal" href="#nodeconfig-property-port"><em>port</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-dir"><em>dir</em></a></li>
+</ul>
+</div>
+<div class="section" id="soapsender">
+<h3>SoapSender<a class="headerlink" href="#soapsender" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-soapsender"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-maxcopies"><em>maxCopies</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-protocolname"><em>protocolName</em></a> <em>restriction</em> hasValue soap</li>
+<li><a class="reference internal" href="#nodeconfig-property-ssl"><em>ssl</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-priority"><em>priority</em></a></li>
+</ul>
+</div>
+<div class="section" id="sparqlservice">
+<h3>SparqlService<a class="headerlink" href="#sparqlservice" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-sparqlservice"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-passwd"><em>passwd</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-ip"><em>ip</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-hostname"><em>hostname</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-ssl"><em>ssl</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-user"><em>user</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-url"><em>url</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-protocolname"><em>protocolName</em></a> <em>restriction</em> hasValue sparql</li>
+<li><a class="reference internal" href="#nodeconfig-property-port"><em>port</em></a> <em>restriction</em> maxCardinality 1</li>
+</ul>
+</div>
+<div class="section" id="spocprouter">
+<h3>SpocpRouter<a class="headerlink" href="#spocprouter" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-spocprouter"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-servicetype"><em>serviceType</em></a> <em>restriction</em> hasValue spocp</li>
+<li><a class="reference internal" href="#nodeconfig-property-servicelocation"><em>serviceLocation</em></a></li>
+</ul>
+</div>
+<div class="section" id="spocpsender">
+<h3>SpocpSender<a class="headerlink" href="#spocpsender" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-spocpsender"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-tagorder"><em>tagOrder</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-servicelocation"><em>serviceLocation</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-maxcopies"><em>maxCopies</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-priority"><em>priority</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-tag"><em>tag</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-protocolname"><em>protocolName</em></a> <em>restriction</em> hasValue spocp</li>
+<li><a class="reference internal" href="#nodeconfig-property-rulepath"><em>rulePath</em></a></li>
+</ul>
+</div>
+<div class="section" id="spocpservice">
+<h3>SpocpService<a class="headerlink" href="#spocpservice" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-spocpservice"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-passwd"><em>passwd</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-ip"><em>ip</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-hostname"><em>hostname</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-ssl"><em>ssl</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-user"><em>user</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-url"><em>url</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-protocolname"><em>protocolName</em></a> <em>restriction</em> hasValue spocp</li>
+<li><a class="reference internal" href="#nodeconfig-property-port"><em>port</em></a> <em>restriction</em> maxCardinality 1</li>
+</ul>
+</div>
+<div class="section" id="stateserver">
+<h3>StateServer<a class="headerlink" href="#stateserver" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-stateserver"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-name"><em>name</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-accessrule"><em>accessRule</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-responseafter"><em>responseAfter</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-ssl"><em>ssl</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-protocolname"><em>protocolName</em></a> <em>restriction</em> hasValue state</li>
+<li><a class="reference internal" href="#nodeconfig-property-port"><em>port</em></a></li>
+</ul>
+</div>
+<div class="section" id="statefull">
+<h3>Statefull<a class="headerlink" href="#statefull" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-statefull"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-servicetype"><em>serviceType</em></a> <em>restriction</em> hasValue statefull</li>
+<li><a class="reference internal" href="#nodeconfig-property-doreplyto"><em>doReplyTo</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-name"><em>name</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-trottle"><em>trottle</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-timeout"><em>timeout</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-authoritativeabout"><em>authoritativeAbout</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-model"><em>model</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-sourceaddress"><em>sourceAddress</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-maxtries"><em>maxTries</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-persistentstore"><em>persistentStore</em></a> <em>restriction</em> maxCardinality 1</li>
+</ul>
+</div>
+<div class="section" id="static">
+<h3>Static<a class="headerlink" href="#static" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-static">A service that takes a receiver of the form <a class="reference external" href="mailto:local&#37;&#52;&#48;domain">local<span>&#64;</span>domain</a> and
+translates it into a set of protocols and endpoints.</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-priority"><em>priority</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-servicetype"><em>serviceType</em></a> <em>restriction</em> hasValue static</li>
+<li><a class="reference internal" href="#nodeconfig-property-exact"><em>exact</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-regexp"><em>regexp</em></a></li>
+</ul>
+</div>
+<div class="section" id="sync">
+<h3>Sync<a class="headerlink" href="#sync" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-sync"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-servicetype"><em>serviceType</em></a> <em>restriction</em> hasValue sync</li>
+<li><a class="reference internal" href="#nodeconfig-property-doreplyto"><em>doReplyTo</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-name"><em>name</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-trottle"><em>trottle</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-authoritativeabout"><em>authoritativeAbout</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-model"><em>model</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-sourceaddress"><em>sourceAddress</em></a> <em>restriction</em> cardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-persistentstore"><em>persistentStore</em></a> <em>restriction</em> maxCardinality 1</li>
+</ul>
+</div>
+<div class="section" id="transformer">
+<h3>Transformer<a class="headerlink" href="#transformer" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-transformer"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-servicetype"><em>serviceType</em></a> <em>restriction</em> hasValue transformer</li>
+<li><a class="reference internal" href="#nodeconfig-property-doreplyto"><em>doReplyTo</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-name"><em>name</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-trottle"><em>trottle</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-actor"><em>actor</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-authoritativeabout"><em>authoritativeAbout</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-model"><em>model</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-sourceaddress"><em>sourceAddress</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-setoutgoingreceiver"><em>setOutgoingReceiver</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-persistentstore"><em>persistentStore</em></a> <em>restriction</em> maxCardinality 1</li>
+</ul>
+</div>
+<div class="section" id="unixsocketlistener">
+<h3>UnixSocketListener<a class="headerlink" href="#unixsocketlistener" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-unixsocketlistener"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-name"><em>name</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-accessrule"><em>accessRule</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-responseafter"><em>responseAfter</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-protocolname"><em>protocolName</em></a> <em>restriction</em> hasValue unixsocket</li>
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-path"><em>path</em></a> <em>restriction</em> cardinality 1</li>
+</ul>
+</div>
+<div class="section" id="unixsocketsender">
+<h3>UnixSocketSender<a class="headerlink" href="#unixsocketsender" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-unixsocketsender"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-maxcopies"><em>maxCopies</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-path"><em>path</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-protocolname"><em>protocolName</em></a> <em>restriction</em> hasValue unixsocket</li>
+<li><a class="reference internal" href="#nodeconfig-property-priority"><em>priority</em></a></li>
+</ul>
+</div>
+<div class="section" id="xmppmsgsender">
+<h3>XMPPMsgSender<a class="headerlink" href="#xmppmsgsender" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-class-xmppmsgsender"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nodeconfig-property-servicelocation"><em>serviceLocation</em></a> <em>restriction</em> cardinality 1</li>
+<li><a class="reference internal" href="#nodeconfig-property-maxcopies"><em>maxCopies</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-priority"><em>priority</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-protocolname"><em>protocolName</em></a> <em>restriction</em> hasValue XMPPmsg</li>
+<li><a class="reference internal" href="#nodeconfig-property-nickname"><em>nickName</em></a> <em>restriction</em> cardinality 1</li>
+</ul>
+</div>
+</div>
+<div class="section" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Permalink to this headline">¶</a></h2>
+<ul class="simple" id="nodeconfig-properties">
+<li><a class="reference internal" href="#nodeconfig-property-accessdefault"><em>accessDefault</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-accessrule"><em>accessRule</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-actor"><em>actor</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-address"><em>address</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-allow"><em>allow</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-authoritativeabout"><em>authoritativeAbout</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-bcc"><em>bcc</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-cacert"><em>cacert</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-cachetime"><em>cacheTime</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-cc"><em>cc</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-certificatechain"><em>certificateChain</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-certificate"><em>certificate</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-create"><em>create</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-debug"><em>debug</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-defaulterrorto"><em>defaultErrorTo</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-defaultreceiver"><em>defaultReceiver</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-deny"><em>deny</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-dir"><em>dir</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-dispatcher"><em>dispatcher</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-dn"><em>dn</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-doreplyto"><em>doReplyTo</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-endpoint"><em>endpoint</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-errreceiver"><em>errReceiver</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-erroraddress"><em>errorAddress</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-errorhandler"><em>errorHandler</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-errortomap"><em>errorToMap</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-exact"><em>exact</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-fanout"><em>fanout</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-from"><em>from</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-handler"><em>handler</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-host"><em>host</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-hostname"><em>hostname</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-idmap"><em>idMap</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-initerrorhandler"><em>initErrorHandler</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-ip"><em>ip</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-listener"><em>listener</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-mailsender"><em>mailSender</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-maskbits"><em>maskbits</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-maxcopies"><em>maxCopies</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-maxtries"><em>maxTries</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-model"><em>model</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-module"><em>module</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-mustsucceed"><em>mustSucceed</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-name"><em>name</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-net"><em>net</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-nexthandler"><em>nextHandler</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-next"><em>next</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-nickname"><em>nickName</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-nodeinfo"><em>nodeinfo</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-objectprefixmap"><em>objectPrefixMap</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-ontology"><em>ontology</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-ontpath"><em>ontpath</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-passwd"><em>passwd</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-path"><em>path</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-pattern"><em>pattern</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-persistentstore"><em>persistentStore</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-port"><em>port</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-posthandler"><em>postHandler</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-prehandler"><em>preHandler</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-priority"><em>priority</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-privatekey"><em>privateKey</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-protocolname"><em>protocolName</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-readinterface"><em>readInterface</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-receivemap"><em>receiveMap</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-receiveraddress"><em>receiverAddress</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-receiver"><em>receiver</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-recipient"><em>recipient</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-regexp"><em>regexp</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-relplogger"><em>relpLogger</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-replyto"><em>replyTo</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-requiresubject"><em>requireSubject</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-resolver"><em>resolver</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-responseafter"><em>responseAfter</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-root"><em>root</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-router"><em>router</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-rulefile"><em>ruleFile</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-rulepath"><em>rulePath</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-senderdomainname"><em>senderDomainName</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-sender"><em>sender</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-sentby"><em>sentBy</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-servicelocation"><em>serviceLocation</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-servicetype"><em>serviceType</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-setoutgoingreceiver"><em>setOutgoingReceiver</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-smtphost"><em>smtpHost</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-sourceaddress"><em>sourceAddress</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-ssl"><em>ssl</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-statusserver"><em>statusServer</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-storename"><em>storeName</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-store"><em>store</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-subject"><em>subject</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-tagorder"><em>tagOrder</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-tag"><em>tag</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-timeout"><em>timeout</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-trottle"><em>trottle</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-url"><em>url</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-user"><em>user</em></a></li>
+<li><a class="reference internal" href="#nodeconfig-property-verifyhostname"><em>verifyHostname</em></a></li>
+</ul>
+<div class="section" id="accessdefault">
+<h3>accessDefault<a class="headerlink" href="#accessdefault" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-accessdefault">
+<dt><em>range</em></dt>
+<dd>Boolean</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="id1">
+<h3>accessRule<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-accessrule">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#nodeconfig-class-accessrule"><em>AccessRule</em></a></dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="id2">
+<h3>actor<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-actor">A piece of code that can act on graphs.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#nodeconfig-class-actor"><em>Actor</em></a></dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="id3">
+<h3>address<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-address">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#nodeconfig-class-address"><em>Address</em></a></dd>
+</dl>
+</div>
+<div class="section" id="allow">
+<h3>allow<a class="headerlink" href="#allow" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-allow">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#nodeconfig-class-limitation"><em>Limitation</em></a></dd>
+</dl>
+</div>
+<div class="section" id="authoritativeabout">
+<h3>authoritativeAbout<a class="headerlink" href="#authoritativeabout" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-authoritativeabout">Specifies which hosts are authoritative for which object uri
+namespace.
+Values of the form &#8220;file:&lt;filename&gt;&#8221; where lines in the
+file pointed to by</p>
+<blockquote>
+&lt;filename&gt; has the format: FQDN 1*SP</blockquote>
+<p>leading_uri_substring</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="bcc">
+<h3>bcc<a class="headerlink" href="#bcc" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-bcc">Blind carbon copies to ...</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+</div>
+<div class="section" id="cacert">
+<h3>cacert<a class="headerlink" href="#cacert" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-cacert">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="cachetime">
+<h3>cacheTime<a class="headerlink" href="#cachetime" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-cachetime">How long the node info can be safely saved, in seconds, before doing a
+refresh.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>Int</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="cc">
+<h3>cc<a class="headerlink" href="#cc" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-cc">Carbon copies to...</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+</div>
+<div class="section" id="certificate">
+<h3>certificate<a class="headerlink" href="#certificate" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-certificate">The signed SSL certificate for this application</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="certificatechain">
+<h3>certificateChain<a class="headerlink" href="#certificatechain" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-certificatechain">A file with a certificate chain</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>Unspecified</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="create">
+<h3>create<a class="headerlink" href="#create" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-create">Whether the directory specified should be created if not present.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>Boolean</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="debug">
+<h3>debug<a class="headerlink" href="#debug" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-debug">Whether debug should be on or off. Levels off debugging might be
+supported in the future.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>Int</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="defaulterrorto">
+<h3>defaultErrorTo<a class="headerlink" href="#defaulterrorto" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-defaulterrorto">The default errorTo receiver</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+</div>
+<div class="section" id="defaultreceiver">
+<h3>defaultReceiver<a class="headerlink" href="#defaultreceiver" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-defaultreceiver">Default receiver if everything goes according to plans</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+</div>
+<div class="section" id="deny">
+<h3>deny<a class="headerlink" href="#deny" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-deny">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#nodeconfig-class-limitation"><em>Limitation</em></a></dd>
+</dl>
+</div>
+<div class="section" id="dir">
+<h3>dir<a class="headerlink" href="#dir" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-dir">directory</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="id4">
+<h3>dispatcher<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-dispatcher">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#nodeconfig-class-dispatcher"><em>Dispatcher</em></a></dd>
+</dl>
+</div>
+<div class="section" id="dn">
+<h3>dn<a class="headerlink" href="#dn" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-dn">
+<dt><em>range</em></dt>
+<dd>Unspecified</dd>
+</dl>
+</div>
+<div class="section" id="doreplyto">
+<h3>doReplyTo<a class="headerlink" href="#doreplyto" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-doreplyto">If this node should send a message to the address specified in replyTo
+in the message header.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>Boolean</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="endpoint">
+<h3>endpoint<a class="headerlink" href="#endpoint" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-endpoint">
+<dt><em>range</em></dt>
+<dd>Unspecified</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="errreceiver">
+<h3>errReceiver<a class="headerlink" href="#errreceiver" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-errreceiver">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#nodeconfig-class-address"><em>Address</em></a></dd>
+</dl>
+</div>
+<div class="section" id="erroraddress">
+<h3>errorAddress<a class="headerlink" href="#erroraddress" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-erroraddress">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+</div>
+<div class="section" id="errorhandler">
+<h3>errorHandler<a class="headerlink" href="#errorhandler" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-errorhandler">If an error occurs in the node after the inital processing of the
+incomming graph, this is where it is defined how an error should be
+handled.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#nodeconfig-class-handler"><em>Handler</em></a></dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="errortomap">
+<h3>errorToMap<a class="headerlink" href="#errortomap" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-errortomap">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#nodeconfig-class-map"><em>Map</em></a></dd>
+</dl>
+</div>
+<div class="section" id="exact">
+<h3>exact<a class="headerlink" href="#exact" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-exact">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#nodeconfig-class-resolvermap"><em>ResolverMap</em></a></dd>
+</dl>
+</div>
+<div class="section" id="fanout">
+<h3>fanout<a class="headerlink" href="#fanout" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-fanout">One address is replace by a set of addresses</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#nodeconfig-class-map"><em>Map</em></a></dd>
+</dl>
+</div>
+<div class="section" id="from">
+<h3>from<a class="headerlink" href="#from" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-from">The sender of the mail</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="id5">
+<h3>handler<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-handler">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#nodeconfig-class-handler"><em>Handler</em></a></dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="host">
+<h3>host<a class="headerlink" href="#host" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-host">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="hostname">
+<h3>hostname<a class="headerlink" href="#hostname" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-hostname">Fully qualified domain name</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="idmap">
+<h3>idMap<a class="headerlink" href="#idmap" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-idmap">Map between a property name and a URI prefix</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#nodeconfig-class-map"><em>Map</em></a></dd>
+</dl>
+</div>
+<div class="section" id="initerrorhandler">
+<h3>initErrorHandler<a class="headerlink" href="#initerrorhandler" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-initerrorhandler">If some error occurs early in the processing this handler allows one
+to specify what exactly is to happen.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#nodeconfig-class-handler"><em>Handler</em></a></dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="ip">
+<h3>ip<a class="headerlink" href="#ip" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-ip">IP number of a host</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="id6">
+<h3>listener<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-listener">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#nodeconfig-class-listener"><em>Listener</em></a></dd>
+</dl>
+</div>
+<div class="section" id="mailsender">
+<h3>mailSender<a class="headerlink" href="#mailsender" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-mailsender">
+<dt><em>range</em></dt>
+<dd>Unspecified</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="maskbits">
+<h3>maskbits<a class="headerlink" href="#maskbits" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-maskbits">
+<dt><em>range</em></dt>
+<dd>Int</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="maxcopies">
+<h3>maxCopies<a class="headerlink" href="#maxcopies" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-maxcopies">Maximum number of copies that a node can have of this module</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>Int</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="maxtries">
+<h3>maxTries<a class="headerlink" href="#maxtries" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-maxtries">
+<dt><em>range</em></dt>
+<dd>Int</dd>
+</dl>
+</div>
+<div class="section" id="model">
+<h3>model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-model">The fullname of the class instances that should be accepted</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+</div>
+<div class="section" id="module">
+<h3>module<a class="headerlink" href="#module" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-module">The python module that implements this transformer</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="mustsucceed">
+<h3>mustSucceed<a class="headerlink" href="#mustsucceed" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-mustsucceed">Whether the transformation must succeed or not.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>Boolean</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="name">
+<h3>name<a class="headerlink" href="#name" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-name">A name</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="net">
+<h3>net<a class="headerlink" href="#net" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-net">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="next">
+<h3>next<a class="headerlink" href="#next" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-next">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#nodeconfig-class-actor"><em>Actor</em></a></dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="nexthandler">
+<h3>nextHandler<a class="headerlink" href="#nexthandler" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-nexthandler">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#nodeconfig-class-handler"><em>Handler</em></a></dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="nickname">
+<h3>nickName<a class="headerlink" href="#nickname" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-nickname">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="id7">
+<h3>nodeinfo<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-nodeinfo">Publish Information about the node as such by the node.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#nodeconfig-class-nodeinfo"><em>NodeInfo</em></a></dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="objectprefixmap">
+<h3>objectPrefixMap<a class="headerlink" href="#objectprefixmap" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-objectprefixmap">Map between an object type and the prefix used for identifiers of that
+type.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#nodeconfig-class-map"><em>Map</em></a></dd>
+</dl>
+</div>
+<div class="section" id="ontology">
+<h3>ontology<a class="headerlink" href="#ontology" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-ontology">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+</div>
+<div class="section" id="ontpath">
+<h3>ontpath<a class="headerlink" href="#ontpath" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-ontpath">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+</div>
+<div class="section" id="passwd">
+<h3>passwd<a class="headerlink" href="#passwd" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-passwd">Password used to authenticate a user to a system</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="path">
+<h3>path<a class="headerlink" href="#path" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-path">A directory path.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="pattern">
+<h3>pattern<a class="headerlink" href="#pattern" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-pattern">A string pattern that a receiver address is matched against</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+</div>
+<div class="section" id="persistentstore">
+<h3>persistentStore<a class="headerlink" href="#persistentstore" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-persistentstore">Somewhere where graphs can be stored while the node is working on
+them. If then the node is closed or crashes the graph is not lost.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+</div>
+<div class="section" id="port">
+<h3>port<a class="headerlink" href="#port" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-port">A internet port number. 0 is equivalent to whatever is default for a
+specific protocol.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>Int</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="posthandler">
+<h3>postHandler<a class="headerlink" href="#posthandler" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-posthandler">When everything succeeded you may still want to do things, this is
+where you define what.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#nodeconfig-class-handler"><em>Handler</em></a></dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="prehandler">
+<h3>preHandler<a class="headerlink" href="#prehandler" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-prehandler">Between the parsing of the incomming graph and possible
+transformations this is where you may do things.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#nodeconfig-class-handler"><em>Handler</em></a></dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="priority">
+<h3>priority<a class="headerlink" href="#priority" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-priority">
+<dt><em>range</em></dt>
+<dd>Int</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="privatekey">
+<h3>privateKey<a class="headerlink" href="#privatekey" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-privatekey">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="protocolname">
+<h3>protocolName<a class="headerlink" href="#protocolname" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-protocolname">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="readinterface">
+<h3>readInterface<a class="headerlink" href="#readinterface" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-readinterface">
+<dt><em>range</em></dt>
+<dd>Unspecified</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="receivemap">
+<h3>receiveMap<a class="headerlink" href="#receivemap" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-receivemap">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#nodeconfig-class-map"><em>Map</em></a></dd>
+</dl>
+</div>
+<div class="section" id="receiver">
+<h3>receiver<a class="headerlink" href="#receiver" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-receiver">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#nodeconfig-class-address"><em>Address</em></a></dd>
+</dl>
+</div>
+<div class="section" id="receiveraddress">
+<h3>receiverAddress<a class="headerlink" href="#receiveraddress" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-receiveraddress">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+</div>
+<div class="section" id="recipient">
+<h3>recipient<a class="headerlink" href="#recipient" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-recipient">A address of kind</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+</div>
+<div class="section" id="regexp">
+<h3>regexp<a class="headerlink" href="#regexp" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-regexp">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#nodeconfig-class-resolvermap"><em>ResolverMap</em></a></dd>
+</dl>
+</div>
+<div class="section" id="relplogger">
+<h3>relpLogger<a class="headerlink" href="#relplogger" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-relplogger">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#nodeconfig-class-logservice"><em>LogService</em></a></dd>
+</dl>
+</div>
+<div class="section" id="replyto">
+<h3>replyTo<a class="headerlink" href="#replyto" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-replyto">If someone wants to answer to this mail, this is the address they
+should use.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="requiresubject">
+<h3>requireSubject<a class="headerlink" href="#requiresubject" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-requiresubject">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+</div>
+<div class="section" id="id8">
+<h3>resolver<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-resolver">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#nodeconfig-class-resolver"><em>Resolver</em></a></dd>
+</dl>
+</div>
+<div class="section" id="responseafter">
+<h3>responseAfter<a class="headerlink" href="#responseafter" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-responseafter">After which state that this node will return a response to the sender.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>Unspecified</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="root">
+<h3>root<a class="headerlink" href="#root" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-root">The root directory of the maildir tree</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="id9">
+<h3>router<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-router">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#nodeconfig-class-router"><em>Router</em></a></dd>
+</dl>
+</div>
+<div class="section" id="rulefile">
+<h3>ruleFile<a class="headerlink" href="#rulefile" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-rulefile">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+</div>
+<div class="section" id="rulepath">
+<h3>rulePath<a class="headerlink" href="#rulepath" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-rulepath">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="id10">
+<h3>sender<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-sender">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#nodeconfig-class-sender"><em>Sender</em></a></dd>
+</dl>
+</div>
+<div class="section" id="senderdomainname">
+<h3>senderDomainName<a class="headerlink" href="#senderdomainname" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-senderdomainname">What the sender should tell the SMTP host that it&#8217;s name is.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="sentby">
+<h3>sentBy<a class="headerlink" href="#sentby" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-sentby">The &#8216;sender&#8217; of the mail</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="id11">
+<h3>serviceLocation<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-servicelocation">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#nodeconfig-class-servicelocation"><em>ServiceLocation</em></a></dd>
+</dl>
+</div>
+<div class="section" id="servicetype">
+<h3>serviceType<a class="headerlink" href="#servicetype" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-servicetype">A label use on start-up to keep things together.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="setoutgoingreceiver">
+<h3>setOutgoingReceiver<a class="headerlink" href="#setoutgoingreceiver" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-setoutgoingreceiver">Whether the receiver property in the message should be set to whatever
+the router process wants to send the message to.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>Boolean</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="smtphost">
+<h3>smtpHost<a class="headerlink" href="#smtphost" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-smtphost">The SMTP host to use for outgoing mail</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="sourceaddress">
+<h3>sourceAddress<a class="headerlink" href="#sourceaddress" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-sourceaddress">If a message is constructed as a result of some action within the node
+this address will be added as sender in the message.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="id12">
+<h3>ssl<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-ssl">SSL context information</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#nodeconfig-class-ssl"><em>SSL</em></a></dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="statusserver">
+<h3>statusServer<a class="headerlink" href="#statusserver" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-statusserver">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#nodeconfig-class-stateserver"><em>StateServer</em></a></dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="store">
+<h3>store<a class="headerlink" href="#store" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-store">Name of a file where stuff is stored</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="storename">
+<h3>storeName<a class="headerlink" href="#storename" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-storename">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="subject">
+<h3>subject<a class="headerlink" href="#subject" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-subject">The subject of the mail</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="tag">
+<h3>tag<a class="headerlink" href="#tag" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-tag">The first tag in the produced s-expression</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="tagorder">
+<h3>tagOrder<a class="headerlink" href="#tagorder" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-tagorder">A sequence of property names, separated by blanks</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="timeout">
+<h3>timeout<a class="headerlink" href="#timeout" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-timeout">
+<dt><em>range</em></dt>
+<dd>Int</dd>
+</dl>
+</div>
+<div class="section" id="trottle">
+<h3>trottle<a class="headerlink" href="#trottle" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-trottle">If a messages from a specific source for some reasons can not be send
+to the receivers then futher messages from the same source are blocked
+until the problematic message are handled without any problem.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>Boolean</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="url">
+<h3>url<a class="headerlink" href="#url" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="nodeconfig-property-url">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="user">
+<h3>user<a class="headerlink" href="#user" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-user">user name</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>String</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="verifyhostname">
+<h3>verifyHostname<a class="headerlink" href="#verifyhostname" title="Permalink to this headline">¶</a></h3>
+<p id="nodeconfig-property-verifyhostname">Whether the hostname or IP address of the peer should be checked
+against the CN of the subject name or entries in the subjectAltName.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>Boolean</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="">The nodeconfig ontology</a><ul>
+<li><a class="reference external" href="#classes">Classes</a><ul>
+<li><a class="reference external" href="#accessrule">AccessRule</a></li>
+<li><a class="reference external" href="#actor">Actor</a></li>
+<li><a class="reference external" href="#address">Address</a></li>
+<li><a class="reference external" href="#configuration">Configuration</a></li>
+<li><a class="reference external" href="#dnsresolver">DNSResolver</a></li>
+<li><a class="reference external" href="#devnullsender">DevNullSender</a></li>
+<li><a class="reference external" href="#dispatcher">Dispatcher</a></li>
+<li><a class="reference external" href="#djbmaildirlistener">DjbMaildirListener</a></li>
+<li><a class="reference external" href="#djbmaildirsender">DjbMaildirSender</a></li>
+<li><a class="reference external" href="#filesender">FileSender</a></li>
+<li><a class="reference external" href="#forwarder">Forwarder</a></li>
+<li><a class="reference external" href="#handler">Handler</a></li>
+<li><a class="reference external" href="#idmapper">IdMapper</a></li>
+<li><a class="reference external" href="#ladokconv">Ladokconv</a></li>
+<li><a class="reference external" href="#ldapsender">LdapSender</a></li>
+<li><a class="reference external" href="#ldapservice">LdapService</a></li>
+<li><a class="reference external" href="#ldapconv">Ldapconv</a></li>
+<li><a class="reference external" href="#limitation">Limitation</a></li>
+<li><a class="reference external" href="#linelistener">LineListener</a></li>
+<li><a class="reference external" href="#listener">Listener</a></li>
+<li><a class="reference external" href="#loghandler">LogHandler</a></li>
+<li><a class="reference external" href="#logservice">LogService</a></li>
+<li><a class="reference external" href="#map">Map</a></li>
+<li><a class="reference external" href="#nodeinfo">NodeInfo</a></li>
+<li><a class="reference external" href="#oidservice">OidService</a></li>
+<li><a class="reference external" href="#om2api">Om2api</a></li>
+<li><a class="reference external" href="#patternrouter">PatternRouter</a></li>
+<li><a class="reference external" href="#ping">Ping</a></li>
+<li><a class="reference external" href="#reply">Reply</a></li>
+<li><a class="reference external" href="#repository">Repository</a></li>
+<li><a class="reference external" href="#resolver">Resolver</a></li>
+<li><a class="reference external" href="#resolvermap">ResolverMap</a></li>
+<li><a class="reference external" href="#restlistener">RestListener</a></li>
+<li><a class="reference external" href="#restsender">RestSender</a></li>
+<li><a class="reference external" href="#retry">Retry</a></li>
+<li><a class="reference external" href="#retryhandler">RetryHandler</a></li>
+<li><a class="reference external" href="#retryrouter">RetryRouter</a></li>
+<li><a class="reference external" href="#router">Router</a></li>
+<li><a class="reference external" href="#smtpsender">SMTPSender</a></li>
+<li><a class="reference external" href="#ssl">SSL</a></li>
+<li><a class="reference external" href="#sendhandler">SendHandler</a></li>
+<li><a class="reference external" href="#sender">Sender</a></li>
+<li><a class="reference external" href="#servicehandler">ServiceHandler</a></li>
+<li><a class="reference external" href="#servicelocation">ServiceLocation</a></li>
+<li><a class="reference external" href="#sforwarder">Sforwarder</a></li>
+<li><a class="reference external" href="#simplerouter">SimpleRouter</a></li>
+<li><a class="reference external" href="#soaplistener">SoapListener</a></li>
+<li><a class="reference external" href="#soapsender">SoapSender</a></li>
+<li><a class="reference external" href="#sparqlservice">SparqlService</a></li>
+<li><a class="reference external" href="#spocprouter">SpocpRouter</a></li>
+<li><a class="reference external" href="#spocpsender">SpocpSender</a></li>
+<li><a class="reference external" href="#spocpservice">SpocpService</a></li>
+<li><a class="reference external" href="#stateserver">StateServer</a></li>
+<li><a class="reference external" href="#statefull">Statefull</a></li>
+<li><a class="reference external" href="#static">Static</a></li>
+<li><a class="reference external" href="#sync">Sync</a></li>
+<li><a class="reference external" href="#transformer">Transformer</a></li>
+<li><a class="reference external" href="#unixsocketlistener">UnixSocketListener</a></li>
+<li><a class="reference external" href="#unixsocketsender">UnixSocketSender</a></li>
+<li><a class="reference external" href="#xmppmsgsender">XMPPMsgSender</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#properties">Properties</a><ul>
+<li><a class="reference external" href="#accessdefault">accessDefault</a></li>
+<li><a class="reference external" href="#id1">accessRule</a></li>
+<li><a class="reference external" href="#id2">actor</a></li>
+<li><a class="reference external" href="#id3">address</a></li>
+<li><a class="reference external" href="#allow">allow</a></li>
+<li><a class="reference external" href="#authoritativeabout">authoritativeAbout</a></li>
+<li><a class="reference external" href="#bcc">bcc</a></li>
+<li><a class="reference external" href="#cacert">cacert</a></li>
+<li><a class="reference external" href="#cachetime">cacheTime</a></li>
+<li><a class="reference external" href="#cc">cc</a></li>
+<li><a class="reference external" href="#certificate">certificate</a></li>
+<li><a class="reference external" href="#certificatechain">certificateChain</a></li>
+<li><a class="reference external" href="#create">create</a></li>
+<li><a class="reference external" href="#debug">debug</a></li>
+<li><a class="reference external" href="#defaulterrorto">defaultErrorTo</a></li>
+<li><a class="reference external" href="#defaultreceiver">defaultReceiver</a></li>
+<li><a class="reference external" href="#deny">deny</a></li>
+<li><a class="reference external" href="#dir">dir</a></li>
+<li><a class="reference external" href="#id4">dispatcher</a></li>
+<li><a class="reference external" href="#dn">dn</a></li>
+<li><a class="reference external" href="#doreplyto">doReplyTo</a></li>
+<li><a class="reference external" href="#endpoint">endpoint</a></li>
+<li><a class="reference external" href="#errreceiver">errReceiver</a></li>
+<li><a class="reference external" href="#erroraddress">errorAddress</a></li>
+<li><a class="reference external" href="#errorhandler">errorHandler</a></li>
+<li><a class="reference external" href="#errortomap">errorToMap</a></li>
+<li><a class="reference external" href="#exact">exact</a></li>
+<li><a class="reference external" href="#fanout">fanout</a></li>
+<li><a class="reference external" href="#from">from</a></li>
+<li><a class="reference external" href="#id5">handler</a></li>
+<li><a class="reference external" href="#host">host</a></li>
+<li><a class="reference external" href="#hostname">hostname</a></li>
+<li><a class="reference external" href="#idmap">idMap</a></li>
+<li><a class="reference external" href="#initerrorhandler">initErrorHandler</a></li>
+<li><a class="reference external" href="#ip">ip</a></li>
+<li><a class="reference external" href="#id6">listener</a></li>
+<li><a class="reference external" href="#mailsender">mailSender</a></li>
+<li><a class="reference external" href="#maskbits">maskbits</a></li>
+<li><a class="reference external" href="#maxcopies">maxCopies</a></li>
+<li><a class="reference external" href="#maxtries">maxTries</a></li>
+<li><a class="reference external" href="#model">model</a></li>
+<li><a class="reference external" href="#module">module</a></li>
+<li><a class="reference external" href="#mustsucceed">mustSucceed</a></li>
+<li><a class="reference external" href="#name">name</a></li>
+<li><a class="reference external" href="#net">net</a></li>
+<li><a class="reference external" href="#next">next</a></li>
+<li><a class="reference external" href="#nexthandler">nextHandler</a></li>
+<li><a class="reference external" href="#nickname">nickName</a></li>
+<li><a class="reference external" href="#id7">nodeinfo</a></li>
+<li><a class="reference external" href="#objectprefixmap">objectPrefixMap</a></li>
+<li><a class="reference external" href="#ontology">ontology</a></li>
+<li><a class="reference external" href="#ontpath">ontpath</a></li>
+<li><a class="reference external" href="#passwd">passwd</a></li>
+<li><a class="reference external" href="#path">path</a></li>
+<li><a class="reference external" href="#pattern">pattern</a></li>
+<li><a class="reference external" href="#persistentstore">persistentStore</a></li>
+<li><a class="reference external" href="#port">port</a></li>
+<li><a class="reference external" href="#posthandler">postHandler</a></li>
+<li><a class="reference external" href="#prehandler">preHandler</a></li>
+<li><a class="reference external" href="#priority">priority</a></li>
+<li><a class="reference external" href="#privatekey">privateKey</a></li>
+<li><a class="reference external" href="#protocolname">protocolName</a></li>
+<li><a class="reference external" href="#readinterface">readInterface</a></li>
+<li><a class="reference external" href="#receivemap">receiveMap</a></li>
+<li><a class="reference external" href="#receiver">receiver</a></li>
+<li><a class="reference external" href="#receiveraddress">receiverAddress</a></li>
+<li><a class="reference external" href="#recipient">recipient</a></li>
+<li><a class="reference external" href="#regexp">regexp</a></li>
+<li><a class="reference external" href="#relplogger">relpLogger</a></li>
+<li><a class="reference external" href="#replyto">replyTo</a></li>
+<li><a class="reference external" href="#requiresubject">requireSubject</a></li>
+<li><a class="reference external" href="#id8">resolver</a></li>
+<li><a class="reference external" href="#responseafter">responseAfter</a></li>
+<li><a class="reference external" href="#root">root</a></li>
+<li><a class="reference external" href="#id9">router</a></li>
+<li><a class="reference external" href="#rulefile">ruleFile</a></li>
+<li><a class="reference external" href="#rulepath">rulePath</a></li>
+<li><a class="reference external" href="#id10">sender</a></li>
+<li><a class="reference external" href="#senderdomainname">senderDomainName</a></li>
+<li><a class="reference external" href="#sentby">sentBy</a></li>
+<li><a class="reference external" href="#id11">serviceLocation</a></li>
+<li><a class="reference external" href="#servicetype">serviceType</a></li>
+<li><a class="reference external" href="#setoutgoingreceiver">setOutgoingReceiver</a></li>
+<li><a class="reference external" href="#smtphost">smtpHost</a></li>
+<li><a class="reference external" href="#sourceaddress">sourceAddress</a></li>
+<li><a class="reference external" href="#id12">ssl</a></li>
+<li><a class="reference external" href="#statusserver">statusServer</a></li>
+<li><a class="reference external" href="#store">store</a></li>
+<li><a class="reference external" href="#storename">storeName</a></li>
+<li><a class="reference external" href="#subject">subject</a></li>
+<li><a class="reference external" href="#tag">tag</a></li>
+<li><a class="reference external" href="#tagorder">tagOrder</a></li>
+<li><a class="reference external" href="#timeout">timeout</a></li>
+<li><a class="reference external" href="#trottle">trottle</a></li>
+<li><a class="reference external" href="#url">url</a></li>
+<li><a class="reference external" href="#user">user</a></li>
+<li><a class="reference external" href="#verifyhostname">verifyHostname</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="handler.html"
+                                  title="previous chapter">The handlers - to provide the dispatcher with more functions</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="../ref/index.html"
+                                  title="next chapter">API reference</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/node/nodeconfig.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../ref/index.html" title="API reference"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="handler.html" title="The handlers - to provide the dispatcher with more functions"
+             >previous</a> |</li>
+        <li><a href="../index.html">OM2 v1.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >The node -the basic buildingblock</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009, Roland Hedberg.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,67 @@
+.. _ref-om2api:
+
+====================
+API to the OM2 cloud
+====================
+
+:Author: Roland Hedberg
+:Version: |version|
+
+.. module:: om2API
+   :synopsis: A programmatic interface to an OM2 system
+.. moduleauthor:: Roland Hedberg
+
+In order to facilitate the usage of a OM2 implementation, an API that can interact with
+an OM2 system has been implemented in Python. This API provides a set of read and write
+operations that hopefully will be sufficient for most application implementers needs.
+
+Usage
+=====
+
+Sending an add operation::
+
+  >>> import om2api
+  >>> import pyom.ontology.prim_4 as prim
+  >>> nexthop = "http://example.com:2001/"
+  >>> ontology = ["pyom.ontology.prim_4"]
+  >>> ontpath = []
+  >>> om = om2api.OM2(nexthop=nexthop,ontology=ontology,ontpath=ontpath,sender="test@example.com")
+  >>> p = prim.UserPerson()
+  >>> p.about = "urn:mace:example.com:employee-id#deje0001"
+  >>> p["surName"] = "Jeter"
+  >>> p["primaryUid"] = "deje0001"
+  >>> p["givenName"] = "Derek"
+  >>> p["title"] = "short stop"
+  >>> p["open"] = True
+  >>> p["active"] = True
+  >>> p["blocked"] = False
+  >>> om.add(p)
+
+A read operation::
+
+  >>> import om2api
+  >>> nexthop = "http://example.com:2001/"
+  >>> ontology = ["pyom.ontology.prim_4"]
+  >>> ontpath = []
+  >>> om = om2api.OM2(nexthop=nexthop,ontology=ontology,ontpath=ontpath,sender="test@example.com")
+  >>> om.read("urn:mace:example.com:employee-id#deje0001")
+  {'http://www.openmetadir.org/om2/prim-4.owl#UserPerson': ("urn:mace:example.com:employee-id#deje0001",
+  {'surName': [u'Jeter'], 'primaryUid': [u'deje0001'], 'active': [True], 'givenName': [u'Derek'], 
+  'open': [True], 'blocked': [False], 'title': ["short stop"]})}
+
+And the a simple delete operation
+
+  >>> import om2api
+  >>> nexthop = "http://example.com:2001/"
+  >>> ontology = ["pyom.ontology.prim_4"]
+  >>> ontpath = []
+  >>> om = om2api.OM2(nexthop=nexthop,ontology=ontology,ontpath=ontpath,sender="test@example.com")
+  >>> om.delete("urn:mace:example.com:employee-id#deje0001")
+
+  
+Module
+======
+
+.. automodule:: om2api_2
+   :members: 
+

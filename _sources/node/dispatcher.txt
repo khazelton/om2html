@@ -1,0 +1,21 @@
+.. _node-dispatcher:
+
+======================
+The centre of the node
+======================
+
+The dispatcher is the central point of the node, it's where everything is connected.
+It:
+
+  * Receives a message from a listener,
+  * uses the routers and
+  * the resolvers that it has connected to it to get protocol/endpoint specifications and
+  * finally will pick senders to use for sending the message.
+  
+It will also, if so configured, make sure that a message isn't lost during processing by
+saving it on disc while working with it.
+
+One might imaging having several different types of dispatchers with special functionality's.
+And in fact that was how it started. But with the advent of the handlers the need for special
+dispatcher has lessened.
+

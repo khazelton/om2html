@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>File &mdash; OM2 v1.1.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.1.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="OM2 v1.1.0 documentation" href="../../index.html" />
+    <link rel="up" title="The sender - how the nodes gets rid of a message" href="../sender.html" />
+    <link rel="next" title="LDAP" href="ldap.html" />
+    <link rel="prev" title="Djbmaildir" href="djbmaildir.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="ldap.html" title="LDAP"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="djbmaildir.html" title="Djbmaildir"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">OM2 v1.1.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >The node -the basic buildingblock</a> &raquo;</li>
+          <li><a href="../sender.html" accesskey="U">The sender - how the nodes gets rid of a message</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="file">
+<span id="senders-file"></span><h1>File<a class="headerlink" href="#file" title="Permalink to this headline">¶</a></h1>
+<p>Appends the messages to a file. If the file doesn&#8217;t exist it will be created.</p>
+<p>One important configuration option:</p>
+<ul class="simple">
+<li>path
+Which is the &#8216;root&#8217; for where the sender will write</li>
+</ul>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="nb">file</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">FileSender</span><span class="p">()</span>
+<span class="nb">file</span><span class="p">[</span><span class="s">&quot;path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;.&quot;</span>
+
+<span class="n">adr</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">Address</span><span class="p">()</span>
+<span class="n">adr</span><span class="p">[</span><span class="s">&quot;protocolName&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;file&quot;</span>
+<span class="n">adr</span><span class="p">[</span><span class="s">&quot;endpoint&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;file:///by_rest&quot;</span>
+<span class="n">recv</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">ResolverMap</span><span class="p">()</span>
+<span class="n">recv</span><span class="p">[</span><span class="s">&quot;pattern&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;file@example.org&quot;</span>
+<span class="n">recv</span><span class="p">[</span><span class="s">&quot;receiver&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">adr</span>
+
+<span class="n">resolv</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">Static</span><span class="p">()</span>
+<span class="n">resolv</span><span class="p">[</span><span class="s">&quot;exact&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">recv</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>What this means is that if there is a message that the router decides should be
+sent to &#8220;<a class="reference external" href="mailto:file&#37;&#52;&#48;example&#46;org">file<span>&#64;</span>example<span>&#46;</span>org</a>&#8220;. It will be send by the FileSender and will be written to the
+file &#8220;./by_rest&#8221; relative to the place from where the node was started.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="djbmaildir.html"
+                                  title="previous chapter">Djbmaildir</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="ldap.html"
+                                  title="next chapter">LDAP</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/node/senders/file.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../modindex.html" title="Global Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="ldap.html" title="LDAP"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="djbmaildir.html" title="Djbmaildir"
+             >previous</a> |</li>
+        <li><a href="../../index.html">OM2 v1.1.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >The node -the basic buildingblock</a> &raquo;</li>
+          <li><a href="../sender.html" >The sender - how the nodes gets rid of a message</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009, Roland Hedberg.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.2.
+    </div>
+  </body>
+</html>

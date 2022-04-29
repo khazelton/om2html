@@ -1,0 +1,431 @@
+.. _ontology-miro:
+
+=================
+The miro ontology
+=================
+
+:Author: Roland Hedberg
+:Version: 1.1.1
+
+.. module:: miro
+.. moduleauthor:: Roland Hedberg
+
+* :ref:`MIRO <miro-class-MIRO>`
+* :ref:`Operation <miro-class-Operation>`
+
+********
+Overview
+********
+
+Introduction
+============
+
+In an Indentity Management (IdM) system based on OM2 there will be one of more source systems for
+information about objects.
+Objects can typically be any type of objects; persons, organisations, organisational units,
+machines, users, groups,....
+I could go on and on about this but enough said, you should be now have grasped that when we talk
+about IdM systems it is not just about people but more diverse then that.
+Now, if we only had a number of sources for information of objects, that would not constitute a IdM systems.
+We also need targets systems for the information, ranging from systems that performs actions when a 
+specific change has occurred to a specific type of object, to systems that stores the state of objects 
+for the use by other systems.
+An example of the later type would be a LDAP directory. In this document a RDF store will be used as 
+an example of the later class.
+What this document attempts to do is first to describe the events and then to make a proposal as to 
+how a system that are interested in keeping ‘state’ should handle notifications of these events.
+Examples given are in the format of XML serialized RDF graphs which is exactly what is sent between OM2 nodes.
+
+Operations
+==========
+
+The Miro ontology does not contain normal Add,Delete,ModifyAdd and so on primitives instead it is built
+around the notion of:
+
+* if something in the store matches this, do this to it.
+
+To accomplish this we have define an ontology that represents the following pseudo-code::
+
+  if match(A):
+    replace(B)
+    insert(C)
+  else:
+    otherwiseInsert(D)
+
+Important to remember is that all operations in OM2 stores are supposed to be idempotent.
+
+Operation patterns
+==================
+
+A Miro operation can only contain zero or one of each of the basic sub operations (match, replace, 
+insert, otherwise). This means that there are a finite number of possible combinations. These 
+combinations form patterns which I in the following sections will try to describe the meaning of. 
+I will also specify what should happen given different states of the store.
+
+Common for all operation is that the operation must fail, if the resulting graph does not comply 
+with all the constraints that are define for the involved type of resource.
+
+OtherwiseInsert
+---------------
+
+A shorthand for writing a match clause that does not match anything is to completely leave it out.
+
+The simplest operations pattern would then be::
+
+  <rdf:RDF
+    xmlns:_4='http://www.openmetadir.org/om2/miro.owl#'
+    xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+    xmlns:_3='http://www.openmetadir.org/om2/prim-4.owl#'
+  >
+    <_4:MIRO>
+      <_4:otherwiseInsert>
+        <_3:Person rdf:about="http://www.umu.se/id#rohe0001">
+          <_3:surName>Hedberg</_3:surName>
+          <_3:givenName>Roland</_3:givenName>
+        </_3:Person>
+      </_4:otherwiseInsert>
+    </_4:MIRO>
+  </rdf:RDF>
+
+Since having no match clause in this context is equivalent to a False statement, then 
+otherwiseInsert will always be applied.
+
+Therefor this pattern is equivalent to an Add operation.
+
+Match and Replace
+-----------------
+
+The intent behind this pattern is that whatever is defined in the match clause should be replaced with whatever is defined in the replace clause::
+
+  <rdf:RDF
+    xmlns:_4='http://www.openmetadir.org/om2/miro.owl#'
+    xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+    xmlns:_3='http://www.openmetadir.org/om2/prim-4.owl#'
+  >
+    <_4:MIRO>
+      <_4:match>
+        <_3:Person rdf:about="http://www.umu.se/id#rohe0001">
+          <_3:givenName>Roland</_3:givenName>
+        </_3:Person>
+      </_4:match>
+      <_4:replace>
+        <_3:Person>
+          <_3:givenName>Ronald</_3:givenName>
+        </_3:Person>
+      </_4:replace>
+    </_4:MIRO>
+  </rdf:RDF>
+
+.. image:: picts/table1.jpg
+
+So if the match graph perfectly match a part of the full graph stored in the repository, 
+then precisely that part is replace with what is defined in the replace clause. As seen in the 
+figure above.
+
+If the match clause does not specify the graph down to and including ‘leafs’ then the match 
+clause will in effect match the subgraph that matches the graph in match and all subgraphs/leafs 
+that start with that subgraph.
+
+Therefor the following operation::
+
+  <rdf:RDF
+    xmlns:_4='http://www.openmetadir.org/om2/prim-4.owl#'
+    xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+    xmlns:_3='http://www.openmetadir.org/om2/miro.owl#'
+  >
+    <_3:MIRO>
+      <_3:replace>
+        <_4:Person>
+          <_4:givenName>Ronny</_4:givenName>
+        </_4:Person>
+      </_3:replace>
+      <_3:match>
+        <_4:Person rdf:about="http://www.umu.se/id#rohe0001">
+          <_4:givenName></_4:givenName>
+        </_4:Person>
+      </_3:match>
+    </_3:MIRO>
+  </rdf:RDF>
+
+
+will produce the result as shown below
+
+.. image:: picts/table2.jpg
+
+And lastly just to show that the above mentioned pattern is not just about leafs. If the operation
+is defined like this::
+
+  <rdf:RDF
+    xmlns:_4='http://www.openmetadir.org/om2/miro.owl#'
+    xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+    xmlns:_3='http://www.openmetadir.org/om2/prim-4.owl#'
+  >
+    <_4:MIRO>
+      <_4:match>
+        <_3:Person rdf:about="http://www.umu.se/id#rohe0001"/>
+      </_4:match>
+      <_4:replace>
+        <_3:Person>
+          <_3:givenName>Orlando</_3:givenName>
+        </_3:Person>
+      </_4:replace>
+    </_4:MIRO>
+  </rdf:RDF>
+
+The effect of applying the operation will be this:
+
+.. image:: picts/table3.jpg
+
+Common for all patterns is that if whatever is define in replace already exists in the store 
+then the operations should be reported as a success ever thought no change has been applied to 
+the store.
+
+It is important to remember that it is not possible to replace something that is outside the graph 
+that is defined in the match clause.
+
+Hence, this is not allowed::
+
+  <rdf:RDF
+    xmlns:_4='http://www.openmetadir.org/om2/miro.owl#'
+    xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+    xmlns:_3='http://www.openmetadir.org/om2/prim-4.owl#'
+  >
+    <_4:MIRO>
+      <_4:match>
+        <_3:Person rdf:about="http://www.umu.se/id#rohe0001">
+          <_3:Phone>
+            <_3:contactType>workphone</_3:contactType>
+          </_3:Phone>
+        </_3:Person>
+      </_4:match>
+      <_4:replace>
+        <_3:Person>
+          <_3:Phone rdf:nodeID="lPNQabwW37">
+            <_3:contactType>Home phone</_3:contactType>
+            <_3:phoneNumber>+46 99 12345678</_3:phoneNumber>
+          </_3:Phone>
+        </_3:Person>
+      </_4:replace>
+    </_4:MIRO>
+  </rdf:RDF>
+
+The change of contactType from “workphone” to “Home phone” is OK, but no replacement of phoneNumber 
+can occur since phoneNumber is not part of the subgraph matched by the match graph.
+
+Also, note that a named object must not be removed from the store if a reference to it is removed 
+from another object.
+
+Like this: The following operation will remove the phone as 'belonging' to this person. But the phone
+as an resource in itself will remain in the store::
+
+  <rdf:RDF
+    xmlns:_4='http://www.openmetadir.org/om2/miro.owl#'
+    xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+    xmlns:_3='http://www.openmetadir.org/om2/prim-3.owl#'
+  >
+    <_4:MIRO>
+      <_4:match>
+        <_3:Person rdf:about="http://www.umu.se/id#p1">
+          <_3:phone rdf:resource="2.4.2.4.5.5.5.1.e164.arpa"/>
+        </_3:Person>
+      </_4:match>
+      <_4:replace>
+        <_3:Person />
+      </_4:replace>
+    </_4:MIRO>
+    <_3:Phone rdf:about="2.4.2.4.5.5.5.1.e164.arpa"/>
+  </rdf:RDF>
+
+And finally, if you want to switch the identifier for an object you can do this using the following 
+construct::
+
+  <_3:MIRO>
+    <_3:match rdf:resource="http://www.umu.se/id#before"/>
+    <_3:replace rdf:resource="http://www.umu.se/id#after"/>
+  </_3:MIRO>
+
+Match and Insert
+----------------
+
+While replace always are relative to match, this is not the case when it comes to insert. Insert does 
+not even have to be about the same resource. It is totally permitted to issue something like this::
+
+  <rdf:RDF
+    xmlns:_4='http://www.openmetadir.org/om2/miro.owl#'
+    xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+    xmlns:_3='http://www.openmetadir.org/om2/prim-4.owl#'
+  >
+    <_4:MIRO>
+      <_4:insert>
+        <_3:Collection rdf:about="http://www.umu.se/collection#foobars">
+          <_3:thing rdf:resource="http://www.umu.se/id#rohe0001"/>
+        </_3:Collection>
+      </_4:insert>
+      <_4:match>
+        <_3:Person rdf:about="http://www.umu.se/id#rohe0001">
+          <_3:title>foobar</_3:title>
+        </_3:Person>
+      </_4:match>
+    </_4:MIRO>
+  </rdf:RDF>
+
+This means that whatever resource is referenced in insert might or might not exist in the store.
+If it exists then the graph should be inserted into that present representation of the resource, 
+if not the insert graph should be added as a new resource.
+
+Match and Replace and Insert
+----------------------------
+
+If both replace and insert are defined in one and the same operation, then replace must be applied 
+before insert. Apart from this, the rules that apply to match/replace and match/insert as defined 
+in 3.2 and 3.3, are valid in match/replace/insert.
+
+Not Match and OtherwiseInsert
+-----------------------------
+
+If the clause in match does not match any resource in the store then neither insert nor replace is 
+applied, instead if otherwiseInsert is present it will be applied.
+The rules for application of otherwiseInsert are the same as for insert. For other rules se 3.1 .
+
+Match
+-----
+
+If an operation specification only contains a match clause, which matches no resource and no insert, 
+replace or otherwiseInsert clauses are part of the operation.
+Then the subgraph in the match clause are supposed to be removed from the store.
+
+Like this::
+
+  <rdf:RDF
+    xmlns:_4='http://www.openmetadir.org/om2/miro.owl#'
+    xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+    xmlns:_3='http://www.openmetadir.org/om2/prim-4.owl#'
+  >
+    <_4:MIRO>
+      <_4:match>
+        <_3:Person rdf:about="http://www.umu.se/id#rohe0001">
+          <_3:title>foobar</_3:title>
+        </_3:Person>
+      </_4:match>
+    </_4:MIRO>
+  </rdf:RDF>
+
+.. image:: picts/table4.jpg
+
+Some notes on graphs
+====================
+
+Only match graphs can contain properties without values. A store should never attempt to store a 
+property without a value.
+
+How a respository should implement the MIRO operations
+======================================================
+
+.. image:: picts/miro_graph.jpg
+
+
+*******
+Classes
+*******
+
+MIRO
+====
+
+.. _miro-class-MIRO:
+
+A miro type operation
+
+**Properties**
+
+* :ref:`insert <miro-property-insert>`
+* :ref:`replace <miro-property-replace>`
+* :ref:`source <om2-property-source>`
+* :ref:`otherwiseInsert <miro-property-otherwiseInsert>`
+* :ref:`dependsOn <miro-property-dependsOn>`
+* :ref:`match <miro-property-match>`
+
+Operation
+=========
+
+.. _miro-class-Operation:
+
+Base class of an IdentityManagement Operation
+
+**Properties**
+
+* :ref:`source <om2-property-source>`
+* :ref:`dependsOn <miro-property-dependsOn>`
+
+**********
+Properties
+**********
+
+
+dependsOn
+=========
+
+.. _miro-property-dependsOn:
+
+One miro operation might in fact be a sequence of MIRO operations,
+using this property
+you can provide information about the order in
+which they should be applied. There is
+no way to not order the
+operations. Applying a sequence of operations is regarded as
+an
+atomic operation. All succeeds or or failes.
+
+*range*
+  :ref:`Operation <miro-class-Operation>`
+
+**Functional**
+
+otherwiseInsert
+===============
+
+.. _miro-property-otherwiseInsert:
+
+If the match clause did not match anything or if it was absent add
+this object to the repository
+
+*range*
+  Unspecified
+
+**Functional**
+
+insert
+======
+
+.. _miro-property-insert:
+
+To an object that matched the match clause apply this insert
+
+*range*
+  Unspecified
+
+**Functional**
+
+replace
+=======
+
+.. _miro-property-replace:
+
+To an object that matched the match clause replace information as
+specified here
+
+*range*
+  Unspecified
+
+**Functional**
+
+match
+=====
+
+.. _miro-property-match:
+
+Specifies which object/-s this operation should work on
+
+*range*
+  Unspecified
+
+**Functional**

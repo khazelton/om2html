@@ -1,0 +1,219 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The handlers - to provide the dispatcher with more functions &mdash; OM2 v1.1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.1.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="OM2 v1.1.0 documentation" href="../index.html" />
+    <link rel="up" title="The node -the basic buildingblock" href="index.html" />
+    <link rel="next" title="The nodeconfig ontology" href="nodeconfig.html" />
+    <link rel="prev" title="The transformer - modifies a message or creates new based on one or more" href="transformer.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="nodeconfig.html" title="The nodeconfig ontology"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="transformer.html" title="The transformer - modifies a message or creates new based on one or more"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">OM2 v1.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">The node -the basic buildingblock</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="the-handlers-to-provide-the-dispatcher-with-more-functions">
+<span id="node-handler"></span><h1>The handlers - to provide the dispatcher with more functions<a class="headerlink" href="#the-handlers-to-provide-the-dispatcher-with-more-functions" title="Permalink to this headline">¶</a></h1>
+<p>From the dispatchers point of view it will receive messages from a listener then it
+will either succeed of fail in transmitting the message to the receivers.</p>
+<p>That gives us three places where we can put handlers which will provide the dispatcher
+with extra functionality.</p>
+<blockquote>
+<ul class="simple">
+<li>between the listener and the dispatcher and sender and</li>
+<li>between the dispatcher and the sender depending on whether it was successful or</li>
+<li>a failure.</li>
+</ul>
+</blockquote>
+<p>So we have pre-,post- and error-handlers.</p>
+<p>If you want to use more than one pre-handler for instance you will have to define in which
+order they will apply. And the order will always be maintained.</p>
+<p>A pre-handler might stop a message from reaching the dispatcher.</p>
+<p>A post- or error-handler might create a new message which will then be passed over to the
+dispatcher as if it has been received by the listener. The dispatcher will not see any
+difference. Such a message will <strong>not</strong> pass through the pre-handler if present.</p>
+<div class="section" id="implemented-handlers">
+<h2>Implemented handlers<a class="headerlink" href="#implemented-handlers" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="block">
+<h3>block<a class="headerlink" href="#block" title="Permalink to this headline">¶</a></h3>
+<p>The function of this handler is to block messages from a sender
+until the previous one is successfully passed on to the receivers.
+The message that failed will be retried again and again with a
+suitable intervall between the tries.</p>
+<p>Typical configuration:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">block</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">RetryHandler</span><span class="p">()</span>
+<span class="n">block</span><span class="p">[</span><span class="s">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;blocker&quot;</span>
+<span class="n">block</span><span class="p">[</span><span class="s">&quot;module&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;pyom.handler.block&quot;</span>
+<span class="n">block</span><span class="p">[</span><span class="s">&quot;timeout&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">2</span>
+
+<span class="n">disp</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">Sforwarder</span><span class="p">()</span>
+<span class="n">disp</span><span class="p">[</span><span class="s">&quot;nextHandler&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">block</span>
+</pre></div>
+</div>
+<p>Setting the handler to a &#8216;nextHandler&#8217; means that it will be entered as pre-,post- and error-handler.
+Which in this case is necessary since it must be able to set the block on error and to remove it when
+the message has been transmitted. The retransmit timer is set to 2 seconds.</p>
+</div>
+<div class="section" id="errsender">
+<h3>errsender<a class="headerlink" href="#errsender" title="Permalink to this headline">¶</a></h3>
+<p>Will construct and send an error message to a set of receivers.</p>
+<p>Typical configuration:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">err</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">SendHandler</span><span class="p">()</span>
+<span class="n">err</span><span class="p">[</span><span class="s">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;error&quot;</span>
+<span class="n">err</span><span class="p">[</span><span class="s">&quot;module&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;pyom.handler.errsender&quot;</span>
+<span class="n">err</span><span class="p">[</span><span class="s">&quot;errorAddress&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;error@example.com&quot;</span>
+
+<span class="n">disp</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">Sforwarder</span><span class="p">()</span>
+<span class="n">disp</span><span class="p">[</span><span class="s">&quot;errorHandler&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">err</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="replyto">
+<h3>replyTo<a class="headerlink" href="#replyto" title="Permalink to this headline">¶</a></h3>
+<p>Will construct and send a reply-to message to a receivers specified in the &#8220;reply-To&#8221; property of
+the message.</p>
+<p>Typical configuration:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">reply</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">SendHandler</span><span class="p">()</span>
+<span class="n">reply</span><span class="p">[</span><span class="s">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;replyTo&quot;</span>
+<span class="n">reply</span><span class="p">[</span><span class="s">&quot;module&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;pyom.handler.replyTo&quot;</span>
+
+<span class="n">disp</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">Sforwarder</span><span class="p">()</span>
+<span class="n">disp</span><span class="p">[</span><span class="s">&quot;postHandler&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">reply</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="synch">
+<h3>synch<a class="headerlink" href="#synch" title="Permalink to this headline">¶</a></h3>
+<p>Will put itself in the reply-To field and will not ACK to the publisher until it has received a
+inReplyTo message with a message-id it waited for from the receiver.</p>
+<p>Typical configuration:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">restin</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">RestListener</span><span class="p">()</span>
+<span class="n">restin</span><span class="p">[</span><span class="s">&quot;port&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;8084&quot;</span>
+<span class="n">restin</span><span class="p">[</span><span class="s">&quot;responseAfter&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;sent&quot;</span>
+
+<span class="n">synch</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">SendHandler</span><span class="p">()</span>
+<span class="n">synch</span><span class="p">[</span><span class="s">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;replyTo&quot;</span>
+<span class="n">synch</span><span class="p">[</span><span class="s">&quot;module&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;pyom.handler.synch&quot;</span>
+<span class="n">synch</span><span class="p">[</span><span class="s">&quot;sourceAddress&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;synch@example.com&quot;</span>
+
+<span class="n">disp</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">Sforwarder</span><span class="p">()</span>
+<span class="n">disp</span><span class="p">[</span><span class="s">&quot;nextHandler&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">synch</span>
+<span class="n">conf</span><span class="p">[</span><span class="s">&quot;dispatcher&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">disp</span>
+</pre></div>
+</div>
+<p>I&#8217;ve included the listener specification because &#8216;responseAfter&#8217; have to be &#8216;sent&#8217; for this to work.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="">The handlers - to provide the dispatcher with more functions</a><ul>
+<li><a class="reference external" href="#implemented-handlers">Implemented handlers</a><ul>
+<li><a class="reference external" href="#block">block</a></li>
+<li><a class="reference external" href="#errsender">errsender</a></li>
+<li><a class="reference external" href="#replyto">replyTo</a></li>
+<li><a class="reference external" href="#synch">synch</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="transformer.html"
+                                  title="previous chapter">The transformer - modifies a message or creates new based on one or more</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="nodeconfig.html"
+                                  title="next chapter">The nodeconfig ontology</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/node/handler.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="nodeconfig.html" title="The nodeconfig ontology"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="transformer.html" title="The transformer - modifies a message or creates new based on one or more"
+             >previous</a> |</li>
+        <li><a href="../index.html">OM2 v1.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >The node -the basic buildingblock</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009, Roland Hedberg.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.2.
+    </div>
+  </body>
+</html>

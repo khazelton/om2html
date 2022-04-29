@@ -1,0 +1,1974 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The prim ontology &mdash; OM2 v1.1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.1.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="OM2 v1.1.0 documentation" href="../index.html" />
+    <link rel="up" title="Ontologies" href="index.html" />
+    <link rel="next" title="The node ontology" href="node.html" />
+    <link rel="prev" title="The miro ontology" href="miro.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="node.html" title="The node ontology"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="miro.html" title="The miro ontology"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">OM2 v1.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Ontologies</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-prim">
+<span id="ontology-prim"></span><h1>The prim ontology<a class="headerlink" href="#module-prim" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Roland Hedberg</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">4.0.6</td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><a class="reference internal" href="#prim-class-aci"><em>ACI</em></a></li>
+<li><a class="reference internal" href="#prim-class-address"><em>Address</em></a></li>
+<li><a class="reference internal" href="#prim-class-affiliate"><em>Affiliate</em></a></li>
+<li><a class="reference internal" href="#prim-class-alias"><em>Alias</em></a></li>
+<li><a class="reference internal" href="#prim-class-alumn"><em>Alumn</em></a></li>
+<li><a class="reference internal" href="#prim-class-application"><em>Application</em></a></li>
+<li><a class="reference internal" href="#prim-class-collection"><em>Collection</em></a></li>
+<li><a class="reference internal" href="#prim-class-consultant"><em>Consultant</em></a></li>
+<li><a class="reference internal" href="#prim-class-contactinformation"><em>ContactInformation</em></a></li>
+<li><a class="reference internal" href="#prim-class-contactable"><em>Contactable</em></a></li>
+<li><a class="reference internal" href="#prim-class-department"><em>Department</em></a></li>
+<li><a class="reference internal" href="#prim-class-email"><em>Email</em></a></li>
+<li><a class="reference internal" href="#prim-class-employee"><em>Employee</em></a></li>
+<li><a class="reference internal" href="#prim-class-member"><em>Member</em></a></li>
+<li><a class="reference internal" href="#prim-class-membership"><em>Membership</em></a></li>
+<li><a class="reference internal" href="#prim-class-object"><em>Object</em></a></li>
+<li><a class="reference internal" href="#prim-class-organisation"><em>Organisation</em></a></li>
+<li><a class="reference internal" href="#prim-class-organisationalunit"><em>OrganisationalUnit</em></a></li>
+<li><a class="reference internal" href="#prim-class-partof"><em>PartOf</em></a></li>
+<li><a class="reference internal" href="#prim-class-person"><em>Person</em></a></li>
+<li><a class="reference internal" href="#prim-class-phone"><em>Phone</em></a></li>
+<li><a class="reference internal" href="#prim-class-position"><em>Position</em></a></li>
+<li><a class="reference internal" href="#prim-class-relatedto"><em>RelatedTo</em></a></li>
+<li><a class="reference internal" href="#prim-class-relation"><em>Relation</em></a></li>
+<li><a class="reference internal" href="#prim-class-responsible"><em>Responsible</em></a></li>
+<li><a class="reference internal" href="#prim-class-role"><em>Role</em></a></li>
+<li><a class="reference internal" href="#prim-class-stem"><em>Stem</em></a></li>
+<li><a class="reference internal" href="#prim-class-studentunionmembership"><em>StudentUnionMembership</em></a></li>
+<li><a class="reference internal" href="#prim-class-unit"><em>Unit</em></a></li>
+<li><a class="reference internal" href="#prim-class-user"><em>User</em></a></li>
+<li><a class="reference internal" href="#prim-class-userperson"><em>UserPerson</em></a></li>
+<li><a class="reference internal" href="#prim-class-visitingaddress"><em>VisitingAddress</em></a></li>
+<li><a class="reference internal" href="#prim-class-www"><em>WWW</em></a></li>
+</ul>
+<div class="section" id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="www">
+<h3>WWW<a class="headerlink" href="#www" title="Permalink to this headline">¶</a></h3>
+<p id="prim-class-www">Information about a specific way of contacting an object.</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#prim-property-url"><em>url</em></a> <em>restriction</em> cardinality 1</li>
+<li><a class="reference internal" href="#prim-property-validto"><em>validTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-primary"><em>primary</em></a></li>
+<li><a class="reference external" href="om2.html#om2-property-source"><em>source</em></a></li>
+<li><a class="reference internal" href="#prim-property-contacttype"><em>contactType</em></a></li>
+<li><a class="reference internal" href="#prim-property-validfrom"><em>validFrom</em></a></li>
+</ul>
+</div>
+<div class="section" id="contactinformation">
+<h3>ContactInformation<a class="headerlink" href="#contactinformation" title="Permalink to this headline">¶</a></h3>
+<p id="prim-class-contactinformation">Information about a specific way of contacting an object.</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference external" href="om2.html#om2-property-source"><em>source</em></a></li>
+<li><a class="reference internal" href="#prim-property-validto"><em>validTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-validfrom"><em>validFrom</em></a></li>
+<li><a class="reference internal" href="#prim-property-primary"><em>primary</em></a></li>
+<li><a class="reference internal" href="#prim-property-contacttype"><em>contactType</em></a></li>
+</ul>
+</div>
+<div class="section" id="stem">
+<h3>Stem<a class="headerlink" href="#stem" title="Permalink to this headline">¶</a></h3>
+<p id="prim-class-stem">Basic object information.</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#prim-property-displayname"><em>displayName</em></a></li>
+<li><a class="reference internal" href="#prim-property-name"><em>name</em></a></li>
+<li><a class="reference internal" href="#prim-property-parent"><em>parent</em></a></li>
+<li><a class="reference internal" href="#prim-property-created"><em>created</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodified"><em>lastModified</em></a></li>
+<li><a class="reference internal" href="#prim-property-aci"><em>aci</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodifiedby"><em>lastModifiedBy</em></a></li>
+<li><a class="reference external" href="om2.html#om2-property-source"><em>source</em></a></li>
+<li><a class="reference internal" href="#prim-property-createdby"><em>createdBy</em></a></li>
+<li><a class="reference internal" href="#prim-property-owner"><em>owner</em></a></li>
+<li><a class="reference internal" href="#prim-property-associatedto"><em>associatedTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-shortname"><em>shortName</em></a></li>
+<li><a class="reference internal" href="#prim-property-description"><em>description</em></a></li>
+</ul>
+</div>
+<div class="section" id="organisationalunit">
+<h3>OrganisationalUnit<a class="headerlink" href="#organisationalunit" title="Permalink to this headline">¶</a></h3>
+<p id="prim-class-organisationalunit">Information about an official part of an organisation.</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#prim-property-www"><em>www</em></a></li>
+<li><a class="reference internal" href="#prim-property-visitingaddress"><em>visitingAddress</em></a></li>
+<li><a class="reference internal" href="#prim-property-alsoknownas"><em>alsoKnownAs</em></a></li>
+<li><a class="reference internal" href="#prim-property-owner"><em>owner</em></a></li>
+<li><a class="reference internal" href="#prim-property-associatedto"><em>associatedTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-formalname"><em>formalName</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodifiedby"><em>lastModifiedBy</em></a></li>
+<li><a class="reference external" href="om2.html#om2-property-source"><em>source</em></a></li>
+<li><a class="reference internal" href="#prim-property-postaladdress"><em>postalAddress</em></a></li>
+<li><a class="reference internal" href="#prim-property-type"><em>type</em></a></li>
+<li><a class="reference internal" href="#prim-property-email"><em>email</em></a></li>
+<li><a class="reference internal" href="#prim-property-status"><em>status</em></a></li>
+<li><a class="reference internal" href="#prim-property-fax"><em>fax</em></a></li>
+<li><a class="reference internal" href="#prim-property-description"><em>description</em></a></li>
+<li><a class="reference internal" href="#prim-property-parent"><em>parent</em></a></li>
+<li><a class="reference internal" href="#prim-property-accountnumber"><em>accountNumber</em></a></li>
+<li><a class="reference internal" href="#prim-property-phone"><em>phone</em></a></li>
+<li><a class="reference internal" href="#prim-property-createdby"><em>createdBy</em></a></li>
+<li><a class="reference internal" href="#prim-property-shortname"><em>shortName</em></a></li>
+<li><a class="reference internal" href="#prim-property-displayname"><em>displayName</em></a></li>
+<li><a class="reference internal" href="#prim-property-name"><em>name</em></a></li>
+<li><a class="reference internal" href="#prim-property-created"><em>created</em></a></li>
+<li><a class="reference internal" href="#prim-property-mobile"><em>mobile</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodified"><em>lastModified</em></a></li>
+<li><a class="reference internal" href="#prim-property-aci"><em>aci</em></a></li>
+<li><a class="reference internal" href="#prim-property-partof"><em>partOf</em></a></li>
+</ul>
+</div>
+<div class="section" id="relation">
+<h3>Relation<a class="headerlink" href="#relation" title="Permalink to this headline">¶</a></h3>
+<p id="prim-class-relation">A relation between two objects</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#prim-property-status"><em>status</em></a></li>
+<li><a class="reference internal" href="#prim-property-displayname"><em>displayName</em></a></li>
+<li><a class="reference internal" href="#prim-property-name"><em>name</em></a></li>
+<li><a class="reference internal" href="#prim-property-parent"><em>parent</em></a></li>
+<li><a class="reference internal" href="#prim-property-created"><em>created</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodified"><em>lastModified</em></a></li>
+<li><a class="reference internal" href="#prim-property-aci"><em>aci</em></a></li>
+<li><a class="reference internal" href="#prim-property-one"><em>one</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodifiedby"><em>lastModifiedBy</em></a></li>
+<li><a class="reference external" href="om2.html#om2-property-source"><em>source</em></a></li>
+<li><a class="reference internal" href="#prim-property-other"><em>other</em></a></li>
+<li><a class="reference internal" href="#prim-property-createdby"><em>createdBy</em></a></li>
+<li><a class="reference internal" href="#prim-property-owner"><em>owner</em></a></li>
+<li><a class="reference internal" href="#prim-property-associatedto"><em>associatedTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-shortname"><em>shortName</em></a></li>
+<li><a class="reference internal" href="#prim-property-validfrom"><em>validFrom</em></a></li>
+<li><a class="reference internal" href="#prim-property-validto"><em>validTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-description"><em>description</em></a></li>
+</ul>
+</div>
+<div class="section" id="consultant">
+<h3>Consultant<a class="headerlink" href="#consultant" title="Permalink to this headline">¶</a></h3>
+<p id="prim-class-consultant">Information about a consultant hired to do some work for an
+organisation.</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#prim-property-createdby"><em>createdBy</em></a></li>
+<li><a class="reference internal" href="#prim-property-validto"><em>validTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-one"><em>one</em></a> <em>restriction</em> maxCardinality 1 <em>restriction</em> allValuesFrom &lt;class &#8216;pyom.ontology.prim_4.Person&#8217;&gt;</li>
+<li><a class="reference internal" href="#prim-property-owner"><em>owner</em></a></li>
+<li><a class="reference internal" href="#prim-property-associatedto"><em>associatedTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodifiedby"><em>lastModifiedBy</em></a></li>
+<li><a class="reference external" href="om2.html#om2-property-source"><em>source</em></a></li>
+<li><a class="reference internal" href="#prim-property-other"><em>other</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#prim-property-postaladdress"><em>postalAddress</em></a></li>
+<li><a class="reference internal" href="#prim-property-email"><em>email</em></a></li>
+<li><a class="reference internal" href="#prim-property-status"><em>status</em></a></li>
+<li><a class="reference internal" href="#prim-property-fax"><em>fax</em></a></li>
+<li><a class="reference internal" href="#prim-property-description"><em>description</em></a></li>
+<li><a class="reference internal" href="#prim-property-parent"><em>parent</em></a></li>
+<li><a class="reference internal" href="#prim-property-phone"><em>phone</em></a></li>
+<li><a class="reference internal" href="#prim-property-visitingaddress"><em>visitingAddress</em></a></li>
+<li><a class="reference internal" href="#prim-property-address"><em>address</em></a></li>
+<li><a class="reference internal" href="#prim-property-shortname"><em>shortName</em></a></li>
+<li><a class="reference internal" href="#prim-property-displayname"><em>displayName</em></a></li>
+<li><a class="reference internal" href="#prim-property-name"><em>name</em></a></li>
+<li><a class="reference internal" href="#prim-property-created"><em>created</em></a></li>
+<li><a class="reference internal" href="#prim-property-mobile"><em>mobile</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodified"><em>lastModified</em></a></li>
+<li><a class="reference internal" href="#prim-property-aci"><em>aci</em></a></li>
+<li><a class="reference internal" href="#prim-property-validfrom"><em>validFrom</em></a></li>
+</ul>
+</div>
+<div class="section" id="address">
+<h3>Address<a class="headerlink" href="#address" title="Permalink to this headline">¶</a></h3>
+<p id="prim-class-address">Information about a specific way of contacting an object.</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#prim-property-city"><em>city</em></a></li>
+<li><a class="reference internal" href="#prim-property-country"><em>country</em></a></li>
+<li><a class="reference internal" href="#prim-property-validto"><em>validTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-address"><em>address</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#prim-property-primary"><em>primary</em></a></li>
+<li><a class="reference external" href="om2.html#om2-property-source"><em>source</em></a></li>
+<li><a class="reference internal" href="#prim-property-street"><em>street</em></a></li>
+<li><a class="reference internal" href="#prim-property-contacttype"><em>contactType</em></a></li>
+<li><a class="reference internal" href="#prim-property-postalcode"><em>postalCode</em></a></li>
+<li><a class="reference internal" href="#prim-property-careof"><em>careOf</em></a></li>
+<li><a class="reference internal" href="#prim-property-validfrom"><em>validFrom</em></a></li>
+</ul>
+</div>
+<div class="section" id="application">
+<h3>Application<a class="headerlink" href="#application" title="Permalink to this headline">¶</a></h3>
+<p id="prim-class-application">Basic object information.</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#prim-property-displayname"><em>displayName</em></a></li>
+<li><a class="reference internal" href="#prim-property-name"><em>name</em></a></li>
+<li><a class="reference internal" href="#prim-property-parent"><em>parent</em></a></li>
+<li><a class="reference internal" href="#prim-property-created"><em>created</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodified"><em>lastModified</em></a></li>
+<li><a class="reference internal" href="#prim-property-aci"><em>aci</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodifiedby"><em>lastModifiedBy</em></a></li>
+<li><a class="reference external" href="om2.html#om2-property-source"><em>source</em></a></li>
+<li><a class="reference internal" href="#prim-property-createdby"><em>createdBy</em></a></li>
+<li><a class="reference internal" href="#prim-property-owner"><em>owner</em></a></li>
+<li><a class="reference internal" href="#prim-property-associatedto"><em>associatedTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-shortname"><em>shortName</em></a></li>
+<li><a class="reference internal" href="#prim-property-description"><em>description</em></a></li>
+</ul>
+</div>
+<div class="section" id="unit">
+<h3>Unit<a class="headerlink" href="#unit" title="Permalink to this headline">¶</a></h3>
+<p id="prim-class-unit">Information about a part of an organisation.</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#prim-property-www"><em>www</em></a></li>
+<li><a class="reference internal" href="#prim-property-visitingaddress"><em>visitingAddress</em></a></li>
+<li><a class="reference internal" href="#prim-property-alsoknownas"><em>alsoKnownAs</em></a></li>
+<li><a class="reference internal" href="#prim-property-owner"><em>owner</em></a></li>
+<li><a class="reference internal" href="#prim-property-associatedto"><em>associatedTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodifiedby"><em>lastModifiedBy</em></a></li>
+<li><a class="reference external" href="om2.html#om2-property-source"><em>source</em></a></li>
+<li><a class="reference internal" href="#prim-property-postaladdress"><em>postalAddress</em></a></li>
+<li><a class="reference internal" href="#prim-property-email"><em>email</em></a></li>
+<li><a class="reference internal" href="#prim-property-status"><em>status</em></a></li>
+<li><a class="reference internal" href="#prim-property-fax"><em>fax</em></a></li>
+<li><a class="reference internal" href="#prim-property-description"><em>description</em></a></li>
+<li><a class="reference internal" href="#prim-property-parent"><em>parent</em></a></li>
+<li><a class="reference internal" href="#prim-property-phone"><em>phone</em></a></li>
+<li><a class="reference internal" href="#prim-property-createdby"><em>createdBy</em></a></li>
+<li><a class="reference internal" href="#prim-property-shortname"><em>shortName</em></a></li>
+<li><a class="reference internal" href="#prim-property-displayname"><em>displayName</em></a></li>
+<li><a class="reference internal" href="#prim-property-name"><em>name</em></a></li>
+<li><a class="reference internal" href="#prim-property-created"><em>created</em></a></li>
+<li><a class="reference internal" href="#prim-property-mobile"><em>mobile</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodified"><em>lastModified</em></a></li>
+<li><a class="reference internal" href="#prim-property-aci"><em>aci</em></a></li>
+<li><a class="reference internal" href="#prim-property-partof"><em>partOf</em></a></li>
+</ul>
+</div>
+<div class="section" id="relatedto">
+<h3>RelatedTo<a class="headerlink" href="#relatedto" title="Permalink to this headline">¶</a></h3>
+<p id="prim-class-relatedto">Information about a relationship between two objects. Normally means
+that there is no ordered relationship between the objects.</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#prim-property-status"><em>status</em></a></li>
+<li><a class="reference internal" href="#prim-property-displayname"><em>displayName</em></a></li>
+<li><a class="reference internal" href="#prim-property-name"><em>name</em></a></li>
+<li><a class="reference internal" href="#prim-property-parent"><em>parent</em></a></li>
+<li><a class="reference internal" href="#prim-property-created"><em>created</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodified"><em>lastModified</em></a></li>
+<li><a class="reference internal" href="#prim-property-aci"><em>aci</em></a></li>
+<li><a class="reference internal" href="#prim-property-one"><em>one</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodifiedby"><em>lastModifiedBy</em></a></li>
+<li><a class="reference external" href="om2.html#om2-property-source"><em>source</em></a></li>
+<li><a class="reference internal" href="#prim-property-other"><em>other</em></a></li>
+<li><a class="reference internal" href="#prim-property-createdby"><em>createdBy</em></a></li>
+<li><a class="reference internal" href="#prim-property-owner"><em>owner</em></a></li>
+<li><a class="reference internal" href="#prim-property-associatedto"><em>associatedTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-shortname"><em>shortName</em></a></li>
+<li><a class="reference internal" href="#prim-property-validfrom"><em>validFrom</em></a></li>
+<li><a class="reference internal" href="#prim-property-validto"><em>validTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-description"><em>description</em></a></li>
+</ul>
+</div>
+<div class="section" id="organisation">
+<h3>Organisation<a class="headerlink" href="#organisation" title="Permalink to this headline">¶</a></h3>
+<p id="prim-class-organisation">Information about an organisation.</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#prim-property-www"><em>www</em></a></li>
+<li><a class="reference internal" href="#prim-property-visitingaddress"><em>visitingAddress</em></a></li>
+<li><a class="reference internal" href="#prim-property-owner"><em>owner</em></a></li>
+<li><a class="reference internal" href="#prim-property-associatedto"><em>associatedTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-lin"><em>lin</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodifiedby"><em>lastModifiedBy</em></a></li>
+<li><a class="reference external" href="om2.html#om2-property-source"><em>source</em></a></li>
+<li><a class="reference internal" href="#prim-property-postaladdress"><em>postalAddress</em></a></li>
+<li><a class="reference internal" href="#prim-property-email"><em>email</em></a></li>
+<li><a class="reference internal" href="#prim-property-status"><em>status</em></a></li>
+<li><a class="reference internal" href="#prim-property-fax"><em>fax</em></a></li>
+<li><a class="reference internal" href="#prim-property-description"><em>description</em></a></li>
+<li><a class="reference internal" href="#prim-property-parent"><em>parent</em></a></li>
+<li><a class="reference internal" href="#prim-property-phone"><em>phone</em></a></li>
+<li><a class="reference internal" href="#prim-property-createdby"><em>createdBy</em></a></li>
+<li><a class="reference internal" href="#prim-property-shortname"><em>shortName</em></a></li>
+<li><a class="reference internal" href="#prim-property-displayname"><em>displayName</em></a></li>
+<li><a class="reference internal" href="#prim-property-name"><em>name</em></a></li>
+<li><a class="reference internal" href="#prim-property-created"><em>created</em></a></li>
+<li><a class="reference internal" href="#prim-property-mobile"><em>mobile</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodified"><em>lastModified</em></a></li>
+<li><a class="reference internal" href="#prim-property-aci"><em>aci</em></a></li>
+<li><a class="reference internal" href="#prim-property-domaincomponent"><em>domainComponent</em></a></li>
+<li><a class="reference internal" href="#prim-property-associateddomain"><em>associatedDomain</em></a></li>
+</ul>
+</div>
+<div class="section" id="position">
+<h3>Position<a class="headerlink" href="#position" title="Permalink to this headline">¶</a></h3>
+<p id="prim-class-position">A position that a person can have at an object.</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#prim-property-createdby"><em>createdBy</em></a></li>
+<li><a class="reference internal" href="#prim-property-validto"><em>validTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-one"><em>one</em></a> <em>restriction</em> maxCardinality 1 <em>restriction</em> allValuesFrom &lt;class &#8216;pyom.ontology.prim_4.Person&#8217;&gt;</li>
+<li><a class="reference internal" href="#prim-property-owner"><em>owner</em></a></li>
+<li><a class="reference internal" href="#prim-property-associatedto"><em>associatedTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodifiedby"><em>lastModifiedBy</em></a></li>
+<li><a class="reference external" href="om2.html#om2-property-source"><em>source</em></a></li>
+<li><a class="reference internal" href="#prim-property-other"><em>other</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#prim-property-postaladdress"><em>postalAddress</em></a></li>
+<li><a class="reference internal" href="#prim-property-email"><em>email</em></a></li>
+<li><a class="reference internal" href="#prim-property-status"><em>status</em></a></li>
+<li><a class="reference internal" href="#prim-property-fax"><em>fax</em></a></li>
+<li><a class="reference internal" href="#prim-property-description"><em>description</em></a></li>
+<li><a class="reference internal" href="#prim-property-parent"><em>parent</em></a></li>
+<li><a class="reference internal" href="#prim-property-phone"><em>phone</em></a></li>
+<li><a class="reference internal" href="#prim-property-visitingaddress"><em>visitingAddress</em></a></li>
+<li><a class="reference internal" href="#prim-property-address"><em>address</em></a></li>
+<li><a class="reference internal" href="#prim-property-shortname"><em>shortName</em></a></li>
+<li><a class="reference internal" href="#prim-property-displayname"><em>displayName</em></a></li>
+<li><a class="reference internal" href="#prim-property-name"><em>name</em></a></li>
+<li><a class="reference internal" href="#prim-property-created"><em>created</em></a></li>
+<li><a class="reference internal" href="#prim-property-mobile"><em>mobile</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodified"><em>lastModified</em></a></li>
+<li><a class="reference internal" href="#prim-property-aci"><em>aci</em></a></li>
+<li><a class="reference internal" href="#prim-property-validfrom"><em>validFrom</em></a></li>
+</ul>
+</div>
+<div class="section" id="object">
+<h3>Object<a class="headerlink" href="#object" title="Permalink to this headline">¶</a></h3>
+<p id="prim-class-object">Basic object information.</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#prim-property-displayname"><em>displayName</em></a></li>
+<li><a class="reference internal" href="#prim-property-name"><em>name</em></a></li>
+<li><a class="reference internal" href="#prim-property-parent"><em>parent</em></a></li>
+<li><a class="reference internal" href="#prim-property-created"><em>created</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodified"><em>lastModified</em></a></li>
+<li><a class="reference internal" href="#prim-property-aci"><em>aci</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodifiedby"><em>lastModifiedBy</em></a></li>
+<li><a class="reference external" href="om2.html#om2-property-source"><em>source</em></a></li>
+<li><a class="reference internal" href="#prim-property-createdby"><em>createdBy</em></a></li>
+<li><a class="reference internal" href="#prim-property-owner"><em>owner</em></a></li>
+<li><a class="reference internal" href="#prim-property-associatedto"><em>associatedTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-shortname"><em>shortName</em></a></li>
+<li><a class="reference internal" href="#prim-property-description"><em>description</em></a></li>
+</ul>
+</div>
+<div class="section" id="collection">
+<h3>Collection<a class="headerlink" href="#collection" title="Permalink to this headline">¶</a></h3>
+<p id="prim-class-collection">Information about a collection of objects/things.</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#prim-property-www"><em>www</em></a></li>
+<li><a class="reference internal" href="#prim-property-visitingaddress"><em>visitingAddress</em></a></li>
+<li><a class="reference internal" href="#prim-property-owner"><em>owner</em></a></li>
+<li><a class="reference internal" href="#prim-property-associatedto"><em>associatedTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodifiedby"><em>lastModifiedBy</em></a></li>
+<li><a class="reference external" href="om2.html#om2-property-source"><em>source</em></a></li>
+<li><a class="reference internal" href="#prim-property-postaladdress"><em>postalAddress</em></a></li>
+<li><a class="reference internal" href="#prim-property-type"><em>type</em></a></li>
+<li><a class="reference internal" href="#prim-property-email"><em>email</em></a></li>
+<li><a class="reference internal" href="#prim-property-status"><em>status</em></a></li>
+<li><a class="reference internal" href="#prim-property-fax"><em>fax</em></a></li>
+<li><a class="reference internal" href="#prim-property-description"><em>description</em></a></li>
+<li><a class="reference internal" href="#prim-property-parent"><em>parent</em></a></li>
+<li><a class="reference internal" href="#prim-property-phone"><em>phone</em></a></li>
+<li><a class="reference internal" href="#prim-property-createdby"><em>createdBy</em></a></li>
+<li><a class="reference internal" href="#prim-property-shortname"><em>shortName</em></a></li>
+<li><a class="reference internal" href="#prim-property-displayname"><em>displayName</em></a></li>
+<li><a class="reference internal" href="#prim-property-name"><em>name</em></a></li>
+<li><a class="reference internal" href="#prim-property-created"><em>created</em></a></li>
+<li><a class="reference internal" href="#prim-property-mobile"><em>mobile</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodified"><em>lastModified</em></a></li>
+<li><a class="reference internal" href="#prim-property-aci"><em>aci</em></a></li>
+<li><a class="reference internal" href="#prim-property-thing"><em>thing</em></a></li>
+</ul>
+</div>
+<div class="section" id="partof">
+<h3>PartOf<a class="headerlink" href="#partof" title="Permalink to this headline">¶</a></h3>
+<p id="prim-class-partof">A directed relationship between one object and another</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#prim-property-status"><em>status</em></a></li>
+<li><a class="reference internal" href="#prim-property-displayname"><em>displayName</em></a></li>
+<li><a class="reference internal" href="#prim-property-name"><em>name</em></a></li>
+<li><a class="reference internal" href="#prim-property-parent"><em>parent</em></a></li>
+<li><a class="reference internal" href="#prim-property-created"><em>created</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodified"><em>lastModified</em></a></li>
+<li><a class="reference internal" href="#prim-property-aci"><em>aci</em></a></li>
+<li><a class="reference internal" href="#prim-property-one"><em>one</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodifiedby"><em>lastModifiedBy</em></a></li>
+<li><a class="reference external" href="om2.html#om2-property-source"><em>source</em></a></li>
+<li><a class="reference internal" href="#prim-property-other"><em>other</em></a> <em>restriction</em> cardinality 1</li>
+<li><a class="reference internal" href="#prim-property-createdby"><em>createdBy</em></a></li>
+<li><a class="reference internal" href="#prim-property-owner"><em>owner</em></a></li>
+<li><a class="reference internal" href="#prim-property-associatedto"><em>associatedTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-shortname"><em>shortName</em></a></li>
+<li><a class="reference internal" href="#prim-property-validfrom"><em>validFrom</em></a></li>
+<li><a class="reference internal" href="#prim-property-validto"><em>validTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-description"><em>description</em></a></li>
+</ul>
+</div>
+<div class="section" id="department">
+<h3>Department<a class="headerlink" href="#department" title="Permalink to this headline">¶</a></h3>
+<p id="prim-class-department">Information about an unofficial part of an organisation.</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#prim-property-www"><em>www</em></a></li>
+<li><a class="reference internal" href="#prim-property-visitingaddress"><em>visitingAddress</em></a></li>
+<li><a class="reference internal" href="#prim-property-alsoknownas"><em>alsoKnownAs</em></a></li>
+<li><a class="reference internal" href="#prim-property-owner"><em>owner</em></a></li>
+<li><a class="reference internal" href="#prim-property-associatedto"><em>associatedTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodifiedby"><em>lastModifiedBy</em></a></li>
+<li><a class="reference external" href="om2.html#om2-property-source"><em>source</em></a></li>
+<li><a class="reference internal" href="#prim-property-postaladdress"><em>postalAddress</em></a></li>
+<li><a class="reference internal" href="#prim-property-email"><em>email</em></a></li>
+<li><a class="reference internal" href="#prim-property-status"><em>status</em></a></li>
+<li><a class="reference internal" href="#prim-property-fax"><em>fax</em></a></li>
+<li><a class="reference internal" href="#prim-property-description"><em>description</em></a></li>
+<li><a class="reference internal" href="#prim-property-parent"><em>parent</em></a></li>
+<li><a class="reference internal" href="#prim-property-phone"><em>phone</em></a></li>
+<li><a class="reference internal" href="#prim-property-createdby"><em>createdBy</em></a></li>
+<li><a class="reference internal" href="#prim-property-shortname"><em>shortName</em></a></li>
+<li><a class="reference internal" href="#prim-property-displayname"><em>displayName</em></a></li>
+<li><a class="reference internal" href="#prim-property-name"><em>name</em></a></li>
+<li><a class="reference internal" href="#prim-property-created"><em>created</em></a></li>
+<li><a class="reference internal" href="#prim-property-mobile"><em>mobile</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodified"><em>lastModified</em></a></li>
+<li><a class="reference internal" href="#prim-property-aci"><em>aci</em></a></li>
+<li><a class="reference internal" href="#prim-property-partof"><em>partOf</em></a></li>
+</ul>
+</div>
+<div class="section" id="visitingaddress">
+<h3>VisitingAddress<a class="headerlink" href="#visitingaddress" title="Permalink to this headline">¶</a></h3>
+<p id="prim-class-visitingaddress">Information about a specific way of contacting an object.</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#prim-property-room"><em>room</em></a></li>
+<li><a class="reference internal" href="#prim-property-validto"><em>validTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-primary"><em>primary</em></a></li>
+<li><a class="reference external" href="om2.html#om2-property-source"><em>source</em></a></li>
+<li><a class="reference internal" href="#prim-property-location"><em>location</em></a></li>
+<li><a class="reference internal" href="#prim-property-contacttype"><em>contactType</em></a></li>
+<li><a class="reference internal" href="#prim-property-validfrom"><em>validFrom</em></a></li>
+<li><a class="reference internal" href="#prim-property-buildingname"><em>buildingName</em></a></li>
+</ul>
+</div>
+<div class="section" id="aci">
+<h3>ACI<a class="headerlink" href="#aci" title="Permalink to this headline">¶</a></h3>
+<p id="prim-class-aci">Access control information</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#prim-property-applicableto"><em>applicableTo</em></a></li>
+<li><a class="reference external" href="om2.html#om2-property-source"><em>source</em></a></li>
+<li><a class="reference internal" href="#prim-property-what"><em>what</em></a></li>
+<li><a class="reference internal" href="#prim-property-right"><em>right</em></a></li>
+<li><a class="reference internal" href="#prim-property-forwho"><em>forWho</em></a></li>
+</ul>
+</div>
+<div class="section" id="contactable">
+<h3>Contactable<a class="headerlink" href="#contactable" title="Permalink to this headline">¶</a></h3>
+<p id="prim-class-contactable">An object that is possible to contact in one way or another.</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#prim-property-status"><em>status</em></a></li>
+<li><a class="reference internal" href="#prim-property-fax"><em>fax</em></a></li>
+<li><a class="reference internal" href="#prim-property-displayname"><em>displayName</em></a></li>
+<li><a class="reference internal" href="#prim-property-phone"><em>phone</em></a></li>
+<li><a class="reference internal" href="#prim-property-mobile"><em>mobile</em></a></li>
+<li><a class="reference internal" href="#prim-property-www"><em>www</em></a></li>
+<li><a class="reference external" href="om2.html#om2-property-source"><em>source</em></a></li>
+<li><a class="reference internal" href="#prim-property-visitingaddress"><em>visitingAddress</em></a></li>
+<li><a class="reference internal" href="#prim-property-postaladdress"><em>postalAddress</em></a></li>
+<li><a class="reference internal" href="#prim-property-email"><em>email</em></a></li>
+</ul>
+</div>
+<div class="section" id="alumn">
+<h3>Alumn<a class="headerlink" href="#alumn" title="Permalink to this headline">¶</a></h3>
+<p id="prim-class-alumn">Information about an alumn</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#prim-property-createdby"><em>createdBy</em></a></li>
+<li><a class="reference internal" href="#prim-property-validto"><em>validTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-one"><em>one</em></a> <em>restriction</em> maxCardinality 1 <em>restriction</em> allValuesFrom &lt;class &#8216;pyom.ontology.prim_4.Person&#8217;&gt;</li>
+<li><a class="reference internal" href="#prim-property-owner"><em>owner</em></a></li>
+<li><a class="reference internal" href="#prim-property-associatedto"><em>associatedTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodifiedby"><em>lastModifiedBy</em></a></li>
+<li><a class="reference external" href="om2.html#om2-property-source"><em>source</em></a></li>
+<li><a class="reference internal" href="#prim-property-other"><em>other</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#prim-property-postaladdress"><em>postalAddress</em></a></li>
+<li><a class="reference internal" href="#prim-property-email"><em>email</em></a></li>
+<li><a class="reference internal" href="#prim-property-status"><em>status</em></a></li>
+<li><a class="reference internal" href="#prim-property-fax"><em>fax</em></a></li>
+<li><a class="reference internal" href="#prim-property-description"><em>description</em></a></li>
+<li><a class="reference internal" href="#prim-property-parent"><em>parent</em></a></li>
+<li><a class="reference internal" href="#prim-property-phone"><em>phone</em></a></li>
+<li><a class="reference internal" href="#prim-property-visitingaddress"><em>visitingAddress</em></a></li>
+<li><a class="reference internal" href="#prim-property-address"><em>address</em></a></li>
+<li><a class="reference internal" href="#prim-property-shortname"><em>shortName</em></a></li>
+<li><a class="reference internal" href="#prim-property-displayname"><em>displayName</em></a></li>
+<li><a class="reference internal" href="#prim-property-name"><em>name</em></a></li>
+<li><a class="reference internal" href="#prim-property-created"><em>created</em></a></li>
+<li><a class="reference internal" href="#prim-property-mobile"><em>mobile</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodified"><em>lastModified</em></a></li>
+<li><a class="reference internal" href="#prim-property-aci"><em>aci</em></a></li>
+<li><a class="reference internal" href="#prim-property-validfrom"><em>validFrom</em></a></li>
+</ul>
+</div>
+<div class="section" id="user">
+<h3>User<a class="headerlink" href="#user" title="Permalink to this headline">¶</a></h3>
+<p id="prim-class-user">A user by some definition</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#prim-property-uid"><em>uid</em></a></li>
+<li><a class="reference internal" href="#prim-property-uidnumber"><em>uidNumber</em></a></li>
+<li><a class="reference internal" href="#prim-property-owner"><em>owner</em></a></li>
+<li><a class="reference internal" href="#prim-property-associatedto"><em>associatedTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-open"><em>open</em></a> <em>restriction</em> cardinality 1</li>
+<li><a class="reference internal" href="#prim-property-blocked"><em>blocked</em></a> <em>restriction</em> cardinality 1</li>
+<li><a class="reference internal" href="#prim-property-lastmodifiedby"><em>lastModifiedBy</em></a></li>
+<li><a class="reference external" href="om2.html#om2-property-source"><em>source</em></a></li>
+<li><a class="reference internal" href="#prim-property-primaryuid"><em>primaryUid</em></a></li>
+<li><a class="reference internal" href="#prim-property-description"><em>description</em></a></li>
+<li><a class="reference internal" href="#prim-property-parent"><em>parent</em></a></li>
+<li><a class="reference internal" href="#prim-property-gidnumber"><em>gidNumber</em></a></li>
+<li><a class="reference internal" href="#prim-property-createdby"><em>createdBy</em></a></li>
+<li><a class="reference internal" href="#prim-property-active"><em>active</em></a> <em>restriction</em> cardinality 1</li>
+<li><a class="reference internal" href="#prim-property-shortname"><em>shortName</em></a></li>
+<li><a class="reference internal" href="#prim-property-name"><em>name</em></a></li>
+<li><a class="reference internal" href="#prim-property-displayname"><em>displayName</em></a></li>
+<li><a class="reference internal" href="#prim-property-primaryaffiliatedto"><em>primaryAffiliatedTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-created"><em>created</em></a></li>
+<li><a class="reference internal" href="#prim-property-legacyuid"><em>legacyUid</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodified"><em>lastModified</em></a></li>
+<li><a class="reference internal" href="#prim-property-aci"><em>aci</em></a></li>
+<li><a class="reference internal" href="#prim-property-homedirectory"><em>homeDirectory</em></a></li>
+</ul>
+</div>
+<div class="section" id="phone">
+<h3>Phone<a class="headerlink" href="#phone" title="Permalink to this headline">¶</a></h3>
+<p id="prim-class-phone">Information about a specific way of contacting an object.</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#prim-property-validto"><em>validTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-primary"><em>primary</em></a></li>
+<li><a class="reference external" href="om2.html#om2-property-source"><em>source</em></a></li>
+<li><a class="reference internal" href="#prim-property-phonenumber"><em>phoneNumber</em></a> <em>restriction</em> cardinality 1</li>
+<li><a class="reference internal" href="#prim-property-contacttype"><em>contactType</em></a></li>
+<li><a class="reference internal" href="#prim-property-validfrom"><em>validFrom</em></a></li>
+</ul>
+</div>
+<div class="section" id="role">
+<h3>Role<a class="headerlink" href="#role" title="Permalink to this headline">¶</a></h3>
+<p id="prim-class-role">Information about a role.</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#prim-property-restriction"><em>restriction</em></a></li>
+<li><a class="reference internal" href="#prim-property-www"><em>www</em></a></li>
+<li><a class="reference internal" href="#prim-property-createdby"><em>createdBy</em></a></li>
+<li><a class="reference internal" href="#prim-property-validto"><em>validTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-one"><em>one</em></a></li>
+<li><a class="reference internal" href="#prim-property-owner"><em>owner</em></a></li>
+<li><a class="reference internal" href="#prim-property-associatedto"><em>associatedTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-category"><em>category</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodifiedby"><em>lastModifiedBy</em></a></li>
+<li><a class="reference external" href="om2.html#om2-property-source"><em>source</em></a></li>
+<li><a class="reference internal" href="#prim-property-other"><em>other</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#prim-property-postaladdress"><em>postalAddress</em></a></li>
+<li><a class="reference internal" href="#prim-property-email"><em>email</em></a></li>
+<li><a class="reference internal" href="#prim-property-status"><em>status</em></a></li>
+<li><a class="reference internal" href="#prim-property-fax"><em>fax</em></a></li>
+<li><a class="reference internal" href="#prim-property-description"><em>description</em></a></li>
+<li><a class="reference internal" href="#prim-property-parent"><em>parent</em></a></li>
+<li><a class="reference internal" href="#prim-property-phone"><em>phone</em></a></li>
+<li><a class="reference internal" href="#prim-property-visitingaddress"><em>visitingAddress</em></a></li>
+<li><a class="reference internal" href="#prim-property-shortname"><em>shortName</em></a></li>
+<li><a class="reference internal" href="#prim-property-displayname"><em>displayName</em></a></li>
+<li><a class="reference internal" href="#prim-property-name"><em>name</em></a></li>
+<li><a class="reference internal" href="#prim-property-created"><em>created</em></a></li>
+<li><a class="reference internal" href="#prim-property-mobile"><em>mobile</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodified"><em>lastModified</em></a></li>
+<li><a class="reference internal" href="#prim-property-aci"><em>aci</em></a></li>
+<li><a class="reference internal" href="#prim-property-assignedby"><em>assignedBy</em></a></li>
+<li><a class="reference internal" href="#prim-property-validfrom"><em>validFrom</em></a></li>
+</ul>
+</div>
+<div class="section" id="affiliate">
+<h3>Affiliate<a class="headerlink" href="#affiliate" title="Permalink to this headline">¶</a></h3>
+<p id="prim-class-affiliate">Information about an affiliate to an organisation.</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#prim-property-createdby"><em>createdBy</em></a></li>
+<li><a class="reference internal" href="#prim-property-validto"><em>validTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-one"><em>one</em></a> <em>restriction</em> maxCardinality 1 <em>restriction</em> allValuesFrom &lt;class &#8216;pyom.ontology.prim_4.Person&#8217;&gt;</li>
+<li><a class="reference internal" href="#prim-property-owner"><em>owner</em></a></li>
+<li><a class="reference internal" href="#prim-property-associatedto"><em>associatedTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodifiedby"><em>lastModifiedBy</em></a></li>
+<li><a class="reference external" href="om2.html#om2-property-source"><em>source</em></a></li>
+<li><a class="reference internal" href="#prim-property-other"><em>other</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#prim-property-postaladdress"><em>postalAddress</em></a></li>
+<li><a class="reference internal" href="#prim-property-email"><em>email</em></a></li>
+<li><a class="reference internal" href="#prim-property-status"><em>status</em></a></li>
+<li><a class="reference internal" href="#prim-property-fax"><em>fax</em></a></li>
+<li><a class="reference internal" href="#prim-property-description"><em>description</em></a></li>
+<li><a class="reference internal" href="#prim-property-parent"><em>parent</em></a></li>
+<li><a class="reference internal" href="#prim-property-phone"><em>phone</em></a></li>
+<li><a class="reference internal" href="#prim-property-visitingaddress"><em>visitingAddress</em></a></li>
+<li><a class="reference internal" href="#prim-property-address"><em>address</em></a></li>
+<li><a class="reference internal" href="#prim-property-shortname"><em>shortName</em></a></li>
+<li><a class="reference internal" href="#prim-property-displayname"><em>displayName</em></a></li>
+<li><a class="reference internal" href="#prim-property-name"><em>name</em></a></li>
+<li><a class="reference internal" href="#prim-property-created"><em>created</em></a></li>
+<li><a class="reference internal" href="#prim-property-mobile"><em>mobile</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodified"><em>lastModified</em></a></li>
+<li><a class="reference internal" href="#prim-property-aci"><em>aci</em></a></li>
+<li><a class="reference internal" href="#prim-property-validfrom"><em>validFrom</em></a></li>
+</ul>
+</div>
+<div class="section" id="alias">
+<h3>Alias<a class="headerlink" href="#alias" title="Permalink to this headline">¶</a></h3>
+<p id="prim-class-alias">Basic object information.</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#prim-property-displayname"><em>displayName</em></a></li>
+<li><a class="reference internal" href="#prim-property-name"><em>name</em></a></li>
+<li><a class="reference internal" href="#prim-property-parent"><em>parent</em></a></li>
+<li><a class="reference internal" href="#prim-property-created"><em>created</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodified"><em>lastModified</em></a></li>
+<li><a class="reference internal" href="#prim-property-aci"><em>aci</em></a></li>
+<li><a class="reference internal" href="#prim-property-aliasedobject"><em>aliasedObject</em></a></li>
+<li><a class="reference internal" href="#prim-property-aliasedobjecttype"><em>aliasedObjectType</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodifiedby"><em>lastModifiedBy</em></a></li>
+<li><a class="reference external" href="om2.html#om2-property-source"><em>source</em></a></li>
+<li><a class="reference internal" href="#prim-property-createdby"><em>createdBy</em></a></li>
+<li><a class="reference internal" href="#prim-property-owner"><em>owner</em></a></li>
+<li><a class="reference internal" href="#prim-property-associatedto"><em>associatedTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-shortname"><em>shortName</em></a></li>
+<li><a class="reference internal" href="#prim-property-description"><em>description</em></a></li>
+</ul>
+</div>
+<div class="section" id="person">
+<h3>Person<a class="headerlink" href="#person" title="Permalink to this headline">¶</a></h3>
+<p id="prim-class-person">Information about a physical person.</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#prim-property-primaryuser"><em>primaryUser</em></a></li>
+<li><a class="reference internal" href="#prim-property-www"><em>www</em></a></li>
+<li><a class="reference internal" href="#prim-property-visitingaddress"><em>visitingAddress</em></a></li>
+<li><a class="reference internal" href="#prim-property-sameas"><em>sameAs</em></a> <em>restriction</em> allValuesFrom &lt;class &#8216;pyom.ontology.prim_4.Person&#8217;&gt;</li>
+<li><a class="reference internal" href="#prim-property-affiliation"><em>affiliation</em></a></li>
+<li><a class="reference internal" href="#prim-property-owner"><em>owner</em></a></li>
+<li><a class="reference internal" href="#prim-property-associatedto"><em>associatedTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-primaryaffiliation"><em>primaryAffiliation</em></a></li>
+<li><a class="reference internal" href="#prim-property-established"><em>established</em></a></li>
+<li><a class="reference internal" href="#prim-property-surname"><em>surName</em></a></li>
+<li><a class="reference internal" href="#prim-property-title"><em>title</em></a></li>
+<li><a class="reference internal" href="#prim-property-middlename"><em>middleName</em></a></li>
+<li><a class="reference internal" href="#prim-property-lin"><em>lin</em></a></li>
+<li><a class="reference internal" href="#prim-property-nationalidentificationnumbertype"><em>nationalIdentificationNumberType</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodifiedby"><em>lastModifiedBy</em></a></li>
+<li><a class="reference external" href="om2.html#om2-property-source"><em>source</em></a></li>
+<li><a class="reference internal" href="#prim-property-passportnumber"><em>passportNumber</em></a></li>
+<li><a class="reference internal" href="#prim-property-postaladdress"><em>postalAddress</em></a></li>
+<li><a class="reference internal" href="#prim-property-nickname"><em>nickName</em></a></li>
+<li><a class="reference internal" href="#prim-property-email"><em>email</em></a></li>
+<li><a class="reference internal" href="#prim-property-status"><em>status</em></a></li>
+<li><a class="reference internal" href="#prim-property-fax"><em>fax</em></a></li>
+<li><a class="reference internal" href="#prim-property-description"><em>description</em></a></li>
+<li><a class="reference internal" href="#prim-property-parent"><em>parent</em></a></li>
+<li><a class="reference internal" href="#prim-property-primaryassociation"><em>primaryAssociation</em></a></li>
+<li><a class="reference internal" href="#prim-property-phone"><em>phone</em></a></li>
+<li><a class="reference internal" href="#prim-property-membership"><em>membership</em></a></li>
+<li><a class="reference internal" href="#prim-property-user"><em>user</em></a></li>
+<li><a class="reference internal" href="#prim-property-createdby"><em>createdBy</em></a></li>
+<li><a class="reference internal" href="#prim-property-shortname"><em>shortName</em></a></li>
+<li><a class="reference internal" href="#prim-property-nationalidentificationnumber"><em>nationalIdentificationNumber</em></a></li>
+<li><a class="reference internal" href="#prim-property-displayname"><em>displayName</em></a></li>
+<li><a class="reference internal" href="#prim-property-name"><em>name</em></a></li>
+<li><a class="reference internal" href="#prim-property-passportissuingcountry"><em>passportIssuingCountry</em></a></li>
+<li><a class="reference internal" href="#prim-property-created"><em>created</em></a></li>
+<li><a class="reference internal" href="#prim-property-mobile"><em>mobile</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodified"><em>lastModified</em></a></li>
+<li><a class="reference internal" href="#prim-property-aci"><em>aci</em></a></li>
+<li><a class="reference internal" href="#prim-property-birthday"><em>birthDay</em></a></li>
+<li><a class="reference internal" href="#prim-property-givenname"><em>givenName</em></a></li>
+<li><a class="reference internal" href="#prim-property-deceased"><em>deceased</em></a></li>
+</ul>
+</div>
+<div class="section" id="member">
+<h3>Member<a class="headerlink" href="#member" title="Permalink to this headline">¶</a></h3>
+<p id="prim-class-member">Information about a member of something.</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#prim-property-createdby"><em>createdBy</em></a></li>
+<li><a class="reference internal" href="#prim-property-validto"><em>validTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-one"><em>one</em></a> <em>restriction</em> maxCardinality 1 <em>restriction</em> allValuesFrom &lt;class &#8216;pyom.ontology.prim_4.Person&#8217;&gt;</li>
+<li><a class="reference internal" href="#prim-property-owner"><em>owner</em></a></li>
+<li><a class="reference internal" href="#prim-property-associatedto"><em>associatedTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodifiedby"><em>lastModifiedBy</em></a></li>
+<li><a class="reference external" href="om2.html#om2-property-source"><em>source</em></a></li>
+<li><a class="reference internal" href="#prim-property-other"><em>other</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#prim-property-postaladdress"><em>postalAddress</em></a></li>
+<li><a class="reference internal" href="#prim-property-email"><em>email</em></a></li>
+<li><a class="reference internal" href="#prim-property-status"><em>status</em></a></li>
+<li><a class="reference internal" href="#prim-property-fax"><em>fax</em></a></li>
+<li><a class="reference internal" href="#prim-property-description"><em>description</em></a></li>
+<li><a class="reference internal" href="#prim-property-parent"><em>parent</em></a></li>
+<li><a class="reference internal" href="#prim-property-phone"><em>phone</em></a></li>
+<li><a class="reference internal" href="#prim-property-visitingaddress"><em>visitingAddress</em></a></li>
+<li><a class="reference internal" href="#prim-property-address"><em>address</em></a></li>
+<li><a class="reference internal" href="#prim-property-shortname"><em>shortName</em></a></li>
+<li><a class="reference internal" href="#prim-property-displayname"><em>displayName</em></a></li>
+<li><a class="reference internal" href="#prim-property-name"><em>name</em></a></li>
+<li><a class="reference internal" href="#prim-property-created"><em>created</em></a></li>
+<li><a class="reference internal" href="#prim-property-mobile"><em>mobile</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodified"><em>lastModified</em></a></li>
+<li><a class="reference internal" href="#prim-property-aci"><em>aci</em></a></li>
+<li><a class="reference internal" href="#prim-property-validfrom"><em>validFrom</em></a></li>
+</ul>
+</div>
+<div class="section" id="email">
+<h3>Email<a class="headerlink" href="#email" title="Permalink to this headline">¶</a></h3>
+<p id="prim-class-email">Information about a specific way of contacting an object.</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#prim-property-validto"><em>validTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-contacttype"><em>contactType</em></a></li>
+<li><a class="reference internal" href="#prim-property-primary"><em>primary</em></a></li>
+<li><a class="reference external" href="om2.html#om2-property-source"><em>source</em></a></li>
+<li><a class="reference internal" href="#prim-property-address"><em>address</em></a> <em>restriction</em> cardinality 1</li>
+<li><a class="reference internal" href="#prim-property-validfrom"><em>validFrom</em></a></li>
+</ul>
+</div>
+<div class="section" id="employee">
+<h3>Employee<a class="headerlink" href="#employee" title="Permalink to this headline">¶</a></h3>
+<p id="prim-class-employee">Information about an employee at an organisation.</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#prim-property-www"><em>www</em></a></li>
+<li><a class="reference internal" href="#prim-property-createdby"><em>createdBy</em></a></li>
+<li><a class="reference internal" href="#prim-property-validto"><em>validTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-primary"><em>primary</em></a></li>
+<li><a class="reference internal" href="#prim-property-one"><em>one</em></a> <em>restriction</em> maxCardinality 1 <em>restriction</em> allValuesFrom &lt;class &#8216;pyom.ontology.prim_4.Person&#8217;&gt;</li>
+<li><a class="reference internal" href="#prim-property-affiliation"><em>affiliation</em></a></li>
+<li><a class="reference internal" href="#prim-property-owner"><em>owner</em></a></li>
+<li><a class="reference internal" href="#prim-property-associatedto"><em>associatedTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-id"><em>id</em></a></li>
+<li><a class="reference internal" href="#prim-property-employmenttype"><em>employmentType</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodifiedby"><em>lastModifiedBy</em></a></li>
+<li><a class="reference external" href="om2.html#om2-property-source"><em>source</em></a></li>
+<li><a class="reference internal" href="#prim-property-other"><em>other</em></a> <em>restriction</em> maxCardinality 1</li>
+<li><a class="reference internal" href="#prim-property-postaladdress"><em>postalAddress</em></a></li>
+<li><a class="reference internal" href="#prim-property-email"><em>email</em></a></li>
+<li><a class="reference internal" href="#prim-property-status"><em>status</em></a></li>
+<li><a class="reference internal" href="#prim-property-fax"><em>fax</em></a></li>
+<li><a class="reference internal" href="#prim-property-description"><em>description</em></a></li>
+<li><a class="reference internal" href="#prim-property-parent"><em>parent</em></a></li>
+<li><a class="reference internal" href="#prim-property-post"><em>post</em></a></li>
+<li><a class="reference internal" href="#prim-property-phone"><em>phone</em></a></li>
+<li><a class="reference internal" href="#prim-property-visitingaddress"><em>visitingAddress</em></a></li>
+<li><a class="reference internal" href="#prim-property-address"><em>address</em></a></li>
+<li><a class="reference internal" href="#prim-property-shortname"><em>shortName</em></a></li>
+<li><a class="reference internal" href="#prim-property-displayname"><em>displayName</em></a></li>
+<li><a class="reference internal" href="#prim-property-name"><em>name</em></a></li>
+<li><a class="reference internal" href="#prim-property-created"><em>created</em></a></li>
+<li><a class="reference internal" href="#prim-property-mobile"><em>mobile</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodified"><em>lastModified</em></a></li>
+<li><a class="reference internal" href="#prim-property-aci"><em>aci</em></a></li>
+<li><a class="reference internal" href="#prim-property-employmentform"><em>employmentForm</em></a></li>
+<li><a class="reference internal" href="#prim-property-extent"><em>extent</em></a></li>
+<li><a class="reference internal" href="#prim-property-validfrom"><em>validFrom</em></a></li>
+</ul>
+</div>
+<div class="section" id="userperson">
+<h3>UserPerson<a class="headerlink" href="#userperson" title="Permalink to this headline">¶</a></h3>
+<p id="prim-class-userperson">Combination of person and user</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#prim-property-primaryuser"><em>primaryUser</em></a></li>
+<li><a class="reference internal" href="#prim-property-www"><em>www</em></a></li>
+<li><a class="reference internal" href="#prim-property-visitingaddress"><em>visitingAddress</em></a></li>
+<li><a class="reference internal" href="#prim-property-sameas"><em>sameAs</em></a> <em>restriction</em> allValuesFrom &lt;class &#8216;pyom.ontology.prim_4.Person&#8217;&gt;</li>
+<li><a class="reference internal" href="#prim-property-uidnumber"><em>uidNumber</em></a></li>
+<li><a class="reference internal" href="#prim-property-affiliation"><em>affiliation</em></a></li>
+<li><a class="reference internal" href="#prim-property-owner"><em>owner</em></a></li>
+<li><a class="reference internal" href="#prim-property-associatedto"><em>associatedTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-primaryaffiliation"><em>primaryAffiliation</em></a></li>
+<li><a class="reference internal" href="#prim-property-open"><em>open</em></a> <em>restriction</em> cardinality 1</li>
+<li><a class="reference internal" href="#prim-property-uid"><em>uid</em></a></li>
+<li><a class="reference internal" href="#prim-property-established"><em>established</em></a></li>
+<li><a class="reference internal" href="#prim-property-surname"><em>surName</em></a></li>
+<li><a class="reference internal" href="#prim-property-title"><em>title</em></a></li>
+<li><a class="reference internal" href="#prim-property-middlename"><em>middleName</em></a></li>
+<li><a class="reference internal" href="#prim-property-lin"><em>lin</em></a></li>
+<li><a class="reference internal" href="#prim-property-nationalidentificationnumbertype"><em>nationalIdentificationNumberType</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodifiedby"><em>lastModifiedBy</em></a></li>
+<li><a class="reference external" href="om2.html#om2-property-source"><em>source</em></a></li>
+<li><a class="reference internal" href="#prim-property-passportnumber"><em>passportNumber</em></a></li>
+<li><a class="reference internal" href="#prim-property-primaryuid"><em>primaryUid</em></a></li>
+<li><a class="reference internal" href="#prim-property-postaladdress"><em>postalAddress</em></a></li>
+<li><a class="reference internal" href="#prim-property-blocked"><em>blocked</em></a> <em>restriction</em> cardinality 1</li>
+<li><a class="reference internal" href="#prim-property-nickname"><em>nickName</em></a></li>
+<li><a class="reference internal" href="#prim-property-email"><em>email</em></a></li>
+<li><a class="reference internal" href="#prim-property-nationalidentificationnumber"><em>nationalIdentificationNumber</em></a></li>
+<li><a class="reference internal" href="#prim-property-status"><em>status</em></a></li>
+<li><a class="reference internal" href="#prim-property-fax"><em>fax</em></a></li>
+<li><a class="reference internal" href="#prim-property-description"><em>description</em></a></li>
+<li><a class="reference internal" href="#prim-property-parent"><em>parent</em></a></li>
+<li><a class="reference internal" href="#prim-property-primaryassociation"><em>primaryAssociation</em></a></li>
+<li><a class="reference internal" href="#prim-property-phone"><em>phone</em></a></li>
+<li><a class="reference internal" href="#prim-property-gidnumber"><em>gidNumber</em></a></li>
+<li><a class="reference internal" href="#prim-property-user"><em>user</em></a></li>
+<li><a class="reference internal" href="#prim-property-createdby"><em>createdBy</em></a></li>
+<li><a class="reference internal" href="#prim-property-active"><em>active</em></a> <em>restriction</em> cardinality 1</li>
+<li><a class="reference internal" href="#prim-property-shortname"><em>shortName</em></a></li>
+<li><a class="reference internal" href="#prim-property-primaryaffiliatedto"><em>primaryAffiliatedTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-displayname"><em>displayName</em></a></li>
+<li><a class="reference internal" href="#prim-property-name"><em>name</em></a></li>
+<li><a class="reference internal" href="#prim-property-passportissuingcountry"><em>passportIssuingCountry</em></a></li>
+<li><a class="reference internal" href="#prim-property-created"><em>created</em></a></li>
+<li><a class="reference internal" href="#prim-property-mobile"><em>mobile</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodified"><em>lastModified</em></a></li>
+<li><a class="reference internal" href="#prim-property-aci"><em>aci</em></a></li>
+<li><a class="reference internal" href="#prim-property-membership"><em>membership</em></a></li>
+<li><a class="reference internal" href="#prim-property-legacyuid"><em>legacyUid</em></a></li>
+<li><a class="reference internal" href="#prim-property-birthday"><em>birthDay</em></a></li>
+<li><a class="reference internal" href="#prim-property-homedirectory"><em>homeDirectory</em></a></li>
+<li><a class="reference internal" href="#prim-property-givenname"><em>givenName</em></a></li>
+<li><a class="reference internal" href="#prim-property-deceased"><em>deceased</em></a></li>
+</ul>
+</div>
+<div class="section" id="responsible">
+<h3>Responsible<a class="headerlink" href="#responsible" title="Permalink to this headline">¶</a></h3>
+<p id="prim-class-responsible">Information about the responsibility of one or more objects for
+another object.</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#prim-property-status"><em>status</em></a></li>
+<li><a class="reference internal" href="#prim-property-displayname"><em>displayName</em></a></li>
+<li><a class="reference internal" href="#prim-property-name"><em>name</em></a></li>
+<li><a class="reference internal" href="#prim-property-parent"><em>parent</em></a></li>
+<li><a class="reference internal" href="#prim-property-created"><em>created</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodified"><em>lastModified</em></a></li>
+<li><a class="reference internal" href="#prim-property-aci"><em>aci</em></a></li>
+<li><a class="reference internal" href="#prim-property-one"><em>one</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodifiedby"><em>lastModifiedBy</em></a></li>
+<li><a class="reference external" href="om2.html#om2-property-source"><em>source</em></a></li>
+<li><a class="reference internal" href="#prim-property-other"><em>other</em></a></li>
+<li><a class="reference internal" href="#prim-property-createdby"><em>createdBy</em></a></li>
+<li><a class="reference internal" href="#prim-property-owner"><em>owner</em></a></li>
+<li><a class="reference internal" href="#prim-property-associatedto"><em>associatedTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-shortname"><em>shortName</em></a></li>
+<li><a class="reference internal" href="#prim-property-validfrom"><em>validFrom</em></a></li>
+<li><a class="reference internal" href="#prim-property-validto"><em>validTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-description"><em>description</em></a></li>
+</ul>
+</div>
+<div class="section" id="studentunionmembership">
+<h3>StudentUnionMembership<a class="headerlink" href="#studentunionmembership" title="Permalink to this headline">¶</a></h3>
+<p id="prim-class-studentunionmembership">Basic object information.</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#prim-property-status"><em>status</em></a></li>
+<li><a class="reference internal" href="#prim-property-reducedfee"><em>reducedFee</em></a></li>
+<li><a class="reference internal" href="#prim-property-displayname"><em>displayName</em></a></li>
+<li><a class="reference internal" href="#prim-property-name"><em>name</em></a></li>
+<li><a class="reference internal" href="#prim-property-parent"><em>parent</em></a></li>
+<li><a class="reference internal" href="#prim-property-created"><em>created</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodified"><em>lastModified</em></a></li>
+<li><a class="reference internal" href="#prim-property-aci"><em>aci</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodifiedby"><em>lastModifiedBy</em></a></li>
+<li><a class="reference external" href="om2.html#om2-property-source"><em>source</em></a></li>
+<li><a class="reference internal" href="#prim-property-semester"><em>semester</em></a> <em>restriction</em> cardinality 1</li>
+<li><a class="reference internal" href="#prim-property-createdby"><em>createdBy</em></a></li>
+<li><a class="reference internal" href="#prim-property-owner"><em>owner</em></a></li>
+<li><a class="reference internal" href="#prim-property-associatedto"><em>associatedTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-shortname"><em>shortName</em></a></li>
+<li><a class="reference internal" href="#prim-property-studentunion"><em>studentUnion</em></a> <em>restriction</em> cardinality 1</li>
+<li><a class="reference internal" href="#prim-property-description"><em>description</em></a></li>
+</ul>
+</div>
+<div class="section" id="membership">
+<h3>Membership<a class="headerlink" href="#membership" title="Permalink to this headline">¶</a></h3>
+<p id="prim-class-membership">Basic object information.</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#prim-property-status"><em>status</em></a></li>
+<li><a class="reference internal" href="#prim-property-displayname"><em>displayName</em></a></li>
+<li><a class="reference internal" href="#prim-property-name"><em>name</em></a></li>
+<li><a class="reference internal" href="#prim-property-parent"><em>parent</em></a></li>
+<li><a class="reference internal" href="#prim-property-created"><em>created</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodified"><em>lastModified</em></a></li>
+<li><a class="reference internal" href="#prim-property-aci"><em>aci</em></a></li>
+<li><a class="reference internal" href="#prim-property-lastmodifiedby"><em>lastModifiedBy</em></a></li>
+<li><a class="reference external" href="om2.html#om2-property-source"><em>source</em></a></li>
+<li><a class="reference internal" href="#prim-property-createdby"><em>createdBy</em></a></li>
+<li><a class="reference internal" href="#prim-property-owner"><em>owner</em></a></li>
+<li><a class="reference internal" href="#prim-property-associatedto"><em>associatedTo</em></a></li>
+<li><a class="reference internal" href="#prim-property-shortname"><em>shortName</em></a></li>
+<li><a class="reference internal" href="#prim-property-description"><em>description</em></a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="lin">
+<h3>lin<a class="headerlink" href="#lin" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-lin">Local identification number, definitely not universally unique.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="homedirectory">
+<h3>homeDirectory<a class="headerlink" href="#homedirectory" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="prim-property-homedirectory">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="title">
+<h3>title<a class="headerlink" href="#title" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="prim-property-title">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+</div>
+<div class="section" id="employmenttype">
+<h3>employmentType<a class="headerlink" href="#employmenttype" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="prim-property-employmenttype">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="right">
+<h3>right<a class="headerlink" href="#right" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="prim-property-right">
+<dt><em>range</em></dt>
+<dd>Unspecified</dd>
+</dl>
+</div>
+<div class="section" id="id1">
+<h3>www<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-www">Information about a website connected to an object.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#prim-class-www"><em>WWW</em></a></dd>
+</dl>
+</div>
+<div class="section" id="parent">
+<h3>parent<a class="headerlink" href="#parent" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="prim-property-parent">
+<dt><em>range</em></dt>
+<dd>Unspecified</dd>
+</dl>
+</div>
+<div class="section" id="surname">
+<h3>surName<a class="headerlink" href="#surname" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="prim-property-surname">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+</div>
+<div class="section" id="alsoknownas">
+<h3>alsoKnownAs<a class="headerlink" href="#alsoknownas" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-alsoknownas">Alternative name of this unit.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+</div>
+<div class="section" id="applicableto">
+<h3>applicableTo<a class="headerlink" href="#applicableto" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-applicableto">Applicable to these object instances</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+</div>
+<div class="section" id="affiliation">
+<h3>affiliation<a class="headerlink" href="#affiliation" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-affiliation">The type of affiliation that an person has to an organisation.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+</div>
+<div class="section" id="one">
+<h3>one<a class="headerlink" href="#one" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-one">The base Object</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>Unspecified</dd>
+</dl>
+</div>
+<div class="section" id="assignedby">
+<h3>assignedBy<a class="headerlink" href="#assignedby" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-assignedby">A reference to the object who has assigned this role to
+someone/something.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#prim-class-person"><em>Person</em></a></dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="id2">
+<h3>address<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-address">The complete address of something.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+</div>
+<div class="section" id="createdby">
+<h3>createdBy<a class="headerlink" href="#createdby" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-createdby">Who created this object</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>Unspecified</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="uidnumber">
+<h3>uidNumber<a class="headerlink" href="#uidnumber" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="prim-property-uidnumber">
+<dt><em>range</em></dt>
+<dd>integer</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="validto">
+<h3>validTo<a class="headerlink" href="#validto" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-validto">This piece of information is valid until this date.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>date</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="restriction">
+<h3>restriction<a class="headerlink" href="#restriction" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-restriction">Limitation or restrictions on a role</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+</div>
+<div class="section" id="formalname">
+<h3>formalName<a class="headerlink" href="#formalname" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-formalname">An official name of a unit.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+</div>
+<div class="section" id="employmentform">
+<h3>employmentForm<a class="headerlink" href="#employmentform" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="prim-property-employmentform">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="primaryuid">
+<h3>primaryUid<a class="headerlink" href="#primaryuid" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="prim-property-primaryuid">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="id3">
+<h3>partOf<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="prim-property-partof">
+<dt><em>range</em></dt>
+<dd>Unspecified</dd>
+</dl>
+</div>
+<div class="section" id="city">
+<h3>city<a class="headerlink" href="#city" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-city">The name of a city.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="established">
+<h3>established<a class="headerlink" href="#established" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-established">When this object was establish in the context of this systems.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>date</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="blocked">
+<h3>blocked<a class="headerlink" href="#blocked" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-blocked">Whether the object should be regarded as block from usage</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>integer</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="domaincomponent">
+<h3>domainComponent<a class="headerlink" href="#domaincomponent" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="prim-property-domaincomponent">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="id4">
+<h3>aci<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-aci">Access Control Information</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#prim-class-aci"><em>ACI</em></a></dd>
+</dl>
+</div>
+<div class="section" id="nationalidentificationnumbertype">
+<h3>nationalIdentificationNumberType<a class="headerlink" href="#nationalidentificationnumbertype" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-nationalidentificationnumbertype">The type of national identification number.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>Unspecified</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="validfrom">
+<h3>validFrom<a class="headerlink" href="#validfrom" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-validfrom">From when this information is valid.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>date</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="givenname">
+<h3>givenName<a class="headerlink" href="#givenname" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="prim-property-givenname">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+</div>
+<div class="section" id="thing">
+<h3>thing<a class="headerlink" href="#thing" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-thing">A reference to a thing or the thing itself.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>Unspecified</dd>
+</dl>
+</div>
+<div class="section" id="room">
+<h3>room<a class="headerlink" href="#room" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-room">Name or identifier of a room.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="passportissuingcountry">
+<h3>passportIssuingCountry<a class="headerlink" href="#passportissuingcountry" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-passportissuingcountry">The name of the country that has issued a passport for this person.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="lastmodifiedby">
+<h3>lastModifiedBy<a class="headerlink" href="#lastmodifiedby" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="prim-property-lastmodifiedby">
+<dt><em>range</em></dt>
+<dd>Unspecified</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="sameas">
+<h3>sameAs<a class="headerlink" href="#sameas" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-sameas">This other object is in fact about the same object as this one.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>Unspecified</dd>
+</dl>
+</div>
+<div class="section" id="phonenumber">
+<h3>phoneNumber<a class="headerlink" href="#phonenumber" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-phonenumber">A phoneNumber</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="lastmodified">
+<h3>lastModified<a class="headerlink" href="#lastmodified" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="prim-property-lastmodified">
+<dt><em>range</em></dt>
+<dd>datetime</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="forwho">
+<h3>forWho<a class="headerlink" href="#forwho" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-forwho">For whom this rule applies.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+</div>
+<div class="section" id="category">
+<h3>category<a class="headerlink" href="#category" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-category">What type of thing is this ?</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+</div>
+<div class="section" id="primaryassociation">
+<h3>primaryAssociation<a class="headerlink" href="#primaryassociation" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="prim-property-primaryassociation">
+<dt><em>range</em></dt>
+<dd>Unspecified</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="affiliatedto">
+<h3>affiliatedTo<a class="headerlink" href="#affiliatedto" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="prim-property-affiliatedto">
+<dt><em>range</em></dt>
+<dd>Unspecified</dd>
+</dl>
+</div>
+<div class="section" id="open">
+<h3>open<a class="headerlink" href="#open" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-open">Whether the object is to be regarded as open.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>integer</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="accountnumber">
+<h3>accountNumber<a class="headerlink" href="#accountnumber" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-accountnumber">A financial account that is connected to this organisational unit.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>integer</dd>
+</dl>
+</div>
+<div class="section" id="nationalidentificationnumber">
+<h3>nationalIdentificationNumber<a class="headerlink" href="#nationalidentificationnumber" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-nationalidentificationnumber">A National Identification Number.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="name">
+<h3>name<a class="headerlink" href="#name" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-name">A name</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+</div>
+<div class="section" id="id5">
+<h3>user<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="prim-property-user">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#prim-class-user"><em>User</em></a></dd>
+</dl>
+</div>
+<div class="section" id="id6">
+<h3>phone<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-phone">Information about an objects phone.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#prim-class-phone"><em>Phone</em></a></dd>
+</dl>
+</div>
+<div class="section" id="displayname">
+<h3>displayName<a class="headerlink" href="#displayname" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-displayname">A meaningfull human understandable name</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="buildingname">
+<h3>buildingName<a class="headerlink" href="#buildingname" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-buildingname">Name of a building.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="deceased">
+<h3>deceased<a class="headerlink" href="#deceased" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-deceased">Whether a person is deceased or not.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>integer</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="what">
+<h3>what<a class="headerlink" href="#what" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-what">The object type for which this access rules are valid.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+</div>
+<div class="section" id="contacttype">
+<h3>contactType<a class="headerlink" href="#contacttype" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-contacttype">What kind of contact information represents this.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="id7">
+<h3>visitingAddress<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-visitingaddress">Information about the physical address of an object.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#prim-class-visitingaddress"><em>VisitingAddress</em></a></dd>
+</dl>
+</div>
+<div class="section" id="aliasedobject">
+<h3>aliasedObject<a class="headerlink" href="#aliasedobject" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="prim-property-aliasedobject">
+<dt><em>range</em></dt>
+<dd>Unspecified</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="id8">
+<h3>membership<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="prim-property-membership">
+<dt><em>range</em></dt>
+<dd>Unspecified</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="extent">
+<h3>extent<a class="headerlink" href="#extent" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-extent">The extent of an employment, expected to be between 0.0 and 100.0</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>?http://www.w3.org/2001/XMLSchema#Float</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="gidnumber">
+<h3>gidNumber<a class="headerlink" href="#gidnumber" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="prim-property-gidnumber">
+<dt><em>range</em></dt>
+<dd>integer</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="primary">
+<h3>primary<a class="headerlink" href="#primary" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="prim-property-primary">
+<dt><em>range</em></dt>
+<dd>integer</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="status">
+<h3>status<a class="headerlink" href="#status" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-status">The state of this relation.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>Unspecified</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="birthday">
+<h3>birthDay<a class="headerlink" href="#birthday" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-birthday">The date when a person was born.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>date</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="associateddomain">
+<h3>associatedDomain<a class="headerlink" href="#associateddomain" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-associateddomain">A DNS domain that is associated to this organisation or organisational
+unit.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+</div>
+<div class="section" id="reducedfee">
+<h3>reducedFee<a class="headerlink" href="#reducedfee" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="prim-property-reducedfee">
+<dt><em>range</em></dt>
+<dd>integer</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="postaladdress">
+<h3>postalAddress<a class="headerlink" href="#postaladdress" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-postaladdress">Which address to use for a paper mail or package.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#prim-class-address"><em>Address</em></a></dd>
+</dl>
+</div>
+<div class="section" id="other">
+<h3>other<a class="headerlink" href="#other" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-other">The object one has a relation to</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>Unspecified</dd>
+</dl>
+</div>
+<div class="section" id="primaryaffiliation">
+<h3>primaryAffiliation<a class="headerlink" href="#primaryaffiliation" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="prim-property-primaryaffiliation">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="location">
+<h3>location<a class="headerlink" href="#location" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-location">Physical location of something.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="uid">
+<h3>uid<a class="headerlink" href="#uid" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-uid">User identifier</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+</div>
+<div class="section" id="shortname">
+<h3>shortName<a class="headerlink" href="#shortname" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="prim-property-shortname">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+</div>
+<div class="section" id="owner">
+<h3>owner<a class="headerlink" href="#owner" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="prim-property-owner">
+<dt><em>range</em></dt>
+<dd>Unspecified</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="url">
+<h3>url<a class="headerlink" href="#url" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-url">Universal resource locator.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="fax">
+<h3>fax<a class="headerlink" href="#fax" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="prim-property-fax">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#prim-class-phone"><em>Phone</em></a></dd>
+</dl>
+</div>
+<div class="section" id="type">
+<h3>type<a class="headerlink" href="#type" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="prim-property-type">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+</div>
+<div class="section" id="id9">
+<h3>email<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-email">Information about an email address of an object.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#prim-class-email"><em>Email</em></a></dd>
+</dl>
+</div>
+<div class="section" id="primaryuser">
+<h3>primaryUser<a class="headerlink" href="#primaryuser" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="prim-property-primaryuser">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#prim-class-user"><em>User</em></a></dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="to">
+<h3>to<a class="headerlink" href="#to" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="prim-property-to">
+<dt><em>range</em></dt>
+<dd>date</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="studentunion">
+<h3>studentUnion<a class="headerlink" href="#studentunion" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="prim-property-studentunion">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="oid">
+<h3>oid<a class="headerlink" href="#oid" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-oid">Unique Identifier of an object</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+</div>
+<div class="section" id="middlename">
+<h3>middleName<a class="headerlink" href="#middlename" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="prim-property-middlename">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+</div>
+<div class="section" id="departmentid">
+<h3>departmentId<a class="headerlink" href="#departmentid" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="prim-property-departmentid">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="mobile">
+<h3>mobile<a class="headerlink" href="#mobile" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-mobile">Information about the mobile (cell) phone of an object.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#prim-class-phone"><em>Phone</em></a></dd>
+</dl>
+</div>
+<div class="section" id="aliasedobjecttype">
+<h3>aliasedObjectType<a class="headerlink" href="#aliasedobjecttype" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="prim-property-aliasedobjecttype">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="nickname">
+<h3>nickName<a class="headerlink" href="#nickname" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="prim-property-nickname">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+</div>
+<div class="section" id="passportnumber">
+<h3>passportNumber<a class="headerlink" href="#passportnumber" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-passportnumber">Number of a passport held by this person.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="legacyuid">
+<h3>legacyUid<a class="headerlink" href="#legacyuid" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="prim-property-legacyuid">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="semester">
+<h3>semester<a class="headerlink" href="#semester" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="prim-property-semester">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="from">
+<h3>from<a class="headerlink" href="#from" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="prim-property-from">
+<dt><em>range</em></dt>
+<dd>date</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="street">
+<h3>street<a class="headerlink" href="#street" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-street">A street name</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="associatedto">
+<h3>associatedTo<a class="headerlink" href="#associatedto" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="prim-property-associatedto">
+<dt><em>range</em></dt>
+<dd>Unspecified</dd>
+</dl>
+</div>
+<div class="section" id="primaryaffiliatedto">
+<h3>primaryAffiliatedTo<a class="headerlink" href="#primaryaffiliatedto" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils" id="prim-property-primaryaffiliatedto">
+<dt><em>range</em></dt>
+<dd>Unspecified</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="post">
+<h3>post<a class="headerlink" href="#post" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-post">The position at which a person is employed.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="description">
+<h3>description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-description">Free form description of an object.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+</div>
+<div class="section" id="created">
+<h3>created<a class="headerlink" href="#created" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-created">When this object was created</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>datetime</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="postalcode">
+<h3>postalCode<a class="headerlink" href="#postalcode" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-postalcode">Postal code</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="country">
+<h3>country<a class="headerlink" href="#country" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-country">The name of a country.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="id">
+<h3>id<a class="headerlink" href="#id" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-id">An identifier of an object, not necessarily universally unique.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="careof">
+<h3>careOf<a class="headerlink" href="#careof" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-careof">If there is no direct address of a object a &#8216;care of&#8217; address might be
+given.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="active">
+<h3>active<a class="headerlink" href="#active" title="Permalink to this headline">¶</a></h3>
+<p id="prim-property-active">Whether the object is active</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>integer</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="">The prim ontology</a><ul>
+<li><a class="reference external" href="#classes">Classes</a><ul>
+<li><a class="reference external" href="#www">WWW</a></li>
+<li><a class="reference external" href="#contactinformation">ContactInformation</a></li>
+<li><a class="reference external" href="#stem">Stem</a></li>
+<li><a class="reference external" href="#organisationalunit">OrganisationalUnit</a></li>
+<li><a class="reference external" href="#relation">Relation</a></li>
+<li><a class="reference external" href="#consultant">Consultant</a></li>
+<li><a class="reference external" href="#address">Address</a></li>
+<li><a class="reference external" href="#application">Application</a></li>
+<li><a class="reference external" href="#unit">Unit</a></li>
+<li><a class="reference external" href="#relatedto">RelatedTo</a></li>
+<li><a class="reference external" href="#organisation">Organisation</a></li>
+<li><a class="reference external" href="#position">Position</a></li>
+<li><a class="reference external" href="#object">Object</a></li>
+<li><a class="reference external" href="#collection">Collection</a></li>
+<li><a class="reference external" href="#partof">PartOf</a></li>
+<li><a class="reference external" href="#department">Department</a></li>
+<li><a class="reference external" href="#visitingaddress">VisitingAddress</a></li>
+<li><a class="reference external" href="#aci">ACI</a></li>
+<li><a class="reference external" href="#contactable">Contactable</a></li>
+<li><a class="reference external" href="#alumn">Alumn</a></li>
+<li><a class="reference external" href="#user">User</a></li>
+<li><a class="reference external" href="#phone">Phone</a></li>
+<li><a class="reference external" href="#role">Role</a></li>
+<li><a class="reference external" href="#affiliate">Affiliate</a></li>
+<li><a class="reference external" href="#alias">Alias</a></li>
+<li><a class="reference external" href="#person">Person</a></li>
+<li><a class="reference external" href="#member">Member</a></li>
+<li><a class="reference external" href="#email">Email</a></li>
+<li><a class="reference external" href="#employee">Employee</a></li>
+<li><a class="reference external" href="#userperson">UserPerson</a></li>
+<li><a class="reference external" href="#responsible">Responsible</a></li>
+<li><a class="reference external" href="#studentunionmembership">StudentUnionMembership</a></li>
+<li><a class="reference external" href="#membership">Membership</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#properties">Properties</a><ul>
+<li><a class="reference external" href="#lin">lin</a></li>
+<li><a class="reference external" href="#homedirectory">homeDirectory</a></li>
+<li><a class="reference external" href="#title">title</a></li>
+<li><a class="reference external" href="#employmenttype">employmentType</a></li>
+<li><a class="reference external" href="#right">right</a></li>
+<li><a class="reference external" href="#id1">www</a></li>
+<li><a class="reference external" href="#parent">parent</a></li>
+<li><a class="reference external" href="#surname">surName</a></li>
+<li><a class="reference external" href="#alsoknownas">alsoKnownAs</a></li>
+<li><a class="reference external" href="#applicableto">applicableTo</a></li>
+<li><a class="reference external" href="#affiliation">affiliation</a></li>
+<li><a class="reference external" href="#one">one</a></li>
+<li><a class="reference external" href="#assignedby">assignedBy</a></li>
+<li><a class="reference external" href="#id2">address</a></li>
+<li><a class="reference external" href="#createdby">createdBy</a></li>
+<li><a class="reference external" href="#uidnumber">uidNumber</a></li>
+<li><a class="reference external" href="#validto">validTo</a></li>
+<li><a class="reference external" href="#restriction">restriction</a></li>
+<li><a class="reference external" href="#formalname">formalName</a></li>
+<li><a class="reference external" href="#employmentform">employmentForm</a></li>
+<li><a class="reference external" href="#primaryuid">primaryUid</a></li>
+<li><a class="reference external" href="#id3">partOf</a></li>
+<li><a class="reference external" href="#city">city</a></li>
+<li><a class="reference external" href="#established">established</a></li>
+<li><a class="reference external" href="#blocked">blocked</a></li>
+<li><a class="reference external" href="#domaincomponent">domainComponent</a></li>
+<li><a class="reference external" href="#id4">aci</a></li>
+<li><a class="reference external" href="#nationalidentificationnumbertype">nationalIdentificationNumberType</a></li>
+<li><a class="reference external" href="#validfrom">validFrom</a></li>
+<li><a class="reference external" href="#givenname">givenName</a></li>
+<li><a class="reference external" href="#thing">thing</a></li>
+<li><a class="reference external" href="#room">room</a></li>
+<li><a class="reference external" href="#passportissuingcountry">passportIssuingCountry</a></li>
+<li><a class="reference external" href="#lastmodifiedby">lastModifiedBy</a></li>
+<li><a class="reference external" href="#sameas">sameAs</a></li>
+<li><a class="reference external" href="#phonenumber">phoneNumber</a></li>
+<li><a class="reference external" href="#lastmodified">lastModified</a></li>
+<li><a class="reference external" href="#forwho">forWho</a></li>
+<li><a class="reference external" href="#category">category</a></li>
+<li><a class="reference external" href="#primaryassociation">primaryAssociation</a></li>
+<li><a class="reference external" href="#affiliatedto">affiliatedTo</a></li>
+<li><a class="reference external" href="#open">open</a></li>
+<li><a class="reference external" href="#accountnumber">accountNumber</a></li>
+<li><a class="reference external" href="#nationalidentificationnumber">nationalIdentificationNumber</a></li>
+<li><a class="reference external" href="#name">name</a></li>
+<li><a class="reference external" href="#id5">user</a></li>
+<li><a class="reference external" href="#id6">phone</a></li>
+<li><a class="reference external" href="#displayname">displayName</a></li>
+<li><a class="reference external" href="#buildingname">buildingName</a></li>
+<li><a class="reference external" href="#deceased">deceased</a></li>
+<li><a class="reference external" href="#what">what</a></li>
+<li><a class="reference external" href="#contacttype">contactType</a></li>
+<li><a class="reference external" href="#id7">visitingAddress</a></li>
+<li><a class="reference external" href="#aliasedobject">aliasedObject</a></li>
+<li><a class="reference external" href="#id8">membership</a></li>
+<li><a class="reference external" href="#extent">extent</a></li>
+<li><a class="reference external" href="#gidnumber">gidNumber</a></li>
+<li><a class="reference external" href="#primary">primary</a></li>
+<li><a class="reference external" href="#status">status</a></li>
+<li><a class="reference external" href="#birthday">birthDay</a></li>
+<li><a class="reference external" href="#associateddomain">associatedDomain</a></li>
+<li><a class="reference external" href="#reducedfee">reducedFee</a></li>
+<li><a class="reference external" href="#postaladdress">postalAddress</a></li>
+<li><a class="reference external" href="#other">other</a></li>
+<li><a class="reference external" href="#primaryaffiliation">primaryAffiliation</a></li>
+<li><a class="reference external" href="#location">location</a></li>
+<li><a class="reference external" href="#uid">uid</a></li>
+<li><a class="reference external" href="#shortname">shortName</a></li>
+<li><a class="reference external" href="#owner">owner</a></li>
+<li><a class="reference external" href="#url">url</a></li>
+<li><a class="reference external" href="#fax">fax</a></li>
+<li><a class="reference external" href="#type">type</a></li>
+<li><a class="reference external" href="#id9">email</a></li>
+<li><a class="reference external" href="#primaryuser">primaryUser</a></li>
+<li><a class="reference external" href="#to">to</a></li>
+<li><a class="reference external" href="#studentunion">studentUnion</a></li>
+<li><a class="reference external" href="#oid">oid</a></li>
+<li><a class="reference external" href="#middlename">middleName</a></li>
+<li><a class="reference external" href="#departmentid">departmentId</a></li>
+<li><a class="reference external" href="#mobile">mobile</a></li>
+<li><a class="reference external" href="#aliasedobjecttype">aliasedObjectType</a></li>
+<li><a class="reference external" href="#nickname">nickName</a></li>
+<li><a class="reference external" href="#passportnumber">passportNumber</a></li>
+<li><a class="reference external" href="#legacyuid">legacyUid</a></li>
+<li><a class="reference external" href="#semester">semester</a></li>
+<li><a class="reference external" href="#from">from</a></li>
+<li><a class="reference external" href="#street">street</a></li>
+<li><a class="reference external" href="#associatedto">associatedTo</a></li>
+<li><a class="reference external" href="#primaryaffiliatedto">primaryAffiliatedTo</a></li>
+<li><a class="reference external" href="#post">post</a></li>
+<li><a class="reference external" href="#description">description</a></li>
+<li><a class="reference external" href="#created">created</a></li>
+<li><a class="reference external" href="#postalcode">postalCode</a></li>
+<li><a class="reference external" href="#country">country</a></li>
+<li><a class="reference external" href="#id">id</a></li>
+<li><a class="reference external" href="#careof">careOf</a></li>
+<li><a class="reference external" href="#active">active</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="miro.html"
+                                  title="previous chapter">The miro ontology</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="node.html"
+                                  title="next chapter">The node ontology</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/ontology/prim.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="node.html" title="The node ontology"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="miro.html" title="The miro ontology"
+             >previous</a> |</li>
+        <li><a href="../index.html">OM2 v1.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Ontologies</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009, Roland Hedberg.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.2.
+    </div>
+  </body>
+</html>

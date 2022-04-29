@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Quick install guide &mdash; OM2 v1.1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.1.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="OM2 v1.1.0 documentation" href="../index.html" />
+    <link rel="up" title="Getting started" href="index.html" />
+    <link rel="next" title="Writing your first Pyom app, part 1" href="tutorial01.html" />
+    <link rel="prev" title="Pyom at a glance" href="overview.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="tutorial01.html" title="Writing your first Pyom app, part 1"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="overview.html" title="Pyom at a glance"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">OM2 v1.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Getting started</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="quick-install-guide">
+<span id="intro-install"></span><h1>Quick install guide<a class="headerlink" href="#quick-install-guide" title="Permalink to this headline">¶</a></h1>
+<p>Before you can use Pyom, you&#8217;ll need to get it installed. This guide
+will guide you to a simple, minimal installation
+that&#8217;ll work while you walk through the introduction.</p>
+<div class="section" id="install-pyom">
+<h2>Install Pyom<a class="headerlink" href="#install-pyom" title="Permalink to this headline">¶</a></h2>
+<p>For all this to work you need to have Python installed. Right now it has to be
+a 2.X version, where X &gt; 4 .</p>
+<div class="section" id="prerequisites">
+<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h3>
+<p>You have to download and install the following packages.</p>
+<ul>
+<li><dl class="first docutils">
+<dt>rdfmarshal</dt>
+<dd><p class="first">Produced by the same project that brings you <strong>pyom</strong>.
+I&#8217;d really like to urge you to make yourself familiar with rdfmarshal
+before attempting to use pyom. Since pyom is heavily dependent on rdfmarshal.</p>
+<p>Load the latest source by subversion:</p>
+<div class="highlight-python"><pre>svn co https://repository.umdac.umu.se/svn/om2/trunk/rdfmarshal</pre>
+</div>
+<p class="last">Not yet available at the cheese shop.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>pyOpenSSL</dt>
+<dd><p class="first"><a class="reference external" href="http://pyopenssl.sourceforge.net/">http://pyopenssl.sourceforge.net/</a></p>
+<p class="last">Developed using version 0.6, guess it will work with 0.7,
+can be automatically downloaded by using <a class="reference external" href="http://peak.telecommunity.com/DevCenter/EasyInstall">easy_install</a>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Twisted</dt>
+<dd><p class="first last">You also need twisted at least version 2.5.0.
+<a class="reference external" href="http://twistedmatrix.com/">http://twistedmatrix.com/</a> is the official website for twisted.
+You must download the code from there.
+Twisted appears on the cheese shop, but at least on the OS X installation
+I tried it, it would not install properly.
+<strong>Note</strong> if you want to use dynamic resolving of address you either have to patch the 2.5.0 version
+(patches included) or install 3.0.0 or later .</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>elementTree</dt>
+<dd><p class="first last">You can either download it from here <a class="reference external" href="http://effbot.org/downloads/#elementtree">http://effbot.org/downloads/#elementtree</a> and build
+it yourself or you can downloaded using easy_install</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>httplib2</dt>
+<dd><p class="first last"><a class="reference external" href="http://code.google.com/p/httplib2/">http://code.google.com/p/httplib2/</a></p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="quick-build-instructions">
+<h3>Quick build instructions<a class="headerlink" href="#quick-build-instructions" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<p>Once you have installed all the necessary prerequisites a simple:</p>
+<div class="highlight-python"><pre>python setup.py install</pre>
+</div>
+<p>will install the basic code.</p>
+<p>After that you have to install the ontologies, run:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">tools</span><span class="o">/</span><span class="n">base_ontologies</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>and rerun:</p>
+<div class="highlight-python"><pre>python setup.py install</pre>
+</div>
+<p>After this you ought to be able to run the tests without an hitch.
+The tests are based on the pypy test environment, so:</p>
+<div class="highlight-python"><pre>py.test test</pre>
+</div>
+<p>is what you should use.</p>
+</blockquote>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="">Quick install guide</a><ul>
+<li><a class="reference external" href="#install-pyom">Install Pyom</a><ul>
+<li><a class="reference external" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference external" href="#quick-build-instructions">Quick build instructions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="overview.html"
+                                  title="previous chapter">Pyom at a glance</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="tutorial01.html"
+                                  title="next chapter">Writing your first Pyom app, part 1</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/intro/install.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tutorial01.html" title="Writing your first Pyom app, part 1"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="overview.html" title="Pyom at a glance"
+             >previous</a> |</li>
+        <li><a href="../index.html">OM2 v1.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Getting started</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009, Roland Hedberg.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.2.
+    </div>
+  </body>
+</html>

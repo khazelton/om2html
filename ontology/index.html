@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Ontologies &mdash; OM2 v1.1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.1.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="OM2 v1.1.0 documentation" href="../index.html" />
+    <link rel="next" title="The om2 ontology" href="om2.html" />
+    <link rel="prev" title="The JSON-RPC API" href="../api/jsonrpc.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="om2.html" title="The om2 ontology"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../api/jsonrpc.html" title="The JSON-RPC API"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">OM2 v1.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="ontologies">
+<span id="ontology-index"></span><h1>Ontologies<a class="headerlink" href="#ontologies" title="Permalink to this headline">¶</a></h1>
+<p>A message sent through a OM2 system must follow a set of ontologies.
+The relationship between them as depicted in the diagram below.</p>
+<img alt="../_images/ontology_relationsship.png" src="../_images/ontology_relationsship.png" />
+<p>Most of what is done in pyom assumes the usage of the Om2 ontology, and
+in some cases the Miro ontology. The Prim ontology on the other hand is
+barely assumed.</p>
+<div class="section" id="specific-ontologies">
+<h2>Specific ontologies<a class="headerlink" href="#specific-ontologies" title="Permalink to this headline">¶</a></h2>
+<p>We need a couple of ontologies to describe different parts of messages or messages used by the system.
+There are a number of different classes of ontologies:</p>
+<ul class="simple">
+<li>A ontology describing the message format. There will only be one in this case, namely<ul>
+<li><a class="reference external" href="om2.html#ontology-om2"><em>OM2</em></a></li>
+</ul>
+</li>
+<li>A set of ontologies describing operations common to a set of applications. In a Identity Management
+system you may want to add, delete and modify object. Therefor any system that has to implement the
+operation semantics, has to understand this ontology. One set of such systems are the repository.
+Application class specific repositories would be one plausible solution. We envisage that there will
+be more types in the future. For now we only have one:<ul>
+<li><a class="reference external" href="miro.html#ontology-miro"><em>MIRO</em></a></li>
+</ul>
+</li>
+<li>One ontology describing objects that are common for many applications. Objects like persons,
+organizational units, groups and so on. We have the <a class="reference external" href="prim.html#ontology-prim"><em>PRIM ontology</em></a>.</li>
+<li>Application specific ontologies. These typically are not housed at www.openmetadir.org but rather
+at the home of the organization responsible for the application.</li>
+<li>An ontology describing the information that you can receive from the service discovery system.
+<a class="reference external" href="node.html#ontology-node"><em>The Node ontology</em></a>.</li>
+</ul>
+</div>
+<div class="section" id="version-handling">
+<h2>Version handling<a class="headerlink" href="#version-handling" title="Permalink to this headline">¶</a></h2>
+<p>Ontologies are not expected to be fixed once and for all, they are instead expected to evolve over
+time. Because of this version handling is extremely important. You can always find information about
+the version in the ontology itself. We will use the property versionInfo and will use the common
+major.minor.patch type of version numbering. But, it will not be uncommon that you have no idea which
+exact ontology a source is using. The only information that you have in these cases are the URIs
+that are used to name classes and properties. Because of this we have decided to place the major
+version number in the URI. The format use will be - like in prim-1. If no version number are present
+in the URI then that must be treated as if the version number was 0 (zero).</p>
+<p>One effect of only placing the major version number in the URI is that minor changes must not change
+the ontology such that a receiver of a RDF following the ontology N.M will not be able to parse it
+and understand the result if its software is build based on N.K (K != M).</p>
+</div>
+<div class="section" id="getting-the-latest">
+<h2>Getting the latest<a class="headerlink" href="#getting-the-latest" title="Permalink to this headline">¶</a></h2>
+<p>Using SVN you can always find the latest versions of the ontologies we use at:</p>
+<p>svn co <a class="reference external" href="https://repository.umdac.umu.se/svn/om2/ontology/trunk">https://repository.umdac.umu.se/svn/om2/ontology/trunk</a></p>
+</div>
+<div class="section" id="central-ontologies">
+<h2>Central Ontologies<a class="headerlink" href="#central-ontologies" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="om2.html">The om2 ontology</a></li>
+<li class="toctree-l1"><a class="reference external" href="miro.html">The miro ontology</a></li>
+<li class="toctree-l1"><a class="reference external" href="prim.html">The prim ontology</a></li>
+<li class="toctree-l1"><a class="reference external" href="node.html">The node ontology</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="">Ontologies</a><ul>
+<li><a class="reference external" href="#specific-ontologies">Specific ontologies</a></li>
+<li><a class="reference external" href="#version-handling">Version handling</a></li>
+<li><a class="reference external" href="#getting-the-latest">Getting the latest</a></li>
+<li><a class="reference external" href="#central-ontologies">Central Ontologies</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="../api/jsonrpc.html"
+                                  title="previous chapter">The JSON-RPC API</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="om2.html"
+                                  title="next chapter">The om2 ontology</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/ontology/index.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="om2.html" title="The om2 ontology"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../api/jsonrpc.html" title="The JSON-RPC API"
+             >previous</a> |</li>
+        <li><a href="../index.html">OM2 v1.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009, Roland Hedberg.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.2.
+    </div>
+  </body>
+</html>

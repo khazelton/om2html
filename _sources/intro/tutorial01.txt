@@ -1,0 +1,232 @@
+.. _intro-tutorial01:
+
+=====================================
+Writing your first Pyom app, part 1
+=====================================
+
+A simple node is one where you use one :ref:`listener <node-listener>`, one 
+:ref:`sender <node-sender>`, a :ref:`simple router <node-router>` and a 
+:ref:`static resolver <node-resolver>`.
+
+One can imagine a simple one, without a sender for instance, but the use of 
+such a node would be limited.
+
+The configuration
+=================
+
+So let's configure a pass-thru node.
+
+The configuration is written as a python program which allows you to perform
+a simple test as to the accuracy of you configuration. If you can run it, the
+configuration is at least syntactically correct.
+
+Anyway you should start be importing the node configuration ontology, create a
+configuration instance and then define some central information about the node 
+like which ontologies it should recognize and a name::
+
+  #!/usr/bin/env python
+
+  import pyom.ontology.nodeconfig as nc
+
+  # Generell Node information
+  conf = nc.Configuration()
+  conf.about = "http://www.umu.se/node#N1"
+  conf["ontology"] = ["pyom.ontology.om2_1","pyom.ontology.prim_4","pyom.ontology.miro"]
+  conf["name"] = "node1@example.org"
+
+Then a listener, in this case a :ref:`rest listener <listener-rest>` listening on
+port 8086. 
+Also specify that this node should ACK the received message after it has been 
+able to send it to the next receiver.::
+
+  line = nc.RestListener()
+  line["port"] = 8086
+  line["responseAfter"] = "sent"
+  conf["listener"] = line
+
+The :ref:`sender <node-sender>`; , in this case a sender that writes to a 
+:ref:`file <senders-file>`::
+
+  fil = nc.FileSender()
+  fil["path"] = "."
+  conf["sender"] = fil
+
+I use a file sender/writer because that will give you the possibility to watch 
+the output. The path property tells the sender in which directory it should
+write the files that are specified by the resolver.
+
+Now, configuration specific to the :ref:`dispatcher <node-dispatcher>`, which 
+is nothing except from choosing the dispatcher::
+
+  disp = nc.Sforwarder()
+  conf["dispatcher"] = disp
+
+If you have nodes that are not just copying what they receive on one side to 
+what they send out on the other, all their functionally is bound to the dispatcher
+module.
+
+The router module is used to find out where the message should be sent.
+Here we are using the simplest possible :ref:`Simple router <router-simple>`, 
+one that looks at what is specified in the 'receiver' property of the incomming
+message. If that property is absent which it may be, then the defaultReceiver is 
+used.
+
+  router = nc.SimpleRouter()
+  router["defaultReceiver"] = "sink@example.org"
+  conf["router"] = router
+
+In order to be able to send the message to the receiver that the router module
+has picked out, the node must resolve this address into a set of protocol and
+endpoint specifications.
+We are here using the simples resolver, the :ref:`static resolver
+<resolver-static>`, a resolver that allows you, in the configuration, to
+specify the mapping from a address into a set of protocols and endpoints.::
+
+  resolv = nc.Static()
+  adr = nc.Address()
+  adr["protocolName"] = "file"
+  adr["endpoint"] = "file:///subscriber.out"
+  defrecv = nc.ResolverMap()
+  defrecv["pattern"] = "sink@example.org"
+  defrecv["receiver"] = adr
+  resolv["exact"] = defrecv
+  conf["resolver"] = resolv
+
+And lastly verify that the configuration adheres to the restrictions put on a 
+node configuration and if so write the configuration as a RDF graph to stdout ::
+
+  conf.within_restrictions()
+
+  if __name__ == "__main__":
+      print conf.graph()
+
+The whole configuration
+=======================
+
+Place this code in an file called message.py ::
+
+  #!/usr/bin/env python
+
+  import pyom.ontology.nodeconfig as nc
+
+  # Generell Node information
+  conf = nc.Configuration()
+  conf.about = "http://www.umu.se/node#N1"
+  conf["ontology"] = ["pyom.ontology.om2_1","pyom.ontology.prim_4","pyom.ontology.miro"]
+  conf["name"] = "node1@example.org"
+
+  line = nc.RestListener()
+  line["port"] = 8086
+  line["responseAfter"] = "sent"
+  conf["listener"] = line
+
+  fil = nc.FileSender()
+  fil["path"] = "."
+  conf["sender"] = fil
+
+  disp = nc.Sforwarder()
+  conf["dispatcher"] = disp
+
+  router = nc.SimpleRouter()
+  router["defaultReceiver"] = "sink@example.org"
+  conf["router"] = router
+
+  resolv = nc.Static()
+  adr = nc.Address()
+  adr["protocolName"] = "file"
+  adr["endpoint"] = "file:///subscriber.out"
+  defrecv = nc.ResolverMap()
+  defrecv["pattern"] = "sink@example.org"
+  defrecv["receiver"] = adr
+  resolv["exact"] = defrecv
+  conf["resolver"] = resolv
+
+  conf.within_restrictions()
+
+  if __name__ == "__main__":
+      print conf.graph()
+
+A publisher
+===========
+
+You can use code that are in the package. A simple publisher can be written like so::
+
+  #!/usr/bin/env python
+  # -*- coding: utf-8 -*-
+
+  import om2api
+  import pyom.ontology.prim_4 as prim
+  from rdflib import URIRef, Literal
+
+  nexthop = "http://localhost:8086/"
+  ontology = ["pyom.ontology.prim_4"]
+
+  om = om2api.OM2(nexthop=nexthop,ontology=ontology,sender="test@example.com")
+
+  ou = prim.OrganisationalUnit()
+  ou["name"] = ["Example AB",Literal("Example Ltd",lang="en")]
+  ou.about = "urn:mace:example.com:id#_1982263575442233342"
+
+  om.addObject(ou)
+
+This code creates just one object and sends an add message containing that 
+object to the 'cloud', by way of 'nexthop', which in our simple case is just 
+one node. 
+But I guess you can easily imaging how you would build on this to do a more
+complicated cloud.
+
+Running the set up
+==================
+
+Now, start the node, which you do by typing::
+
+  nodectl.py start node
+  
+When this command returns, you should have two new files in the directory where
+you stand. One named node.log and the other node.pid . 
+node.pid contains the process id of the running node process
+and node.log contains the log output from the node.
+
+Next you run the message.py file, by either doing::
+
+  chmod +x message.py
+  ./message.py
+  
+or::
+
+  python message.py
+
+If everything works you should get a file named 'subscriber.out' in the
+directory with the message as sent from the message.py script.
+It should look something like this::
+
+  <?xml version="1.0" encoding="utf-8"?>
+  <rdf:RDF
+    xmlns:_4='http://www.openmetadir.org/om2/om2-1.owl#'
+    xmlns:_5='http://www.openmetadir.org/om2/miro.owl#'
+    xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+    xmlns:_3='http://www.openmetadir.org/om2/prim-4.owl#'
+  >
+    <_4:Message>
+      <_4:createTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-02-25T14:50:11</_4:createTime>
+      <_4:body>
+        <_5:MIRO>
+          <_5:otherwiseInsert rdf:resource="urn:mace:example.com:id#_1982263575442233342"/>
+        </_5:MIRO>
+      </_4:body>
+      <_4:mid rdf:datatype="http://www.w3.org/2001/XMLSchema#string">38c26b3a-0343-11de-8a92-002332d5aa34</_4:mid>
+      <_4:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">test@example.com</_4:source>
+    </_4:Message>
+    <_3:OrganisationalUnit rdf:about="urn:mace:example.com:id#_1982263575442233342">
+      <_3:name xml:lang="en" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Example Ltd</_3:name>
+      <_3:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Example AB</_3:name>
+    </_3:OrganisationalUnit>
+  </rdf:RDF>
+
+Since this is XML and some of the stuff is constructed dynamically, 
+I'm absolutely sure it will not look exactly like what you have. But the 
+essentials will be the same.
+
+That it isn't the same is just something you have to get used to, that's life !
+
+And now on to the :ref:`deep stuff <node-index>`

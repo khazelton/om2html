@@ -1,0 +1,2139 @@
+.. _ontology-nodeconfig:
+
+=======================
+The nodeconfig ontology
+=======================
+
+:Author: Roland Hedberg
+:Version: 0.22.0
+
+.. module:: nodeconfig
+.. moduleauthor:: Roland Hedberg
+
+* :ref:`Classes <nodeconfig-classes>`
+* :ref:`Properties <nodeconfig-properties>`
+
+
+*******
+Classes
+*******
+
+.. _nodeconfig-classes:
+
+* :ref:`AccessRule <nodeconfig-class-AccessRule>`
+* :ref:`Actor <nodeconfig-class-Actor>`
+* :ref:`Address <nodeconfig-class-Address>`
+* :ref:`Configuration <nodeconfig-class-Configuration>`
+* :ref:`DNSResolver <nodeconfig-class-DNSResolver>`
+* :ref:`DevNullSender <nodeconfig-class-DevNullSender>`
+* :ref:`Dispatcher <nodeconfig-class-Dispatcher>`
+* :ref:`DjbMaildirListener <nodeconfig-class-DjbMaildirListener>`
+* :ref:`DjbMaildirSender <nodeconfig-class-DjbMaildirSender>`
+* :ref:`FileSender <nodeconfig-class-FileSender>`
+* :ref:`Forwarder <nodeconfig-class-Forwarder>`
+* :ref:`Handler <nodeconfig-class-Handler>`
+* :ref:`IdMapper <nodeconfig-class-IdMapper>`
+* :ref:`Ladokconv <nodeconfig-class-Ladokconv>`
+* :ref:`LdapSender <nodeconfig-class-LdapSender>`
+* :ref:`LdapService <nodeconfig-class-LdapService>`
+* :ref:`Ldapconv <nodeconfig-class-Ldapconv>`
+* :ref:`Limitation <nodeconfig-class-Limitation>`
+* :ref:`LineListener <nodeconfig-class-LineListener>`
+* :ref:`Listener <nodeconfig-class-Listener>`
+* :ref:`LogHandler <nodeconfig-class-LogHandler>`
+* :ref:`LogService <nodeconfig-class-LogService>`
+* :ref:`Map <nodeconfig-class-Map>`
+* :ref:`NodeInfo <nodeconfig-class-NodeInfo>`
+* :ref:`OidService <nodeconfig-class-OidService>`
+* :ref:`Om2api <nodeconfig-class-Om2api>`
+* :ref:`PatternRouter <nodeconfig-class-PatternRouter>`
+* :ref:`Ping <nodeconfig-class-Ping>`
+* :ref:`Reply <nodeconfig-class-Reply>`
+* :ref:`Repository <nodeconfig-class-Repository>`
+* :ref:`Resolver <nodeconfig-class-Resolver>`
+* :ref:`ResolverMap <nodeconfig-class-ResolverMap>`
+* :ref:`RestListener <nodeconfig-class-RestListener>`
+* :ref:`RestSender <nodeconfig-class-RestSender>`
+* :ref:`Retry <nodeconfig-class-Retry>`
+* :ref:`RetryHandler <nodeconfig-class-RetryHandler>`
+* :ref:`RetryRouter <nodeconfig-class-RetryRouter>`
+* :ref:`Router <nodeconfig-class-Router>`
+* :ref:`SMTPSender <nodeconfig-class-SMTPSender>`
+* :ref:`SSL <nodeconfig-class-SSL>`
+* :ref:`SendHandler <nodeconfig-class-SendHandler>`
+* :ref:`Sender <nodeconfig-class-Sender>`
+* :ref:`ServiceHandler <nodeconfig-class-ServiceHandler>`
+* :ref:`ServiceLocation <nodeconfig-class-ServiceLocation>`
+* :ref:`Sforwarder <nodeconfig-class-Sforwarder>`
+* :ref:`SimpleRouter <nodeconfig-class-SimpleRouter>`
+* :ref:`SoapListener <nodeconfig-class-SoapListener>`
+* :ref:`SoapSender <nodeconfig-class-SoapSender>`
+* :ref:`SparqlService <nodeconfig-class-SparqlService>`
+* :ref:`SpocpRouter <nodeconfig-class-SpocpRouter>`
+* :ref:`SpocpSender <nodeconfig-class-SpocpSender>`
+* :ref:`SpocpService <nodeconfig-class-SpocpService>`
+* :ref:`StateServer <nodeconfig-class-StateServer>`
+* :ref:`Statefull <nodeconfig-class-Statefull>`
+* :ref:`Static <nodeconfig-class-Static>`
+* :ref:`Sync <nodeconfig-class-Sync>`
+* :ref:`Transformer <nodeconfig-class-Transformer>`
+* :ref:`UnixSocketListener <nodeconfig-class-UnixSocketListener>`
+* :ref:`UnixSocketSender <nodeconfig-class-UnixSocketSender>`
+* :ref:`XMPPMsgSender <nodeconfig-class-XMPPMsgSender>`
+
+
+AccessRule
+^^^^^^^^^^
+
+.. _nodeconfig-class-AccessRule:
+
+**Properties**
+
+* :ref:`accessDefault <nodeconfig-property-accessDefault>`
+* :ref:`deny <nodeconfig-property-deny>`
+* :ref:`allow <nodeconfig-property-allow>`
+
+Actor
+^^^^^
+
+.. _nodeconfig-class-Actor:
+
+**Properties**
+
+* :ref:`serviceLocation <nodeconfig-property-serviceLocation>`
+* :ref:`name <nodeconfig-property-name>`
+* :ref:`mustSucceed <nodeconfig-property-mustSucceed>`
+* :ref:`module <nodeconfig-property-module>`
+* :ref:`next <nodeconfig-property-next>`
+* :ref:`debug <nodeconfig-property-debug>`
+* :ref:`sourceAddress <nodeconfig-property-sourceAddress>`
+
+Address
+^^^^^^^
+
+.. _nodeconfig-class-Address:
+
+a OM2 recipient of RDF graphs
+
+**Properties**
+
+* :ref:`protocolName <nodeconfig-property-protocolName>` *restriction* cardinality 1
+* :ref:`endpoint <nodeconfig-property-endpoint>` *restriction* cardinality 1
+
+Configuration
+^^^^^^^^^^^^^
+
+.. _nodeconfig-class-Configuration:
+
+**Properties**
+
+* :ref:`readInterface <nodeconfig-property-readInterface>`
+* :ref:`name <nodeconfig-property-name>` *restriction* cardinality 1
+* :ref:`nodeinfo <nodeconfig-property-nodeinfo>`
+* :ref:`statusServer <nodeconfig-property-statusServer>`
+* :ref:`listener <nodeconfig-property-listener>`
+* :ref:`relpLogger <nodeconfig-property-relpLogger>`
+* :ref:`resolver <nodeconfig-property-resolver>`
+* :ref:`ontpath <nodeconfig-property-ontpath>`
+* :ref:`debug <nodeconfig-property-debug>`
+* :ref:`router <nodeconfig-property-router>`
+* :ref:`ontology <nodeconfig-property-ontology>` *restriction* minCardinality 1
+* :ref:`dispatcher <nodeconfig-property-dispatcher>`
+* :ref:`sender <nodeconfig-property-sender>`
+
+DNSResolver
+^^^^^^^^^^^
+
+.. _nodeconfig-class-DNSResolver:
+
+A service that takes a receiver of the form local@domain and
+translates it into a set of protocols and endpoints.
+
+**Properties**
+
+* :ref:`debug <nodeconfig-property-debug>`
+* :ref:`priority <nodeconfig-property-priority>`
+* :ref:`serviceType <nodeconfig-property-serviceType>` *restriction* hasValue dns
+* :ref:`ontology <nodeconfig-property-ontology>`
+* :ref:`serviceLocation <nodeconfig-property-serviceLocation>`
+
+DevNullSender
+^^^^^^^^^^^^^
+
+.. _nodeconfig-class-DevNullSender:
+
+**Properties**
+
+* :ref:`maxCopies <nodeconfig-property-maxCopies>`
+* :ref:`debug <nodeconfig-property-debug>`
+* :ref:`protocolName <nodeconfig-property-protocolName>` *restriction* hasValue devnull
+* :ref:`priority <nodeconfig-property-priority>`
+
+Dispatcher
+^^^^^^^^^^
+
+.. _nodeconfig-class-Dispatcher:
+
+**Properties**
+
+* :ref:`serviceType <nodeconfig-property-serviceType>`
+* :ref:`doReplyTo <nodeconfig-property-doReplyTo>`
+* :ref:`name <nodeconfig-property-name>` *restriction* maxCardinality 1
+* :ref:`trottle <nodeconfig-property-trottle>`
+* :ref:`authoritativeAbout <nodeconfig-property-authoritativeAbout>`
+* :ref:`debug <nodeconfig-property-debug>` *restriction* maxCardinality 1
+* :ref:`model <nodeconfig-property-model>`
+* :ref:`sourceAddress <nodeconfig-property-sourceAddress>`
+* :ref:`persistentStore <nodeconfig-property-persistentStore>` *restriction* maxCardinality 1
+
+DjbMaildirListener
+^^^^^^^^^^^^^^^^^^
+
+.. _nodeconfig-class-DjbMaildirListener:
+
+**Properties**
+
+* :ref:`name <nodeconfig-property-name>`
+* :ref:`accessRule <nodeconfig-property-accessRule>`
+* :ref:`create <nodeconfig-property-create>` *restriction* cardinality 1
+* :ref:`responseAfter <nodeconfig-property-responseAfter>`
+* :ref:`debug <nodeconfig-property-debug>`
+* :ref:`protocolName <nodeconfig-property-protocolName>` *restriction* hasValue djbmaildir
+* :ref:`root <nodeconfig-property-root>` *restriction* cardinality 1
+
+DjbMaildirSender
+^^^^^^^^^^^^^^^^
+
+.. _nodeconfig-class-DjbMaildirSender:
+
+**Properties**
+
+* :ref:`maxCopies <nodeconfig-property-maxCopies>`
+* :ref:`create <nodeconfig-property-create>`
+* :ref:`priority <nodeconfig-property-priority>`
+* :ref:`debug <nodeconfig-property-debug>`
+* :ref:`protocolName <nodeconfig-property-protocolName>` *restriction* hasValue djbmaildir
+* :ref:`root <nodeconfig-property-root>`
+
+FileSender
+^^^^^^^^^^
+
+.. _nodeconfig-class-FileSender:
+
+**Properties**
+
+* :ref:`maxCopies <nodeconfig-property-maxCopies>`
+* :ref:`debug <nodeconfig-property-debug>`
+* :ref:`path <nodeconfig-property-path>`
+* :ref:`protocolName <nodeconfig-property-protocolName>` *restriction* hasValue file
+* :ref:`priority <nodeconfig-property-priority>`
+
+Forwarder
+^^^^^^^^^
+
+.. _nodeconfig-class-Forwarder:
+
+**Properties**
+
+* :ref:`serviceType <nodeconfig-property-serviceType>` *restriction* hasValue forwarder
+* :ref:`doReplyTo <nodeconfig-property-doReplyTo>`
+* :ref:`name <nodeconfig-property-name>` *restriction* maxCardinality 1
+* :ref:`trottle <nodeconfig-property-trottle>`
+* :ref:`errorHandler <nodeconfig-property-errorHandler>`
+* :ref:`authoritativeAbout <nodeconfig-property-authoritativeAbout>`
+* :ref:`debug <nodeconfig-property-debug>` *restriction* maxCardinality 1
+* :ref:`model <nodeconfig-property-model>`
+* :ref:`sourceAddress <nodeconfig-property-sourceAddress>`
+* :ref:`setOutgoingReceiver <nodeconfig-property-setOutgoingReceiver>`
+* :ref:`persistentStore <nodeconfig-property-persistentStore>` *restriction* maxCardinality 1
+
+Handler
+^^^^^^^
+
+.. _nodeconfig-class-Handler:
+
+**Properties**
+
+* :ref:`name <nodeconfig-property-name>`
+* :ref:`errorHandler <nodeconfig-property-errorHandler>`
+* :ref:`debug <nodeconfig-property-debug>`
+* :ref:`module <nodeconfig-property-module>`
+* :ref:`nextHandler <nodeconfig-property-nextHandler>`
+* :ref:`initErrorHandler <nodeconfig-property-initErrorHandler>`
+* :ref:`path <nodeconfig-property-path>`
+* :ref:`postHandler <nodeconfig-property-postHandler>`
+* :ref:`preHandler <nodeconfig-property-preHandler>`
+
+IdMapper
+^^^^^^^^
+
+.. _nodeconfig-class-IdMapper:
+
+An actor that transforms one identifier of an object into another.
+
+**Properties**
+
+* :ref:`serviceLocation <nodeconfig-property-serviceLocation>`
+* :ref:`name <nodeconfig-property-name>`
+* :ref:`mustSucceed <nodeconfig-property-mustSucceed>`
+* :ref:`idMap <nodeconfig-property-idMap>`
+* :ref:`module <nodeconfig-property-module>`
+* :ref:`next <nodeconfig-property-next>`
+* :ref:`objectPrefixMap <nodeconfig-property-objectPrefixMap>`
+* :ref:`debug <nodeconfig-property-debug>`
+* :ref:`sourceAddress <nodeconfig-property-sourceAddress>`
+
+Ladokconv
+^^^^^^^^^
+
+.. _nodeconfig-class-Ladokconv:
+
+**Properties**
+
+* :ref:`serviceType <nodeconfig-property-serviceType>` *restriction* hasValue ladokmtconv
+* :ref:`doReplyTo <nodeconfig-property-doReplyTo>`
+* :ref:`name <nodeconfig-property-name>` *restriction* maxCardinality 1
+* :ref:`trottle <nodeconfig-property-trottle>`
+* :ref:`authoritativeAbout <nodeconfig-property-authoritativeAbout>`
+* :ref:`debug <nodeconfig-property-debug>` *restriction* maxCardinality 1
+* :ref:`model <nodeconfig-property-model>`
+* :ref:`sourceAddress <nodeconfig-property-sourceAddress>`
+* :ref:`persistentStore <nodeconfig-property-persistentStore>` *restriction* maxCardinality 1
+
+LdapSender
+^^^^^^^^^^
+
+.. _nodeconfig-class-LdapSender:
+
+**Properties**
+
+* :ref:`dn <nodeconfig-property-dn>`
+* :ref:`serviceLocation <nodeconfig-property-serviceLocation>` *restriction* cardinality 1
+* :ref:`maxCopies <nodeconfig-property-maxCopies>`
+* :ref:`priority <nodeconfig-property-priority>`
+* :ref:`debug <nodeconfig-property-debug>`
+* :ref:`protocolName <nodeconfig-property-protocolName>` *restriction* hasValue ldapprov
+
+LdapService
+^^^^^^^^^^^
+
+.. _nodeconfig-class-LdapService:
+
+**Properties**
+
+* :ref:`dn <nodeconfig-property-dn>`
+* :ref:`passwd <nodeconfig-property-passwd>` *restriction* maxCardinality 1
+* :ref:`ip <nodeconfig-property-ip>`
+* :ref:`hostname <nodeconfig-property-hostname>`
+* :ref:`ssl <nodeconfig-property-ssl>` *restriction* maxCardinality 1
+* :ref:`user <nodeconfig-property-user>` *restriction* maxCardinality 1
+* :ref:`url <nodeconfig-property-url>`
+* :ref:`protocolName <nodeconfig-property-protocolName>` *restriction* hasValue ldap
+* :ref:`port <nodeconfig-property-port>` *restriction* maxCardinality 1
+
+Ldapconv
+^^^^^^^^
+
+.. _nodeconfig-class-Ldapconv:
+
+**Properties**
+
+* :ref:`serviceType <nodeconfig-property-serviceType>` *restriction* hasValue ldapmtconv
+* :ref:`doReplyTo <nodeconfig-property-doReplyTo>`
+* :ref:`name <nodeconfig-property-name>` *restriction* maxCardinality 1
+* :ref:`trottle <nodeconfig-property-trottle>`
+* :ref:`authoritativeAbout <nodeconfig-property-authoritativeAbout>`
+* :ref:`debug <nodeconfig-property-debug>` *restriction* maxCardinality 1
+* :ref:`model <nodeconfig-property-model>`
+* :ref:`sourceAddress <nodeconfig-property-sourceAddress>`
+* :ref:`persistentStore <nodeconfig-property-persistentStore>` *restriction* maxCardinality 1
+
+Limitation
+^^^^^^^^^^
+
+.. _nodeconfig-class-Limitation:
+
+**Properties**
+
+* :ref:`maskbits <nodeconfig-property-maskbits>`
+* :ref:`net <nodeconfig-property-net>`
+* :ref:`host <nodeconfig-property-host>`
+
+LineListener
+^^^^^^^^^^^^
+
+.. _nodeconfig-class-LineListener:
+
+**Properties**
+
+* :ref:`name <nodeconfig-property-name>`
+* :ref:`accessRule <nodeconfig-property-accessRule>`
+* :ref:`responseAfter <nodeconfig-property-responseAfter>`
+* :ref:`debug <nodeconfig-property-debug>`
+* :ref:`protocolName <nodeconfig-property-protocolName>` *restriction* hasValue line
+* :ref:`port <nodeconfig-property-port>`
+
+Listener
+^^^^^^^^
+
+.. _nodeconfig-class-Listener:
+
+**Properties**
+
+* :ref:`debug <nodeconfig-property-debug>`
+* :ref:`responseAfter <nodeconfig-property-responseAfter>`
+* :ref:`name <nodeconfig-property-name>`
+* :ref:`accessRule <nodeconfig-property-accessRule>`
+* :ref:`protocolName <nodeconfig-property-protocolName>`
+
+LogHandler
+^^^^^^^^^^
+
+.. _nodeconfig-class-LogHandler:
+
+**Properties**
+
+* :ref:`name <nodeconfig-property-name>`
+* :ref:`hostname <nodeconfig-property-hostname>`
+* :ref:`errorHandler <nodeconfig-property-errorHandler>`
+* :ref:`port <nodeconfig-property-port>`
+* :ref:`debug <nodeconfig-property-debug>`
+* :ref:`module <nodeconfig-property-module>`
+* :ref:`nextHandler <nodeconfig-property-nextHandler>`
+* :ref:`initErrorHandler <nodeconfig-property-initErrorHandler>`
+* :ref:`path <nodeconfig-property-path>`
+* :ref:`postHandler <nodeconfig-property-postHandler>`
+* :ref:`store <nodeconfig-property-store>`
+* :ref:`preHandler <nodeconfig-property-preHandler>`
+
+LogService
+^^^^^^^^^^
+
+.. _nodeconfig-class-LogService:
+
+**Properties**
+
+* :ref:`name <nodeconfig-property-name>`
+* :ref:`passwd <nodeconfig-property-passwd>` *restriction* maxCardinality 1
+* :ref:`ip <nodeconfig-property-ip>`
+* :ref:`hostname <nodeconfig-property-hostname>`
+* :ref:`ssl <nodeconfig-property-ssl>` *restriction* maxCardinality 1
+* :ref:`user <nodeconfig-property-user>` *restriction* maxCardinality 1
+* :ref:`url <nodeconfig-property-url>`
+* :ref:`protocolName <nodeconfig-property-protocolName>`
+* :ref:`port <nodeconfig-property-port>` *restriction* maxCardinality 1
+
+Map
+^^^
+
+.. _nodeconfig-class-Map:
+
+**Properties**
+
+* :ref:`pattern <nodeconfig-property-pattern>`
+* :ref:`recipient <nodeconfig-property-recipient>` *restriction* minCardinality 1
+
+NodeInfo
+^^^^^^^^
+
+.. _nodeconfig-class-NodeInfo:
+
+**Properties**
+
+* :ref:`cacheTime <nodeconfig-property-cacheTime>`
+* :ref:`name <nodeconfig-property-name>`
+* :ref:`accessRule <nodeconfig-property-accessRule>`
+* :ref:`responseAfter <nodeconfig-property-responseAfter>`
+* :ref:`path <nodeconfig-property-path>` *restriction* cardinality 1
+* :ref:`debug <nodeconfig-property-debug>`
+* :ref:`protocolName <nodeconfig-property-protocolName>` *restriction* hasValue nodeinfo
+* :ref:`port <nodeconfig-property-port>` *restriction* cardinality 1
+
+OidService
+^^^^^^^^^^
+
+.. _nodeconfig-class-OidService:
+
+**Properties**
+
+* :ref:`receiverAddress <nodeconfig-property-receiverAddress>`
+* :ref:`passwd <nodeconfig-property-passwd>` *restriction* maxCardinality 1
+* :ref:`ip <nodeconfig-property-ip>`
+* :ref:`hostname <nodeconfig-property-hostname>`
+* :ref:`ssl <nodeconfig-property-ssl>` *restriction* maxCardinality 1
+* :ref:`user <nodeconfig-property-user>` *restriction* maxCardinality 1
+* :ref:`ontpath <nodeconfig-property-ontpath>`
+* :ref:`url <nodeconfig-property-url>`
+* :ref:`protocolName <nodeconfig-property-protocolName>` *restriction* hasValue oidsrv
+* :ref:`ontology <nodeconfig-property-ontology>`
+* :ref:`sourceAddress <nodeconfig-property-sourceAddress>`
+* :ref:`port <nodeconfig-property-port>` *restriction* maxCardinality 1
+
+Om2api
+^^^^^^
+
+.. _nodeconfig-class-Om2api:
+
+**Properties**
+
+* :ref:`passwd <nodeconfig-property-passwd>` *restriction* maxCardinality 1
+* :ref:`ip <nodeconfig-property-ip>`
+* :ref:`hostname <nodeconfig-property-hostname>`
+* :ref:`ssl <nodeconfig-property-ssl>` *restriction* maxCardinality 1
+* :ref:`user <nodeconfig-property-user>` *restriction* maxCardinality 1
+* :ref:`ontpath <nodeconfig-property-ontpath>`
+* :ref:`url <nodeconfig-property-url>`
+* :ref:`protocolName <nodeconfig-property-protocolName>` *restriction* hasValue om2api
+* :ref:`ontology <nodeconfig-property-ontology>`
+* :ref:`port <nodeconfig-property-port>` *restriction* maxCardinality 1
+
+PatternRouter
+^^^^^^^^^^^^^
+
+.. _nodeconfig-class-PatternRouter:
+
+**Properties**
+
+* :ref:`debug <nodeconfig-property-debug>`
+* :ref:`receiveMap <nodeconfig-property-receiveMap>` *restriction* minCardinality 1
+* :ref:`serviceType <nodeconfig-property-serviceType>` *restriction* hasValue pattern
+* :ref:`ontology <nodeconfig-property-ontology>`
+* :ref:`errorToMap <nodeconfig-property-errorToMap>`
+
+Ping
+^^^^
+
+.. _nodeconfig-class-Ping:
+
+**Properties**
+
+* :ref:`serviceType <nodeconfig-property-serviceType>` *restriction* hasValue ping
+* :ref:`doReplyTo <nodeconfig-property-doReplyTo>`
+* :ref:`name <nodeconfig-property-name>` *restriction* maxCardinality 1
+* :ref:`trottle <nodeconfig-property-trottle>`
+* :ref:`authoritativeAbout <nodeconfig-property-authoritativeAbout>`
+* :ref:`debug <nodeconfig-property-debug>` *restriction* maxCardinality 1
+* :ref:`model <nodeconfig-property-model>`
+* :ref:`sourceAddress <nodeconfig-property-sourceAddress>` *restriction* cardinality 1
+* :ref:`persistentStore <nodeconfig-property-persistentStore>` *restriction* maxCardinality 1
+
+Reply
+^^^^^
+
+.. _nodeconfig-class-Reply:
+
+**Properties**
+
+* :ref:`debug <nodeconfig-property-debug>`
+* :ref:`serviceType <nodeconfig-property-serviceType>` *restriction* hasValue reply
+
+Repository
+^^^^^^^^^^
+
+.. _nodeconfig-class-Repository:
+
+**Properties**
+
+* :ref:`maxCopies <nodeconfig-property-maxCopies>`
+* :ref:`priority <nodeconfig-property-priority>`
+* :ref:`protocolName <nodeconfig-property-protocolName>`
+* :ref:`debug <nodeconfig-property-debug>`
+* :ref:`path <nodeconfig-property-path>`
+* :ref:`ontology <nodeconfig-property-ontology>` *restriction* minCardinality 1
+
+Resolver
+^^^^^^^^
+
+.. _nodeconfig-class-Resolver:
+
+A service that takes a receiver of the form local@domain and
+translates it into a set of protocols and endpoints.
+
+**Properties**
+
+* :ref:`debug <nodeconfig-property-debug>`
+* :ref:`priority <nodeconfig-property-priority>`
+* :ref:`serviceType <nodeconfig-property-serviceType>`
+
+ResolverMap
+^^^^^^^^^^^
+
+.. _nodeconfig-class-ResolverMap:
+
+**Properties**
+
+* :ref:`pattern <nodeconfig-property-pattern>`
+* :ref:`receiver <nodeconfig-property-receiver>`
+
+RestListener
+^^^^^^^^^^^^
+
+.. _nodeconfig-class-RestListener:
+
+A listener that expects PUT requests. What is put is a RDF graph.
+
+**Properties**
+
+* :ref:`name <nodeconfig-property-name>`
+* :ref:`accessRule <nodeconfig-property-accessRule>`
+* :ref:`responseAfter <nodeconfig-property-responseAfter>`
+* :ref:`ssl <nodeconfig-property-ssl>`
+* :ref:`path <nodeconfig-property-path>`
+* :ref:`debug <nodeconfig-property-debug>`
+* :ref:`protocolName <nodeconfig-property-protocolName>` *restriction* hasValue rest
+* :ref:`port <nodeconfig-property-port>`
+
+RestSender
+^^^^^^^^^^
+
+.. _nodeconfig-class-RestSender:
+
+**Properties**
+
+* :ref:`maxCopies <nodeconfig-property-maxCopies>`
+* :ref:`debug <nodeconfig-property-debug>`
+* :ref:`protocolName <nodeconfig-property-protocolName>` *restriction* hasValue rest
+* :ref:`ssl <nodeconfig-property-ssl>`
+* :ref:`priority <nodeconfig-property-priority>`
+
+Retry
+^^^^^
+
+.. _nodeconfig-class-Retry:
+
+**Properties**
+
+* :ref:`serviceType <nodeconfig-property-serviceType>` *restriction* hasValue retry
+* :ref:`doReplyTo <nodeconfig-property-doReplyTo>`
+* :ref:`name <nodeconfig-property-name>` *restriction* maxCardinality 1
+* :ref:`trottle <nodeconfig-property-trottle>`
+* :ref:`timeout <nodeconfig-property-timeout>`
+* :ref:`authoritativeAbout <nodeconfig-property-authoritativeAbout>`
+* :ref:`debug <nodeconfig-property-debug>` *restriction* maxCardinality 1
+* :ref:`model <nodeconfig-property-model>`
+* :ref:`sourceAddress <nodeconfig-property-sourceAddress>`
+* :ref:`maxTries <nodeconfig-property-maxTries>`
+* :ref:`persistentStore <nodeconfig-property-persistentStore>` *restriction* maxCardinality 1
+
+RetryHandler
+^^^^^^^^^^^^
+
+.. _nodeconfig-class-RetryHandler:
+
+**Properties**
+
+* :ref:`name <nodeconfig-property-name>`
+* :ref:`timeout <nodeconfig-property-timeout>`
+* :ref:`errorHandler <nodeconfig-property-errorHandler>`
+* :ref:`maxTries <nodeconfig-property-maxTries>`
+* :ref:`debug <nodeconfig-property-debug>`
+* :ref:`module <nodeconfig-property-module>`
+* :ref:`nextHandler <nodeconfig-property-nextHandler>`
+* :ref:`initErrorHandler <nodeconfig-property-initErrorHandler>`
+* :ref:`path <nodeconfig-property-path>`
+* :ref:`postHandler <nodeconfig-property-postHandler>`
+* :ref:`store <nodeconfig-property-store>`
+* :ref:`preHandler <nodeconfig-property-preHandler>`
+
+RetryRouter
+^^^^^^^^^^^
+
+.. _nodeconfig-class-RetryRouter:
+
+Special router for the retry node
+
+**Properties**
+
+* :ref:`debug <nodeconfig-property-debug>`
+* :ref:`serviceType <nodeconfig-property-serviceType>` *restriction* hasValue retry
+
+Router
+^^^^^^
+
+.. _nodeconfig-class-Router:
+
+**Properties**
+
+* :ref:`debug <nodeconfig-property-debug>`
+* :ref:`serviceType <nodeconfig-property-serviceType>`
+
+SMTPSender
+^^^^^^^^^^
+
+.. _nodeconfig-class-SMTPSender:
+
+**Properties**
+
+* :ref:`replyTo <nodeconfig-property-replyTo>`
+* :ref:`from <nodeconfig-property-from>` *restriction* cardinality 1
+* :ref:`maxCopies <nodeconfig-property-maxCopies>`
+* :ref:`bcc <nodeconfig-property-bcc>`
+* :ref:`priority <nodeconfig-property-priority>`
+* :ref:`cc <nodeconfig-property-cc>`
+* :ref:`senderDomainName <nodeconfig-property-senderDomainName>`
+* :ref:`smtpHost <nodeconfig-property-smtpHost>` *restriction* cardinality 1
+* :ref:`debug <nodeconfig-property-debug>`
+* :ref:`protocolName <nodeconfig-property-protocolName>` *restriction* hasValue smtp
+* :ref:`sentBy <nodeconfig-property-sentBy>`
+* :ref:`subject <nodeconfig-property-subject>` *restriction* cardinality 1
+
+SSL
+^^^
+
+.. _nodeconfig-class-SSL:
+
+**Properties**
+
+* :ref:`cacert <nodeconfig-property-cacert>`
+* :ref:`requireSubject <nodeconfig-property-requireSubject>`
+* :ref:`verifyHostname <nodeconfig-property-verifyHostname>`
+* :ref:`privateKey <nodeconfig-property-privateKey>`
+* :ref:`certificate <nodeconfig-property-certificate>`
+
+SendHandler
+^^^^^^^^^^^
+
+.. _nodeconfig-class-SendHandler:
+
+**Properties**
+
+* :ref:`sender <nodeconfig-property-sender>`
+* :ref:`name <nodeconfig-property-name>`
+* :ref:`receiverAddress <nodeconfig-property-receiverAddress>`
+* :ref:`errorAddress <nodeconfig-property-errorAddress>`
+* :ref:`errorHandler <nodeconfig-property-errorHandler>`
+* :ref:`errReceiver <nodeconfig-property-errReceiver>`
+* :ref:`debug <nodeconfig-property-debug>`
+* :ref:`module <nodeconfig-property-module>`
+* :ref:`nextHandler <nodeconfig-property-nextHandler>`
+* :ref:`initErrorHandler <nodeconfig-property-initErrorHandler>`
+* :ref:`path <nodeconfig-property-path>`
+* :ref:`sourceAddress <nodeconfig-property-sourceAddress>`
+* :ref:`postHandler <nodeconfig-property-postHandler>`
+* :ref:`preHandler <nodeconfig-property-preHandler>`
+
+Sender
+^^^^^^
+
+.. _nodeconfig-class-Sender:
+
+**Properties**
+
+* :ref:`maxCopies <nodeconfig-property-maxCopies>`
+* :ref:`debug <nodeconfig-property-debug>`
+* :ref:`protocolName <nodeconfig-property-protocolName>`
+* :ref:`priority <nodeconfig-property-priority>`
+
+ServiceHandler
+^^^^^^^^^^^^^^
+
+.. _nodeconfig-class-ServiceHandler:
+
+**Properties**
+
+* :ref:`serviceLocation <nodeconfig-property-serviceLocation>`
+* :ref:`name <nodeconfig-property-name>`
+* :ref:`errorHandler <nodeconfig-property-errorHandler>`
+* :ref:`debug <nodeconfig-property-debug>`
+* :ref:`module <nodeconfig-property-module>`
+* :ref:`nextHandler <nodeconfig-property-nextHandler>`
+* :ref:`initErrorHandler <nodeconfig-property-initErrorHandler>`
+* :ref:`path <nodeconfig-property-path>`
+* :ref:`postHandler <nodeconfig-property-postHandler>`
+* :ref:`preHandler <nodeconfig-property-preHandler>`
+
+ServiceLocation
+^^^^^^^^^^^^^^^
+
+.. _nodeconfig-class-ServiceLocation:
+
+**Properties**
+
+* :ref:`passwd <nodeconfig-property-passwd>` *restriction* maxCardinality 1
+* :ref:`ip <nodeconfig-property-ip>`
+* :ref:`hostname <nodeconfig-property-hostname>`
+* :ref:`ssl <nodeconfig-property-ssl>` *restriction* maxCardinality 1
+* :ref:`user <nodeconfig-property-user>` *restriction* maxCardinality 1
+* :ref:`url <nodeconfig-property-url>`
+* :ref:`protocolName <nodeconfig-property-protocolName>`
+* :ref:`port <nodeconfig-property-port>` *restriction* maxCardinality 1
+
+Sforwarder
+^^^^^^^^^^
+
+.. _nodeconfig-class-Sforwarder:
+
+**Properties**
+
+* :ref:`serviceType <nodeconfig-property-serviceType>` *restriction* hasValue sforwarder
+* :ref:`doReplyTo <nodeconfig-property-doReplyTo>`
+* :ref:`name <nodeconfig-property-name>` *restriction* maxCardinality 1
+* :ref:`nextHandler <nodeconfig-property-nextHandler>`
+* :ref:`setOutgoingReceiver <nodeconfig-property-setOutgoingReceiver>`
+* :ref:`trottle <nodeconfig-property-trottle>`
+* :ref:`errorHandler <nodeconfig-property-errorHandler>`
+* :ref:`initErrorHandler <nodeconfig-property-initErrorHandler>`
+* :ref:`actor <nodeconfig-property-actor>`
+* :ref:`authoritativeAbout <nodeconfig-property-authoritativeAbout>`
+* :ref:`debug <nodeconfig-property-debug>` *restriction* maxCardinality 1
+* :ref:`model <nodeconfig-property-model>`
+* :ref:`preHandler <nodeconfig-property-preHandler>`
+* :ref:`sourceAddress <nodeconfig-property-sourceAddress>`
+* :ref:`postHandler <nodeconfig-property-postHandler>`
+* :ref:`persistentStore <nodeconfig-property-persistentStore>` *restriction* maxCardinality 1
+
+SimpleRouter
+^^^^^^^^^^^^
+
+.. _nodeconfig-class-SimpleRouter:
+
+**Properties**
+
+* :ref:`debug <nodeconfig-property-debug>`
+* :ref:`serviceType <nodeconfig-property-serviceType>` *restriction* hasValue simple
+* :ref:`fanout <nodeconfig-property-fanout>`
+* :ref:`defaultErrorTo <nodeconfig-property-defaultErrorTo>`
+* :ref:`defaultReceiver <nodeconfig-property-defaultReceiver>`
+
+SoapListener
+^^^^^^^^^^^^
+
+.. _nodeconfig-class-SoapListener:
+
+**Properties**
+
+* :ref:`name <nodeconfig-property-name>`
+* :ref:`accessRule <nodeconfig-property-accessRule>`
+* :ref:`responseAfter <nodeconfig-property-responseAfter>`
+* :ref:`debug <nodeconfig-property-debug>`
+* :ref:`protocolName <nodeconfig-property-protocolName>` *restriction* hasValue soap
+* :ref:`port <nodeconfig-property-port>`
+* :ref:`dir <nodeconfig-property-dir>`
+
+SoapSender
+^^^^^^^^^^
+
+.. _nodeconfig-class-SoapSender:
+
+**Properties**
+
+* :ref:`maxCopies <nodeconfig-property-maxCopies>`
+* :ref:`debug <nodeconfig-property-debug>`
+* :ref:`protocolName <nodeconfig-property-protocolName>` *restriction* hasValue soap
+* :ref:`ssl <nodeconfig-property-ssl>`
+* :ref:`priority <nodeconfig-property-priority>`
+
+SparqlService
+^^^^^^^^^^^^^
+
+.. _nodeconfig-class-SparqlService:
+
+**Properties**
+
+* :ref:`passwd <nodeconfig-property-passwd>` *restriction* maxCardinality 1
+* :ref:`ip <nodeconfig-property-ip>`
+* :ref:`hostname <nodeconfig-property-hostname>`
+* :ref:`ssl <nodeconfig-property-ssl>` *restriction* maxCardinality 1
+* :ref:`user <nodeconfig-property-user>` *restriction* maxCardinality 1
+* :ref:`url <nodeconfig-property-url>`
+* :ref:`protocolName <nodeconfig-property-protocolName>` *restriction* hasValue sparql
+* :ref:`port <nodeconfig-property-port>` *restriction* maxCardinality 1
+
+SpocpRouter
+^^^^^^^^^^^
+
+.. _nodeconfig-class-SpocpRouter:
+
+**Properties**
+
+* :ref:`debug <nodeconfig-property-debug>`
+* :ref:`serviceType <nodeconfig-property-serviceType>` *restriction* hasValue spocp
+* :ref:`serviceLocation <nodeconfig-property-serviceLocation>`
+
+SpocpSender
+^^^^^^^^^^^
+
+.. _nodeconfig-class-SpocpSender:
+
+**Properties**
+
+* :ref:`tagOrder <nodeconfig-property-tagOrder>`
+* :ref:`serviceLocation <nodeconfig-property-serviceLocation>`
+* :ref:`maxCopies <nodeconfig-property-maxCopies>`
+* :ref:`priority <nodeconfig-property-priority>`
+* :ref:`tag <nodeconfig-property-tag>`
+* :ref:`debug <nodeconfig-property-debug>`
+* :ref:`protocolName <nodeconfig-property-protocolName>` *restriction* hasValue spocp
+* :ref:`rulePath <nodeconfig-property-rulePath>`
+
+SpocpService
+^^^^^^^^^^^^
+
+.. _nodeconfig-class-SpocpService:
+
+**Properties**
+
+* :ref:`passwd <nodeconfig-property-passwd>` *restriction* maxCardinality 1
+* :ref:`ip <nodeconfig-property-ip>`
+* :ref:`hostname <nodeconfig-property-hostname>`
+* :ref:`ssl <nodeconfig-property-ssl>` *restriction* maxCardinality 1
+* :ref:`user <nodeconfig-property-user>` *restriction* maxCardinality 1
+* :ref:`url <nodeconfig-property-url>`
+* :ref:`protocolName <nodeconfig-property-protocolName>` *restriction* hasValue spocp
+* :ref:`port <nodeconfig-property-port>` *restriction* maxCardinality 1
+
+StateServer
+^^^^^^^^^^^
+
+.. _nodeconfig-class-StateServer:
+
+**Properties**
+
+* :ref:`name <nodeconfig-property-name>`
+* :ref:`accessRule <nodeconfig-property-accessRule>`
+* :ref:`responseAfter <nodeconfig-property-responseAfter>`
+* :ref:`ssl <nodeconfig-property-ssl>`
+* :ref:`debug <nodeconfig-property-debug>`
+* :ref:`protocolName <nodeconfig-property-protocolName>` *restriction* hasValue state
+* :ref:`port <nodeconfig-property-port>`
+
+Statefull
+^^^^^^^^^
+
+.. _nodeconfig-class-Statefull:
+
+**Properties**
+
+* :ref:`serviceType <nodeconfig-property-serviceType>` *restriction* hasValue statefull
+* :ref:`doReplyTo <nodeconfig-property-doReplyTo>`
+* :ref:`name <nodeconfig-property-name>` *restriction* maxCardinality 1
+* :ref:`trottle <nodeconfig-property-trottle>`
+* :ref:`timeout <nodeconfig-property-timeout>`
+* :ref:`authoritativeAbout <nodeconfig-property-authoritativeAbout>`
+* :ref:`debug <nodeconfig-property-debug>` *restriction* maxCardinality 1
+* :ref:`model <nodeconfig-property-model>`
+* :ref:`sourceAddress <nodeconfig-property-sourceAddress>`
+* :ref:`maxTries <nodeconfig-property-maxTries>`
+* :ref:`persistentStore <nodeconfig-property-persistentStore>` *restriction* maxCardinality 1
+
+Static
+^^^^^^
+
+.. _nodeconfig-class-Static:
+
+A service that takes a receiver of the form local@domain and
+translates it into a set of protocols and endpoints.
+
+**Properties**
+
+* :ref:`debug <nodeconfig-property-debug>`
+* :ref:`priority <nodeconfig-property-priority>`
+* :ref:`serviceType <nodeconfig-property-serviceType>` *restriction* hasValue static
+* :ref:`exact <nodeconfig-property-exact>`
+* :ref:`regexp <nodeconfig-property-regexp>`
+
+Sync
+^^^^
+
+.. _nodeconfig-class-Sync:
+
+**Properties**
+
+* :ref:`serviceType <nodeconfig-property-serviceType>` *restriction* hasValue sync
+* :ref:`doReplyTo <nodeconfig-property-doReplyTo>`
+* :ref:`name <nodeconfig-property-name>` *restriction* maxCardinality 1
+* :ref:`trottle <nodeconfig-property-trottle>`
+* :ref:`authoritativeAbout <nodeconfig-property-authoritativeAbout>`
+* :ref:`debug <nodeconfig-property-debug>` *restriction* maxCardinality 1
+* :ref:`model <nodeconfig-property-model>`
+* :ref:`sourceAddress <nodeconfig-property-sourceAddress>` *restriction* cardinality 1
+* :ref:`persistentStore <nodeconfig-property-persistentStore>` *restriction* maxCardinality 1
+
+Transformer
+^^^^^^^^^^^
+
+.. _nodeconfig-class-Transformer:
+
+**Properties**
+
+* :ref:`serviceType <nodeconfig-property-serviceType>` *restriction* hasValue transformer
+* :ref:`doReplyTo <nodeconfig-property-doReplyTo>`
+* :ref:`name <nodeconfig-property-name>` *restriction* maxCardinality 1
+* :ref:`trottle <nodeconfig-property-trottle>`
+* :ref:`actor <nodeconfig-property-actor>`
+* :ref:`authoritativeAbout <nodeconfig-property-authoritativeAbout>`
+* :ref:`debug <nodeconfig-property-debug>` *restriction* maxCardinality 1
+* :ref:`model <nodeconfig-property-model>`
+* :ref:`sourceAddress <nodeconfig-property-sourceAddress>`
+* :ref:`setOutgoingReceiver <nodeconfig-property-setOutgoingReceiver>`
+* :ref:`persistentStore <nodeconfig-property-persistentStore>` *restriction* maxCardinality 1
+
+UnixSocketListener
+^^^^^^^^^^^^^^^^^^
+
+.. _nodeconfig-class-UnixSocketListener:
+
+**Properties**
+
+* :ref:`name <nodeconfig-property-name>`
+* :ref:`accessRule <nodeconfig-property-accessRule>`
+* :ref:`responseAfter <nodeconfig-property-responseAfter>`
+* :ref:`protocolName <nodeconfig-property-protocolName>` *restriction* hasValue unixsocket
+* :ref:`debug <nodeconfig-property-debug>`
+* :ref:`path <nodeconfig-property-path>` *restriction* cardinality 1
+
+UnixSocketSender
+^^^^^^^^^^^^^^^^
+
+.. _nodeconfig-class-UnixSocketSender:
+
+**Properties**
+
+* :ref:`maxCopies <nodeconfig-property-maxCopies>`
+* :ref:`debug <nodeconfig-property-debug>`
+* :ref:`path <nodeconfig-property-path>`
+* :ref:`protocolName <nodeconfig-property-protocolName>` *restriction* hasValue unixsocket
+* :ref:`priority <nodeconfig-property-priority>`
+
+XMPPMsgSender
+^^^^^^^^^^^^^
+
+.. _nodeconfig-class-XMPPMsgSender:
+
+**Properties**
+
+* :ref:`serviceLocation <nodeconfig-property-serviceLocation>` *restriction* cardinality 1
+* :ref:`maxCopies <nodeconfig-property-maxCopies>`
+* :ref:`priority <nodeconfig-property-priority>`
+* :ref:`debug <nodeconfig-property-debug>`
+* :ref:`protocolName <nodeconfig-property-protocolName>` *restriction* hasValue XMPPmsg
+* :ref:`nickName <nodeconfig-property-nickName>` *restriction* cardinality 1
+
+**********
+Properties
+**********
+
+.. _nodeconfig-properties:
+
+* :ref:`accessDefault <nodeconfig-property-accessDefault>`
+* :ref:`accessRule <nodeconfig-property-accessRule>`
+* :ref:`actor <nodeconfig-property-actor>`
+* :ref:`address <nodeconfig-property-address>`
+* :ref:`allow <nodeconfig-property-allow>`
+* :ref:`authoritativeAbout <nodeconfig-property-authoritativeAbout>`
+* :ref:`bcc <nodeconfig-property-bcc>`
+* :ref:`cacert <nodeconfig-property-cacert>`
+* :ref:`cacheTime <nodeconfig-property-cacheTime>`
+* :ref:`cc <nodeconfig-property-cc>`
+* :ref:`certificateChain <nodeconfig-property-certificateChain>`
+* :ref:`certificate <nodeconfig-property-certificate>`
+* :ref:`create <nodeconfig-property-create>`
+* :ref:`debug <nodeconfig-property-debug>`
+* :ref:`defaultErrorTo <nodeconfig-property-defaultErrorTo>`
+* :ref:`defaultReceiver <nodeconfig-property-defaultReceiver>`
+* :ref:`deny <nodeconfig-property-deny>`
+* :ref:`dir <nodeconfig-property-dir>`
+* :ref:`dispatcher <nodeconfig-property-dispatcher>`
+* :ref:`dn <nodeconfig-property-dn>`
+* :ref:`doReplyTo <nodeconfig-property-doReplyTo>`
+* :ref:`endpoint <nodeconfig-property-endpoint>`
+* :ref:`errReceiver <nodeconfig-property-errReceiver>`
+* :ref:`errorAddress <nodeconfig-property-errorAddress>`
+* :ref:`errorHandler <nodeconfig-property-errorHandler>`
+* :ref:`errorToMap <nodeconfig-property-errorToMap>`
+* :ref:`exact <nodeconfig-property-exact>`
+* :ref:`fanout <nodeconfig-property-fanout>`
+* :ref:`from <nodeconfig-property-from>`
+* :ref:`handler <nodeconfig-property-handler>`
+* :ref:`host <nodeconfig-property-host>`
+* :ref:`hostname <nodeconfig-property-hostname>`
+* :ref:`idMap <nodeconfig-property-idMap>`
+* :ref:`initErrorHandler <nodeconfig-property-initErrorHandler>`
+* :ref:`ip <nodeconfig-property-ip>`
+* :ref:`listener <nodeconfig-property-listener>`
+* :ref:`mailSender <nodeconfig-property-mailSender>`
+* :ref:`maskbits <nodeconfig-property-maskbits>`
+* :ref:`maxCopies <nodeconfig-property-maxCopies>`
+* :ref:`maxTries <nodeconfig-property-maxTries>`
+* :ref:`model <nodeconfig-property-model>`
+* :ref:`module <nodeconfig-property-module>`
+* :ref:`mustSucceed <nodeconfig-property-mustSucceed>`
+* :ref:`name <nodeconfig-property-name>`
+* :ref:`net <nodeconfig-property-net>`
+* :ref:`nextHandler <nodeconfig-property-nextHandler>`
+* :ref:`next <nodeconfig-property-next>`
+* :ref:`nickName <nodeconfig-property-nickName>`
+* :ref:`nodeinfo <nodeconfig-property-nodeinfo>`
+* :ref:`objectPrefixMap <nodeconfig-property-objectPrefixMap>`
+* :ref:`ontology <nodeconfig-property-ontology>`
+* :ref:`ontpath <nodeconfig-property-ontpath>`
+* :ref:`passwd <nodeconfig-property-passwd>`
+* :ref:`path <nodeconfig-property-path>`
+* :ref:`pattern <nodeconfig-property-pattern>`
+* :ref:`persistentStore <nodeconfig-property-persistentStore>`
+* :ref:`port <nodeconfig-property-port>`
+* :ref:`postHandler <nodeconfig-property-postHandler>`
+* :ref:`preHandler <nodeconfig-property-preHandler>`
+* :ref:`priority <nodeconfig-property-priority>`
+* :ref:`privateKey <nodeconfig-property-privateKey>`
+* :ref:`protocolName <nodeconfig-property-protocolName>`
+* :ref:`readInterface <nodeconfig-property-readInterface>`
+* :ref:`receiveMap <nodeconfig-property-receiveMap>`
+* :ref:`receiverAddress <nodeconfig-property-receiverAddress>`
+* :ref:`receiver <nodeconfig-property-receiver>`
+* :ref:`recipient <nodeconfig-property-recipient>`
+* :ref:`regexp <nodeconfig-property-regexp>`
+* :ref:`relpLogger <nodeconfig-property-relpLogger>`
+* :ref:`replyTo <nodeconfig-property-replyTo>`
+* :ref:`requireSubject <nodeconfig-property-requireSubject>`
+* :ref:`resolver <nodeconfig-property-resolver>`
+* :ref:`responseAfter <nodeconfig-property-responseAfter>`
+* :ref:`root <nodeconfig-property-root>`
+* :ref:`router <nodeconfig-property-router>`
+* :ref:`ruleFile <nodeconfig-property-ruleFile>`
+* :ref:`rulePath <nodeconfig-property-rulePath>`
+* :ref:`senderDomainName <nodeconfig-property-senderDomainName>`
+* :ref:`sender <nodeconfig-property-sender>`
+* :ref:`sentBy <nodeconfig-property-sentBy>`
+* :ref:`serviceLocation <nodeconfig-property-serviceLocation>`
+* :ref:`serviceType <nodeconfig-property-serviceType>`
+* :ref:`setOutgoingReceiver <nodeconfig-property-setOutgoingReceiver>`
+* :ref:`smtpHost <nodeconfig-property-smtpHost>`
+* :ref:`sourceAddress <nodeconfig-property-sourceAddress>`
+* :ref:`ssl <nodeconfig-property-ssl>`
+* :ref:`statusServer <nodeconfig-property-statusServer>`
+* :ref:`storeName <nodeconfig-property-storeName>`
+* :ref:`store <nodeconfig-property-store>`
+* :ref:`subject <nodeconfig-property-subject>`
+* :ref:`tagOrder <nodeconfig-property-tagOrder>`
+* :ref:`tag <nodeconfig-property-tag>`
+* :ref:`timeout <nodeconfig-property-timeout>`
+* :ref:`trottle <nodeconfig-property-trottle>`
+* :ref:`url <nodeconfig-property-url>`
+* :ref:`user <nodeconfig-property-user>`
+* :ref:`verifyHostname <nodeconfig-property-verifyHostname>`
+
+
+accessDefault
+^^^^^^^^^^^^^
+
+.. _nodeconfig-property-accessDefault:
+
+*range*
+  Boolean
+
+**Functional**
+
+accessRule
+^^^^^^^^^^
+
+.. _nodeconfig-property-accessRule:
+
+*range*
+  :ref:`AccessRule <nodeconfig-class-AccessRule>`
+
+**Functional**
+
+actor
+^^^^^
+
+.. _nodeconfig-property-actor:
+
+A piece of code that can act on graphs.
+
+*range*
+  :ref:`Actor <nodeconfig-class-Actor>`
+
+**Functional**
+
+address
+^^^^^^^
+
+.. _nodeconfig-property-address:
+
+*range*
+  :ref:`Address <nodeconfig-class-Address>`
+
+allow
+^^^^^
+
+.. _nodeconfig-property-allow:
+
+*range*
+  :ref:`Limitation <nodeconfig-class-Limitation>`
+
+authoritativeAbout
+^^^^^^^^^^^^^^^^^^
+
+.. _nodeconfig-property-authoritativeAbout:
+
+Specifies which hosts are authoritative for which object uri
+namespace.
+Values of the form "file:<filename>" where lines in the
+file pointed to by
+ <filename> has the format: FQDN 1*SP
+leading_uri_substring
+
+*range*
+  String
+
+**Functional**
+
+bcc
+^^^
+
+.. _nodeconfig-property-bcc:
+
+Blind carbon copies to ...
+
+*range*
+  String
+
+cacert
+^^^^^^
+
+.. _nodeconfig-property-cacert:
+
+*range*
+  String
+
+**Functional**
+
+cacheTime
+^^^^^^^^^
+
+.. _nodeconfig-property-cacheTime:
+
+How long the node info can be safely saved, in seconds, before doing a
+refresh.
+
+*range*
+  Int
+
+**Functional**
+
+cc
+^^
+
+.. _nodeconfig-property-cc:
+
+Carbon copies to...
+
+*range*
+  String
+
+certificate
+^^^^^^^^^^^
+
+.. _nodeconfig-property-certificate:
+
+The signed SSL certificate for this application
+
+*range*
+  String
+
+**Functional**
+
+certificateChain
+^^^^^^^^^^^^^^^^
+
+.. _nodeconfig-property-certificateChain:
+
+A file with a certificate chain
+
+*range*
+  Unspecified
+
+**Functional**
+
+create
+^^^^^^
+
+.. _nodeconfig-property-create:
+
+Whether the directory specified should be created if not present.
+
+*range*
+  Boolean
+
+**Functional**
+
+debug
+^^^^^
+
+.. _nodeconfig-property-debug:
+
+Whether debug should be on or off. Levels off debugging might be
+supported in the future.
+
+*range*
+  Int
+
+**Functional**
+
+defaultErrorTo
+^^^^^^^^^^^^^^
+
+.. _nodeconfig-property-defaultErrorTo:
+
+The default errorTo receiver
+
+*range*
+  String
+
+defaultReceiver
+^^^^^^^^^^^^^^^
+
+.. _nodeconfig-property-defaultReceiver:
+
+Default receiver if everything goes according to plans
+
+*range*
+  String
+
+deny
+^^^^
+
+.. _nodeconfig-property-deny:
+
+*range*
+  :ref:`Limitation <nodeconfig-class-Limitation>`
+
+dir
+^^^
+
+.. _nodeconfig-property-dir:
+
+directory
+
+*range*
+  String
+
+**Functional**
+
+dispatcher
+^^^^^^^^^^
+
+.. _nodeconfig-property-dispatcher:
+
+*range*
+  :ref:`Dispatcher <nodeconfig-class-Dispatcher>`
+
+dn
+^^
+
+.. _nodeconfig-property-dn:
+
+*range*
+  Unspecified
+
+doReplyTo
+^^^^^^^^^
+
+.. _nodeconfig-property-doReplyTo:
+
+If this node should send a message to the address specified in replyTo
+in the message header.
+
+*range*
+  Boolean
+
+**Functional**
+
+endpoint
+^^^^^^^^
+
+.. _nodeconfig-property-endpoint:
+
+*range*
+  Unspecified
+
+**Functional**
+
+errReceiver
+^^^^^^^^^^^
+
+.. _nodeconfig-property-errReceiver:
+
+*range*
+  :ref:`Address <nodeconfig-class-Address>`
+
+errorAddress
+^^^^^^^^^^^^
+
+.. _nodeconfig-property-errorAddress:
+
+*range*
+  String
+
+errorHandler
+^^^^^^^^^^^^
+
+.. _nodeconfig-property-errorHandler:
+
+If an error occurs in the node after the inital processing of the
+incomming graph, this is where it is defined how an error should be
+handled.
+
+*range*
+  :ref:`Handler <nodeconfig-class-Handler>`
+
+**Functional**
+
+errorToMap
+^^^^^^^^^^
+
+.. _nodeconfig-property-errorToMap:
+
+*range*
+  :ref:`Map <nodeconfig-class-Map>`
+
+exact
+^^^^^
+
+.. _nodeconfig-property-exact:
+
+*range*
+  :ref:`ResolverMap <nodeconfig-class-ResolverMap>`
+
+fanout
+^^^^^^
+
+.. _nodeconfig-property-fanout:
+
+One address is replace by a set of addresses
+
+*range*
+  :ref:`Map <nodeconfig-class-Map>`
+
+from
+^^^^
+
+.. _nodeconfig-property-from:
+
+The sender of the mail
+
+*range*
+  String
+
+**Functional**
+
+handler
+^^^^^^^
+
+.. _nodeconfig-property-handler:
+
+*range*
+  :ref:`Handler <nodeconfig-class-Handler>`
+
+**Functional**
+
+host
+^^^^
+
+.. _nodeconfig-property-host:
+
+*range*
+  String
+
+**Functional**
+
+hostname
+^^^^^^^^
+
+.. _nodeconfig-property-hostname:
+
+Fully qualified domain name
+
+*range*
+  String
+
+**Functional**
+
+idMap
+^^^^^
+
+.. _nodeconfig-property-idMap:
+
+Map between a property name and a URI prefix
+
+*range*
+  :ref:`Map <nodeconfig-class-Map>`
+
+initErrorHandler
+^^^^^^^^^^^^^^^^
+
+.. _nodeconfig-property-initErrorHandler:
+
+If some error occurs early in the processing this handler allows one
+to specify what exactly is to happen.
+
+*range*
+  :ref:`Handler <nodeconfig-class-Handler>`
+
+**Functional**
+
+ip
+^^
+
+.. _nodeconfig-property-ip:
+
+IP number of a host
+
+*range*
+  String
+
+**Functional**
+
+listener
+^^^^^^^^
+
+.. _nodeconfig-property-listener:
+
+*range*
+  :ref:`Listener <nodeconfig-class-Listener>`
+
+mailSender
+^^^^^^^^^^
+
+.. _nodeconfig-property-mailSender:
+
+*range*
+  Unspecified
+
+**Functional**
+
+maskbits
+^^^^^^^^
+
+.. _nodeconfig-property-maskbits:
+
+*range*
+  Int
+
+**Functional**
+
+maxCopies
+^^^^^^^^^
+
+.. _nodeconfig-property-maxCopies:
+
+Maximum number of copies that a node can have of this module
+
+*range*
+  Int
+
+**Functional**
+
+maxTries
+^^^^^^^^
+
+.. _nodeconfig-property-maxTries:
+
+*range*
+  Int
+
+model
+^^^^^
+
+.. _nodeconfig-property-model:
+
+The fullname of the class instances that should be accepted
+
+*range*
+  String
+
+module
+^^^^^^
+
+.. _nodeconfig-property-module:
+
+The python module that implements this transformer
+
+*range*
+  String
+
+**Functional**
+
+mustSucceed
+^^^^^^^^^^^
+
+.. _nodeconfig-property-mustSucceed:
+
+Whether the transformation must succeed or not.
+
+*range*
+  Boolean
+
+**Functional**
+
+name
+^^^^
+
+.. _nodeconfig-property-name:
+
+A name
+
+*range*
+  String
+
+**Functional**
+
+net
+^^^
+
+.. _nodeconfig-property-net:
+
+*range*
+  String
+
+**Functional**
+
+next
+^^^^
+
+.. _nodeconfig-property-next:
+
+*range*
+  :ref:`Actor <nodeconfig-class-Actor>`
+
+**Functional**
+
+nextHandler
+^^^^^^^^^^^
+
+.. _nodeconfig-property-nextHandler:
+
+*range*
+  :ref:`Handler <nodeconfig-class-Handler>`
+
+**Functional**
+
+nickName
+^^^^^^^^
+
+.. _nodeconfig-property-nickName:
+
+*range*
+  String
+
+**Functional**
+
+nodeinfo
+^^^^^^^^
+
+.. _nodeconfig-property-nodeinfo:
+
+Publish Information about the node as such by the node.
+
+*range*
+  :ref:`NodeInfo <nodeconfig-class-NodeInfo>`
+
+**Functional**
+
+objectPrefixMap
+^^^^^^^^^^^^^^^
+
+.. _nodeconfig-property-objectPrefixMap:
+
+Map between an object type and the prefix used for identifiers of that
+type.
+
+*range*
+  :ref:`Map <nodeconfig-class-Map>`
+
+ontology
+^^^^^^^^
+
+.. _nodeconfig-property-ontology:
+
+*range*
+  String
+
+ontpath
+^^^^^^^
+
+.. _nodeconfig-property-ontpath:
+
+*range*
+  String
+
+passwd
+^^^^^^
+
+.. _nodeconfig-property-passwd:
+
+Password used to authenticate a user to a system
+
+*range*
+  String
+
+**Functional**
+
+path
+^^^^
+
+.. _nodeconfig-property-path:
+
+A directory path.
+
+*range*
+  String
+
+**Functional**
+
+pattern
+^^^^^^^
+
+.. _nodeconfig-property-pattern:
+
+A string pattern that a receiver address is matched against
+
+*range*
+  String
+
+persistentStore
+^^^^^^^^^^^^^^^
+
+.. _nodeconfig-property-persistentStore:
+
+Somewhere where graphs can be stored while the node is working on
+them. If then the node is closed or crashes the graph is not lost.
+
+*range*
+  String
+
+port
+^^^^
+
+.. _nodeconfig-property-port:
+
+A internet port number. 0 is equivalent to whatever is default for a
+specific protocol.
+
+*range*
+  Int
+
+**Functional**
+
+postHandler
+^^^^^^^^^^^
+
+.. _nodeconfig-property-postHandler:
+
+When everything succeeded you may still want to do things, this is
+where you define what.
+
+*range*
+  :ref:`Handler <nodeconfig-class-Handler>`
+
+**Functional**
+
+preHandler
+^^^^^^^^^^
+
+.. _nodeconfig-property-preHandler:
+
+Between the parsing of the incomming graph and possible
+transformations this is where you may do things.
+
+*range*
+  :ref:`Handler <nodeconfig-class-Handler>`
+
+**Functional**
+
+priority
+^^^^^^^^
+
+.. _nodeconfig-property-priority:
+
+*range*
+  Int
+
+**Functional**
+
+privateKey
+^^^^^^^^^^
+
+.. _nodeconfig-property-privateKey:
+
+*range*
+  String
+
+**Functional**
+
+protocolName
+^^^^^^^^^^^^
+
+.. _nodeconfig-property-protocolName:
+
+*range*
+  String
+
+**Functional**
+
+readInterface
+^^^^^^^^^^^^^
+
+.. _nodeconfig-property-readInterface:
+
+*range*
+  Unspecified
+
+**Functional**
+
+receiveMap
+^^^^^^^^^^
+
+.. _nodeconfig-property-receiveMap:
+
+*range*
+  :ref:`Map <nodeconfig-class-Map>`
+
+receiver
+^^^^^^^^
+
+.. _nodeconfig-property-receiver:
+
+*range*
+  :ref:`Address <nodeconfig-class-Address>`
+
+receiverAddress
+^^^^^^^^^^^^^^^
+
+.. _nodeconfig-property-receiverAddress:
+
+*range*
+  String
+
+recipient
+^^^^^^^^^
+
+.. _nodeconfig-property-recipient:
+
+A address of kind
+
+*range*
+  String
+
+regexp
+^^^^^^
+
+.. _nodeconfig-property-regexp:
+
+*range*
+  :ref:`ResolverMap <nodeconfig-class-ResolverMap>`
+
+relpLogger
+^^^^^^^^^^
+
+.. _nodeconfig-property-relpLogger:
+
+*range*
+  :ref:`LogService <nodeconfig-class-LogService>`
+
+replyTo
+^^^^^^^
+
+.. _nodeconfig-property-replyTo:
+
+If someone wants to answer to this mail, this is the address they
+should use.
+
+*range*
+  String
+
+**Functional**
+
+requireSubject
+^^^^^^^^^^^^^^
+
+.. _nodeconfig-property-requireSubject:
+
+*range*
+  String
+
+resolver
+^^^^^^^^
+
+.. _nodeconfig-property-resolver:
+
+*range*
+  :ref:`Resolver <nodeconfig-class-Resolver>`
+
+responseAfter
+^^^^^^^^^^^^^
+
+.. _nodeconfig-property-responseAfter:
+
+After which state that this node will return a response to the sender.
+
+*range*
+  Unspecified
+
+**Functional**
+
+root
+^^^^
+
+.. _nodeconfig-property-root:
+
+The root directory of the maildir tree
+
+*range*
+  String
+
+**Functional**
+
+router
+^^^^^^
+
+.. _nodeconfig-property-router:
+
+*range*
+  :ref:`Router <nodeconfig-class-Router>`
+
+ruleFile
+^^^^^^^^
+
+.. _nodeconfig-property-ruleFile:
+
+*range*
+  String
+
+rulePath
+^^^^^^^^
+
+.. _nodeconfig-property-rulePath:
+
+*range*
+  String
+
+**Functional**
+
+sender
+^^^^^^
+
+.. _nodeconfig-property-sender:
+
+*range*
+  :ref:`Sender <nodeconfig-class-Sender>`
+
+senderDomainName
+^^^^^^^^^^^^^^^^
+
+.. _nodeconfig-property-senderDomainName:
+
+What the sender should tell the SMTP host that it's name is.
+
+*range*
+  String
+
+**Functional**
+
+sentBy
+^^^^^^
+
+.. _nodeconfig-property-sentBy:
+
+The 'sender' of the mail
+
+*range*
+  String
+
+**Functional**
+
+serviceLocation
+^^^^^^^^^^^^^^^
+
+.. _nodeconfig-property-serviceLocation:
+
+*range*
+  :ref:`ServiceLocation <nodeconfig-class-ServiceLocation>`
+
+serviceType
+^^^^^^^^^^^
+
+.. _nodeconfig-property-serviceType:
+
+A label use on start-up to keep things together.
+
+*range*
+  String
+
+**Functional**
+
+setOutgoingReceiver
+^^^^^^^^^^^^^^^^^^^
+
+.. _nodeconfig-property-setOutgoingReceiver:
+
+Whether the receiver property in the message should be set to whatever
+the router process wants to send the message to.
+
+*range*
+  Boolean
+
+**Functional**
+
+smtpHost
+^^^^^^^^
+
+.. _nodeconfig-property-smtpHost:
+
+The SMTP host to use for outgoing mail
+
+*range*
+  String
+
+**Functional**
+
+sourceAddress
+^^^^^^^^^^^^^
+
+.. _nodeconfig-property-sourceAddress:
+
+If a message is constructed as a result of some action within the node
+this address will be added as sender in the message.
+
+*range*
+  String
+
+**Functional**
+
+ssl
+^^^
+
+.. _nodeconfig-property-ssl:
+
+SSL context information
+
+*range*
+  :ref:`SSL <nodeconfig-class-SSL>`
+
+**Functional**
+
+statusServer
+^^^^^^^^^^^^
+
+.. _nodeconfig-property-statusServer:
+
+*range*
+  :ref:`StateServer <nodeconfig-class-StateServer>`
+
+**Functional**
+
+store
+^^^^^
+
+.. _nodeconfig-property-store:
+
+Name of a file where stuff is stored
+
+*range*
+  String
+
+**Functional**
+
+storeName
+^^^^^^^^^
+
+.. _nodeconfig-property-storeName:
+
+*range*
+  String
+
+**Functional**
+
+subject
+^^^^^^^
+
+.. _nodeconfig-property-subject:
+
+The subject of the mail
+
+*range*
+  String
+
+**Functional**
+
+tag
+^^^
+
+.. _nodeconfig-property-tag:
+
+The first tag in the produced s-expression
+
+*range*
+  String
+
+**Functional**
+
+tagOrder
+^^^^^^^^
+
+.. _nodeconfig-property-tagOrder:
+
+A sequence of property names, separated by blanks
+
+*range*
+  String
+
+**Functional**
+
+timeout
+^^^^^^^
+
+.. _nodeconfig-property-timeout:
+
+*range*
+  Int
+
+trottle
+^^^^^^^
+
+.. _nodeconfig-property-trottle:
+
+If a messages from a specific source for some reasons can not be send
+to the receivers then futher messages from the same source are blocked
+until the problematic message are handled without any problem.
+
+*range*
+  Boolean
+
+**Functional**
+
+url
+^^^
+
+.. _nodeconfig-property-url:
+
+*range*
+  String
+
+**Functional**
+
+user
+^^^^
+
+.. _nodeconfig-property-user:
+
+user name
+
+*range*
+  String
+
+**Functional**
+
+verifyHostname
+^^^^^^^^^^^^^^
+
+.. _nodeconfig-property-verifyHostname:
+
+Whether the hostname or IP address of the peer should be checked
+against the CN of the subject name or entries in the subjectAltName.
+
+*range*
+  Boolean
+
+**Functional**

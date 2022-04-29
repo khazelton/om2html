@@ -1,0 +1,604 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The transformer - modifies a message or creates new based on one or more &mdash; OM2 v1.1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.1.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="OM2 v1.1.0 documentation" href="../index.html" />
+    <link rel="up" title="The node -the basic buildingblock" href="index.html" />
+    <link rel="next" title="The handlers - to provide the dispatcher with more functions" href="handler.html" />
+    <link rel="prev" title="Unix Domain Socket" href="senders/unix.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="handler.html" title="The handlers - to provide the dispatcher with more functions"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="senders/unix.html" title="Unix Domain Socket"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">OM2 v1.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">The node -the basic buildingblock</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="the-transformer-modifies-a-message-or-creates-new-based-on-one-or-more">
+<span id="node-transformer"></span><h1>The transformer - modifies a message or creates new based on one or more<a class="headerlink" href="#the-transformer-modifies-a-message-or-creates-new-based-on-one-or-more" title="Permalink to this headline">¶</a></h1>
+<p>A message graph consists of an object with properties and values on these
+properties. These values can in them self be object instances and so on.
+So a transformer works by binding conversion functions to object types and
+properties.
+When a message is transformed, the transformer walks through the graph from
+top to bottom, applying the conversion functions as appropriate .</p>
+<div class="section" id="write-your-own">
+<h2>Write your own<a class="headerlink" href="#write-your-own" title="Permalink to this headline">¶</a></h2>
+<p>So defining a transformation can be as simple as using the standard conversion
+functions and just specifying when (which objects and properties) they should be
+used.</p>
+<p>Or you can write your own conversion functions.</p>
+</div>
+<div class="section" id="configuration-examples">
+<h2>Configuration examples<a class="headerlink" href="#configuration-examples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="attribute-converter">
+<h3>Attribute converter<a class="headerlink" href="#attribute-converter" title="Permalink to this headline">¶</a></h3>
+<p>About as simple as it gets:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">objconf</span> <span class="o">=</span> <span class="p">{</span> <span class="n">prim</span><span class="o">.</span><span class="n">UserPerson</span><span class="p">:</span> <span class="p">{</span>
+  <span class="s">&quot;objectClass&quot;</span><span class="p">:</span> <span class="n">prim</span><span class="o">.</span><span class="n">Person</span><span class="p">,</span>
+  <span class="s">&quot;objectFunction&quot;</span><span class="p">:</span> <span class="s">&quot;convert&quot;</span><span class="p">,</span>
+  <span class="s">&quot;propertyMap&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="s">&quot;givenName&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;givenName&quot;</span><span class="p">}}}}</span>
+</pre></div>
+</div>
+<p>This means that if a instance of a prim.UserPerson appears it will be converted to an
+instance of a prim.Person and only the property givenName will be copied to the
+new instance.</p>
+<p>Any other properties that appears in the incoming instance will be ignored,
+so this is in essence a filter.</p>
+<p>Using a property converter:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">objconf</span> <span class="o">=</span> <span class="p">{</span> <span class="n">prim</span><span class="o">.</span><span class="n">UserPerson</span><span class="p">:</span> <span class="p">{</span>
+  <span class="s">&quot;objectClass&quot;</span><span class="p">:</span> <span class="n">prim</span><span class="o">.</span><span class="n">Person</span><span class="p">,</span>
+  <span class="s">&quot;objectFunction&quot;</span><span class="p">:</span> <span class="s">&quot;convert&quot;</span><span class="p">,</span>
+  <span class="s">&quot;propertyMap&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="s">&quot;givenName&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;givenName&quot;</span><span class="p">,</span> <span class="s">&quot;valueConverter&quot;</span><span class="p">:</span><span class="s">&quot;upper&quot;</span><span class="p">}}}}</span>
+</pre></div>
+</div>
+<p>Will do the same as above but also convert the values of givenName into upper case.</p>
+<p>A value converter will always return one or more values of the expected type for the
+concerned property.</p>
+</div>
+<div class="section" id="property-constructor">
+<h3>Property constructor<a class="headerlink" href="#property-constructor" title="Permalink to this headline">¶</a></h3>
+<p>In both examples the values of the property &#8220;givenName&#8221; are provided to the value converter.
+If you want to use values of more than one property you are supposed to use a property
+contructor.</p>
+<p>This is example of such a constructor:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">objconf</span> <span class="o">=</span> <span class="p">{</span> <span class="n">prim</span><span class="o">.</span><span class="n">UserPerson</span><span class="p">:</span> <span class="p">{</span>
+  <span class="s">&quot;objectClass&quot;</span><span class="p">:</span> <span class="n">prim</span><span class="o">.</span><span class="n">Person</span><span class="p">,</span>
+  <span class="s">&quot;objectFunction&quot;</span><span class="p">:</span> <span class="s">&quot;convert&quot;</span><span class="p">,</span>
+  <span class="s">&quot;propertyConstructionMap&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">&quot;__foo&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;name&quot;</span><span class="p">],</span>
+      <span class="s">&quot;valueConverter&quot;</span><span class="p">:</span><span class="s">&quot;patternConstruct&quot;</span><span class="p">,</span>
+      <span class="s">&quot;value_pattern&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;</span><span class="si">%(givenName)s</span><span class="s"> </span><span class="si">%(surName)s</span><span class="s">&quot;</span><span class="p">]}}}}</span>
+</pre></div>
+</div>
+<p>This will lead to the new instance having the property &#8216;name&#8217; with a value which is a
+combination of &#8216;surName&#8217; and &#8216;givenName&#8217;.</p>
+<p>So if you push the following graph into the value converter:</p>
+<div class="highlight-python"><pre>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;rdf:RDF
+  xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+  xmlns:_3='http://www.openmetadir.org/om2/prim-4.owl#'
+&gt;
+  &lt;_3:UserPerson&gt;
+    &lt;_3:surName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"&gt;Tappet&lt;/_3:surName&gt;
+    &lt;_3:givenName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"&gt;Click&lt;/_3:givenName&gt;
+  &lt;/_3:UserPerson&gt;
+&lt;/rdf:RDF&gt;</pre>
+</div>
+<p>out will come:</p>
+<div class="highlight-python"><pre>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;rdf:RDF
+  xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+  xmlns:_3='http://www.openmetadir.org/om2/prim-4.owl#'
+&gt;
+  &lt;_3:Person&gt;
+    &lt;_3:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"&gt;Click Tappet&lt;/_3:name&gt;
+  &lt;/_3:Person&gt;
+&lt;/rdf:RDF&gt;</pre>
+</div>
+<p>A property constructor, might as in the example above modify a graph, but it must always
+return a 3-tuple containing the:</p>
+<blockquote>
+<ul class="simple">
+<li>a list of object instance it has created,</li>
+<li>a list of messages it has created, and</li>
+<li>a list of references as to which objects in it&#8217;s path it has modified.</li>
+</ul>
+</blockquote>
+</div>
+<div class="section" id="object-constructor">
+<h3>Object constructor<a class="headerlink" href="#object-constructor" title="Permalink to this headline">¶</a></h3>
+<p>The third level is that you provide a conversion function with a whole object. It could be
+simple objects like an Email instance, but also more complex like a person.</p>
+<p>The configuration directive in that case could be:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">objectConf</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="n">prim</span><span class="o">.</span><span class="n">Role</span><span class="p">:</span> <span class="p">{</span> <span class="s">&quot;objektClass&quot;</span><span class="p">:</span><span class="s">&quot;dynamic&quot;</span><span class="p">,</span> <span class="s">&quot;objectFunction&quot;</span><span class="p">:</span><span class="s">&quot;role&quot;</span><span class="p">},</span>
+  <span class="n">prim</span><span class="o">.</span><span class="n">UserPerson</span><span class="p">:</span> <span class="p">{</span> <span class="s">&quot;objektClass&quot;</span><span class="p">:</span><span class="s">&quot;dynamic&quot;</span><span class="p">,</span> <span class="s">&quot;objectFunction&quot;</span><span class="p">:</span><span class="s">&quot;person&quot;</span><span class="p">},</span>
+  <span class="s">&quot;default&quot;</span><span class="p">:</span> <span class="n">objekt</span><span class="p">(</span><span class="s">&quot;dynamic&quot;</span><span class="p">,</span><span class="bp">None</span><span class="p">),</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Where &#8216;role&#8217; and &#8216;person&#8217; are the names under which the object constructors are registered.
+The third line with the class specification &#8216;default&#8217; is used for all objects that are not
+or the types prim.Role or prim.UserPerson. Specifying a transformer function of None means
+nothing is done with the object, so nothing comes out, hence the result of such a conversion
+is that the object will be dropped on the floor.</p>
+<p>Object constructors are expected to return the same 3-tuple as property constructors do.</p>
+</div>
+<div class="section" id="a-list-of-base-transformers">
+<h3>A list of base transformers:<a class="headerlink" href="#a-list-of-base-transformers" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="onlyid">
+<h4>OnlyID<a class="headerlink" href="#onlyid" title="Permalink to this headline">¶</a></h4>
+<p>Returns only the object identifier everything else is removed.</p>
+<p>Usefull if you in a graph has a reference to another object and where in the original
+graph that object is represented by a graph of its own.</p>
+<p>Configuration example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">objconf</span> <span class="o">=</span> <span class="p">{</span> <span class="n">prim</span><span class="o">.</span><span class="n">Employee</span><span class="p">:</span> <span class="p">{</span>
+  <span class="s">&quot;objectClass&quot;</span><span class="p">:</span> <span class="n">prim</span><span class="o">.</span><span class="n">Person</span><span class="p">,</span>
+  <span class="s">&quot;objectFunction&quot;</span><span class="p">:</span> <span class="s">&quot;convert&quot;</span><span class="p">,</span>
+  <span class="s">&quot;propertyMap&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">&quot;other&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;other&quot;</span><span class="p">,</span> <span class="s">&quot;valueConverter&quot;</span><span class="p">:</span><span class="s">&quot;OnlyID&quot;</span><span class="p">,</span> <span class="s">&quot;only_uriref&quot;</span><span class="p">:</span> <span class="bp">True</span><span class="p">},</span>
+    <span class="s">&quot;one&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;one&quot;</span><span class="p">,</span> <span class="s">&quot;valueConverter&quot;</span><span class="p">:</span><span class="s">&quot;OnlyID&quot;</span><span class="p">,</span> <span class="s">&quot;only_uriref&quot;</span><span class="p">:</span> <span class="bp">True</span><span class="p">},</span>
+  <span class="p">}}}</span>
+</pre></div>
+</div>
+<p>Will reduce:</p>
+<div class="highlight-python"><pre>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;rdf:RDF
+  xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+  xmlns:_3='http://www.openmetadir.org/om2/prim-4.owl#'
+&gt;
+  &lt;_3:Employee&gt;
+    &lt;_3:other&gt;
+      &lt;_3:Organisation rdf:about="urn:mace:example.com:id#abc"&gt;
+        &lt;_3:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"&gt;Example Inc.&lt;/_3:name&gt;
+      &lt;/_3:Organisation&gt;
+    &lt;/_3:other&gt;
+    &lt;_3:one&gt;
+      &lt;_3:UserPerson rdf:about="urn:mace:example.com:person#clta0001"&gt;
+        &lt;_3:surName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"&gt;Tappet&lt;/_3:surName&gt;
+        &lt;_3:givenName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"&gt;Click&lt;/_3:givenName&gt;
+      &lt;/_3:UserPerson&gt;
+    &lt;/_3:one&gt;
+  &lt;/_3:Employee&gt;
+&lt;/rdf:RDF&gt;</pre>
+</div>
+<p>to:</p>
+<div class="highlight-python"><pre>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;rdf:RDF
+  xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+  xmlns:_3='http://www.openmetadir.org/om2/prim-4.owl#'
+&gt;
+  &lt;_3:Employee&gt;
+    &lt;_3:other rdf:resource="urn:mace:example.com:id#abc"/&gt;
+    &lt;_3:one rdf:resource="urn:mace:example.com:person#clta0001"/&gt;
+  &lt;/_3:Employee&gt;
+&lt;/rdf:RDF&gt;</pre>
+</div>
+</div>
+<div class="section" id="passthrough">
+<h4>PassThrough<a class="headerlink" href="#passthrough" title="Permalink to this headline">¶</a></h4>
+<p>Just copies the input verbatim to the output</p>
+</div>
+<div class="section" id="propertyadd">
+<h4>PropertyAdd<a class="headerlink" href="#propertyadd" title="Permalink to this headline">¶</a></h4>
+<p><strong>Property constructor</strong></p>
+<p>Will add a property and one or more values.</p>
+</div>
+<div class="section" id="propertydelete">
+<h4>PropertyDelete<a class="headerlink" href="#propertydelete" title="Permalink to this headline">¶</a></h4>
+<p><strong>Property constructor</strong></p>
+<p>Will remove a property value or property from an object if present.</p>
+<p>Configuration example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">objconf</span> <span class="o">=</span> <span class="p">{</span> <span class="n">prim</span><span class="o">.</span><span class="n">UserPerson</span><span class="p">:</span> <span class="p">{</span>
+  <span class="s">&quot;objectClass&quot;</span><span class="p">:</span> <span class="n">prim</span><span class="o">.</span><span class="n">Person</span><span class="p">,</span>
+  <span class="s">&quot;objectFunction&quot;</span><span class="p">:</span> <span class="s">&quot;convert&quot;</span><span class="p">,</span>
+  <span class="s">&quot;propertyConstructionMap&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">&quot;__foo&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s">&quot;valueConverter&quot;</span><span class="p">:</span><span class="s">&quot;PropertyDelete&quot;</span><span class="p">,</span>
+      <span class="s">&quot;uid&quot;</span><span class="p">:</span> <span class="bp">None</span><span class="p">}}}}</span>
+</pre></div>
+</div>
+<p>A value of None means remove all the values, the result of which is to remove the whole
+property. If values are given then exactly them are removed.</p>
+<p>Given the following input:</p>
+<div class="highlight-python"><pre>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;rdf:RDF
+  xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+  xmlns:_3='http://www.openmetadir.org/om2/prim-4.owl#'
+&gt;
+  &lt;_3:UserPerson&gt;
+    &lt;_3:uid rdf:datatype="http://www.w3.org/2001/XMLSchema#string"&gt;clta0001&lt;/_3:uid&gt;
+    &lt;_3:givenName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"&gt;Click&lt;/_3:givenName&gt;
+    &lt;_3:surName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"&gt;Tappet&lt;/_3:surName&gt;
+  &lt;/_3:UserPerson&gt;
+&lt;/rdf:RDF&gt;</pre>
+</div>
+<p>The output will be:</p>
+<div class="highlight-python"><pre>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;rdf:RDF
+  xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+  xmlns:_3='http://www.openmetadir.org/om2/prim-4.owl#'
+&gt;
+  &lt;_3:UserPerson&gt;
+    &lt;_3:givenName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"&gt;Click&lt;/_3:givenName&gt;
+    &lt;_3:surName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"&gt;Tappet&lt;/_3:surName&gt;
+  &lt;/_3:UserPerson&gt;
+&lt;/rdf:RDF&gt;</pre>
+</div>
+</div>
+<div class="section" id="propertyreplace">
+<h4>PropertyReplace<a class="headerlink" href="#propertyreplace" title="Permalink to this headline">¶</a></h4>
+<p><strong>Property constructor</strong></p>
+<p>Will replace all the values of a property, if present, with something else.</p>
+<p>Configuration example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">objconf</span> <span class="o">=</span> <span class="p">{</span> <span class="n">prim</span><span class="o">.</span><span class="n">UserPerson</span><span class="p">:</span> <span class="p">{</span>
+  <span class="s">&quot;objectClass&quot;</span><span class="p">:</span> <span class="n">prim</span><span class="o">.</span><span class="n">Person</span><span class="p">,</span>
+  <span class="s">&quot;objectFunction&quot;</span><span class="p">:</span> <span class="s">&quot;convert&quot;</span><span class="p">,</span>
+  <span class="s">&quot;propertyConstructionMap&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">&quot;__foo&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s">&quot;valueConverter&quot;</span><span class="p">:</span><span class="s">&quot;PropertyReplace&quot;</span><span class="p">,</span>
+      <span class="s">&quot;givenName&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;Clack&quot;</span><span class="p">]}}}}</span>
+</pre></div>
+</div>
+<p>Given the following input:</p>
+<div class="highlight-python"><pre>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;rdf:RDF
+  xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+  xmlns:_3='http://www.openmetadir.org/om2/prim-4.owl#'
+&gt;
+  &lt;_3:UserPerson&gt;
+    &lt;_3:givenName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"&gt;Tom&lt;/_3:givenName&gt;
+    &lt;_3:givenName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"&gt;Click&lt;/_3:givenName&gt;
+    &lt;_3:surName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"&gt;Tappet&lt;/_3:surName&gt;
+  &lt;/_3:UserPerson&gt;
+&lt;/rdf:RDF&gt;</pre>
+</div>
+<p>The output will be:</p>
+<div class="highlight-python"><pre>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;rdf:RDF
+  xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+  xmlns:_3='http://www.openmetadir.org/om2/prim-4.owl#'
+&gt;
+  &lt;_3:UserPerson&gt;
+    &lt;_3:givenName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"&gt;Clack&lt;/_3:givenName&gt;
+    &lt;_3:surName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"&gt;Tappet&lt;/_3:surName&gt;
+  &lt;/_3:UserPerson&gt;
+&lt;/rdf:RDF&gt;</pre>
+</div>
+</div>
+<div class="section" id="patternconstruct">
+<h4>PatternConstruct<a class="headerlink" href="#patternconstruct" title="Permalink to this headline">¶</a></h4>
+<p>Will construct property values based on a pattern and the information in the graph.
+An example of this has been given above.</p>
+</div>
+</div>
+</div>
+<div class="section" id="module-definition">
+<h2>Module definition<a class="headerlink" href="#module-definition" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="MsgTransform">
+<em class="property">
+class </em><tt class="descname">MsgTransform</tt><a class="headerlink" href="#MsgTransform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms a RDF graph from one representation to another,
+This might include changing from one set of ontologies to another</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>objectConf</em> &#8211; <p>This is a dictionary containing the following keys:</p>
+<ul>
+<li><em>objectClass</em>: The class this class should be converted into. As a special this
+can be defined to be &#8216;dynamic&#8217; in which case the &#8216;objectFunction&#8217;
+decides which object class it should be</li>
+<li><em>objectFunction</em>: A function that works on the class instance.</li>
+<li><em>propertyMap</em>: A dictionary with property names as keys and definitions on what to
+do with values of that property. The definition is a dictionary where the keys used are
+dependent on the context</li>
+<li><em>propertyConstructionMap</em>: How to construct extra properties outside the &#8216;simple&#8217;
+conversion of values.</li>
+</ul>
+</li>
+<li><em>regFunc</em> &#8211; Value conversion functions that should be registered from the start</li>
+<li><em>msgConf</em> &#8211; How to convert a message, if not defined a default will be used which
+is a speficiation of how an OM2 message should be handled. This includes how to
+handle operations that follows the MIRO ontology.</li>
+<li><em>debug</em> &#8211; Put on debugging or not</li>
+<li><em>servers</em> &#8211; Servers to be used by the transformer in its work</li>
+<li><em>doctest</em> &#8211; This provides some more output during doctest or py.testing</li>
+<li><em>conf</em> &#8211; Extra information to be used by MsgTranform or value converters.</li>
+<li><em>log</em> &#8211; Log functions to use</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="MsgTransform.doGraph">
+<tt class="descname">doGraph</tt><big>(</big><em>graph</em><big>)</big><a class="headerlink" href="#MsgTransform.doGraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the starting point for any message transformation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameter:</th><td class="field-body"><em>graph</em> &#8211; The message graph but in its pythonic representation.</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body">list of python objects representing messages.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<tt class="descname">register(klass,name=None):</tt></dt>
+<dd><p>Registers a transformer (for values,properties or objects) under an string alias,
+it is possible though not recommended to register a function
+with an alias that coincides with a function of this class.
+The registered function will have precedence in that case.
+So watch out!</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>klass</em> &#8211; The transformer function</li>
+<li><em>name</em> &#8211; The name under which the transformer should be registered</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<tt class="descname">runable(func):</tt></dt>
+<dd><p>Return a run-able function if possible. The function is found be looking in the
+list of registered function and if not present there checks if it&#8217;s one of the class&#8217;s
+methods.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameter:</th><td class="field-body"><em>func</em> &#8211; The name of the function</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body">A list of messages or None.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="MsgTransform.convObj">
+<tt class="descname">convObj</tt><big>(</big><em>self</em>, <em>source</em>, <em>path</em>, <em>propertyMap=None</em>, <em>args={}</em><big>)</big><a class="headerlink" href="#MsgTransform.convObj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts an object to possibly something different based on what&#8217;s in the configuration.
+This piece just picks which configuration to use before running the actual converter.
+If there is no specific configuration for this type of object it
+will look for a default converter configuration.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>source</em> &#8211; <p>A list of objects, defining the path that has been taken through the
+message graph before reaching this method. Typically it will look something like this:</p>
+<div class="highlight-python"><pre>[&lt;pyom.ontology.om2_1.Message object at 0x1677b10&gt;,'body',
+[&lt;pyom.ontology.miro.MIRO object at 0x1677bf0&gt;],
+&lt;pyom.ontology.miro.MIRO object at 0x1677bf0&gt;,
+'otherwiseInsert',[&lt;pyom.ontology.prim_4.UserPerson object at 0x1677930&gt;],
+&lt;pyom.ontology.prim_4.UserPerson object at 0x1677930&gt;]</pre>
+</div>
+</li>
+<li><em>path</em> &#8211; A list of object that has be instantiated on the way here, the last object in
+this list is normally where the converted should be added</li>
+<li><em>args</em> &#8211; Extra arguments</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="MsgTransform.convert">
+<tt class="descname">convert</tt><big>(</big><em>source</em>, <em>path</em>, <em>conf={}</em>, <em>args={}</em><big>)</big><a class="headerlink" href="#MsgTransform.convert" title="Permalink to this definition">¶</a></dt>
+<dd><p>The basic conversion function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>source</em> &#8211; A list of objects, representing the path from the message object
+to the class instance that is to be converted.</li>
+<li><em>path</em> &#8211; A list of objects, representing the objects created along this
+source path.</li>
+<li><em>conf</em> &#8211; Arguments</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="MsgTransform.onlyPropertyConstruct">
+<tt class="descname">onlyPropertyConstruct</tt><big>(</big><em>source</em>, <em>path</em>, <em>conf={}</em><big>)</big><a class="headerlink" href="#MsgTransform.onlyPropertyConstruct" title="Permalink to this definition">¶</a></dt>
+<dd>A special case of convert(), where the there are only property constructs defined for the
+object. No mapping or copies.</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="ValueConverter">
+<em class="property">
+class </em><tt class="descname">ValueConverter</tt><a class="headerlink" href="#ValueConverter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for value converters</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameter:</th><td class="field-body"><em>parent</em> &#8211; The MsgTransform instance who owns this value converter.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt>
+<tt class="descname">conv(source,path,args):</tt></dt>
+<dd><p>The conversion function itself.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>source</em> &#8211; A list of objects, representing the path from the message object
+to the class instance that is to be converted.</li>
+<li><em>path</em> &#8211; A list of objects, representing the objects created along this source path.</li>
+<li><em>args</em> &#8211; Extra arguments.</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Must return a 3-tuple consisting of</p>
+<ul class="simple">
+<li>a list of values,</li>
+<li>a list of new messages and</li>
+<li>a list that tells which path elements if any that should be replaced.</li>
+</ul>
+<p class="last">Any lists can of course be empty.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ValueConverter.my_sourceAddress">
+<tt class="descname">my_sourceAddress</tt><big>(</big><big>)</big><a class="headerlink" href="#ValueConverter.my_sourceAddress" title="Permalink to this definition">¶</a></dt>
+<dd>returns an address to use as source address if a new message is created.</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="">The transformer - modifies a message or creates new based on one or more</a><ul>
+<li><a class="reference external" href="#write-your-own">Write your own</a></li>
+<li><a class="reference external" href="#configuration-examples">Configuration examples</a><ul>
+<li><a class="reference external" href="#attribute-converter">Attribute converter</a></li>
+<li><a class="reference external" href="#property-constructor">Property constructor</a></li>
+<li><a class="reference external" href="#object-constructor">Object constructor</a></li>
+<li><a class="reference external" href="#a-list-of-base-transformers">A list of base transformers:</a><ul>
+<li><a class="reference external" href="#onlyid">OnlyID</a></li>
+<li><a class="reference external" href="#passthrough">PassThrough</a></li>
+<li><a class="reference external" href="#propertyadd">PropertyAdd</a></li>
+<li><a class="reference external" href="#propertydelete">PropertyDelete</a></li>
+<li><a class="reference external" href="#propertyreplace">PropertyReplace</a></li>
+<li><a class="reference external" href="#patternconstruct">PatternConstruct</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference external" href="#module-definition">Module definition</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="senders/unix.html"
+                                  title="previous chapter">Unix Domain Socket</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="handler.html"
+                                  title="next chapter">The handlers - to provide the dispatcher with more functions</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/node/transformer.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="handler.html" title="The handlers - to provide the dispatcher with more functions"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="senders/unix.html" title="Unix Domain Socket"
+             >previous</a> |</li>
+        <li><a href="../index.html">OM2 v1.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >The node -the basic buildingblock</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009, Roland Hedberg.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.2.
+    </div>
+  </body>
+</html>

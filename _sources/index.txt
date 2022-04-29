@@ -1,0 +1,33 @@
+.. _index:
+
+===================
+PYOM documentation!
+===================
+
+:Release: |version|
+:Date: |today|
+
+.. module:: pyom
+
+Everything you need to know about Pyom.
+
+*******
+Content
+*******
+
+.. toctree::
+   :maxdepth: 1
+    
+   intro/index.rst
+   node/index.rst
+   ref/index.rst
+   api/index.rst
+   ontology/index.rst
+
+******************
+Indices and tables
+******************
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`

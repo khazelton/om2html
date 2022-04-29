@@ -1,0 +1,36 @@
+.. _grouped-install:
+
+***********************
+Installation directives
+***********************
+
+I assume that you have the rest of the documentation or at least have a working setup of
+a Neo repository and knows how to configure and start a node. If that is not the case you have
+some work before you :-).
+
+The GUI is a javascript which can be provided to the web client by a simple web server. 
+Due to restrictions on javascripts the ajax server part have to reside on the same web server.
+It is not sufficient to be on the same machine with another port number, it has to be the 
+same machine and the same port number.
+
+The fetch the javascript by doing::
+
+wget http://www.windh.com/om2/groupadmin.war
+
+Unpacking is a simple unziping in a place of your choice.
+After unpacking you will have to look for a file named groupadmin/Grouped.html .
+In this file you must configure where the ajax server is. It's this line you have to change::
+
+  var generalSettings = { serverUrl:"http://xenosmilus.umdc.umu.se/cgi-bin/om2jsonrpc" }; 
+
+to be consistent with your setup.
+
+The code for the ajax server can be found :ref:`here <grouped-om2jsonrpc>` .
+
+In this you have to change at the end of the file where you have your Neo repository and
+where the receiver node is.
+
+And that's it !!
+
+**Note!** Right now the access control is not fully implemented, so everyone can do everything.
+This will change in the future.

@@ -1,0 +1,56 @@
+.. _intro-index:
+
+Getting started
+===============
+
+New to Pyom? Or to metadirectories? Well, you came to the right
+place: read this material to quickly get up and running.
+
+Copied from Wikipedia which is, as everyone knows, the authority:
+
+A metadirectory system provides for the flow of data between one or more directory 
+services and databases, in order to maintain synchronization of that data, and is 
+an important part of identity management systems. 
+The data being synchronized typically are collections of entries that contain user 
+profiles and potentially authentication or policy information. Most metadirectory 
+deployments synchronize data into at least one LDAP-based directory server, to 
+ensure that LDAP-based applications such as single sign-on and portal servers 
+have access to recent data, even if the data is mastered in a non-LDAP data source.
+
+Metadirectory products support filtering and transformation of data in transit.
+
+The Openmetadir_ project was started by SWAMI_ 
+because the members felt there was a need for a open source metadir implementation.
+
+Pyom is the Python_ implementation of the OpenMetadir specification.
+
+.. toctree::
+   :maxdepth: 1
+    
+   overview
+   install
+   tutorial01
+   
+.. seealso::
+
+    If you're new to Python_, you might want to start by getting an idea of what
+    the language is like. Pyom is 100% Python, so if you've got minimal
+    comfort with Python you'll probably get a lot more out of Pyom.
+    
+    If you're new to programming entirely, you might want to start with this
+    `list of Python resources for non-programmers`_
+    
+    If you already know a few other languages and want to get up to speed with
+    Python quickly, we recommend `Dive Into Python`_ (also available in a
+    `dead-tree version`_). If that's not quite your style, there are quite
+    a few other `books about Python`_.
+    
+    .. _python: http://python.org/
+    .. _list of Python resources for non-programmers: http://wiki.python.org/moin/BeginnersGuide/NonProgrammers
+    .. _dive into python: http://diveintopython.org/
+    .. _dead-tree version: http://www.amazon.com/exec/obidos/ASIN/1590593561/ref=nosim/jacobian20
+    .. _books about Python: http://wiki.python.org/moin/PythonBooks
+    
+    
+.. _Openmetadir: http://www.openmetadir.org
+.. _SWAMI: http://www.swami.se

@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>A node through a microscope :-) &mdash; OM2 v1.1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.1.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="OM2 v1.1.0 documentation" href="../index.html" />
+    <link rel="up" title="The node -the basic buildingblock" href="index.html" />
+    <link rel="next" title="Node configuration" href="config.html" />
+    <link rel="prev" title="The node -the basic buildingblock" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="config.html" title="Node configuration"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="The node -the basic buildingblock"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">OM2 v1.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">The node -the basic buildingblock</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="a-node-through-a-microscope">
+<span id="node-overview"></span><h1>A node through a microscope :-)<a class="headerlink" href="#a-node-through-a-microscope" title="Permalink to this headline">¶</a></h1>
+<p>The components in a node described in an <em>simple</em> activity diagram:</p>
+<img alt="../_images/pyomnode_ad.png" src="../_images/pyomnode_ad.png" />
+<p>The absolutely simplest node contains one listener, one simple router, a
+static resolver, one sender and no handlers.</p>
+<p>In that case a message:</p>
+<ol class="arabic">
+<li><p class="first">comes in trough the listener,</p>
+</li>
+<li><p class="first">after it is parsed into a python object it is passed on to the dispatcher, who</p>
+</li>
+<li><p class="first">sends it to a router which returns zero or more address.</p>
+</li>
+<li><dl class="first docutils">
+<dt>For each address it is sent to the resolver who returns zero or more</dt>
+<dd><p class="first last">protocol/endpoint combination.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>a sender is picked based on the protocol and that sender receives the</dt>
+<dd><p class="first last">message together with the endpoint specification</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">the sender sends the message</p>
+</li>
+<li><dl class="first docutils">
+<dt>depending on whether the sending was successfull or not a positive or negative</dt>
+<dd><p class="first last">reply is returned to the listener</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">who returns a response to the original sender according to the protocol it uses.</p>
+</li>
+</ol>
+<p>This then can be arbitrarily complicated;</p>
+<ul class="simple">
+<li>increase the number of listener and senders</li>
+<li>use pre-/initerr-/post-/errorhandlers</li>
+<li>more sophisticated routers and dynamic resolvers</li>
+<li>and so on</li>
+</ul>
+<div class="section" id="starting-a-node">
+<h2>Starting a node<a class="headerlink" href="#starting-a-node" title="Permalink to this headline">¶</a></h2>
+<p>A node is started with the command:</p>
+<div class="highlight-python"><pre>nodectl.py start &lt;nodeconfiguration_file&gt;</pre>
+</div>
+<p>The node configuration file is a python script that using the <em class="xref">nodeconfig
+ontology</em> specifies what parts the node is expected to contain.</p>
+<p>The command syntax for nodectl.py is:</p>
+<p>Usage: nodectl [options] operation 1*node</p>
+<dl class="docutils">
+<dt>Valid options:</dt>
+<dd><table class="first last docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd><span class="option">-l <var>logfile</var></span></kbd></td>
+<td>: The directory where the logfile should be placed</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-p <var>pidfile</var></span></kbd></td>
+<td>: The directory where the pidfile should be placed</td></tr>
+</tbody>
+</table>
+</dd>
+<dt>operations are</dt>
+<dd>&#8220;start&#8221;
+&#8220;stop&#8221;
+&#8220;restart&#8221; and
+&#8220;configtest&#8221;</dd>
+<dt>node</dt>
+<dd>a node configuration file</dd>
+</dl>
+</div>
+<div class="section" id="debugging-a-node">
+<h2>Debugging a node<a class="headerlink" href="#debugging-a-node" title="Permalink to this headline">¶</a></h2>
+<p>There is no central place where you can turn on/turn off debug logging, rather you
+do it per piece. If you want to know what a specific listener does, turn on the
+debugging for that listener.
+The same for every other piece.</p>
+<p>Debug level is an integer, but presently it&#8217;s mostly on/off. This might change in
+the future.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="">A node through a microscope :-)</a><ul>
+<li><a class="reference external" href="#starting-a-node">Starting a node</a></li>
+<li><a class="reference external" href="#debugging-a-node">Debugging a node</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="index.html"
+                                  title="previous chapter">The node -the basic buildingblock</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="config.html"
+                                  title="next chapter">Node configuration</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/node/overview.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="config.html" title="Node configuration"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="The node -the basic buildingblock"
+             >previous</a> |</li>
+        <li><a href="../index.html">OM2 v1.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >The node -the basic buildingblock</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009, Roland Hedberg.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.2.
+    </div>
+  </body>
+</html>

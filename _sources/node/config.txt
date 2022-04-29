@@ -1,0 +1,52 @@
+.. _node-config:
+
+==================
+Node configuration
+==================
+
+
+:Author: Roland Hedberg
+:Version: |version|
+
+.. module:: nodeconfig
+.. moduleauthor:: Roland Hedberg
+
+********************
+A configuration file
+********************
+
+Is a python script that typically starts with::
+
+  #!/usr/bin/env python
+
+  import pyom.ontology.nodeconfig as nc
+
+  # Generell Node information
+  conf = nc.Configuration()
+  conf.about = "http://www.umu.se/node#N1"
+  conf["ontology"] = ["pyom.ontology.om2_1","pyom.ontology.prim_4",
+    "pyom.ontology.miro"]
+  conf["name"] = "node1@example.org"
+  
+**Note**: Using *about* and setting a name of the configuration as such is 
+only necessary if you contemplate saving the configuration in a RDF store.
+Otherwise you may as well leave it out.
+
+You **must** specify which ontologies the node must understand. If a message
+arrives that is built using an ontology that the node doesn't know about
+it will be rejected.
+
+Setting a *name* is a good thing since this information is used in logging.
+
+After this you have to got through the other parts
+
+* :ref:`Listener <node-listener>`
+* :ref:`Router <node-router>`
+* :ref:`Resolver <node-resolver>`
+* :ref:`Sender <node-sender>`
+* :ref:`Transformer <node-transformer>`
+* :ref:`handler <node-handler>`
+
+Configuration directives are described by the 
+:ref:`nodeconfig ontology <node-ontology-nodeconfig>`
+

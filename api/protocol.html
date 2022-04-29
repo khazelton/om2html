@@ -1,0 +1,397 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The protocol &mdash; OM2 v1.1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.1.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="OM2 v1.1.0 documentation" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li><a href="../index.html">OM2 v1.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="the-protocol">
+<span id="grouped-protocol"></span><h1>The protocol<a class="headerlink" href="#the-protocol" title="Permalink to this headline">¶</a></h1>
+<p>A number of commands are implemented, all of them dependent on access control.</p>
+<dl class="function">
+<dt id="add">
+<tt class="descname">add</tt><big>(</big><em>object</em><span class="optional">[</span>, <em>req=&quot;&quot;</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds an object to the repository</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>object</em> (A dictionary) &#8211; The object to be added</li>
+<li><em>req</em> (A uriref) &#8211; The object identifier of the requestor</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="update">
+<tt class="descname">update</tt><big>(</big><em>object</em><span class="optional">[</span>, <em>req=&quot;&quot;</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates an object in the repository, the idea being that this is the <em>complete</em> object
+after the modification. So not just a diff.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>object</em> (A dictionary) &#8211; The object to be added</li>
+<li><em>req</em> (A uriref) &#8211; The object identifier of the requestor</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="delete">
+<tt class="descname">delete</tt><big>(</big><em>id</em><span class="optional">[</span>, <em>req=&quot;&quot;</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes an object from the repository</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>id</em> (A uriref) &#8211; The identifier of the object to delete</li>
+<li><em>req</em> (A uriref) &#8211; The object identifier of the requestor</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="group_info">
+<tt class="descname">group_info</tt><big>(</big><em>id</em><span class="optional">[</span>, <em>expand=False</em>, <em>req=&quot;&quot;</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#group_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return information on a group from the repository</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>id</em> (A uriref) &#8211; The identifier of the group</li>
+<li><em>expand</em> (True/False) &#8211; Whether groups as members should be expanded</li>
+<li><em>req</em> (A uriref) &#8211; The object identifier of the requestor</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A dictionary with the keys: aci,member,name,path,parent,uriref</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p>Typical return information</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;personal&#39;</span><span class="p">,</span>
+<span class="s">&#39;parent&#39;</span><span class="p">:</span> <span class="s">&#39;urn:mace:umu.se:ed:stem#_3920743537361534465&#39;</span><span class="p">,</span>
+<span class="s">&#39;uriref&#39;</span><span class="p">:</span> <span class="s">&#39;urn:mace:umu.se:ed:collection#3096131303521433080_personal&#39;</span><span class="p">,</span>
+<span class="s">&#39;aci&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;urn:mace:umu.se:uuid#_55e82bae-93d7-11dd-a500-0016cba1aac1&#39;</span><span class="p">],</span>
+<span class="s">&#39;member&#39;</span><span class="p">:</span> <span class="p">[</span>
+<span class="p">[</span><span class="s">&#39;urn:mace:umu.se:ed:umuid#_1202118531122696708&#39;</span><span class="p">,</span> <span class="s">&#39;David Beckham (dabe0001)&#39;</span><span class="p">],</span>
+<span class="p">[</span><span class="s">&#39;urn:mace:umu.se:ed:umuid#_1352606719072064518&#39;</span><span class="p">,</span> <span class="s">&#39;Philip Senderos (phse0001)&#39;</span><span class="p">],</span>
+<span class="p">[</span><span class="s">&#39;urn:mace:umu.se:ed:umuid#_1775730385251111931&#39;</span><span class="p">,</span> <span class="s">&#39;Henrik Larsson (hela0001)&#39;</span><span class="p">]],</span>
+<span class="s">&#39;path&#39;</span><span class="p">:</span> <span class="s">u&#39;umu:Institutionen för idrott:Fotboll:personal&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+<dl class="function">
+<dt id="groups">
+<tt class="descname">groups</tt><big>(</big><em>name</em><span class="optional">[</span>, <em>category</em>, <em>req</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#groups" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the groups in the repository that matches the given information</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>name</em> (a string) &#8211; <p>a name, (you can represent leading,trailing and substrings by using &#8216;*&#8217;)</p>
+<ul>
+<li>&#8220;*foo&#8221; - means all groups with names that ends with &#8220;foo&#8221;,</li>
+<li>&#8220;foo*&#8221; - means all groups with names that starts with &#8220;foo&#8221; and</li>
+<li>&#8220;*foo*&#8221; - means all groups with names that has &#8220;foo&#8221; somewhere in them</li>
+</ul>
+</li>
+<li><em>category</em> (string) &#8211; The category of the group</li>
+<li><em>req</em> (A uriref) &#8211; The object identifier of the requestor</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">list of list with two items; the first the uriref, the second the full path</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p>Typical return information</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[[</span>
+<span class="s">&#39;urn:mace:umu.se:uuid#_62825dde_f431_11dd_aa01_0050568374ea&#39;</span><span class="p">,</span>
+<span class="s">u&#39;umu:Institutionen för klinisk mikrobiologi:Immunologi:personal:Pior&#39;</span>
+<span class="p">]]</span>
+</pre></div>
+</div>
+<dl class="function">
+<dt id="person_info">
+<tt class="descname">person_info</tt><big>(</big><em>id</em><span class="optional">[</span>, <em>req</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#person_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return information about a person given a unique identifier for a person.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>id</em> (A uriref) &#8211; The identifier of the person</li>
+<li><em>req</em> (A uriref) &#8211; The object identifier of the requestor</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A dictionary with the keys: givenName,surName,uid and uriref</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p>Typical return information</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span>
+<span class="s">&#39;givenName&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;Elisabet&#39;</span><span class="p">],</span>
+<span class="s">&#39;surName&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;Sundbom&#39;</span><span class="p">],</span>
+<span class="s">&#39;uid&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;elsu0001&#39;</span><span class="p">],</span>
+<span class="s">&#39;uriref&#39;</span><span class="p">:</span> <span class="s">&#39;urn:mace:umu.se:ed:umuid#_1373986647351385080&#39;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<dl class="function">
+<dt id="persons">
+<tt class="descname">persons</tt><big>(</big><span class="optional">[</span><em>givenname</em>, <em>surname</em>, <em>uid</em>, <em>req</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#persons" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the persons in the repository that matches the given information</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>givenname</em> (A string) &#8211; The given name of the person, &#8220;*&#8221; allow as specified above</li>
+<li><em>surname</em> (A string) &#8211; The surname of the person, &#8220;*&#8221; allow as specified above</li>
+<li><em>uid</em> (A string) &#8211; The uid of the person</li>
+<li><em>req</em> (A uriref) &#8211; The object identifier of the requestor</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p>Typical return information</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span>
+<span class="p">[</span><span class="s">&#39;urn:mace:umu.se:ed:umuid#_1078603230108404733&#39;</span><span class="p">,</span> <span class="s">&#39;Pia Hedberg (piaheg00)&#39;</span><span class="p">],</span>
+<span class="p">[</span><span class="s">&#39;urn:mace:umu.se:ed:umuid#_2151715987016096763&#39;</span><span class="p">,</span> <span class="s">&#39;Ylva Hedberg (ylaheg97)&#39;</span><span class="p">],</span>
+<span class="p">[</span><span class="s">&#39;urn:mace:umu.se:ed:umuid#_2123221779995136007&#39;</span><span class="p">,</span> <span class="s">&#39;Roland Hedberg (rohe0002)&#39;</span><span class="p">],</span>
+<span class="p">[</span><span class="s">&#39;urn:mace:umu.se:ed:umuid#_2106020507225672700&#39;</span><span class="p">,</span> <span class="s">&#39;Maria Hedberg (mahe0026)&#39;</span><span class="p">],</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<dl class="function">
+<dt id="assigned_roles">
+<tt class="descname">assigned_roles</tt><big>(</big><span class="optional">[</span><em>id</em>, <em>uid</em>, <em>req</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#assigned_roles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the roles that a specific person can use. One of <em>id</em> and <em>uid</em> has to be given.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>id</em> (A uriref) &#8211; The identifier of the person</li>
+<li><em>uid</em> (A string) &#8211; The uid of the person</li>
+<li><em>req</em> (A uriref) &#8211; The object identifier of the requestor</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">list of lists, the later with two members: uriref and name</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p>Typical return information</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span>
+<span class="p">[</span><span class="s">&#39;urn:mace:umu.se:ed:umuid#_1579133568852000765&#39;</span><span class="p">,</span>
+<span class="s">u&#39;katalogansvarig@Institutionen för klinisk mikrobiologi&#39;</span><span class="p">]</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<dl class="function">
+<dt id="role_name">
+<tt class="descname">role_name</tt><big>(</big><em>id</em><span class="optional">[</span>, <em>req</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#role_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the name of a role, given the roles identifier</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>id</em> (A uriref) &#8211; The identifier of the role</li>
+<li><em>req</em> (A uriref) &#8211; The object identifier of the requestor</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="stem_info">
+<tt class="descname">stem_info</tt><big>(</big><em>id</em><span class="optional">[</span>, <em>req</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#stem_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return information about a stem.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>id</em> (A uriref) &#8211; The stems identifier</li>
+<li><em>req</em> (A uriref) &#8211; The object identifier of the requestor</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="stems">
+<tt class="descname">stems</tt><big>(</big><em>name</em><span class="optional">[</span>, <em>req</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#stems" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the stems in the repository that matches the given information</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>name</em> (A string) &#8211; The name of the stem, &#8220;*&#8221; allow as specified above</li>
+<li><em>req</em> (A uriref) &#8211; The object identifier of the requestor</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="owned_groups">
+<tt class="descname">owned_groups</tt><big>(</big><span class="optional">[</span><em>id</em>, <em>uid</em>, <em>req</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#owned_groups" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all groups that a person owns. One of <em>id</em> and <em>uid</em> has to be given.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>id</em> (A uriref) &#8211; The identifier of the person</li>
+<li><em>uid</em> (A string) &#8211; The uid of the person</li>
+<li><em>req</em> (A uriref) &#8211; The object identifier of the requestor</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="owned_stems">
+<tt class="descname">owned_stems</tt><big>(</big><span class="optional">[</span><em>id</em>, <em>uid</em>, <em>req</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#owned_stems" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all stems that a person owns. One of <em>id</em> and <em>uid</em> has to be given.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>id</em> (A uriref) &#8211; The identifier of the person</li>
+<li><em>uid</em> (A string) &#8211; The uid of the person</li>
+<li><em>req</em> (A uriref) &#8211; The object identifier of the requestor</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/api/protocol.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">OM2 v1.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009, Roland Hedberg.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,96 @@
+.. _node-resolver:
+
+===============================================================
+The resolver - turns an address into a protocol and an endpoint
+===============================================================
+
+There are two resolvers implemented presently, one static and one dynamic.
+Let's take the simple first.
+
+.. _resolver-static:
+
+Static
+======
+
+With this you have to define the mapping between an address and a protocol/endpoint
+that will be valid as long as the node is running.
+
+The mapping consists of two parts: a protocol/endpoint combination and a address 
+matching rule. A matching rule can either be exakt or a regular expression.
+
+One exact map, two receivers::
+
+  resolv = nc.Static()
+  
+  adr1 = nc.Address()
+  adr1["protocolName"] = "rest"
+  adr1["endpoint"] = "http://localhost:8087/"
+  adr2 = nc.Address()
+  adr2["protocolName"] = "devnull"
+  adr2["endpoint"] = "/dev/null"
+  map = nc.ResolverMap()
+  map["pattern"] = "foo@example.org"
+  map["receiver"] = [adr1,adr2]
+  resolv["exact"] = map
+
+Two exact maps, one receivers::
+
+  resolv = nc.Static()
+
+  adr = nc.Address()
+  adr["protocolName"] = "rest"
+  adr["endpoint"] = "http://localhost:8087/"
+  map1 = nc.ResolverMap()
+  map1["pattern"] = "foo@example.org"
+  map1["receiver"] = [adr]
+  map2 = nc.ResolverMap()
+  map2["pattern"] = "bar@example.org"
+  map2["receiver"] = [adr]
+  resolv["exact"] = [map1,map2]
+    
+One regexp match, one receiver::
+
+  resolv = nc.Static()
+
+  adr = nc.Address()
+  adr["protocolName"] = "rest"
+  adr["endpoint"] = "http://localhost:8087/"
+  map = nc.ResolverMap()
+  map["pattern"] = ".+@example.org"
+  map["receiver"] = [adr]
+  resolv["regexp"] = map
+
+.. _resolver-dynamic:
+
+Dynamic
+=======
+
+This uses the dynamic resolver as defined by the OpenMetadir project.
+
+This defines a sequence of events base on the DDDS specification
+(Defined in :rfc:`3401`, :rfc:`3402`, :rfc:`3403`, :rfc:`3404`, and :rfc:`3405`):
+
+1. Use the domain part of the address and find the NAPTR record/-s for that domain/host
+2. Using the NAPTR record translate the address to a URL
+3. Do a HTTP GET on the URL and expect a RDF graph following the :ref:`node ontology <ontology-node>` back.
+4. Use the information in the graph and choose a suitable protocol and endpoint
+
+An example of what could be returned::
+
+  <?xml version="1.0" encoding="utf-8"?>
+  <rdf:RDF
+    xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+    xmlns:_3='http://www.openmetadir.org/om2/node#'
+  >
+    <_3:Service>
+      <_3:cacheTime rdf:datatype="http://www.w3.org/2001/XMLSchema#int">60</_3:cacheTime>
+      <_3:interface>
+        <_3:Interface>
+          <_3:protocol>REST</_3:protocol>
+          <_3:url>http://localhost:8091</_3:url>
+        </_3:Interface>
+      </_3:interface>
+      <_3:name>sink@example.com</_3:name>
+    </_3:Service>
+  </rdf:RDF>
+

@@ -1,0 +1,2031 @@
+.. _ontology-prim:
+
+=================
+The prim ontology
+=================
+
+:Author: Roland Hedberg
+:Version: 4.0.6
+
+.. module:: prim
+.. moduleauthor:: Roland Hedberg
+
+* :ref:`ACI <prim-class-ACI>`
+* :ref:`Address <prim-class-Address>`
+* :ref:`Affiliate <prim-class-Affiliate>`
+* :ref:`Alias <prim-class-Alias>`
+* :ref:`Alumn <prim-class-Alumn>`
+* :ref:`Application <prim-class-Application>`
+* :ref:`Collection <prim-class-Collection>`
+* :ref:`Consultant <prim-class-Consultant>`
+* :ref:`ContactInformation <prim-class-ContactInformation>`
+* :ref:`Contactable <prim-class-Contactable>`
+* :ref:`Department <prim-class-Department>`
+* :ref:`Email <prim-class-Email>`
+* :ref:`Employee <prim-class-Employee>`
+* :ref:`Member <prim-class-Member>`
+* :ref:`Membership <prim-class-Membership>`
+* :ref:`Object <prim-class-Object>`
+* :ref:`Organisation <prim-class-Organisation>`
+* :ref:`OrganisationalUnit <prim-class-OrganisationalUnit>`
+* :ref:`PartOf <prim-class-PartOf>`
+* :ref:`Person <prim-class-Person>`
+* :ref:`Phone <prim-class-Phone>`
+* :ref:`Position <prim-class-Position>`
+* :ref:`RelatedTo <prim-class-RelatedTo>`
+* :ref:`Relation <prim-class-Relation>`
+* :ref:`Responsible <prim-class-Responsible>`
+* :ref:`Role <prim-class-Role>`
+* :ref:`Stem <prim-class-Stem>`
+* :ref:`StudentUnionMembership <prim-class-StudentUnionMembership>`
+* :ref:`Unit <prim-class-Unit>`
+* :ref:`User <prim-class-User>`
+* :ref:`UserPerson <prim-class-UserPerson>`
+* :ref:`VisitingAddress <prim-class-VisitingAddress>`
+* :ref:`WWW <prim-class-WWW>`
+
+*******
+Classes
+*******
+
+
+WWW
+^^^
+
+.. _prim-class-WWW:
+
+Information about a specific way of contacting an object.
+
+**Properties**
+
+* :ref:`url <prim-property-url>` *restriction* cardinality 1
+* :ref:`validTo <prim-property-validTo>`
+* :ref:`primary <prim-property-primary>`
+* :ref:`source <om2-property-source>`
+* :ref:`contactType <prim-property-contactType>`
+* :ref:`validFrom <prim-property-validFrom>`
+
+ContactInformation
+^^^^^^^^^^^^^^^^^^
+
+.. _prim-class-ContactInformation:
+
+Information about a specific way of contacting an object.
+
+**Properties**
+
+* :ref:`source <om2-property-source>`
+* :ref:`validTo <prim-property-validTo>`
+* :ref:`validFrom <prim-property-validFrom>`
+* :ref:`primary <prim-property-primary>`
+* :ref:`contactType <prim-property-contactType>`
+
+Stem
+^^^^
+
+.. _prim-class-Stem:
+
+Basic object information.
+
+**Properties**
+
+* :ref:`displayName <prim-property-displayName>`
+* :ref:`name <prim-property-name>`
+* :ref:`parent <prim-property-parent>`
+* :ref:`created <prim-property-created>`
+* :ref:`lastModified <prim-property-lastModified>`
+* :ref:`aci <prim-property-aci>`
+* :ref:`lastModifiedBy <prim-property-lastModifiedBy>`
+* :ref:`source <om2-property-source>`
+* :ref:`createdBy <prim-property-createdBy>`
+* :ref:`owner <prim-property-owner>`
+* :ref:`associatedTo <prim-property-associatedTo>`
+* :ref:`shortName <prim-property-shortName>`
+* :ref:`description <prim-property-description>`
+
+OrganisationalUnit
+^^^^^^^^^^^^^^^^^^
+
+.. _prim-class-OrganisationalUnit:
+
+Information about an official part of an organisation.
+
+**Properties**
+
+* :ref:`www <prim-property-www>`
+* :ref:`visitingAddress <prim-property-visitingAddress>`
+* :ref:`alsoKnownAs <prim-property-alsoKnownAs>`
+* :ref:`owner <prim-property-owner>`
+* :ref:`associatedTo <prim-property-associatedTo>`
+* :ref:`formalName <prim-property-formalName>`
+* :ref:`lastModifiedBy <prim-property-lastModifiedBy>`
+* :ref:`source <om2-property-source>`
+* :ref:`postalAddress <prim-property-postalAddress>`
+* :ref:`type <prim-property-type>`
+* :ref:`email <prim-property-email>`
+* :ref:`status <prim-property-status>`
+* :ref:`fax <prim-property-fax>`
+* :ref:`description <prim-property-description>`
+* :ref:`parent <prim-property-parent>`
+* :ref:`accountNumber <prim-property-accountNumber>`
+* :ref:`phone <prim-property-phone>`
+* :ref:`createdBy <prim-property-createdBy>`
+* :ref:`shortName <prim-property-shortName>`
+* :ref:`displayName <prim-property-displayName>`
+* :ref:`name <prim-property-name>`
+* :ref:`created <prim-property-created>`
+* :ref:`mobile <prim-property-mobile>`
+* :ref:`lastModified <prim-property-lastModified>`
+* :ref:`aci <prim-property-aci>`
+* :ref:`partOf <prim-property-partOf>`
+
+Relation
+^^^^^^^^
+
+.. _prim-class-Relation:
+
+A relation between two objects
+
+**Properties**
+
+* :ref:`status <prim-property-status>`
+* :ref:`displayName <prim-property-displayName>`
+* :ref:`name <prim-property-name>`
+* :ref:`parent <prim-property-parent>`
+* :ref:`created <prim-property-created>`
+* :ref:`lastModified <prim-property-lastModified>`
+* :ref:`aci <prim-property-aci>`
+* :ref:`one <prim-property-one>`
+* :ref:`lastModifiedBy <prim-property-lastModifiedBy>`
+* :ref:`source <om2-property-source>`
+* :ref:`other <prim-property-other>`
+* :ref:`createdBy <prim-property-createdBy>`
+* :ref:`owner <prim-property-owner>`
+* :ref:`associatedTo <prim-property-associatedTo>`
+* :ref:`shortName <prim-property-shortName>`
+* :ref:`validFrom <prim-property-validFrom>`
+* :ref:`validTo <prim-property-validTo>`
+* :ref:`description <prim-property-description>`
+
+Consultant
+^^^^^^^^^^
+
+.. _prim-class-Consultant:
+
+Information about a consultant hired to do some work for an
+organisation.
+
+**Properties**
+
+* :ref:`createdBy <prim-property-createdBy>`
+* :ref:`validTo <prim-property-validTo>`
+* :ref:`one <prim-property-one>` *restriction* maxCardinality 1 *restriction* allValuesFrom <class 'pyom.ontology.prim_4.Person'>
+* :ref:`owner <prim-property-owner>`
+* :ref:`associatedTo <prim-property-associatedTo>`
+* :ref:`lastModifiedBy <prim-property-lastModifiedBy>`
+* :ref:`source <om2-property-source>`
+* :ref:`other <prim-property-other>` *restriction* maxCardinality 1
+* :ref:`postalAddress <prim-property-postalAddress>`
+* :ref:`email <prim-property-email>`
+* :ref:`status <prim-property-status>`
+* :ref:`fax <prim-property-fax>`
+* :ref:`description <prim-property-description>`
+* :ref:`parent <prim-property-parent>`
+* :ref:`phone <prim-property-phone>`
+* :ref:`visitingAddress <prim-property-visitingAddress>`
+* :ref:`address <prim-property-address>`
+* :ref:`shortName <prim-property-shortName>`
+* :ref:`displayName <prim-property-displayName>`
+* :ref:`name <prim-property-name>`
+* :ref:`created <prim-property-created>`
+* :ref:`mobile <prim-property-mobile>`
+* :ref:`lastModified <prim-property-lastModified>`
+* :ref:`aci <prim-property-aci>`
+* :ref:`validFrom <prim-property-validFrom>`
+
+Address
+^^^^^^^
+
+.. _prim-class-Address:
+
+Information about a specific way of contacting an object.
+
+**Properties**
+
+* :ref:`city <prim-property-city>`
+* :ref:`country <prim-property-country>`
+* :ref:`validTo <prim-property-validTo>`
+* :ref:`address <prim-property-address>` *restriction* maxCardinality 1
+* :ref:`primary <prim-property-primary>`
+* :ref:`source <om2-property-source>`
+* :ref:`street <prim-property-street>`
+* :ref:`contactType <prim-property-contactType>`
+* :ref:`postalCode <prim-property-postalCode>`
+* :ref:`careOf <prim-property-careOf>`
+* :ref:`validFrom <prim-property-validFrom>`
+
+Application
+^^^^^^^^^^^
+
+.. _prim-class-Application:
+
+Basic object information.
+
+**Properties**
+
+* :ref:`displayName <prim-property-displayName>`
+* :ref:`name <prim-property-name>`
+* :ref:`parent <prim-property-parent>`
+* :ref:`created <prim-property-created>`
+* :ref:`lastModified <prim-property-lastModified>`
+* :ref:`aci <prim-property-aci>`
+* :ref:`lastModifiedBy <prim-property-lastModifiedBy>`
+* :ref:`source <om2-property-source>`
+* :ref:`createdBy <prim-property-createdBy>`
+* :ref:`owner <prim-property-owner>`
+* :ref:`associatedTo <prim-property-associatedTo>`
+* :ref:`shortName <prim-property-shortName>`
+* :ref:`description <prim-property-description>`
+
+Unit
+^^^^
+
+.. _prim-class-Unit:
+
+Information about a part of an organisation.
+
+**Properties**
+
+* :ref:`www <prim-property-www>`
+* :ref:`visitingAddress <prim-property-visitingAddress>`
+* :ref:`alsoKnownAs <prim-property-alsoKnownAs>`
+* :ref:`owner <prim-property-owner>`
+* :ref:`associatedTo <prim-property-associatedTo>`
+* :ref:`lastModifiedBy <prim-property-lastModifiedBy>`
+* :ref:`source <om2-property-source>`
+* :ref:`postalAddress <prim-property-postalAddress>`
+* :ref:`email <prim-property-email>`
+* :ref:`status <prim-property-status>`
+* :ref:`fax <prim-property-fax>`
+* :ref:`description <prim-property-description>`
+* :ref:`parent <prim-property-parent>`
+* :ref:`phone <prim-property-phone>`
+* :ref:`createdBy <prim-property-createdBy>`
+* :ref:`shortName <prim-property-shortName>`
+* :ref:`displayName <prim-property-displayName>`
+* :ref:`name <prim-property-name>`
+* :ref:`created <prim-property-created>`
+* :ref:`mobile <prim-property-mobile>`
+* :ref:`lastModified <prim-property-lastModified>`
+* :ref:`aci <prim-property-aci>`
+* :ref:`partOf <prim-property-partOf>`
+
+RelatedTo
+^^^^^^^^^
+
+.. _prim-class-RelatedTo:
+
+Information about a relationship between two objects. Normally means
+that there is no ordered relationship between the objects.
+
+**Properties**
+
+* :ref:`status <prim-property-status>`
+* :ref:`displayName <prim-property-displayName>`
+* :ref:`name <prim-property-name>`
+* :ref:`parent <prim-property-parent>`
+* :ref:`created <prim-property-created>`
+* :ref:`lastModified <prim-property-lastModified>`
+* :ref:`aci <prim-property-aci>`
+* :ref:`one <prim-property-one>`
+* :ref:`lastModifiedBy <prim-property-lastModifiedBy>`
+* :ref:`source <om2-property-source>`
+* :ref:`other <prim-property-other>`
+* :ref:`createdBy <prim-property-createdBy>`
+* :ref:`owner <prim-property-owner>`
+* :ref:`associatedTo <prim-property-associatedTo>`
+* :ref:`shortName <prim-property-shortName>`
+* :ref:`validFrom <prim-property-validFrom>`
+* :ref:`validTo <prim-property-validTo>`
+* :ref:`description <prim-property-description>`
+
+Organisation
+^^^^^^^^^^^^
+
+.. _prim-class-Organisation:
+
+Information about an organisation.
+
+**Properties**
+
+* :ref:`www <prim-property-www>`
+* :ref:`visitingAddress <prim-property-visitingAddress>`
+* :ref:`owner <prim-property-owner>`
+* :ref:`associatedTo <prim-property-associatedTo>`
+* :ref:`lin <prim-property-lin>`
+* :ref:`lastModifiedBy <prim-property-lastModifiedBy>`
+* :ref:`source <om2-property-source>`
+* :ref:`postalAddress <prim-property-postalAddress>`
+* :ref:`email <prim-property-email>`
+* :ref:`status <prim-property-status>`
+* :ref:`fax <prim-property-fax>`
+* :ref:`description <prim-property-description>`
+* :ref:`parent <prim-property-parent>`
+* :ref:`phone <prim-property-phone>`
+* :ref:`createdBy <prim-property-createdBy>`
+* :ref:`shortName <prim-property-shortName>`
+* :ref:`displayName <prim-property-displayName>`
+* :ref:`name <prim-property-name>`
+* :ref:`created <prim-property-created>`
+* :ref:`mobile <prim-property-mobile>`
+* :ref:`lastModified <prim-property-lastModified>`
+* :ref:`aci <prim-property-aci>`
+* :ref:`domainComponent <prim-property-domainComponent>`
+* :ref:`associatedDomain <prim-property-associatedDomain>`
+
+Position
+^^^^^^^^
+
+.. _prim-class-Position:
+
+A position that a person can have at an object.
+
+**Properties**
+
+* :ref:`createdBy <prim-property-createdBy>`
+* :ref:`validTo <prim-property-validTo>`
+* :ref:`one <prim-property-one>` *restriction* maxCardinality 1 *restriction* allValuesFrom <class 'pyom.ontology.prim_4.Person'>
+* :ref:`owner <prim-property-owner>`
+* :ref:`associatedTo <prim-property-associatedTo>`
+* :ref:`lastModifiedBy <prim-property-lastModifiedBy>`
+* :ref:`source <om2-property-source>`
+* :ref:`other <prim-property-other>` *restriction* maxCardinality 1
+* :ref:`postalAddress <prim-property-postalAddress>`
+* :ref:`email <prim-property-email>`
+* :ref:`status <prim-property-status>`
+* :ref:`fax <prim-property-fax>`
+* :ref:`description <prim-property-description>`
+* :ref:`parent <prim-property-parent>`
+* :ref:`phone <prim-property-phone>`
+* :ref:`visitingAddress <prim-property-visitingAddress>`
+* :ref:`address <prim-property-address>`
+* :ref:`shortName <prim-property-shortName>`
+* :ref:`displayName <prim-property-displayName>`
+* :ref:`name <prim-property-name>`
+* :ref:`created <prim-property-created>`
+* :ref:`mobile <prim-property-mobile>`
+* :ref:`lastModified <prim-property-lastModified>`
+* :ref:`aci <prim-property-aci>`
+* :ref:`validFrom <prim-property-validFrom>`
+
+Object
+^^^^^^
+
+.. _prim-class-Object:
+
+Basic object information.
+
+**Properties**
+
+* :ref:`displayName <prim-property-displayName>`
+* :ref:`name <prim-property-name>`
+* :ref:`parent <prim-property-parent>`
+* :ref:`created <prim-property-created>`
+* :ref:`lastModified <prim-property-lastModified>`
+* :ref:`aci <prim-property-aci>`
+* :ref:`lastModifiedBy <prim-property-lastModifiedBy>`
+* :ref:`source <om2-property-source>`
+* :ref:`createdBy <prim-property-createdBy>`
+* :ref:`owner <prim-property-owner>`
+* :ref:`associatedTo <prim-property-associatedTo>`
+* :ref:`shortName <prim-property-shortName>`
+* :ref:`description <prim-property-description>`
+
+Collection
+^^^^^^^^^^
+
+.. _prim-class-Collection:
+
+Information about a collection of objects/things.
+
+**Properties**
+
+* :ref:`www <prim-property-www>`
+* :ref:`visitingAddress <prim-property-visitingAddress>`
+* :ref:`owner <prim-property-owner>`
+* :ref:`associatedTo <prim-property-associatedTo>`
+* :ref:`lastModifiedBy <prim-property-lastModifiedBy>`
+* :ref:`source <om2-property-source>`
+* :ref:`postalAddress <prim-property-postalAddress>`
+* :ref:`type <prim-property-type>`
+* :ref:`email <prim-property-email>`
+* :ref:`status <prim-property-status>`
+* :ref:`fax <prim-property-fax>`
+* :ref:`description <prim-property-description>`
+* :ref:`parent <prim-property-parent>`
+* :ref:`phone <prim-property-phone>`
+* :ref:`createdBy <prim-property-createdBy>`
+* :ref:`shortName <prim-property-shortName>`
+* :ref:`displayName <prim-property-displayName>`
+* :ref:`name <prim-property-name>`
+* :ref:`created <prim-property-created>`
+* :ref:`mobile <prim-property-mobile>`
+* :ref:`lastModified <prim-property-lastModified>`
+* :ref:`aci <prim-property-aci>`
+* :ref:`thing <prim-property-thing>`
+
+PartOf
+^^^^^^
+
+.. _prim-class-PartOf:
+
+A directed relationship between one object and another
+
+**Properties**
+
+* :ref:`status <prim-property-status>`
+* :ref:`displayName <prim-property-displayName>`
+* :ref:`name <prim-property-name>`
+* :ref:`parent <prim-property-parent>`
+* :ref:`created <prim-property-created>`
+* :ref:`lastModified <prim-property-lastModified>`
+* :ref:`aci <prim-property-aci>`
+* :ref:`one <prim-property-one>`
+* :ref:`lastModifiedBy <prim-property-lastModifiedBy>`
+* :ref:`source <om2-property-source>`
+* :ref:`other <prim-property-other>` *restriction* cardinality 1
+* :ref:`createdBy <prim-property-createdBy>`
+* :ref:`owner <prim-property-owner>`
+* :ref:`associatedTo <prim-property-associatedTo>`
+* :ref:`shortName <prim-property-shortName>`
+* :ref:`validFrom <prim-property-validFrom>`
+* :ref:`validTo <prim-property-validTo>`
+* :ref:`description <prim-property-description>`
+
+Department
+^^^^^^^^^^
+
+.. _prim-class-Department:
+
+Information about an unofficial part of an organisation.
+
+**Properties**
+
+* :ref:`www <prim-property-www>`
+* :ref:`visitingAddress <prim-property-visitingAddress>`
+* :ref:`alsoKnownAs <prim-property-alsoKnownAs>`
+* :ref:`owner <prim-property-owner>`
+* :ref:`associatedTo <prim-property-associatedTo>`
+* :ref:`lastModifiedBy <prim-property-lastModifiedBy>`
+* :ref:`source <om2-property-source>`
+* :ref:`postalAddress <prim-property-postalAddress>`
+* :ref:`email <prim-property-email>`
+* :ref:`status <prim-property-status>`
+* :ref:`fax <prim-property-fax>`
+* :ref:`description <prim-property-description>`
+* :ref:`parent <prim-property-parent>`
+* :ref:`phone <prim-property-phone>`
+* :ref:`createdBy <prim-property-createdBy>`
+* :ref:`shortName <prim-property-shortName>`
+* :ref:`displayName <prim-property-displayName>`
+* :ref:`name <prim-property-name>`
+* :ref:`created <prim-property-created>`
+* :ref:`mobile <prim-property-mobile>`
+* :ref:`lastModified <prim-property-lastModified>`
+* :ref:`aci <prim-property-aci>`
+* :ref:`partOf <prim-property-partOf>`
+
+VisitingAddress
+^^^^^^^^^^^^^^^
+
+.. _prim-class-VisitingAddress:
+
+Information about a specific way of contacting an object.
+
+**Properties**
+
+* :ref:`room <prim-property-room>`
+* :ref:`validTo <prim-property-validTo>`
+* :ref:`primary <prim-property-primary>`
+* :ref:`source <om2-property-source>`
+* :ref:`location <prim-property-location>`
+* :ref:`contactType <prim-property-contactType>`
+* :ref:`validFrom <prim-property-validFrom>`
+* :ref:`buildingName <prim-property-buildingName>`
+
+ACI
+^^^
+
+.. _prim-class-ACI:
+
+Access control information
+
+**Properties**
+
+* :ref:`applicableTo <prim-property-applicableTo>`
+* :ref:`source <om2-property-source>`
+* :ref:`what <prim-property-what>`
+* :ref:`right <prim-property-right>`
+* :ref:`forWho <prim-property-forWho>`
+
+Contactable
+^^^^^^^^^^^
+
+.. _prim-class-Contactable:
+
+An object that is possible to contact in one way or another.
+
+**Properties**
+
+* :ref:`status <prim-property-status>`
+* :ref:`fax <prim-property-fax>`
+* :ref:`displayName <prim-property-displayName>`
+* :ref:`phone <prim-property-phone>`
+* :ref:`mobile <prim-property-mobile>`
+* :ref:`www <prim-property-www>`
+* :ref:`source <om2-property-source>`
+* :ref:`visitingAddress <prim-property-visitingAddress>`
+* :ref:`postalAddress <prim-property-postalAddress>`
+* :ref:`email <prim-property-email>`
+
+Alumn
+^^^^^
+
+.. _prim-class-Alumn:
+
+Information about an alumn
+
+**Properties**
+
+* :ref:`createdBy <prim-property-createdBy>`
+* :ref:`validTo <prim-property-validTo>`
+* :ref:`one <prim-property-one>` *restriction* maxCardinality 1 *restriction* allValuesFrom <class 'pyom.ontology.prim_4.Person'>
+* :ref:`owner <prim-property-owner>`
+* :ref:`associatedTo <prim-property-associatedTo>`
+* :ref:`lastModifiedBy <prim-property-lastModifiedBy>`
+* :ref:`source <om2-property-source>`
+* :ref:`other <prim-property-other>` *restriction* maxCardinality 1
+* :ref:`postalAddress <prim-property-postalAddress>`
+* :ref:`email <prim-property-email>`
+* :ref:`status <prim-property-status>`
+* :ref:`fax <prim-property-fax>`
+* :ref:`description <prim-property-description>`
+* :ref:`parent <prim-property-parent>`
+* :ref:`phone <prim-property-phone>`
+* :ref:`visitingAddress <prim-property-visitingAddress>`
+* :ref:`address <prim-property-address>`
+* :ref:`shortName <prim-property-shortName>`
+* :ref:`displayName <prim-property-displayName>`
+* :ref:`name <prim-property-name>`
+* :ref:`created <prim-property-created>`
+* :ref:`mobile <prim-property-mobile>`
+* :ref:`lastModified <prim-property-lastModified>`
+* :ref:`aci <prim-property-aci>`
+* :ref:`validFrom <prim-property-validFrom>`
+
+User
+^^^^
+
+.. _prim-class-User:
+
+A user by some definition
+
+**Properties**
+
+* :ref:`uid <prim-property-uid>`
+* :ref:`uidNumber <prim-property-uidNumber>`
+* :ref:`owner <prim-property-owner>`
+* :ref:`associatedTo <prim-property-associatedTo>`
+* :ref:`open <prim-property-open>` *restriction* cardinality 1
+* :ref:`blocked <prim-property-blocked>` *restriction* cardinality 1
+* :ref:`lastModifiedBy <prim-property-lastModifiedBy>`
+* :ref:`source <om2-property-source>`
+* :ref:`primaryUid <prim-property-primaryUid>`
+* :ref:`description <prim-property-description>`
+* :ref:`parent <prim-property-parent>`
+* :ref:`gidNumber <prim-property-gidNumber>`
+* :ref:`createdBy <prim-property-createdBy>`
+* :ref:`active <prim-property-active>` *restriction* cardinality 1
+* :ref:`shortName <prim-property-shortName>`
+* :ref:`name <prim-property-name>`
+* :ref:`displayName <prim-property-displayName>`
+* :ref:`primaryAffiliatedTo <prim-property-primaryAffiliatedTo>`
+* :ref:`created <prim-property-created>`
+* :ref:`legacyUid <prim-property-legacyUid>`
+* :ref:`lastModified <prim-property-lastModified>`
+* :ref:`aci <prim-property-aci>`
+* :ref:`homeDirectory <prim-property-homeDirectory>`
+
+Phone
+^^^^^
+
+.. _prim-class-Phone:
+
+Information about a specific way of contacting an object.
+
+**Properties**
+
+* :ref:`validTo <prim-property-validTo>`
+* :ref:`primary <prim-property-primary>`
+* :ref:`source <om2-property-source>`
+* :ref:`phoneNumber <prim-property-phoneNumber>` *restriction* cardinality 1
+* :ref:`contactType <prim-property-contactType>`
+* :ref:`validFrom <prim-property-validFrom>`
+
+Role
+^^^^
+
+.. _prim-class-Role:
+
+Information about a role.
+
+**Properties**
+
+* :ref:`restriction <prim-property-restriction>`
+* :ref:`www <prim-property-www>`
+* :ref:`createdBy <prim-property-createdBy>`
+* :ref:`validTo <prim-property-validTo>`
+* :ref:`one <prim-property-one>`
+* :ref:`owner <prim-property-owner>`
+* :ref:`associatedTo <prim-property-associatedTo>`
+* :ref:`category <prim-property-category>`
+* :ref:`lastModifiedBy <prim-property-lastModifiedBy>`
+* :ref:`source <om2-property-source>`
+* :ref:`other <prim-property-other>` *restriction* maxCardinality 1
+* :ref:`postalAddress <prim-property-postalAddress>`
+* :ref:`email <prim-property-email>`
+* :ref:`status <prim-property-status>`
+* :ref:`fax <prim-property-fax>`
+* :ref:`description <prim-property-description>`
+* :ref:`parent <prim-property-parent>`
+* :ref:`phone <prim-property-phone>`
+* :ref:`visitingAddress <prim-property-visitingAddress>`
+* :ref:`shortName <prim-property-shortName>`
+* :ref:`displayName <prim-property-displayName>`
+* :ref:`name <prim-property-name>`
+* :ref:`created <prim-property-created>`
+* :ref:`mobile <prim-property-mobile>`
+* :ref:`lastModified <prim-property-lastModified>`
+* :ref:`aci <prim-property-aci>`
+* :ref:`assignedBy <prim-property-assignedBy>`
+* :ref:`validFrom <prim-property-validFrom>`
+
+Affiliate
+^^^^^^^^^
+
+.. _prim-class-Affiliate:
+
+Information about an affiliate to an organisation.
+
+**Properties**
+
+* :ref:`createdBy <prim-property-createdBy>`
+* :ref:`validTo <prim-property-validTo>`
+* :ref:`one <prim-property-one>` *restriction* maxCardinality 1 *restriction* allValuesFrom <class 'pyom.ontology.prim_4.Person'>
+* :ref:`owner <prim-property-owner>`
+* :ref:`associatedTo <prim-property-associatedTo>`
+* :ref:`lastModifiedBy <prim-property-lastModifiedBy>`
+* :ref:`source <om2-property-source>`
+* :ref:`other <prim-property-other>` *restriction* maxCardinality 1
+* :ref:`postalAddress <prim-property-postalAddress>`
+* :ref:`email <prim-property-email>`
+* :ref:`status <prim-property-status>`
+* :ref:`fax <prim-property-fax>`
+* :ref:`description <prim-property-description>`
+* :ref:`parent <prim-property-parent>`
+* :ref:`phone <prim-property-phone>`
+* :ref:`visitingAddress <prim-property-visitingAddress>`
+* :ref:`address <prim-property-address>`
+* :ref:`shortName <prim-property-shortName>`
+* :ref:`displayName <prim-property-displayName>`
+* :ref:`name <prim-property-name>`
+* :ref:`created <prim-property-created>`
+* :ref:`mobile <prim-property-mobile>`
+* :ref:`lastModified <prim-property-lastModified>`
+* :ref:`aci <prim-property-aci>`
+* :ref:`validFrom <prim-property-validFrom>`
+
+Alias
+^^^^^
+
+.. _prim-class-Alias:
+
+Basic object information.
+
+**Properties**
+
+* :ref:`displayName <prim-property-displayName>`
+* :ref:`name <prim-property-name>`
+* :ref:`parent <prim-property-parent>`
+* :ref:`created <prim-property-created>`
+* :ref:`lastModified <prim-property-lastModified>`
+* :ref:`aci <prim-property-aci>`
+* :ref:`aliasedObject <prim-property-aliasedObject>`
+* :ref:`aliasedObjectType <prim-property-aliasedObjectType>`
+* :ref:`lastModifiedBy <prim-property-lastModifiedBy>`
+* :ref:`source <om2-property-source>`
+* :ref:`createdBy <prim-property-createdBy>`
+* :ref:`owner <prim-property-owner>`
+* :ref:`associatedTo <prim-property-associatedTo>`
+* :ref:`shortName <prim-property-shortName>`
+* :ref:`description <prim-property-description>`
+
+Person
+^^^^^^
+
+.. _prim-class-Person:
+
+Information about a physical person.
+
+**Properties**
+
+* :ref:`primaryUser <prim-property-primaryUser>`
+* :ref:`www <prim-property-www>`
+* :ref:`visitingAddress <prim-property-visitingAddress>`
+* :ref:`sameAs <prim-property-sameAs>` *restriction* allValuesFrom <class 'pyom.ontology.prim_4.Person'>
+* :ref:`affiliation <prim-property-affiliation>`
+* :ref:`owner <prim-property-owner>`
+* :ref:`associatedTo <prim-property-associatedTo>`
+* :ref:`primaryAffiliation <prim-property-primaryAffiliation>`
+* :ref:`established <prim-property-established>`
+* :ref:`surName <prim-property-surName>`
+* :ref:`title <prim-property-title>`
+* :ref:`middleName <prim-property-middleName>`
+* :ref:`lin <prim-property-lin>`
+* :ref:`nationalIdentificationNumberType <prim-property-nationalIdentificationNumberType>`
+* :ref:`lastModifiedBy <prim-property-lastModifiedBy>`
+* :ref:`source <om2-property-source>`
+* :ref:`passportNumber <prim-property-passportNumber>`
+* :ref:`postalAddress <prim-property-postalAddress>`
+* :ref:`nickName <prim-property-nickName>`
+* :ref:`email <prim-property-email>`
+* :ref:`status <prim-property-status>`
+* :ref:`fax <prim-property-fax>`
+* :ref:`description <prim-property-description>`
+* :ref:`parent <prim-property-parent>`
+* :ref:`primaryAssociation <prim-property-primaryAssociation>`
+* :ref:`phone <prim-property-phone>`
+* :ref:`membership <prim-property-membership>`
+* :ref:`user <prim-property-user>`
+* :ref:`createdBy <prim-property-createdBy>`
+* :ref:`shortName <prim-property-shortName>`
+* :ref:`nationalIdentificationNumber <prim-property-nationalIdentificationNumber>`
+* :ref:`displayName <prim-property-displayName>`
+* :ref:`name <prim-property-name>`
+* :ref:`passportIssuingCountry <prim-property-passportIssuingCountry>`
+* :ref:`created <prim-property-created>`
+* :ref:`mobile <prim-property-mobile>`
+* :ref:`lastModified <prim-property-lastModified>`
+* :ref:`aci <prim-property-aci>`
+* :ref:`birthDay <prim-property-birthDay>`
+* :ref:`givenName <prim-property-givenName>`
+* :ref:`deceased <prim-property-deceased>`
+
+Member
+^^^^^^
+
+.. _prim-class-Member:
+
+Information about a member of something.
+
+**Properties**
+
+* :ref:`createdBy <prim-property-createdBy>`
+* :ref:`validTo <prim-property-validTo>`
+* :ref:`one <prim-property-one>` *restriction* maxCardinality 1 *restriction* allValuesFrom <class 'pyom.ontology.prim_4.Person'>
+* :ref:`owner <prim-property-owner>`
+* :ref:`associatedTo <prim-property-associatedTo>`
+* :ref:`lastModifiedBy <prim-property-lastModifiedBy>`
+* :ref:`source <om2-property-source>`
+* :ref:`other <prim-property-other>` *restriction* maxCardinality 1
+* :ref:`postalAddress <prim-property-postalAddress>`
+* :ref:`email <prim-property-email>`
+* :ref:`status <prim-property-status>`
+* :ref:`fax <prim-property-fax>`
+* :ref:`description <prim-property-description>`
+* :ref:`parent <prim-property-parent>`
+* :ref:`phone <prim-property-phone>`
+* :ref:`visitingAddress <prim-property-visitingAddress>`
+* :ref:`address <prim-property-address>`
+* :ref:`shortName <prim-property-shortName>`
+* :ref:`displayName <prim-property-displayName>`
+* :ref:`name <prim-property-name>`
+* :ref:`created <prim-property-created>`
+* :ref:`mobile <prim-property-mobile>`
+* :ref:`lastModified <prim-property-lastModified>`
+* :ref:`aci <prim-property-aci>`
+* :ref:`validFrom <prim-property-validFrom>`
+
+Email
+^^^^^
+
+.. _prim-class-Email:
+
+Information about a specific way of contacting an object.
+
+**Properties**
+
+* :ref:`validTo <prim-property-validTo>`
+* :ref:`contactType <prim-property-contactType>`
+* :ref:`primary <prim-property-primary>`
+* :ref:`source <om2-property-source>`
+* :ref:`address <prim-property-address>` *restriction* cardinality 1
+* :ref:`validFrom <prim-property-validFrom>`
+
+Employee
+^^^^^^^^
+
+.. _prim-class-Employee:
+
+Information about an employee at an organisation.
+
+**Properties**
+
+* :ref:`www <prim-property-www>`
+* :ref:`createdBy <prim-property-createdBy>`
+* :ref:`validTo <prim-property-validTo>`
+* :ref:`primary <prim-property-primary>`
+* :ref:`one <prim-property-one>` *restriction* maxCardinality 1 *restriction* allValuesFrom <class 'pyom.ontology.prim_4.Person'>
+* :ref:`affiliation <prim-property-affiliation>`
+* :ref:`owner <prim-property-owner>`
+* :ref:`associatedTo <prim-property-associatedTo>`
+* :ref:`id <prim-property-id>`
+* :ref:`employmentType <prim-property-employmentType>`
+* :ref:`lastModifiedBy <prim-property-lastModifiedBy>`
+* :ref:`source <om2-property-source>`
+* :ref:`other <prim-property-other>` *restriction* maxCardinality 1
+* :ref:`postalAddress <prim-property-postalAddress>`
+* :ref:`email <prim-property-email>`
+* :ref:`status <prim-property-status>`
+* :ref:`fax <prim-property-fax>`
+* :ref:`description <prim-property-description>`
+* :ref:`parent <prim-property-parent>`
+* :ref:`post <prim-property-post>`
+* :ref:`phone <prim-property-phone>`
+* :ref:`visitingAddress <prim-property-visitingAddress>`
+* :ref:`address <prim-property-address>`
+* :ref:`shortName <prim-property-shortName>`
+* :ref:`displayName <prim-property-displayName>`
+* :ref:`name <prim-property-name>`
+* :ref:`created <prim-property-created>`
+* :ref:`mobile <prim-property-mobile>`
+* :ref:`lastModified <prim-property-lastModified>`
+* :ref:`aci <prim-property-aci>`
+* :ref:`employmentForm <prim-property-employmentForm>`
+* :ref:`extent <prim-property-extent>`
+* :ref:`validFrom <prim-property-validFrom>`
+
+UserPerson
+^^^^^^^^^^
+
+.. _prim-class-UserPerson:
+
+Combination of person and user
+
+**Properties**
+
+* :ref:`primaryUser <prim-property-primaryUser>`
+* :ref:`www <prim-property-www>`
+* :ref:`visitingAddress <prim-property-visitingAddress>`
+* :ref:`sameAs <prim-property-sameAs>` *restriction* allValuesFrom <class 'pyom.ontology.prim_4.Person'>
+* :ref:`uidNumber <prim-property-uidNumber>`
+* :ref:`affiliation <prim-property-affiliation>`
+* :ref:`owner <prim-property-owner>`
+* :ref:`associatedTo <prim-property-associatedTo>`
+* :ref:`primaryAffiliation <prim-property-primaryAffiliation>`
+* :ref:`open <prim-property-open>` *restriction* cardinality 1
+* :ref:`uid <prim-property-uid>`
+* :ref:`established <prim-property-established>`
+* :ref:`surName <prim-property-surName>`
+* :ref:`title <prim-property-title>`
+* :ref:`middleName <prim-property-middleName>`
+* :ref:`lin <prim-property-lin>`
+* :ref:`nationalIdentificationNumberType <prim-property-nationalIdentificationNumberType>`
+* :ref:`lastModifiedBy <prim-property-lastModifiedBy>`
+* :ref:`source <om2-property-source>`
+* :ref:`passportNumber <prim-property-passportNumber>`
+* :ref:`primaryUid <prim-property-primaryUid>`
+* :ref:`postalAddress <prim-property-postalAddress>`
+* :ref:`blocked <prim-property-blocked>` *restriction* cardinality 1
+* :ref:`nickName <prim-property-nickName>`
+* :ref:`email <prim-property-email>`
+* :ref:`nationalIdentificationNumber <prim-property-nationalIdentificationNumber>`
+* :ref:`status <prim-property-status>`
+* :ref:`fax <prim-property-fax>`
+* :ref:`description <prim-property-description>`
+* :ref:`parent <prim-property-parent>`
+* :ref:`primaryAssociation <prim-property-primaryAssociation>`
+* :ref:`phone <prim-property-phone>`
+* :ref:`gidNumber <prim-property-gidNumber>`
+* :ref:`user <prim-property-user>`
+* :ref:`createdBy <prim-property-createdBy>`
+* :ref:`active <prim-property-active>` *restriction* cardinality 1
+* :ref:`shortName <prim-property-shortName>`
+* :ref:`primaryAffiliatedTo <prim-property-primaryAffiliatedTo>`
+* :ref:`displayName <prim-property-displayName>`
+* :ref:`name <prim-property-name>`
+* :ref:`passportIssuingCountry <prim-property-passportIssuingCountry>`
+* :ref:`created <prim-property-created>`
+* :ref:`mobile <prim-property-mobile>`
+* :ref:`lastModified <prim-property-lastModified>`
+* :ref:`aci <prim-property-aci>`
+* :ref:`membership <prim-property-membership>`
+* :ref:`legacyUid <prim-property-legacyUid>`
+* :ref:`birthDay <prim-property-birthDay>`
+* :ref:`homeDirectory <prim-property-homeDirectory>`
+* :ref:`givenName <prim-property-givenName>`
+* :ref:`deceased <prim-property-deceased>`
+
+Responsible
+^^^^^^^^^^^
+
+.. _prim-class-Responsible:
+
+Information about the responsibility of one or more objects for
+another object.
+
+**Properties**
+
+* :ref:`status <prim-property-status>`
+* :ref:`displayName <prim-property-displayName>`
+* :ref:`name <prim-property-name>`
+* :ref:`parent <prim-property-parent>`
+* :ref:`created <prim-property-created>`
+* :ref:`lastModified <prim-property-lastModified>`
+* :ref:`aci <prim-property-aci>`
+* :ref:`one <prim-property-one>`
+* :ref:`lastModifiedBy <prim-property-lastModifiedBy>`
+* :ref:`source <om2-property-source>`
+* :ref:`other <prim-property-other>`
+* :ref:`createdBy <prim-property-createdBy>`
+* :ref:`owner <prim-property-owner>`
+* :ref:`associatedTo <prim-property-associatedTo>`
+* :ref:`shortName <prim-property-shortName>`
+* :ref:`validFrom <prim-property-validFrom>`
+* :ref:`validTo <prim-property-validTo>`
+* :ref:`description <prim-property-description>`
+
+StudentUnionMembership
+^^^^^^^^^^^^^^^^^^^^^^
+
+.. _prim-class-StudentUnionMembership:
+
+Basic object information.
+
+**Properties**
+
+* :ref:`status <prim-property-status>`
+* :ref:`reducedFee <prim-property-reducedFee>`
+* :ref:`displayName <prim-property-displayName>`
+* :ref:`name <prim-property-name>`
+* :ref:`parent <prim-property-parent>`
+* :ref:`created <prim-property-created>`
+* :ref:`lastModified <prim-property-lastModified>`
+* :ref:`aci <prim-property-aci>`
+* :ref:`lastModifiedBy <prim-property-lastModifiedBy>`
+* :ref:`source <om2-property-source>`
+* :ref:`semester <prim-property-semester>` *restriction* cardinality 1
+* :ref:`createdBy <prim-property-createdBy>`
+* :ref:`owner <prim-property-owner>`
+* :ref:`associatedTo <prim-property-associatedTo>`
+* :ref:`shortName <prim-property-shortName>`
+* :ref:`studentUnion <prim-property-studentUnion>` *restriction* cardinality 1
+* :ref:`description <prim-property-description>`
+
+Membership
+^^^^^^^^^^
+
+.. _prim-class-Membership:
+
+Basic object information.
+
+**Properties**
+
+* :ref:`status <prim-property-status>`
+* :ref:`displayName <prim-property-displayName>`
+* :ref:`name <prim-property-name>`
+* :ref:`parent <prim-property-parent>`
+* :ref:`created <prim-property-created>`
+* :ref:`lastModified <prim-property-lastModified>`
+* :ref:`aci <prim-property-aci>`
+* :ref:`lastModifiedBy <prim-property-lastModifiedBy>`
+* :ref:`source <om2-property-source>`
+* :ref:`createdBy <prim-property-createdBy>`
+* :ref:`owner <prim-property-owner>`
+* :ref:`associatedTo <prim-property-associatedTo>`
+* :ref:`shortName <prim-property-shortName>`
+* :ref:`description <prim-property-description>`
+
+**********
+Properties
+**********
+
+
+lin
+^^^
+
+.. _prim-property-lin:
+
+Local identification number, definitely not universally unique.
+
+*range*
+  string
+
+**Functional**
+
+homeDirectory
+^^^^^^^^^^^^^
+
+.. _prim-property-homeDirectory:
+
+*range*
+  string
+
+**Functional**
+
+title
+^^^^^
+
+.. _prim-property-title:
+
+*range*
+  string
+
+employmentType
+^^^^^^^^^^^^^^
+
+.. _prim-property-employmentType:
+
+*range*
+  string
+
+**Functional**
+
+right
+^^^^^
+
+.. _prim-property-right:
+
+*range*
+  Unspecified
+
+www
+^^^
+
+.. _prim-property-www:
+
+Information about a website connected to an object.
+
+*range*
+  :ref:`WWW <prim-class-WWW>`
+
+parent
+^^^^^^
+
+.. _prim-property-parent:
+
+*range*
+  Unspecified
+
+surName
+^^^^^^^
+
+.. _prim-property-surName:
+
+*range*
+  string
+
+alsoKnownAs
+^^^^^^^^^^^
+
+.. _prim-property-alsoKnownAs:
+
+Alternative name of this unit.
+
+*range*
+  string
+
+applicableTo
+^^^^^^^^^^^^
+
+.. _prim-property-applicableTo:
+
+Applicable to these object instances
+
+*range*
+  string
+
+affiliation
+^^^^^^^^^^^
+
+.. _prim-property-affiliation:
+
+The type of affiliation that an person has to an organisation.
+
+*range*
+  string
+
+one
+^^^
+
+.. _prim-property-one:
+
+The base Object
+
+*range*
+  Unspecified
+
+assignedBy
+^^^^^^^^^^
+
+.. _prim-property-assignedBy:
+
+A reference to the object who has assigned this role to
+someone/something.
+
+*range*
+  :ref:`Person <prim-class-Person>`
+
+**Functional**
+
+address
+^^^^^^^
+
+.. _prim-property-address:
+
+The complete address of something.
+
+*range*
+  string
+
+createdBy
+^^^^^^^^^
+
+.. _prim-property-createdBy:
+
+Who created this object
+
+*range*
+  Unspecified
+
+**Functional**
+
+uidNumber
+^^^^^^^^^
+
+.. _prim-property-uidNumber:
+
+*range*
+  integer
+
+**Functional**
+
+validTo
+^^^^^^^
+
+.. _prim-property-validTo:
+
+This piece of information is valid until this date.
+
+*range*
+  date
+
+**Functional**
+
+restriction
+^^^^^^^^^^^
+
+.. _prim-property-restriction:
+
+Limitation or restrictions on a role
+
+*range*
+  string
+
+formalName
+^^^^^^^^^^
+
+.. _prim-property-formalName:
+
+An official name of a unit.
+
+*range*
+  string
+
+employmentForm
+^^^^^^^^^^^^^^
+
+.. _prim-property-employmentForm:
+
+*range*
+  string
+
+**Functional**
+
+primaryUid
+^^^^^^^^^^
+
+.. _prim-property-primaryUid:
+
+*range*
+  string
+
+**Functional**
+
+partOf
+^^^^^^
+
+.. _prim-property-partOf:
+
+*range*
+  Unspecified
+
+city
+^^^^
+
+.. _prim-property-city:
+
+The name of a city.
+
+*range*
+  string
+
+**Functional**
+
+established
+^^^^^^^^^^^
+
+.. _prim-property-established:
+
+When this object was establish in the context of this systems.
+
+*range*
+  date
+
+**Functional**
+
+blocked
+^^^^^^^
+
+.. _prim-property-blocked:
+
+Whether the object should be regarded as block from usage
+
+*range*
+  integer
+
+**Functional**
+
+domainComponent
+^^^^^^^^^^^^^^^
+
+.. _prim-property-domainComponent:
+
+*range*
+  string
+
+**Functional**
+
+aci
+^^^
+
+.. _prim-property-aci:
+
+Access Control Information
+
+*range*
+  :ref:`ACI <prim-class-ACI>`
+
+nationalIdentificationNumberType
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. _prim-property-nationalIdentificationNumberType:
+
+The type of national identification number.
+
+*range*
+  Unspecified
+
+**Functional**
+
+validFrom
+^^^^^^^^^
+
+.. _prim-property-validFrom:
+
+From when this information is valid.
+
+*range*
+  date
+
+**Functional**
+
+givenName
+^^^^^^^^^
+
+.. _prim-property-givenName:
+
+*range*
+  string
+
+thing
+^^^^^
+
+.. _prim-property-thing:
+
+A reference to a thing or the thing itself.
+
+*range*
+  Unspecified
+
+room
+^^^^
+
+.. _prim-property-room:
+
+Name or identifier of a room.
+
+*range*
+  string
+
+**Functional**
+
+passportIssuingCountry
+^^^^^^^^^^^^^^^^^^^^^^
+
+.. _prim-property-passportIssuingCountry:
+
+The name of the country that has issued a passport for this person.
+
+*range*
+  string
+
+**Functional**
+
+lastModifiedBy
+^^^^^^^^^^^^^^
+
+.. _prim-property-lastModifiedBy:
+
+*range*
+  Unspecified
+
+**Functional**
+
+sameAs
+^^^^^^
+
+.. _prim-property-sameAs:
+
+This other object is in fact about the same object as this one.
+
+*range*
+  Unspecified
+
+phoneNumber
+^^^^^^^^^^^
+
+.. _prim-property-phoneNumber:
+
+A phoneNumber
+
+*range*
+  string
+
+**Functional**
+
+lastModified
+^^^^^^^^^^^^
+
+.. _prim-property-lastModified:
+
+*range*
+  datetime
+
+**Functional**
+
+forWho
+^^^^^^
+
+.. _prim-property-forWho:
+
+For whom this rule applies.
+
+*range*
+  string
+
+category
+^^^^^^^^
+
+.. _prim-property-category:
+
+What type of thing is this ?
+
+*range*
+  string
+
+primaryAssociation
+^^^^^^^^^^^^^^^^^^
+
+.. _prim-property-primaryAssociation:
+
+*range*
+  Unspecified
+
+**Functional**
+
+affiliatedTo
+^^^^^^^^^^^^
+
+.. _prim-property-affiliatedTo:
+
+*range*
+  Unspecified
+
+open
+^^^^
+
+.. _prim-property-open:
+
+Whether the object is to be regarded as open.
+
+*range*
+  integer
+
+**Functional**
+
+accountNumber
+^^^^^^^^^^^^^
+
+.. _prim-property-accountNumber:
+
+A financial account that is connected to this organisational unit.
+
+*range*
+  integer
+
+nationalIdentificationNumber
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. _prim-property-nationalIdentificationNumber:
+
+A National Identification Number.
+
+*range*
+  string
+
+**Functional**
+
+name
+^^^^
+
+.. _prim-property-name:
+
+A name
+
+*range*
+  string
+
+user
+^^^^
+
+.. _prim-property-user:
+
+*range*
+  :ref:`User <prim-class-User>`
+
+phone
+^^^^^
+
+.. _prim-property-phone:
+
+Information about an objects phone.
+
+*range*
+  :ref:`Phone <prim-class-Phone>`
+
+displayName
+^^^^^^^^^^^
+
+.. _prim-property-displayName:
+
+A meaningfull human understandable name
+
+*range*
+  string
+
+**Functional**
+
+buildingName
+^^^^^^^^^^^^
+
+.. _prim-property-buildingName:
+
+Name of a building.
+
+*range*
+  string
+
+**Functional**
+
+deceased
+^^^^^^^^
+
+.. _prim-property-deceased:
+
+Whether a person is deceased or not.
+
+*range*
+  integer
+
+**Functional**
+
+what
+^^^^
+
+.. _prim-property-what:
+
+The object type for which this access rules are valid.
+
+*range*
+  string
+
+contactType
+^^^^^^^^^^^
+
+.. _prim-property-contactType:
+
+What kind of contact information represents this.
+
+*range*
+  string
+
+**Functional**
+
+visitingAddress
+^^^^^^^^^^^^^^^
+
+.. _prim-property-visitingAddress:
+
+Information about the physical address of an object.
+
+*range*
+  :ref:`VisitingAddress <prim-class-VisitingAddress>`
+
+aliasedObject
+^^^^^^^^^^^^^
+
+.. _prim-property-aliasedObject:
+
+*range*
+  Unspecified
+
+**Functional**
+
+membership
+^^^^^^^^^^
+
+.. _prim-property-membership:
+
+*range*
+  Unspecified
+
+**Functional**
+
+extent
+^^^^^^
+
+.. _prim-property-extent:
+
+The extent of an employment, expected to be between 0.0 and 100.0
+
+*range*
+  ?http://www.w3.org/2001/XMLSchema#Float
+
+**Functional**
+
+gidNumber
+^^^^^^^^^
+
+.. _prim-property-gidNumber:
+
+*range*
+  integer
+
+**Functional**
+
+primary
+^^^^^^^
+
+.. _prim-property-primary:
+
+*range*
+  integer
+
+**Functional**
+
+status
+^^^^^^
+
+.. _prim-property-status:
+
+The state of this relation.
+
+*range*
+  Unspecified
+
+**Functional**
+
+birthDay
+^^^^^^^^
+
+.. _prim-property-birthDay:
+
+The date when a person was born.
+
+*range*
+  date
+
+**Functional**
+
+associatedDomain
+^^^^^^^^^^^^^^^^
+
+.. _prim-property-associatedDomain:
+
+A DNS domain that is associated to this organisation or organisational
+unit.
+
+*range*
+  string
+
+reducedFee
+^^^^^^^^^^
+
+.. _prim-property-reducedFee:
+
+*range*
+  integer
+
+**Functional**
+
+postalAddress
+^^^^^^^^^^^^^
+
+.. _prim-property-postalAddress:
+
+Which address to use for a paper mail or package.
+
+*range*
+  :ref:`Address <prim-class-Address>`
+
+other
+^^^^^
+
+.. _prim-property-other:
+
+The object one has a relation to
+
+*range*
+  Unspecified
+
+primaryAffiliation
+^^^^^^^^^^^^^^^^^^
+
+.. _prim-property-primaryAffiliation:
+
+*range*
+  string
+
+**Functional**
+
+location
+^^^^^^^^
+
+.. _prim-property-location:
+
+Physical location of something.
+
+*range*
+  string
+
+**Functional**
+
+uid
+^^^
+
+.. _prim-property-uid:
+
+User identifier
+
+*range*
+  string
+
+shortName
+^^^^^^^^^
+
+.. _prim-property-shortName:
+
+*range*
+  string
+
+owner
+^^^^^
+
+.. _prim-property-owner:
+
+*range*
+  Unspecified
+
+**Functional**
+
+url
+^^^
+
+.. _prim-property-url:
+
+Universal resource locator.
+
+*range*
+  string
+
+**Functional**
+
+fax
+^^^
+
+.. _prim-property-fax:
+
+*range*
+  :ref:`Phone <prim-class-Phone>`
+
+type
+^^^^
+
+.. _prim-property-type:
+
+*range*
+  string
+
+email
+^^^^^
+
+.. _prim-property-email:
+
+Information about an email address of an object.
+
+*range*
+  :ref:`Email <prim-class-Email>`
+
+primaryUser
+^^^^^^^^^^^
+
+.. _prim-property-primaryUser:
+
+*range*
+  :ref:`User <prim-class-User>`
+
+**Functional**
+
+to
+^^
+
+.. _prim-property-to:
+
+*range*
+  date
+
+**Functional**
+
+studentUnion
+^^^^^^^^^^^^
+
+.. _prim-property-studentUnion:
+
+*range*
+  string
+
+**Functional**
+
+oid
+^^^
+
+.. _prim-property-oid:
+
+Unique Identifier of an object
+
+*range*
+  string
+
+middleName
+^^^^^^^^^^
+
+.. _prim-property-middleName:
+
+*range*
+  string
+
+departmentId
+^^^^^^^^^^^^
+
+.. _prim-property-departmentId:
+
+*range*
+  string
+
+**Functional**
+
+mobile
+^^^^^^
+
+.. _prim-property-mobile:
+
+Information about the mobile (cell) phone of an object.
+
+*range*
+  :ref:`Phone <prim-class-Phone>`
+
+aliasedObjectType
+^^^^^^^^^^^^^^^^^
+
+.. _prim-property-aliasedObjectType:
+
+*range*
+  string
+
+**Functional**
+
+nickName
+^^^^^^^^
+
+.. _prim-property-nickName:
+
+*range*
+  string
+
+passportNumber
+^^^^^^^^^^^^^^
+
+.. _prim-property-passportNumber:
+
+Number of a passport held by this person.
+
+*range*
+  string
+
+**Functional**
+
+legacyUid
+^^^^^^^^^
+
+.. _prim-property-legacyUid:
+
+*range*
+  string
+
+**Functional**
+
+semester
+^^^^^^^^
+
+.. _prim-property-semester:
+
+*range*
+  string
+
+**Functional**
+
+from
+^^^^
+
+.. _prim-property-from:
+
+*range*
+  date
+
+**Functional**
+
+street
+^^^^^^
+
+.. _prim-property-street:
+
+A street name
+
+*range*
+  string
+
+**Functional**
+
+associatedTo
+^^^^^^^^^^^^
+
+.. _prim-property-associatedTo:
+
+*range*
+  Unspecified
+
+primaryAffiliatedTo
+^^^^^^^^^^^^^^^^^^^
+
+.. _prim-property-primaryAffiliatedTo:
+
+*range*
+  Unspecified
+
+**Functional**
+
+post
+^^^^
+
+.. _prim-property-post:
+
+The position at which a person is employed.
+
+*range*
+  string
+
+**Functional**
+
+description
+^^^^^^^^^^^
+
+.. _prim-property-description:
+
+Free form description of an object.
+
+*range*
+  string
+
+created
+^^^^^^^
+
+.. _prim-property-created:
+
+When this object was created
+
+*range*
+  datetime
+
+**Functional**
+
+postalCode
+^^^^^^^^^^
+
+.. _prim-property-postalCode:
+
+Postal code
+
+*range*
+  string
+
+**Functional**
+
+country
+^^^^^^^
+
+.. _prim-property-country:
+
+The name of a country.
+
+*range*
+  string
+
+**Functional**
+
+id
+^^
+
+.. _prim-property-id:
+
+An identifier of an object, not necessarily universally unique.
+
+*range*
+  string
+
+**Functional**
+
+careOf
+^^^^^^
+
+.. _prim-property-careOf:
+
+If there is no direct address of a object a 'care of' address might be
+given.
+
+*range*
+  string
+
+**Functional**
+
+active
+^^^^^^
+
+.. _prim-property-active:
+
+Whether the object is active
+
+*range*
+  integer
+
+**Functional**

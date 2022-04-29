@@ -1,0 +1,336 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Writing your first Pyom app, part 1 &mdash; OM2 v1.1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.1.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="OM2 v1.1.0 documentation" href="../index.html" />
+    <link rel="up" title="Getting started" href="index.html" />
+    <link rel="next" title="The node -the basic buildingblock" href="../node/index.html" />
+    <link rel="prev" title="Quick install guide" href="install.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="../node/index.html" title="The node -the basic buildingblock"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="install.html" title="Quick install guide"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">OM2 v1.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Getting started</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="writing-your-first-pyom-app-part-1">
+<span id="intro-tutorial01"></span><h1>Writing your first Pyom app, part 1<a class="headerlink" href="#writing-your-first-pyom-app-part-1" title="Permalink to this headline">¶</a></h1>
+<p>A simple node is one where you use one <a class="reference external" href="../node/listener.html#node-listener"><em>listener</em></a>, one
+<a class="reference external" href="../node/sender.html#node-sender"><em>sender</em></a>, a <a class="reference external" href="../node/router.html#node-router"><em>simple router</em></a> and a
+<a class="reference external" href="../node/resolver.html#node-resolver"><em>static resolver</em></a>.</p>
+<p>One can imagine a simple one, without a sender for instance, but the use of
+such a node would be limited.</p>
+<div class="section" id="the-configuration">
+<h2>The configuration<a class="headerlink" href="#the-configuration" title="Permalink to this headline">¶</a></h2>
+<p>So let&#8217;s configure a pass-thru node.</p>
+<p>The configuration is written as a python program which allows you to perform
+a simple test as to the accuracy of you configuration. If you can run it, the
+configuration is at least syntactically correct.</p>
+<p>Anyway you should start be importing the node configuration ontology, create a
+configuration instance and then define some central information about the node
+like which ontologies it should recognize and a name:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+
+<span class="kn">import</span> <span class="nn">pyom.ontology.nodeconfig</span> <span class="kn">as</span> <span class="nn">nc</span>
+
+<span class="c"># Generell Node information</span>
+<span class="n">conf</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">Configuration</span><span class="p">()</span>
+<span class="n">conf</span><span class="o">.</span><span class="n">about</span> <span class="o">=</span> <span class="s">&quot;http://www.umu.se/node#N1&quot;</span>
+<span class="n">conf</span><span class="p">[</span><span class="s">&quot;ontology&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;pyom.ontology.om2_1&quot;</span><span class="p">,</span><span class="s">&quot;pyom.ontology.prim_4&quot;</span><span class="p">,</span><span class="s">&quot;pyom.ontology.miro&quot;</span><span class="p">]</span>
+<span class="n">conf</span><span class="p">[</span><span class="s">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;node1@example.org&quot;</span>
+</pre></div>
+</div>
+<p>Then a listener, in this case a <a class="reference external" href="../node/listener.html#listener-rest"><em>rest listener</em></a> listening on
+port 8086.
+Also specify that this node should ACK the received message after it has been
+able to send it to the next receiver.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">line</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">RestListener</span><span class="p">()</span>
+<span class="n">line</span><span class="p">[</span><span class="s">&quot;port&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">8086</span>
+<span class="n">line</span><span class="p">[</span><span class="s">&quot;responseAfter&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;sent&quot;</span>
+<span class="n">conf</span><span class="p">[</span><span class="s">&quot;listener&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">line</span>
+</pre></div>
+</div>
+<p>The <a class="reference external" href="../node/sender.html#node-sender"><em>sender</em></a>; , in this case a sender that writes to a
+<a class="reference external" href="../node/senders/file.html#senders-file"><em>file</em></a>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">fil</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">FileSender</span><span class="p">()</span>
+<span class="n">fil</span><span class="p">[</span><span class="s">&quot;path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;.&quot;</span>
+<span class="n">conf</span><span class="p">[</span><span class="s">&quot;sender&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fil</span>
+</pre></div>
+</div>
+<p>I use a file sender/writer because that will give you the possibility to watch
+the output. The path property tells the sender in which directory it should
+write the files that are specified by the resolver.</p>
+<p>Now, configuration specific to the <a class="reference external" href="../node/dispatcher.html#node-dispatcher"><em>dispatcher</em></a>, which
+is nothing except from choosing the dispatcher:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">disp</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">Sforwarder</span><span class="p">()</span>
+<span class="n">conf</span><span class="p">[</span><span class="s">&quot;dispatcher&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">disp</span>
+</pre></div>
+</div>
+<p>If you have nodes that are not just copying what they receive on one side to
+what they send out on the other, all their functionally is bound to the dispatcher
+module.</p>
+<p>The router module is used to find out where the message should be sent.
+Here we are using the simplest possible <a class="reference external" href="../node/router.html#router-simple"><em>Simple router</em></a>,
+one that looks at what is specified in the &#8216;receiver&#8217; property of the incomming
+message. If that property is absent which it may be, then the defaultReceiver is
+used.</p>
+<blockquote>
+router = nc.SimpleRouter()
+router[&#8220;defaultReceiver&#8221;] = &#8220;<a class="reference external" href="mailto:sink&#37;&#52;&#48;example&#46;org">sink<span>&#64;</span>example<span>&#46;</span>org</a>&#8221;
+conf[&#8220;router&#8221;] = router</blockquote>
+<p>In order to be able to send the message to the receiver that the router module
+has picked out, the node must resolve this address into a set of protocol and
+endpoint specifications.
+We are here using the simples resolver, the <a class="reference external" href="../node/resolver.html#resolver-static"><em>static resolver</em></a>, a resolver that allows you, in the configuration, to
+specify the mapping from a address into a set of protocols and endpoints.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">resolv</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">Static</span><span class="p">()</span>
+<span class="n">adr</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">Address</span><span class="p">()</span>
+<span class="n">adr</span><span class="p">[</span><span class="s">&quot;protocolName&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;file&quot;</span>
+<span class="n">adr</span><span class="p">[</span><span class="s">&quot;endpoint&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;file:///subscriber.out&quot;</span>
+<span class="n">defrecv</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">ResolverMap</span><span class="p">()</span>
+<span class="n">defrecv</span><span class="p">[</span><span class="s">&quot;pattern&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;sink@example.org&quot;</span>
+<span class="n">defrecv</span><span class="p">[</span><span class="s">&quot;receiver&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">adr</span>
+<span class="n">resolv</span><span class="p">[</span><span class="s">&quot;exact&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">defrecv</span>
+<span class="n">conf</span><span class="p">[</span><span class="s">&quot;resolver&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">resolv</span>
+</pre></div>
+</div>
+<p>And lastly verify that the configuration adheres to the restrictions put on a
+node configuration and if so write the configuration as a RDF graph to stdout</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">conf</span><span class="o">.</span><span class="n">within_restrictions</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">conf</span><span class="o">.</span><span class="n">graph</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-whole-configuration">
+<h2>The whole configuration<a class="headerlink" href="#the-whole-configuration" title="Permalink to this headline">¶</a></h2>
+<p>Place this code in an file called message.py</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+
+<span class="kn">import</span> <span class="nn">pyom.ontology.nodeconfig</span> <span class="kn">as</span> <span class="nn">nc</span>
+
+<span class="c"># Generell Node information</span>
+<span class="n">conf</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">Configuration</span><span class="p">()</span>
+<span class="n">conf</span><span class="o">.</span><span class="n">about</span> <span class="o">=</span> <span class="s">&quot;http://www.umu.se/node#N1&quot;</span>
+<span class="n">conf</span><span class="p">[</span><span class="s">&quot;ontology&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;pyom.ontology.om2_1&quot;</span><span class="p">,</span><span class="s">&quot;pyom.ontology.prim_4&quot;</span><span class="p">,</span><span class="s">&quot;pyom.ontology.miro&quot;</span><span class="p">]</span>
+<span class="n">conf</span><span class="p">[</span><span class="s">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;node1@example.org&quot;</span>
+
+<span class="n">line</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">RestListener</span><span class="p">()</span>
+<span class="n">line</span><span class="p">[</span><span class="s">&quot;port&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">8086</span>
+<span class="n">line</span><span class="p">[</span><span class="s">&quot;responseAfter&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;sent&quot;</span>
+<span class="n">conf</span><span class="p">[</span><span class="s">&quot;listener&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">line</span>
+
+<span class="n">fil</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">FileSender</span><span class="p">()</span>
+<span class="n">fil</span><span class="p">[</span><span class="s">&quot;path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;.&quot;</span>
+<span class="n">conf</span><span class="p">[</span><span class="s">&quot;sender&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fil</span>
+
+<span class="n">disp</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">Sforwarder</span><span class="p">()</span>
+<span class="n">conf</span><span class="p">[</span><span class="s">&quot;dispatcher&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">disp</span>
+
+<span class="n">router</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">SimpleRouter</span><span class="p">()</span>
+<span class="n">router</span><span class="p">[</span><span class="s">&quot;defaultReceiver&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;sink@example.org&quot;</span>
+<span class="n">conf</span><span class="p">[</span><span class="s">&quot;router&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">router</span>
+
+<span class="n">resolv</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">Static</span><span class="p">()</span>
+<span class="n">adr</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">Address</span><span class="p">()</span>
+<span class="n">adr</span><span class="p">[</span><span class="s">&quot;protocolName&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;file&quot;</span>
+<span class="n">adr</span><span class="p">[</span><span class="s">&quot;endpoint&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;file:///subscriber.out&quot;</span>
+<span class="n">defrecv</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">ResolverMap</span><span class="p">()</span>
+<span class="n">defrecv</span><span class="p">[</span><span class="s">&quot;pattern&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;sink@example.org&quot;</span>
+<span class="n">defrecv</span><span class="p">[</span><span class="s">&quot;receiver&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">adr</span>
+<span class="n">resolv</span><span class="p">[</span><span class="s">&quot;exact&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">defrecv</span>
+<span class="n">conf</span><span class="p">[</span><span class="s">&quot;resolver&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">resolv</span>
+
+<span class="n">conf</span><span class="o">.</span><span class="n">within_restrictions</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">conf</span><span class="o">.</span><span class="n">graph</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="a-publisher">
+<h2>A publisher<a class="headerlink" href="#a-publisher" title="Permalink to this headline">¶</a></h2>
+<p>You can use code that are in the package. A simple publisher can be written like so:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+<span class="c"># -*- coding: utf-8 -*-</span>
+
+<span class="kn">import</span> <span class="nn">om2api</span>
+<span class="kn">import</span> <span class="nn">pyom.ontology.prim_4</span> <span class="kn">as</span> <span class="nn">prim</span>
+<span class="kn">from</span> <span class="nn">rdflib</span> <span class="kn">import</span> <span class="n">URIRef</span><span class="p">,</span> <span class="n">Literal</span>
+
+<span class="n">nexthop</span> <span class="o">=</span> <span class="s">&quot;http://localhost:8086/&quot;</span>
+<span class="n">ontology</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;pyom.ontology.prim_4&quot;</span><span class="p">]</span>
+
+<span class="n">om</span> <span class="o">=</span> <span class="n">om2api</span><span class="o">.</span><span class="n">OM2</span><span class="p">(</span><span class="n">nexthop</span><span class="o">=</span><span class="n">nexthop</span><span class="p">,</span><span class="n">ontology</span><span class="o">=</span><span class="n">ontology</span><span class="p">,</span><span class="n">sender</span><span class="o">=</span><span class="s">&quot;test@example.com&quot;</span><span class="p">)</span>
+
+<span class="n">ou</span> <span class="o">=</span> <span class="n">prim</span><span class="o">.</span><span class="n">OrganisationalUnit</span><span class="p">()</span>
+<span class="n">ou</span><span class="p">[</span><span class="s">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;Example AB&quot;</span><span class="p">,</span><span class="n">Literal</span><span class="p">(</span><span class="s">&quot;Example Ltd&quot;</span><span class="p">,</span><span class="n">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">)]</span>
+<span class="n">ou</span><span class="o">.</span><span class="n">about</span> <span class="o">=</span> <span class="s">&quot;urn:mace:example.com:id#_1982263575442233342&quot;</span>
+
+<span class="n">om</span><span class="o">.</span><span class="n">addObject</span><span class="p">(</span><span class="n">ou</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This code creates just one object and sends an add message containing that
+object to the &#8216;cloud&#8217;, by way of &#8216;nexthop&#8217;, which in our simple case is just
+one node.
+But I guess you can easily imaging how you would build on this to do a more
+complicated cloud.</p>
+</div>
+<div class="section" id="running-the-set-up">
+<h2>Running the set up<a class="headerlink" href="#running-the-set-up" title="Permalink to this headline">¶</a></h2>
+<p>Now, start the node, which you do by typing:</p>
+<div class="highlight-python"><pre>nodectl.py start node</pre>
+</div>
+<p>When this command returns, you should have two new files in the directory where
+you stand. One named node.log and the other node.pid .
+node.pid contains the process id of the running node process
+and node.log contains the log output from the node.</p>
+<p>Next you run the message.py file, by either doing:</p>
+<div class="highlight-python"><pre>chmod +x message.py
+./message.py</pre>
+</div>
+<p>or:</p>
+<div class="highlight-python"><pre>python message.py</pre>
+</div>
+<p>If everything works you should get a file named &#8216;subscriber.out&#8217; in the
+directory with the message as sent from the message.py script.
+It should look something like this:</p>
+<div class="highlight-python"><pre>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;rdf:RDF
+  xmlns:_4='http://www.openmetadir.org/om2/om2-1.owl#'
+  xmlns:_5='http://www.openmetadir.org/om2/miro.owl#'
+  xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+  xmlns:_3='http://www.openmetadir.org/om2/prim-4.owl#'
+&gt;
+  &lt;_4:Message&gt;
+    &lt;_4:createTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"&gt;2009-02-25T14:50:11&lt;/_4:createTime&gt;
+    &lt;_4:body&gt;
+      &lt;_5:MIRO&gt;
+        &lt;_5:otherwiseInsert rdf:resource="urn:mace:example.com:id#_1982263575442233342"/&gt;
+      &lt;/_5:MIRO&gt;
+    &lt;/_4:body&gt;
+    &lt;_4:mid rdf:datatype="http://www.w3.org/2001/XMLSchema#string"&gt;38c26b3a-0343-11de-8a92-002332d5aa34&lt;/_4:mid&gt;
+    &lt;_4:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"&gt;test@example.com&lt;/_4:source&gt;
+  &lt;/_4:Message&gt;
+  &lt;_3:OrganisationalUnit rdf:about="urn:mace:example.com:id#_1982263575442233342"&gt;
+    &lt;_3:name xml:lang="en" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"&gt;Example Ltd&lt;/_3:name&gt;
+    &lt;_3:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"&gt;Example AB&lt;/_3:name&gt;
+  &lt;/_3:OrganisationalUnit&gt;
+&lt;/rdf:RDF&gt;</pre>
+</div>
+<p>Since this is XML and some of the stuff is constructed dynamically,
+I&#8217;m absolutely sure it will not look exactly like what you have. But the
+essentials will be the same.</p>
+<p>That it isn&#8217;t the same is just something you have to get used to, that&#8217;s life !</p>
+<p>And now on to the <a class="reference external" href="../node/index.html#node-index"><em>deep stuff</em></a></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="">Writing your first Pyom app, part 1</a><ul>
+<li><a class="reference external" href="#the-configuration">The configuration</a></li>
+<li><a class="reference external" href="#the-whole-configuration">The whole configuration</a></li>
+<li><a class="reference external" href="#a-publisher">A publisher</a></li>
+<li><a class="reference external" href="#running-the-set-up">Running the set up</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="install.html"
+                                  title="previous chapter">Quick install guide</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="../node/index.html"
+                                  title="next chapter">The node -the basic buildingblock</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/intro/tutorial01.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../node/index.html" title="The node -the basic buildingblock"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="install.html" title="Quick install guide"
+             >previous</a> |</li>
+        <li><a href="../index.html">OM2 v1.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Getting started</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009, Roland Hedberg.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,366 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The om2 ontology &mdash; OM2 v1.1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.1.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="OM2 v1.1.0 documentation" href="../index.html" />
+    <link rel="up" title="Ontologies" href="index.html" />
+    <link rel="next" title="The miro ontology" href="miro.html" />
+    <link rel="prev" title="Ontologies" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="miro.html" title="The miro ontology"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Ontologies"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">OM2 v1.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Ontologies</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-om2">
+<span id="ontology-om2"></span><h1>The om2 ontology<a class="headerlink" href="#module-om2" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Roland Hedberg</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.4.1</td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><a class="reference internal" href="#om2-class-error"><em>Error</em></a></li>
+<li><a class="reference internal" href="#om2-class-message"><em>Message</em></a></li>
+<li><a class="reference internal" href="#om2-class-omobject"><em>OmObject</em></a></li>
+</ul>
+<div class="section" id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="error">
+<h3>Error<a class="headerlink" href="#error" title="Permalink to this headline">¶</a></h3>
+<p id="om2-class-error">A description (where,what and when) of an error that occured when a
+node handled a message.</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#om2-property-what"><em>what</em></a></li>
+<li><a class="reference internal" href="#om2-property-timestamp"><em>timestamp</em></a> <em>restriction</em> cardinality 1</li>
+<li><a class="reference internal" href="#om2-property-errorcode"><em>errorCode</em></a></li>
+<li><a class="reference internal" href="#om2-property-where"><em>where</em></a> <em>restriction</em> cardinality 1</li>
+<li><a class="reference internal" href="#om2-property-handledby"><em>handledBy</em></a></li>
+<li><a class="reference internal" href="#om2-property-nexterror"><em>nextError</em></a></li>
+</ul>
+</div>
+<div class="section" id="omobject">
+<h3>OmObject<a class="headerlink" href="#omobject" title="Permalink to this headline">¶</a></h3>
+<p id="om2-class-omobject"><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#om2-property-source"><em>source</em></a></li>
+</ul>
+</div>
+<div class="section" id="message">
+<h3>Message<a class="headerlink" href="#message" title="Permalink to this headline">¶</a></h3>
+<p id="om2-class-message">An OM2 message</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#om2-property-body"><em>body</em></a></li>
+<li><a class="reference internal" href="#om2-property-inreplyto"><em>inReplyTo</em></a></li>
+<li><a class="reference internal" href="#om2-property-notvalidafter"><em>notValidAfter</em></a></li>
+<li><a class="reference internal" href="#om2-property-replyto"><em>replyTo</em></a></li>
+<li><a class="reference internal" href="#om2-property-mid"><em>mid</em></a> <em>restriction</em> cardinality 1</li>
+<li><a class="reference internal" href="#om2-property-errorto"><em>errorTo</em></a></li>
+<li><a class="reference internal" href="#om2-property-source"><em>source</em></a> <em>restriction</em> cardinality 1</li>
+<li><a class="reference internal" href="#om2-property-errorencountered"><em>errorEncountered</em></a></li>
+<li><a class="reference internal" href="#om2-property-receiver"><em>receiver</em></a></li>
+<li><a class="reference internal" href="#om2-property-replyby"><em>replyBy</em></a></li>
+<li><a class="reference internal" href="#om2-property-createtime"><em>createTime</em></a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="timestamp">
+<h3>timestamp<a class="headerlink" href="#timestamp" title="Permalink to this headline">¶</a></h3>
+<p id="om2-property-timestamp">The time something happend</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>datetime</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="errorcode">
+<h3>errorCode<a class="headerlink" href="#errorcode" title="Permalink to this headline">¶</a></h3>
+<p id="om2-property-errorcode">An error specification in the common 3-digit format</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="where">
+<h3>where<a class="headerlink" href="#where" title="Permalink to this headline">¶</a></h3>
+<p id="om2-property-where">The address of the node that encountered an error while processing a
+message.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="source">
+<h3>source<a class="headerlink" href="#source" title="Permalink to this headline">¶</a></h3>
+<p id="om2-property-source">The origin of this message</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="errorto">
+<h3>errorTo<a class="headerlink" href="#errorto" title="Permalink to this headline">¶</a></h3>
+<p id="om2-property-errorto">In an error happend that prevented a node from furthering this message
+to an intended recipient it should instead be sent to this
+address/-es.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+</div>
+<div class="section" id="inreplyto">
+<h3>inReplyTo<a class="headerlink" href="#inreplyto" title="Permalink to this headline">¶</a></h3>
+<p id="om2-property-inreplyto">A concatenation of the source and the message id of the message that
+this message is a reply to. The syntax of the value must be &lt;source&gt;
+&#8220;:&#8221; &lt;mid&gt;.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="notvalidafter">
+<h3>notValidAfter<a class="headerlink" href="#notvalidafter" title="Permalink to this headline">¶</a></h3>
+<p id="om2-property-notvalidafter">Recipients that get this message after this time should just silently
+ignore the message.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>datetime</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="errorencountered">
+<h3>errorEncountered<a class="headerlink" href="#errorencountered" title="Permalink to this headline">¶</a></h3>
+<p id="om2-property-errorencountered">Errors that nodes handling this message has encountered</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#om2-class-error"><em>Error</em></a></dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="mid">
+<h3>mid<a class="headerlink" href="#mid" title="Permalink to this headline">¶</a></h3>
+<p id="om2-property-mid">Message identifier</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="createtime">
+<h3>createTime<a class="headerlink" href="#createtime" title="Permalink to this headline">¶</a></h3>
+<p id="om2-property-createtime">When this event occured at the source of the message</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>datetime</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="nexterror">
+<h3>nextError<a class="headerlink" href="#nexterror" title="Permalink to this headline">¶</a></h3>
+<p id="om2-property-nexterror">The next error in a list of errors that this message has encountered</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd><a class="reference internal" href="#om2-class-error"><em>Error</em></a></dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="what">
+<h3>what<a class="headerlink" href="#what" title="Permalink to this headline">¶</a></h3>
+<p id="om2-property-what">A human readable description of an error that prevented a node to do
+what it should with the a message</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="handledby">
+<h3>handledBy<a class="headerlink" href="#handledby" title="Permalink to this headline">¶</a></h3>
+<p id="om2-property-handledby">Which node that handled this error</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="body">
+<h3>body<a class="headerlink" href="#body" title="Permalink to this headline">¶</a></h3>
+<p id="om2-property-body">The payload/body of the message</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>Unspecified</dd>
+</dl>
+</div>
+<div class="section" id="replyto">
+<h3>replyTo<a class="headerlink" href="#replyto" title="Permalink to this headline">¶</a></h3>
+<p id="om2-property-replyto">When this message reaches a endpoint that endpoint should send a
+message acknowledging the receivement to this address.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+</div>
+<div class="section" id="replyby">
+<h3>replyBy<a class="headerlink" href="#replyby" title="Permalink to this headline">¶</a></h3>
+<p id="om2-property-replyby">The last time by which the sender is interested in a reply to the
+&#8216;replyTo&#8217; address signifying the reception of a message.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>datetime</dd>
+</dl>
+<p><strong>Functional</strong></p>
+</div>
+<div class="section" id="receiver">
+<h3>receiver<a class="headerlink" href="#receiver" title="Permalink to this headline">¶</a></h3>
+<p id="om2-property-receiver">Intended receivers of this message.</p>
+<dl class="docutils">
+<dt><em>range</em></dt>
+<dd>string</dd>
+</dl>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="">The om2 ontology</a><ul>
+<li><a class="reference external" href="#classes">Classes</a><ul>
+<li><a class="reference external" href="#error">Error</a></li>
+<li><a class="reference external" href="#omobject">OmObject</a></li>
+<li><a class="reference external" href="#message">Message</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#properties">Properties</a><ul>
+<li><a class="reference external" href="#timestamp">timestamp</a></li>
+<li><a class="reference external" href="#errorcode">errorCode</a></li>
+<li><a class="reference external" href="#where">where</a></li>
+<li><a class="reference external" href="#source">source</a></li>
+<li><a class="reference external" href="#errorto">errorTo</a></li>
+<li><a class="reference external" href="#inreplyto">inReplyTo</a></li>
+<li><a class="reference external" href="#notvalidafter">notValidAfter</a></li>
+<li><a class="reference external" href="#errorencountered">errorEncountered</a></li>
+<li><a class="reference external" href="#mid">mid</a></li>
+<li><a class="reference external" href="#createtime">createTime</a></li>
+<li><a class="reference external" href="#nexterror">nextError</a></li>
+<li><a class="reference external" href="#what">what</a></li>
+<li><a class="reference external" href="#handledby">handledBy</a></li>
+<li><a class="reference external" href="#body">body</a></li>
+<li><a class="reference external" href="#replyto">replyTo</a></li>
+<li><a class="reference external" href="#replyby">replyBy</a></li>
+<li><a class="reference external" href="#receiver">receiver</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="index.html"
+                                  title="previous chapter">Ontologies</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="miro.html"
+                                  title="next chapter">The miro ontology</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/ontology/om2.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="miro.html" title="The miro ontology"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Ontologies"
+             >previous</a> |</li>
+        <li><a href="../index.html">OM2 v1.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Ontologies</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009, Roland Hedberg.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.2.
+    </div>
+  </body>
+</html>

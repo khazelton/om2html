@@ -1,0 +1,204 @@
+.. _grouped-protocol:
+
+************
+The protocol
+************
+
+A number of commands are implemented, all of them dependent on access control.
+
+.. function:: add(object[,req=""])
+  
+  Adds an object to the repository
+  
+  :param object: The object to be added
+  :type object: A dictionary
+  :param req: The object identifier of the requestor
+  :type req: A uriref
+  
+.. function:: update(object[,req=""])
+  
+  Updates an object in the repository, the idea being that this is the *complete* object
+  after the modification. So not just a diff. 
+  
+  :param object: The object to be added
+  :type object: A dictionary
+  :param req: The object identifier of the requestor
+  :type req: A uriref
+
+.. function:: delete(id[,req=""])
+
+  Deletes an object from the repository
+
+  :param id: The identifier of the object to delete
+  :type id: A uriref
+  :param req: The object identifier of the requestor
+  :type req: A uriref
+
+.. function:: group_info(id[,expand=False,req=""])
+
+  Return information on a group from the repository
+
+  :param id: The identifier of the group
+  :type id: A uriref
+  :param expand: Whether groups as members should be expanded 
+  :type expand: True/False
+  :param req: The object identifier of the requestor
+  :type req: A uriref
+  :return: A dictionary with the keys: aci,member,name,path,parent,uriref
+
+Typical return information
+
+.. code-block:: python
+
+  {'name': 'personal', 
+  'parent': 'urn:mace:umu.se:ed:stem#_3920743537361534465', 
+  'uriref': 'urn:mace:umu.se:ed:collection#3096131303521433080_personal', 
+  'aci': ['urn:mace:umu.se:uuid#_55e82bae-93d7-11dd-a500-0016cba1aac1'], 
+  'member': [
+  ['urn:mace:umu.se:ed:umuid#_1202118531122696708', 'David Beckham (dabe0001)'],
+  ['urn:mace:umu.se:ed:umuid#_1352606719072064518', 'Philip Senderos (phse0001)'],
+  ['urn:mace:umu.se:ed:umuid#_1775730385251111931', 'Henrik Larsson (hela0001)']], 
+  'path': u'umu:Institutionen för idrott:Fotboll:personal'}
+
+.. function:: groups(name[,category,req])
+
+  Return the groups in the repository that matches the given information
+
+  :param name: a name, (you can represent leading,trailing and substrings by using '*')
+  
+    * "\*foo" - means all groups with names that ends with "foo",
+    * "foo\*" - means all groups with names that starts with "foo" and
+    * "\*foo\*" - means all groups with names that has "foo" somewhere in them
+    
+  :type name: a string
+  :param category: The category of the group
+  :type category: string
+  :param req: The object identifier of the requestor
+  :type req: A uriref
+  :returns: list of list with two items; the first the uriref, the second the full path
+
+Typical return information
+
+.. code-block:: python
+
+  [[
+  'urn:mace:umu.se:uuid#_62825dde_f431_11dd_aa01_0050568374ea',
+  u'umu:Institutionen för klinisk mikrobiologi:Immunologi:personal:Pior'
+  ]]
+
+.. function:: person_info(id[,req])
+
+  Return information about a person given a unique identifier for a person.
+  
+  :param id: The identifier of the person
+  :type id: A uriref
+  :param req: The object identifier of the requestor
+  :type req: A uriref
+  :return: A dictionary with the keys: givenName,surName,uid and uriref
+  
+Typical return information
+
+.. code-block:: python
+
+  {
+  'givenName': ['Elisabet'], 
+  'surName': ['Sundbom'], 
+  'uid': ['elsu0001'], 
+  'uriref': 'urn:mace:umu.se:ed:umuid#_1373986647351385080'
+  }
+
+.. function:: persons([givenname,surname,uid,req])
+
+  Return the persons in the repository that matches the given information
+
+  :param givenname: The given name of the person, "*" allow as specified above
+  :type givenname: A string
+  :param surname: The surname of the person, "*" allow as specified above
+  :type surname: A string
+  :param uid: The uid of the person
+  :type uid: A string
+  :param req: The object identifier of the requestor
+  :type req: A uriref
+
+Typical return information
+
+.. code-block:: python
+
+  [
+  ['urn:mace:umu.se:ed:umuid#_1078603230108404733', 'Pia Hedberg (piaheg00)'],
+  ['urn:mace:umu.se:ed:umuid#_2151715987016096763', 'Ylva Hedberg (ylaheg97)'], 
+  ['urn:mace:umu.se:ed:umuid#_2123221779995136007', 'Roland Hedberg (rohe0002)'], 
+  ['urn:mace:umu.se:ed:umuid#_2106020507225672700', 'Maria Hedberg (mahe0026)'],
+  ]
+
+
+.. function:: assigned_roles([id,uid,req])
+
+  Return the roles that a specific person can use. One of *id* and *uid* has to be given. 
+
+  :param id: The identifier of the person
+  :type id: A uriref
+  :param uid: The uid of the person
+  :type uid: A string
+  :param req: The object identifier of the requestor
+  :type req: A uriref
+  :return: list of lists, the later with two members: uriref and name
+
+Typical return information
+
+.. code-block:: python
+
+  [
+  ['urn:mace:umu.se:ed:umuid#_1579133568852000765', 
+  u'katalogansvarig@Institutionen för klinisk mikrobiologi']
+  ]
+
+.. function:: role_name(id[,req])
+
+  Return the name of a role, given the roles identifier
+
+  :param id: The identifier of the role
+  :type id: A uriref
+  :param req: The object identifier of the requestor
+  :type req: A uriref
+
+.. function:: stem_info(id[,req])
+
+  Return information about a stem.
+
+  :param id: The stems identifier
+  :type id: A uriref
+  :param req: The object identifier of the requestor
+  :type req: A uriref
+
+.. function:: stems(name[,req])
+
+  Return the stems in the repository that matches the given information
+
+  :param name: The name of the stem, "*" allow as specified above
+  :type name: A string
+  :param req: The object identifier of the requestor
+  :type req: A uriref
+
+.. function:: owned_groups([id,uid,req])
+
+  Return all groups that a person owns. One of *id* and *uid* has to be given. 
+
+  :param id: The identifier of the person
+  :type id: A uriref
+  :param uid: The uid of the person
+  :type uid: A string
+  :param req: The object identifier of the requestor
+  :type req: A uriref
+
+.. function:: owned_stems([id,uid,req])
+
+  Return all stems that a person owns. One of *id* and *uid* has to be given. 
+
+  :param id: The identifier of the person
+  :type id: A uriref
+  :param uid: The uid of the person
+  :type uid: A string
+  :param req: The object identifier of the requestor
+  :type req: A uriref
+

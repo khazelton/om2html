@@ -1,0 +1,151 @@
+.. _node-listener:
+
+=================================
+The listener - the ears of a node
+=================================
+
+
+Introduction
+============
+
+The configuration is in the form of a dictionary, ( or in fact a :meth:`~instance.Base`). Exactly what properties you can define can be
+found :ref:`here <nodeconfig-class-listener>`
+
+These are examples of 'normal' listeners
+
+* :ref:`RestListener <listener-rest>`
+* :ref:`SoapListener <listener-soap>`
+* :ref:`LineListener <listener-line>`
+* :ref:`DjbMaildirListener <listener-djb>`
+* :ref:`UnixSocketListener <listener-unix>`
+
+and then a couple of special ones which are more like small servers bound to the node.
+
+* :ref:`NodeInfo <listener-nodeinfo>`
+* :ref:`StateServer <listener-state>`
+
+Listeners
+=========
+
+Properties common to all listeners
+
+* :ref:`accessRule <nodeconfig-property-accessrule>` - who are allowed to talk to this listener, simple
+    domainname/ipnumber access control. Some protocols supports log in other not in which case this 
+    might be the best one can do.
+    
+* :ref:`debug <nodeconfig-property-debug>` - The level of debugging, right now it's mostly on/off
+* :ref:`name <nodeconfig-property-name>` - The name of the listener, used in the log file
+* :ref:`responseAfter <nodeconfig-property-responseafter>` - When the listener should ACK.
+* :ref:`protocolName <nodeconfig-property-protocolname>` - Typical for the listener
+
+.. _listener-rest:
+
+RestListener
+************
+
+Will listen on a port for HTTP PUT messages.
+Each message is expected to contain *one* OM2 message.
+
+Extra properties for this listener:
+
+* :ref:`path <nodeconfig-property-path>`
+* :ref:`port <nodeconfig-property-port>`
+* :ref:`ssl <nodeconfig-property-ssl>`
+
+.. _listener-soap:
+
+SoapListener
+************
+
+Expects communication using the SOAP protocol over HTTP.
+Only supports one command: 'put'.
+Each message is expected to contain *one* OM2 message.
+
+Extra properties for this listener:
+
+* :ref:`dir <nodeconfig-property-dir>`
+* :ref:`port <nodeconfig-property-port>`
+
+.. _listener-line:
+
+LineListener
+************
+
+Listens on a telnet port for incoming connections.
+Expects to receive one or more lines followed by one empty line.
+When it has receive the empty line, all preceding lines together are
+assumed to represent *one* OM2 message.
+
+Extra property for this listener:
+
+* :ref:`port <nodeconfig-property-port>`
+
+.. _listener-djb:
+
+DjbMaildirListener
+*************************************
+
+Works on a directory that follows the http://en.wikipedia.org/wiki/Maildir 
+specification. Each file that are place in the *new* directory are expected 
+to represent an incomming OM2 message. The listener will clean up after itself, that 
+is it will move a successfully forwarded message to the *old* directory.
+If the message for some reason could not be forwarded it will be placed in the *err*
+directory and the listener will block. The block will be removed when the *err* 
+directory becomes empty.
+
+Extra properties for this listener:
+
+* :ref:`root <nodeconfig-property-root>`
+* :ref:`create <nodeconfig-property-create>`
+
+.. _listener-unix:
+
+UnixSocketListener
+*************************************
+
+Will listen on a Unix domain socket, which is represented as a file.
+Typical configuration::
+
+  djbin = nc.DjbMaildirListener()
+  djbin["root"] = "./incoming"
+  conf["listener"] = djbin
+
+Extra properties for this listener:
+
+* :ref:`root <nodeconfig-property-root>`
+
+NodeInfo
+********
+
+.. _listener-nodeinfo:
+
+If you are using dynamic resolving of addresses you need to place information
+about your nodes on a web server **or** you can let the node supply the information.
+This 'listener' will act as a web server and on a GET request will provide 
+node information.
+
+Extra properties for this listener:
+
+* :ref:`path <nodeconfig-property-path>`
+* :ref:`port <nodeconfig-property-port>`
+* :ref:`cacheTime <nodeconfig-property-cachetime>`
+
+StateServer (**EXPERIMENTAL**)
+******************************
+
+.. _listener-state:
+
+A interface which you can use to get state information about the node.
+If you do HTTP GET on the webpage it will return a JSON 
+(http://www.json.org/) encoded dictionary, containing items with the keys:
+
+* Name
+* Counters
+* Receivers
+* Transformers
+* Version
+
+Extra properties for this listener:
+
+* :ref:`port <nodeconfig-property-port>`
+* :ref:`ssl <nodeconfig-property-ssl>`

@@ -1,0 +1,423 @@
+.. _node-transformer:
+
+========================================================================
+The transformer - modifies a message or creates new based on one or more
+========================================================================
+
+A message graph consists of an object with properties and values on these
+properties. These values can in them self be object instances and so on.
+So a transformer works by binding conversion functions to object types and
+properties.
+When a message is transformed, the transformer walks through the graph from
+top to bottom, applying the conversion functions as appropriate .
+
+Write your own
+==============
+
+So defining a transformation can be as simple as using the standard conversion 
+functions and just specifying when (which objects and properties) they should be 
+used.
+
+Or you can write your own conversion functions.
+
+Configuration examples
+======================
+
+Attribute converter
+-------------------
+
+About as simple as it gets::
+
+  objconf = { prim.UserPerson: {
+    "objectClass": prim.Person,
+    "objectFunction": "convert", 
+    "propertyMap": { "givenName": { "name": "givenName"}}}}
+
+This means that if a instance of a prim.UserPerson appears it will be converted to an
+instance of a prim.Person and only the property givenName will be copied to the
+new instance.
+
+Any other properties that appears in the incoming instance will be ignored, 
+so this is in essence a filter.
+
+Using a property converter::
+
+  objconf = { prim.UserPerson: {
+    "objectClass": prim.Person,
+    "objectFunction": "convert", 
+    "propertyMap": { "givenName": { "name": "givenName", "valueConverter":"upper"}}}}
+
+Will do the same as above but also convert the values of givenName into upper case.
+
+A value converter will always return one or more values of the expected type for the 
+concerned property.
+
+Property constructor
+--------------------
+
+In both examples the values of the property "givenName" are provided to the value converter.
+If you want to use values of more than one property you are supposed to use a property
+contructor.
+
+This is example of such a constructor::
+
+  objconf = { prim.UserPerson: {
+    "objectClass": prim.Person,
+    "objectFunction": "convert", 
+    "propertyConstructionMap": { 
+      "__foo": { 
+        "name": ["name"],
+        "valueConverter":"patternConstruct",
+        "value_pattern": ["%(givenName)s %(surName)s"]}}}}
+
+
+This will lead to the new instance having the property 'name' with a value which is a 
+combination of 'surName' and 'givenName'.
+
+So if you push the following graph into the value converter::
+
+  <?xml version="1.0" encoding="utf-8"?>
+  <rdf:RDF
+    xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+    xmlns:_3='http://www.openmetadir.org/om2/prim-4.owl#'
+  >
+    <_3:UserPerson>
+      <_3:surName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tappet</_3:surName>
+      <_3:givenName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Click</_3:givenName>
+    </_3:UserPerson>
+  </rdf:RDF>
+
+out will come::
+
+  <?xml version="1.0" encoding="utf-8"?>
+  <rdf:RDF
+    xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+    xmlns:_3='http://www.openmetadir.org/om2/prim-4.owl#'
+  >
+    <_3:Person>
+      <_3:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Click Tappet</_3:name>
+    </_3:Person>
+  </rdf:RDF>
+
+A property constructor, might as in the example above modify a graph, but it must always
+return a 3-tuple containing the:
+
+  * a list of object instance it has created,
+  * a list of messages it has created, and
+  * a list of references as to which objects in it's path it has modified.
+
+Object constructor
+------------------
+
+The third level is that you provide a conversion function with a whole object. It could be 
+simple objects like an Email instance, but also more complex like a person.
+
+The configuration directive in that case could be::
+
+  objectConf = {
+    prim.Role: { "objektClass":"dynamic", "objectFunction":"role"},
+    prim.UserPerson: { "objektClass":"dynamic", "objectFunction":"person"},
+    "default": objekt("dynamic",None), 
+  }
+  
+Where 'role' and 'person' are the names under which the object constructors are registered.
+The third line with the class specification 'default' is used for all objects that are not
+or the types prim.Role or prim.UserPerson. Specifying a transformer function of None means
+nothing is done with the object, so nothing comes out, hence the result of such a conversion
+is that the object will be dropped on the floor.
+
+Object constructors are expected to return the same 3-tuple as property constructors do.
+
+A list of base transformers:
+----------------------------
+
+OnlyID
+^^^^^^
+
+Returns only the object identifier everything else is removed.
+
+Usefull if you in a graph has a reference to another object and where in the original 
+graph that object is represented by a graph of its own.
+
+Configuration example::
+
+  objconf = { prim.Employee: {
+    "objectClass": prim.Person,
+    "objectFunction": "convert", 
+    "propertyMap": { 
+      "other": { "name": "other", "valueConverter":"OnlyID", "only_uriref": True},
+      "one": { "name": "one", "valueConverter":"OnlyID", "only_uriref": True},
+    }}}
+
+Will reduce::
+
+  <?xml version="1.0" encoding="utf-8"?>
+  <rdf:RDF
+    xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+    xmlns:_3='http://www.openmetadir.org/om2/prim-4.owl#'
+  >
+    <_3:Employee>
+      <_3:other>
+        <_3:Organisation rdf:about="urn:mace:example.com:id#abc">
+          <_3:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Example Inc.</_3:name>
+        </_3:Organisation>
+      </_3:other>
+      <_3:one>
+        <_3:UserPerson rdf:about="urn:mace:example.com:person#clta0001">
+          <_3:surName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tappet</_3:surName>
+          <_3:givenName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Click</_3:givenName>
+        </_3:UserPerson>
+      </_3:one>
+    </_3:Employee>
+  </rdf:RDF>
+
+to::
+
+  <?xml version="1.0" encoding="utf-8"?>
+  <rdf:RDF
+    xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+    xmlns:_3='http://www.openmetadir.org/om2/prim-4.owl#'
+  >
+    <_3:Employee>
+      <_3:other rdf:resource="urn:mace:example.com:id#abc"/>
+      <_3:one rdf:resource="urn:mace:example.com:person#clta0001"/>
+    </_3:Employee>
+  </rdf:RDF>
+
+PassThrough
+^^^^^^^^^^^^
+
+Just copies the input verbatim to the output
+
+PropertyAdd
+^^^^^^^^^^^
+
+**Property constructor**
+
+Will add a property and one or more values.
+
+PropertyDelete
+^^^^^^^^^^^^^^
+
+**Property constructor**
+
+Will remove a property value or property from an object if present.
+
+Configuration example::
+
+  objconf = { prim.UserPerson: {
+    "objectClass": prim.Person,
+    "objectFunction": "convert", 
+    "propertyConstructionMap": { 
+      "__foo": { 
+        "valueConverter":"PropertyDelete",
+        "uid": None}}}}
+
+A value of None means remove all the values, the result of which is to remove the whole
+property. If values are given then exactly them are removed.
+
+Given the following input::
+
+  <?xml version="1.0" encoding="utf-8"?>
+  <rdf:RDF
+    xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+    xmlns:_3='http://www.openmetadir.org/om2/prim-4.owl#'
+  >
+    <_3:UserPerson>
+      <_3:uid rdf:datatype="http://www.w3.org/2001/XMLSchema#string">clta0001</_3:uid>
+      <_3:givenName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Click</_3:givenName>
+      <_3:surName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tappet</_3:surName>
+    </_3:UserPerson>
+  </rdf:RDF>
+
+The output will be::
+
+  <?xml version="1.0" encoding="utf-8"?>
+  <rdf:RDF
+    xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+    xmlns:_3='http://www.openmetadir.org/om2/prim-4.owl#'
+  >
+    <_3:UserPerson>
+      <_3:givenName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Click</_3:givenName>
+      <_3:surName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tappet</_3:surName>
+    </_3:UserPerson>
+  </rdf:RDF>
+
+PropertyReplace
+^^^^^^^^^^^^^^^
+
+**Property constructor**
+
+Will replace all the values of a property, if present, with something else.
+
+Configuration example::
+
+  objconf = { prim.UserPerson: {
+    "objectClass": prim.Person,
+    "objectFunction": "convert", 
+    "propertyConstructionMap": { 
+      "__foo": { 
+        "valueConverter":"PropertyReplace",
+        "givenName": ["Clack"]}}}}
+
+Given the following input::
+
+  <?xml version="1.0" encoding="utf-8"?>
+  <rdf:RDF
+    xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+    xmlns:_3='http://www.openmetadir.org/om2/prim-4.owl#'
+  >
+    <_3:UserPerson>
+      <_3:givenName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tom</_3:givenName>
+      <_3:givenName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Click</_3:givenName>
+      <_3:surName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tappet</_3:surName>
+    </_3:UserPerson>
+  </rdf:RDF>
+
+The output will be::
+
+  <?xml version="1.0" encoding="utf-8"?>
+  <rdf:RDF
+    xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+    xmlns:_3='http://www.openmetadir.org/om2/prim-4.owl#'
+  >
+    <_3:UserPerson>
+      <_3:givenName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Clack</_3:givenName>
+      <_3:surName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tappet</_3:surName>
+    </_3:UserPerson>
+  </rdf:RDF>
+
+
+PatternConstruct
+^^^^^^^^^^^^^^^^
+
+Will construct property values based on a pattern and the information in the graph.
+An example of this has been given above.
+
+Module definition
+=================
+
+.. class:: MsgTransform
+  
+  Transforms a RDF graph from one representation to another,
+  This might include changing from one set of ontologies to another
+  
+  :param objectConf: This is a dictionary containing the following keys:
+
+    * *objectClass*: The class this class should be converted into. As a special this
+      can be defined to be 'dynamic' in which case the 'objectFunction'
+      decides which object class it should be
+
+    * *objectFunction*: A function that works on the class instance.
+    * *propertyMap*: A dictionary with property names as keys and definitions on what to 
+      do with values of that property. The definition is a dictionary where the keys used are
+      dependent on the context
+
+    * *propertyConstructionMap*: How to construct extra properties outside the 'simple' 
+      conversion of values.
+
+  :param regFunc: Value conversion functions that should be registered from the start
+  :param msgConf: How to convert a message, if not defined a default will be used which
+    is a speficiation of how an OM2 message should be handled. This includes how to
+    handle operations that follows the MIRO ontology.
+  :param debug: Put on debugging or not
+  :param servers: Servers to be used by the transformer in its work
+  :param doctest: This provides some more output during doctest or py.testing
+  :param conf: Extra information to be used by MsgTranform or value converters.
+  :param log: Log functions to use
+  
+  
+  .. method:: doGraph(graph)
+  
+      This is the starting point for any message transformation.
+      
+      :param graph: The message graph but in its pythonic representation.
+      :return: list of python objects representing messages.
+  
+  .. method:: register(klass,name=None):
+  
+      Registers a transformer (for values,properties or objects) under an string alias,
+      it is possible though not recommended to register a function
+      with an alias that coincides with a function of this class.
+      The registered function will have precedence in that case.
+      So watch out!
+  
+      :param klass: The transformer function
+      :param name: The name under which the transformer should be registered
+      
+  .. method:: runable(func):
+  
+      Return a run-able function if possible. The function is found be looking in the
+      list of registered function and if not present there checks if it's one of the class's
+      methods.
+      
+      :param func: The name of the function
+      :return: A list of messages or None.
+      
+  .. method:: convObj(self,source,path,propertyMap=None,args={})
+  
+      Converts an object to possibly something different based on what's in the configuration.
+      This piece just picks which configuration to use before running the actual converter.
+      If there is no specific configuration for this type of object it
+      will look for a default converter configuration.
+      
+      :param source: A list of objects, defining the path that has been taken through the
+        message graph before reaching this method. Typically it will look something like this::
+        
+          [<pyom.ontology.om2_1.Message object at 0x1677b10>,'body',
+          [<pyom.ontology.miro.MIRO object at 0x1677bf0>],
+          <pyom.ontology.miro.MIRO object at 0x1677bf0>,
+          'otherwiseInsert',[<pyom.ontology.prim_4.UserPerson object at 0x1677930>],
+          <pyom.ontology.prim_4.UserPerson object at 0x1677930>]
+
+      :param path: A list of object that has be instantiated on the way here, the last object in 
+        this list is normally where the converted should be added
+      :param args: Extra arguments
+      
+  .. method:: convert(source,path,conf={},args={})
+
+      The basic conversion function.
+
+      :param source:
+          A list of objects, representing the path from the message object 
+          to the class instance that is to be converted.
+      :param path:
+          A list of objects, representing the objects created along this 
+          source path.
+      :param conf:
+          Arguments
+  
+  .. method:: onlyPropertyConstruct(source,path,conf={})
+  
+      A special case of convert(), where the there are only property constructs defined for the
+      object. No mapping or copies.
+      
+.. class:: ValueConverter
+
+  Base class for value converters
+
+  :param parent: The MsgTransform instance who owns this value converter.
+  
+  .. method:: conv(source,path,args):
+
+    The conversion function itself.
+
+    :param source:
+        A list of objects, representing the path from the message object 
+        to the class instance that is to be converted.
+    :param path:
+        A list of objects, representing the objects created along this source path.
+    :param args: Extra arguments.
+
+    :return: Must return a 3-tuple consisting of
+        
+        * a list of values, 
+        * a list of new messages and 
+        * a list that tells which path elements if any that should be replaced.
+        
+        Any lists can of course be empty.
+
+  .. method:: my_sourceAddress()
+  
+    returns an address to use as source address if a new message is created.
+      

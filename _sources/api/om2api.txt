@@ -1,0 +1,23 @@
+.. _api-om2api:
+
+**************************
+The om2 api
+**************************
+
+
+:mod: 'om2api' -- om2api
+
+==========================================================
+
+:Author: Roland Hedberg
+:Version: |version|
+
+.. module:: om2api
+   :synopsis: The om2 api
+.. moduleauthor:: Roland Hedberg
+
+Module
+======
+
+.. automodule:: om2api_2
+   :members: 

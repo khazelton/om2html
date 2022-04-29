@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The resolver - turns an address into a protocol and an endpoint &mdash; OM2 v1.1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.1.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="OM2 v1.1.0 documentation" href="../index.html" />
+    <link rel="up" title="The node -the basic buildingblock" href="index.html" />
+    <link rel="next" title="The sender - how the nodes gets rid of a message" href="sender.html" />
+    <link rel="prev" title="The router - finds the receiver address for a message" href="router.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="sender.html" title="The sender - how the nodes gets rid of a message"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="router.html" title="The router - finds the receiver address for a message"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">OM2 v1.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">The node -the basic buildingblock</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="the-resolver-turns-an-address-into-a-protocol-and-an-endpoint">
+<span id="node-resolver"></span><h1>The resolver - turns an address into a protocol and an endpoint<a class="headerlink" href="#the-resolver-turns-an-address-into-a-protocol-and-an-endpoint" title="Permalink to this headline">¶</a></h1>
+<p>There are two resolvers implemented presently, one static and one dynamic.
+Let&#8217;s take the simple first.</p>
+<div class="section" id="static">
+<span id="resolver-static"></span><h2>Static<a class="headerlink" href="#static" title="Permalink to this headline">¶</a></h2>
+<p>With this you have to define the mapping between an address and a protocol/endpoint
+that will be valid as long as the node is running.</p>
+<p>The mapping consists of two parts: a protocol/endpoint combination and a address
+matching rule. A matching rule can either be exakt or a regular expression.</p>
+<p>One exact map, two receivers:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">resolv</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">Static</span><span class="p">()</span>
+
+<span class="n">adr1</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">Address</span><span class="p">()</span>
+<span class="n">adr1</span><span class="p">[</span><span class="s">&quot;protocolName&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;rest&quot;</span>
+<span class="n">adr1</span><span class="p">[</span><span class="s">&quot;endpoint&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;http://localhost:8087/&quot;</span>
+<span class="n">adr2</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">Address</span><span class="p">()</span>
+<span class="n">adr2</span><span class="p">[</span><span class="s">&quot;protocolName&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;devnull&quot;</span>
+<span class="n">adr2</span><span class="p">[</span><span class="s">&quot;endpoint&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;/dev/null&quot;</span>
+<span class="nb">map</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">ResolverMap</span><span class="p">()</span>
+<span class="nb">map</span><span class="p">[</span><span class="s">&quot;pattern&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;foo@example.org&quot;</span>
+<span class="nb">map</span><span class="p">[</span><span class="s">&quot;receiver&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">adr1</span><span class="p">,</span><span class="n">adr2</span><span class="p">]</span>
+<span class="n">resolv</span><span class="p">[</span><span class="s">&quot;exact&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">map</span>
+</pre></div>
+</div>
+<p>Two exact maps, one receivers:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">resolv</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">Static</span><span class="p">()</span>
+
+<span class="n">adr</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">Address</span><span class="p">()</span>
+<span class="n">adr</span><span class="p">[</span><span class="s">&quot;protocolName&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;rest&quot;</span>
+<span class="n">adr</span><span class="p">[</span><span class="s">&quot;endpoint&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;http://localhost:8087/&quot;</span>
+<span class="n">map1</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">ResolverMap</span><span class="p">()</span>
+<span class="n">map1</span><span class="p">[</span><span class="s">&quot;pattern&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;foo@example.org&quot;</span>
+<span class="n">map1</span><span class="p">[</span><span class="s">&quot;receiver&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">adr</span><span class="p">]</span>
+<span class="n">map2</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">ResolverMap</span><span class="p">()</span>
+<span class="n">map2</span><span class="p">[</span><span class="s">&quot;pattern&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;bar@example.org&quot;</span>
+<span class="n">map2</span><span class="p">[</span><span class="s">&quot;receiver&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">adr</span><span class="p">]</span>
+<span class="n">resolv</span><span class="p">[</span><span class="s">&quot;exact&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">map1</span><span class="p">,</span><span class="n">map2</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>One regexp match, one receiver:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">resolv</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">Static</span><span class="p">()</span>
+
+<span class="n">adr</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">Address</span><span class="p">()</span>
+<span class="n">adr</span><span class="p">[</span><span class="s">&quot;protocolName&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;rest&quot;</span>
+<span class="n">adr</span><span class="p">[</span><span class="s">&quot;endpoint&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;http://localhost:8087/&quot;</span>
+<span class="nb">map</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">ResolverMap</span><span class="p">()</span>
+<span class="nb">map</span><span class="p">[</span><span class="s">&quot;pattern&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;.+@example.org&quot;</span>
+<span class="nb">map</span><span class="p">[</span><span class="s">&quot;receiver&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">adr</span><span class="p">]</span>
+<span class="n">resolv</span><span class="p">[</span><span class="s">&quot;regexp&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">map</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="dynamic">
+<span id="resolver-dynamic"></span><h2>Dynamic<a class="headerlink" href="#dynamic" title="Permalink to this headline">¶</a></h2>
+<p>This uses the dynamic resolver as defined by the OpenMetadir project.</p>
+<p>This defines a sequence of events base on the DDDS specification
+(Defined in <span class="target" id="index-0"></span><a class="reference external" href="http://tools.ietf.org/html/rfc3401.html"><strong>RFC 3401</strong></a>, <span class="target" id="index-1"></span><a class="reference external" href="http://tools.ietf.org/html/rfc3402.html"><strong>RFC 3402</strong></a>, <span class="target" id="index-2"></span><a class="reference external" href="http://tools.ietf.org/html/rfc3403.html"><strong>RFC 3403</strong></a>, <span class="target" id="index-3"></span><a class="reference external" href="http://tools.ietf.org/html/rfc3404.html"><strong>RFC 3404</strong></a>, and <span class="target" id="index-4"></span><a class="reference external" href="http://tools.ietf.org/html/rfc3405.html"><strong>RFC 3405</strong></a>):</p>
+<ol class="arabic simple">
+<li>Use the domain part of the address and find the NAPTR record/-s for that domain/host</li>
+<li>Using the NAPTR record translate the address to a URL</li>
+<li>Do a HTTP GET on the URL and expect a RDF graph following the <a class="reference external" href="../ontology/node.html#ontology-node"><em>node ontology</em></a> back.</li>
+<li>Use the information in the graph and choose a suitable protocol and endpoint</li>
+</ol>
+<p>An example of what could be returned:</p>
+<div class="highlight-python"><pre>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;rdf:RDF
+  xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+  xmlns:_3='http://www.openmetadir.org/om2/node#'
+&gt;
+  &lt;_3:Service&gt;
+    &lt;_3:cacheTime rdf:datatype="http://www.w3.org/2001/XMLSchema#int"&gt;60&lt;/_3:cacheTime&gt;
+    &lt;_3:interface&gt;
+      &lt;_3:Interface&gt;
+        &lt;_3:protocol&gt;REST&lt;/_3:protocol&gt;
+        &lt;_3:url&gt;http://localhost:8091&lt;/_3:url&gt;
+      &lt;/_3:Interface&gt;
+    &lt;/_3:interface&gt;
+    &lt;_3:name&gt;sink@example.com&lt;/_3:name&gt;
+  &lt;/_3:Service&gt;
+&lt;/rdf:RDF&gt;</pre>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="">The resolver - turns an address into a protocol and an endpoint</a><ul>
+<li><a class="reference external" href="#static">Static</a></li>
+<li><a class="reference external" href="#dynamic">Dynamic</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="router.html"
+                                  title="previous chapter">The router - finds the receiver address for a message</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="sender.html"
+                                  title="next chapter">The sender - how the nodes gets rid of a message</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/node/resolver.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="sender.html" title="The sender - how the nodes gets rid of a message"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="router.html" title="The router - finds the receiver address for a message"
+             >previous</a> |</li>
+        <li><a href="../index.html">OM2 v1.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >The node -the basic buildingblock</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009, Roland Hedberg.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.2.
+    </div>
+  </body>
+</html>

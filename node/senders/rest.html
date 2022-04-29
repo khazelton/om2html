@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Rest &mdash; OM2 v1.1.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.1.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="OM2 v1.1.0 documentation" href="../../index.html" />
+    <link rel="up" title="The sender - how the nodes gets rid of a message" href="../sender.html" />
+    <link rel="next" title="SMTP" href="smtp.html" />
+    <link rel="prev" title="LDAP" href="ldap.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="smtp.html" title="SMTP"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="ldap.html" title="LDAP"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">OM2 v1.1.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >The node -the basic buildingblock</a> &raquo;</li>
+          <li><a href="../sender.html" accesskey="U">The sender - how the nodes gets rid of a message</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="rest">
+<span id="senders-rest"></span><h1>Rest<a class="headerlink" href="#rest" title="Permalink to this headline">¶</a></h1>
+<p>Does not have any configuration options of it&#8217;s own except for &#8216;ssl&#8217; which
+should be used if you want to use HTTPS. If so the expectation is that you
+use both client and server certificates.</p>
+<p>So the simples configuration would be:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">rest</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">RestSender</span><span class="p">()</span>
+
+<span class="n">resolv</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">Static</span><span class="p">()</span>
+
+<span class="n">adr</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">Address</span><span class="p">()</span>
+<span class="n">adr</span><span class="p">[</span><span class="s">&quot;protocolName&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;rest&quot;</span>
+<span class="n">adr</span><span class="p">[</span><span class="s">&quot;endpoint&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;http://localhost:8087/&quot;</span>
+<span class="n">recv</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">ResolverMap</span><span class="p">()</span>
+<span class="n">recv</span><span class="p">[</span><span class="s">&quot;pattern&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;receiver@example.org&quot;</span>
+<span class="n">recv</span><span class="p">[</span><span class="s">&quot;receiver&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">adr</span>
+<span class="n">resolv</span><span class="p">[</span><span class="s">&quot;exact&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">recv</span>
+</pre></div>
+</div>
+<p>Which means, if the router has fick the address &#8220;<a class="reference external" href="mailto:receiver&#37;&#52;&#48;example&#46;org">receiver<span>&#64;</span>example<span>&#46;</span>org</a>&#8221; as receiver of the
+message. Then the resolver will pick the protocol &#8216;rest&#8217; and the endpoint &#8216;<a class="reference external" href="http://localhost:8087/">http://localhost:8087/</a>&#8216;
+and the message will be sent by the RestSender to that URL.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="ldap.html"
+                                  title="previous chapter">LDAP</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="smtp.html"
+                                  title="next chapter">SMTP</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/node/senders/rest.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../modindex.html" title="Global Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="smtp.html" title="SMTP"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="ldap.html" title="LDAP"
+             >previous</a> |</li>
+        <li><a href="../../index.html">OM2 v1.1.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >The node -the basic buildingblock</a> &raquo;</li>
+          <li><a href="../sender.html" >The sender - how the nodes gets rid of a message</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009, Roland Hedberg.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.2.
+    </div>
+  </body>
+</html>

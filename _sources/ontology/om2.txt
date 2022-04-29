@@ -1,0 +1,277 @@
+.. _ontology-om2:
+
+================
+The om2 ontology
+================
+
+:Author: Roland Hedberg
+:Version: 1.4.1
+
+.. module:: om2
+.. moduleauthor:: Roland Hedberg
+
+* :ref:`Error <om2-class-Error>`
+* :ref:`Message <om2-class-Message>`
+* :ref:`OmObject <om2-class-OmObject>`
+
+*******
+Classes
+*******
+
+
+Error
+^^^^^
+
+.. _om2-class-Error:
+
+A description (where,what and when) of an error that occured when a
+node handled a message.
+
+**Properties**
+
+* :ref:`what <om2-property-what>`
+* :ref:`timestamp <om2-property-timestamp>` *restriction* cardinality 1
+* :ref:`errorCode <om2-property-errorCode>`
+* :ref:`where <om2-property-where>` *restriction* cardinality 1
+* :ref:`handledBy <om2-property-handledBy>`
+* :ref:`nextError <om2-property-nextError>`
+
+OmObject
+^^^^^^^^
+
+.. _om2-class-OmObject:
+
+**Properties**
+
+* :ref:`source <om2-property-source>`
+
+Message
+^^^^^^^
+
+.. _om2-class-Message:
+
+An OM2 message
+
+**Properties**
+
+* :ref:`body <om2-property-body>`
+* :ref:`inReplyTo <om2-property-inReplyTo>`
+* :ref:`notValidAfter <om2-property-notValidAfter>`
+* :ref:`replyTo <om2-property-replyTo>`
+* :ref:`mid <om2-property-mid>` *restriction* cardinality 1
+* :ref:`errorTo <om2-property-errorTo>`
+* :ref:`source <om2-property-source>` *restriction* cardinality 1
+* :ref:`errorEncountered <om2-property-errorEncountered>`
+* :ref:`receiver <om2-property-receiver>`
+* :ref:`replyBy <om2-property-replyBy>`
+* :ref:`createTime <om2-property-createTime>`
+
+**********
+Properties
+**********
+
+
+timestamp
+^^^^^^^^^
+
+.. _om2-property-timestamp:
+
+The time something happend
+
+*range*
+  datetime
+
+**Functional**
+
+errorCode
+^^^^^^^^^
+
+.. _om2-property-errorCode:
+
+An error specification in the common 3-digit format
+
+*range*
+  string
+
+**Functional**
+
+where
+^^^^^
+
+.. _om2-property-where:
+
+The address of the node that encountered an error while processing a
+message.
+
+*range*
+  string
+
+**Functional**
+
+source
+^^^^^^
+
+.. _om2-property-source:
+
+The origin of this message
+
+*range*
+  string
+
+**Functional**
+
+errorTo
+^^^^^^^
+
+.. _om2-property-errorTo:
+
+In an error happend that prevented a node from furthering this message
+to an intended recipient it should instead be sent to this
+address/-es.
+
+*range*
+  string
+
+inReplyTo
+^^^^^^^^^
+
+.. _om2-property-inReplyTo:
+
+A concatenation of the source and the message id of the message that
+this message is a reply to. The syntax of the value must be <source>
+":" <mid>.
+
+*range*
+  string
+
+**Functional**
+
+notValidAfter
+^^^^^^^^^^^^^
+
+.. _om2-property-notValidAfter:
+
+Recipients that get this message after this time should just silently
+ignore the message.
+
+*range*
+  datetime
+
+**Functional**
+
+errorEncountered
+^^^^^^^^^^^^^^^^
+
+.. _om2-property-errorEncountered:
+
+Errors that nodes handling this message has encountered
+
+*range*
+  :ref:`Error <om2-class-Error>`
+
+**Functional**
+
+mid
+^^^
+
+.. _om2-property-mid:
+
+Message identifier
+
+*range*
+  string
+
+**Functional**
+
+createTime
+^^^^^^^^^^
+
+.. _om2-property-createTime:
+
+When this event occured at the source of the message
+
+*range*
+  datetime
+
+**Functional**
+
+nextError
+^^^^^^^^^
+
+.. _om2-property-nextError:
+
+The next error in a list of errors that this message has encountered
+
+*range*
+  :ref:`Error <om2-class-Error>`
+
+**Functional**
+
+what
+^^^^
+
+.. _om2-property-what:
+
+A human readable description of an error that prevented a node to do
+what it should with the a message
+
+*range*
+  string
+
+**Functional**
+
+handledBy
+^^^^^^^^^
+
+.. _om2-property-handledBy:
+
+Which node that handled this error
+
+*range*
+  string
+
+**Functional**
+
+body
+^^^^
+
+.. _om2-property-body:
+
+The payload/body of the message
+
+*range*
+  Unspecified
+
+replyTo
+^^^^^^^
+
+.. _om2-property-replyTo:
+
+When this message reaches a endpoint that endpoint should send a
+message acknowledging the receivement to this address.
+
+*range*
+  string
+
+replyBy
+^^^^^^^
+
+.. _om2-property-replyBy:
+
+The last time by which the sender is interested in a reply to the
+'replyTo' address signifying the reception of a message.
+
+*range*
+  datetime
+
+**Functional**
+
+receiver
+^^^^^^^^
+
+.. _om2-property-receiver:
+
+Intended receivers of this message.
+
+*range*
+  string

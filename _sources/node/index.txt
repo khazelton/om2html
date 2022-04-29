@@ -1,0 +1,24 @@
+.. _node-index:
+
+=================================
+The node -the basic buildingblock
+=================================
+
+Constructing flows between sources and sinks in some cases ís a matter of a direct connection
+but in most cases its more a indirect because you need some business logic inbetween. This is 
+where the node enters.
+
+.. toctree::
+   :maxdepth: 1
+    
+   overview
+   config
+   listener
+   dispatcher
+   router
+   resolver
+   sender
+   transformer
+   handler
+   nodeconfig
+   

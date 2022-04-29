@@ -1,0 +1,20 @@
+.. _node-sender:
+
+================================================
+The sender - how the nodes gets rid of a message
+================================================
+
+Since different sender protocols have different costs. For instance it costs a lot less 
+to write to a file then use HTTPS to send to a receiver. 
+You may order the senders so that the less costly are tried first. 
+As soon as the messages has been successfully transmitted to one receiver (protocol/endpoint).
+Then no more possible receivers are tried.
+
+*******
+Senders
+*******
+
+.. toctree::
+   :glob:
+    
+   senders/*

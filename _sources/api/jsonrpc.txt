@@ -1,0 +1,454 @@
+.. _api-jsonrpc:
+
+****************
+The JSON-RPC API
+****************
+
+Is implemented as a CGI script and publishes a set of methods.
+
+A normal JSON-RPC_ contains three properties:
+
+* method
+* params
+* id
+
+And these are packaged as ::
+
+  {"method": "methodName",
+    "id": "arbitrary-something",
+    "params": [arg1, arg2, ...]}
+
+What is described below are the methods and which parameters they take in the
+om2 JSON-RPC API.
+Parameters that are in **bold** are mandatory, parameters in *italic* are optional.
+
+----
+read
+----
+
+Reads information about an object from the repository
+
+---------------------------------------------------------------
+
+method
+    read
+    
+params:  
+  * **id** The uriref of the object
+  * *properties* A list of properties that the server are expected to return
+  * *expand* Governs how values of object properties are handled. If expand are not
+    set then only uriref"s of value objects are returned. If expand are set then value 
+    objects are expected to contain information about the objects, this only works one
+    level deep.
+  * *req* The requestor of the operation
+
+return
+  dictionary with information about the object. The format of the dictionary are
+  { objecttype : (uriref, ava)}, where ava is a dictionary with property names and values.
+    
+---------------------------------------------------------------
+  
+With a operation like::
+
+  {"method": "read",
+    "id": "whatever",
+    "params": [{"id":"urn:mace:example.com:id#_1"}]}
+  
+one might receive a reply resembling this (linebreaks added for readability)::
+
+  {"result": {"http://www.openmetadir.org/om2/prim-4.owl#UserPerson":
+      ["urn:mace:example.com:id#_1", {
+        "givenName": ["Derek"], "surName": ["Jeter"]  
+        }
+      ]},
+    "id": "whatever"
+  }
+
+------
+delete
+------
+
+Delets an object from the repository
+
+---------------------------------------------------------------
+
+method
+    delete
+    
+params:  
+  * **id** The uriref of the object
+  * *req* The requestor of the operation
+
+return
+  True or False depending on the outcome of the operation.
+    
+---------------------------------------------------------------
+  
+With a operation like::
+
+  {"method": "delete",
+    "id": "whatever",
+    "params": [{"id":"urn:mace:example.com:id#_1"}]}
+  
+one might receive a reply resembling this (linebreaks added for readability)::
+
+  {"result": True,
+    "id": "whatever"
+  }
+  
+------
+search
+------
+
+Searches for all objects in the repository that matches a specified filter
+
+---------------------------------------------------------------
+
+method
+    search
+    
+params:  
+  * *typ* The type of object
+  * *properties* The properties to return. To define which properties to return one can use
+    a XPath like format <name> ['.' <name>] . This is interesting when the objects that is found
+    has properties with objects as value and what you really are efter is the value of a property
+    of an object that i a value of a property of the object found. Like if you want the mail address 
+    of a person. To do this you would have to use the property specification "email.address".
+  * *filter* The filter, a dictionary of property names and values.
+    substring specifications may be used as values. Leading ("str\*"), trailing ("\*ing") and
+    any ("\*rin\*") substrings are valid. 
+  * *req* The requestor of the operation
+
+return
+  True or False depending on the outcome of the operation.
+    
+---------------------------------------------------------------
+  
+The following call will return all objects in the repository that are of the
+type *Person*::
+
+  {"method": "search",
+    "id": "whatever",
+    "params": [{"type":"Person"}]}
+  
+This might possibly return a very long list of uriref"s::
+
+  {"result": ["urn:mace:example.com:id#_39",
+        "urn:mace:example.com:id#_41",
+        ...
+        ],
+    "id": "whatever"
+  }
+
+If one wants a special set of persons and not just everybody, you have to add a filter
+like this::
+
+  {"method": "search",
+    "id": "whatever",
+    "params": [{"type":"Person",
+                "filter":{"givenName":"Roland"},
+                "properties":["surName"]}]}
+
+Which will search for all objects of type Person and where the property "givenName" of the
+object has *exact* the value "Roland" and for those found return not just the uriref
+but also the values of the property "surName". The result might look like this::
+
+  {"result": [
+      ["urn:mace:example.com:id#_279", {"surName": ["Olsson"]}],
+      ["urn:mace:example.com:id#_145", {"surName": ["Johansson"]}],
+      ["urn:mace:example.com:id#_239", {"surName": ["Wass"]}],
+      ["urn:mace:example.com:id#_327", {"surName": ["Spolander"]}],
+      ...,
+    ],
+    "id": "whatever"
+  }
+
+In the search filter it is permissible to use simple substring definitions like this::
+
+  {"method": "search",
+    "id": "whatever",
+    "params": [{"type":"Person",
+                "filter":{"givenName":"*land"},
+                "properties":["surName","givenName"]}]}
+
+Which then might give a result similar to this::
+
+  {"result": [
+      ["urn:mace:example.com:id#_279", {"givenName": ["Roland"], "surName":  ["Olsson"]}], 
+      ...
+      ["urn:mace:example.com:id#_268", {"givenName": ["Erland"], "surName": ["Danielsson"]}], 
+      ["urn:mace:example.com:id#_418", {"givenName": ["Bo-Roland"], "surName": ["Karlsson"]}]]
+    "id": "whatever"
+  }
+
+And finally like for *read* you can in *properties* refer to properties in objects that are values to
+properties in the object that matches the query::
+
+  {"method": "search",
+    "id": "whatever",
+    "params": [{"type":"Person",
+                "filter":{"givenName":"Roland", "surName": "Johansson"},
+                "properties":["email.address"]}
+                
+and the result  will be accordingly::
+
+  {"result": [
+    ['urn:mace:example.com:id#_2194848237278695939', {
+      'email': [
+        {'http://www.openmetadir.org/om2/prim-4.owl#Email':
+          ['urn:mace:example.com:uuid#_943a2da8-93d7-11dd-8ad4-0016cba1aac1', {
+            'address': ['roland.johansson@adm.umu.se']}]}]}], 
+    ['urn:mace:example.com:id#_1450418969126394361', {
+      'email': [
+        {'http://www.openmetadir.org/om2/prim-4.owl#Email': 
+          ['urn:mace:example.com:uuid#_5a744bbd-93d7-11dd-94f5-0016cba1aac1', {
+            'address': ['roland.s.johansson@physiol.umu.se']}]}, 
+        {'http://www.openmetadir.org/om2/prim-4.owl#Email':
+          ['urn:mace:example.com:uuid#_5a74770f-93d7-11dd-9f25-0016cba1aac1', {
+            'address': ['roland.johansson@physiol.umu.se']}]}]}]]
+    "id": "whatever"
+  }
+
+---
+add
+---
+
+Adds an objects to the repository.
+
+---------------------------------------------------------------
+
+method
+    add
+    
+params:  
+  * **object** The object that is to be added
+  * *req* The requestor of the operation
+
+return
+  True or False depending on the outcome of the operation.
+    
+---------------------------------------------------------------
+
+Example::
+
+  { "method": "add,
+    "id": "whatever",
+    {'http://www.openmetadir.org/om2/prim-4.owl#Person': 
+      ('urn:mace:example.com:id#_666666', {'givenName': ['Emil'], 'surName': ['Eifrem']})}
+    }
+
+Reply
+  
+  {"result": True, "id": "whatever"}
+  
+Note that the object you want to add has to adher to all the restrictions that 
+are set on objects of that type. If it isn't the repository should reject it.
+
+-------------
+modify_insert
+-------------
+
+Modifies an objects in the repository by adding some information to it.
+
+---------------------------------------------------------------
+
+method
+    modify_insert
+    
+params:  
+  * **object** The object that is to be added. The object is expessed as dictionary
+    where the key is the type of the object and the value is a 2-tuple (whether it is
+    actually a 2-tuple or a list of two items are immaterial since JSON does not distinguish
+    inbetween them) containing the
+    uriref and a property-value assertion. The property-value assertion is in itself a
+    dictionary with the property names as keys and a list of values as value.
+  * *req* The requestor of the operation
+
+return
+  True or False depending on the outcome of the operation.
+    
+---------------------------------------------------------------
+
+Example::
+
+  {"method": "modify_insert",
+    "id": "whatever",
+    "params": [{"object":{
+        "http://www.openmetadir.org/om2/prim-4.owl#Person":
+          ("urn:mace:example.com:id#_279", {"title": ["test person"]})
+      }}]}
+
+returns::
+
+  {"result": True, "id": "whatever"}
+  
+-------------
+modify_remove
+-------------
+
+Modifies an objects in the repository by removing some information from it.
+
+---------------------------------------------------------------
+
+method
+    modify_remove
+    
+params:  
+  * **object** The object part that is to be removed
+  * *req* The requestor of the operation
+
+return
+  True or False depending on the outcome of the operation.
+    
+---------------------------------------------------------------
+
+Example::
+
+  {"method": "modify_remove",
+    "id": "whatever",
+    "params": [{"object":{
+        "http://www.openmetadir.org/om2/prim-4.owl#Person":
+          ("urn:mace:example.com:id#_279", {"title": None})
+      }}]}
+
+returns::
+
+  {"result": True, "id": "whatever"}
+
+
+--------------
+modify_replace
+--------------
+
+Modifies an objects in the repository by replacing some information in it with something else.
+
+---------------------------------------------------------------
+
+method
+    modify_replace
+    
+params:  
+  * **object** An object describing what should be replaced by what as 
+    {object_type: [uriref, ava]} where ava is {key: [(before,after),...]}
+  * *req* The requestor of the operation
+
+return
+  True or False depending on the outcome of the operation.
+    
+---------------------------------------------------------------
+
+Example::
+
+  {"method": "modify_remove",
+    "id": "whatever",
+    "params": [{
+        "object":{"http://www.openmetadir.org/om2/prim-4.owl#Person": 
+          ["urn:mace:example.com:id#_279", {"title": [["test person", "person test"]]}]
+        }}]
+  }
+
+returns::
+
+  {"result": True, "id": "whatever"}
+
+
+----
+tree
+----
+
+Returns a list of children to an object and possibly also their children and so on.
+
+---------------------------------------------------------------
+
+method
+    tree
+    
+params:  
+  * **id** The objects whoes children are sought
+  * **type** The object type of the children I"m interested in.
+  * *properties* what apart from the uriref should be returned about the child
+  * *depth* 0 will give you the immediate children (this is the default), 1 gives you
+    the children and granchildren, ...
+  * *req* The requestor of the operation
+
+return
+  List of children
+    
+---------------------------------------------------------------
+
+Query, immediate children::
+
+  {"method": "tree",
+    "id": "whatever",
+    "params": [{"id":"urn:mace:example.com:id#_15", "type":"Stem", "properties":["name"]}]}
+
+Reply::
+
+  {"result":[
+      ("urn:mace:example.com:id#_268", "Produktionsavdelningen", 
+      ("urn:mace:example.com:id#_162", "Konsultavdelningen"), 
+      ("urn:mace:example.com:id#_362", "RDS"), 
+      ("urn:mace:example.com:id#_754", "Internservice")
+    ],
+    "id": "whatever"
+  }
+
+
+Query, chidren and grandchildren::
+
+  {"method": "tree",
+    "id": "whatever",
+    "params": [{"id":"urn:mace:example.com:id#_15", 
+              "type":"Stem", 
+              "properties":["name"], 
+              "depth":1}]}
+
+Reply::
+
+  {"result":[
+      ("urn:mace:example.com:id#_268", "Produktionsavdelningen", 
+         [("urn:mace:example.com:id#_197", u"N\xe4tdrift"), 
+         ("urn:mace:example.com:id#_257", "IRT"), 
+         ("urn:mace:example.com:id#_408", "Datordrift")]), 
+      ("urn:mace:example.com:id#_162", "Konsultavdelningen", 
+        [("urn:mace:example.com:id#_184", u"Systemf\xf6rvaltning"), 
+        ("urn:mace:example.com:id#_560", "Support"), 
+        ("urn:mace:example.com:id#_507", "Utvecklingsenheten")]), 
+      ("urn:mace:example.com:id#_362", "RDS"), 
+      ("urn:mace:example.com:id#_754", "Internservice")],
+    "id": "whatever"
+  }
+
+------
+whoami
+------
+
+In a single-sign-on environment this tells the client who is actually using it.
+The client is not expected to handle the login itself.
+
+---------------------------------------------------------------
+
+method
+  whoami
+    
+params:  
+  no parameters
+    
+return
+  string 
+    
+---------------------------------------------------------------
+
+Typically::
+
+  {"method": "whoami",
+    "id": "whatever",
+  }
+
+returns something like::
+
+  { "result": "urn:mace:example.com:id#_279",
+    "id": "whatever"}
+  
+
+.. _JSON-RPC: http://json-rpc.org/
